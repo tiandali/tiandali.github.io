@@ -1,0 +1,791 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="面向对象（OOP） 面试对象是编程思想JAVA、PHP、C#、C++、.net(dot net)、Ruby、Python JS…这些都是面向对象编程的，（面向过程编程思想：C语言是面向过程的）。   HTML和CSS是标记语言不是编程语言，没有所谓的面向对象编程LESS/SASS属于CSS预编译语言，旨在把CSS变为编程语言（面向对象）   对象、类、实例   对象：编程语言中的对象是一个泛指，万">
+<meta property="og:type" content="article">
+<meta property="og:title" content="面向对象的理解">
+<meta property="og:url" content="http://yoursite.com/2018/05/04/面向对象的理解/index.html">
+<meta property="og:site_name" content="tiandali">
+<meta property="og:description" content="面向对象（OOP） 面试对象是编程思想JAVA、PHP、C#、C++、.net(dot net)、Ruby、Python JS…这些都是面向对象编程的，（面向过程编程思想：C语言是面向过程的）。   HTML和CSS是标记语言不是编程语言，没有所谓的面向对象编程LESS/SASS属于CSS预编译语言，旨在把CSS变为编程语言（面向对象）   对象、类、实例   对象：编程语言中的对象是一个泛指，万">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2018-05-04T11:32:50.873Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="面向对象的理解">
+<meta name="twitter:description" content="面向对象（OOP） 面试对象是编程思想JAVA、PHP、C#、C++、.net(dot net)、Ruby、Python JS…这些都是面向对象编程的，（面向过程编程思想：C语言是面向过程的）。   HTML和CSS是标记语言不是编程语言，没有所谓的面向对象编程LESS/SASS属于CSS预编译语言，旨在把CSS变为编程语言（面向对象）   对象、类、实例   对象：编程语言中的对象是一个泛指，万">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/05/04/面向对象的理解/"/>
+
+
+
+
+
+  <title>面向对象的理解 | tiandali</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">tiandali</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/04/面向对象的理解/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="tiandali">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="tiandali">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">面向对象的理解</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-05-04T17:59:37+08:00">
+                2018-05-04
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="面向对象（OOP）"><a href="#面向对象（OOP）" class="headerlink" title="面向对象（OOP）"></a>面向对象（OOP）</h3><blockquote>
+<p>面试对象是编程思想JAVA、PHP、C#、C++、.net(dot net)、Ruby、Python JS…这些都是面向对象编程的，（面向过程编程思想：C语言是面向过程的）。</p>
+</blockquote>
+<blockquote>
+<p>HTML和CSS是标记语言不是编程语言，没有所谓的面向对象编程<br>LESS/SASS属于CSS预编译语言，旨在把CSS变为编程语言（面向对象）</p>
+</blockquote>
+<blockquote>
+<p>对象、类、实例</p>
+</blockquote>
+<blockquote>
+<p><code>对象</code>：编程语言中的对象是一个泛指，万物接对象（我们所要研究学习以及使用的都是对象）<br><code>类</code>：对象的具体细分（按照属性或者特性细分为一些类别）<br><code>实例</code>：某一类中具体的事物(拿出类别中的具体一个实例进行研究，那么当前类别下的其他实例也具备这些特点和特征。)</p>
+</blockquote>
+<h3 id="单例模式-singleton-Pattern"><a href="#单例模式-singleton-Pattern" class="headerlink" title="单例模式(singleton Pattern)"></a>单例模式(singleton Pattern)</h3><blockquote>
+<p>在真实项目中，为了实现<code>模块化开发</code>或者团队协作开发，我们经常应用单例模式（一般业务逻辑部分的代码都是依托单例模式设计规划的）<br>单例模式命名 的由来：每一个命名空间都是js中Object这个内置类的实例而实例之间是相互独立不干扰的所以我们称之为单例：单独的实例。<br><code>作用</code>：把描述同一件事物的属性和特征进行分组、归类(存储在同一个堆内存空间中)因此避免了全局变量之间的冲突和污染。<br><code>本质</code>：实际上就是一个对象<br>优点：封装性、防止代码冲突和污染<br>模块的调用：<br>不同模块：模块名.属性名来调用<br>同模块：this.属性名，外面用模块名.属性名运行。</p>
+</blockquote>
+<h3 id="高级单例模式"><a href="#高级单例模式" class="headerlink" title="高级单例模式"></a>高级单例模式</h3><blockquote>
+<p>基于JS高阶编程技巧<code>惰性思想</code>来实现的单例模式，并且可以把一些常用的设计模式（例如：命令模式、发布订阅设计模式、promise设计模式等）融合进来，最后清晰的规划我们的业务逻辑代码，方便后期二次开发和维护，这种设计思想综合体就是高级单例模式，也是项目中最常应用的</p>
+<ul>
+<li>1.在给命名空间赋值的时候不是直接赋值给一个对象，而是先执行匿名函数，形成一个私有作用域(不销毁的栈内存)在AA中创建一个堆内存，把堆内存地址赋值给命名空间.</li>
+<li>2.好处是：我们完全可以在AA当中创造很多内容(变量or函数)，哪些需要供外面使用，我们就暴露给返回的对象中(模块化实现的思想)<br>有私有部分，有暴露外面的，功能全，满足需求。<br><code>缺点</code>：只能单个操作效率低，代码冗余。</li>
+</ul>
+</blockquote>
+<h3 id="工厂模式-factory-pattern"><a href="#工厂模式-factory-pattern" class="headerlink" title="工厂模式(factory pattern)"></a>工厂模式(factory pattern)</h3><p>把实现相同功能的代码进行封装，从此来实现批量生产后期想要实现这个功能我们只需要执行函数即可<br>低耦合高内聚，减少代码冗余量。</p>
+<blockquote>
+<p>1）提供原材料—-新建一个对象<br>2）原材料加工生产—-对对象添加属性和方法<br>3）输出产品—-返回对象<br>缺点：加工出来的全是对象，没法识别，产品的差异化问题没法解决<br>本质：函数</p>
+</blockquote>
+<h3 id="构造函数-constructor"><a href="#构造函数-constructor" class="headerlink" title="构造函数(constructor)"></a>构造函数(constructor)</h3><blockquote>
+<p>在普通函数执行的基础上’new xxx()’这样就不是普通函数执行了而是构造函数执行，当前的函数名称之为“类名”，接收的返回结果是当前类的一个实例</p>
+<ul>
+<li>这种构造函数设计模式执行，主要用于组件库类插件框架等的封装，平时编写业务逻辑一般不这样处理<br><code>注意事项</code>：<br>1.函数名首字符大写<br>2.this.xxx方式添加属性名，this 指实例<br>3.new 函数名运行，若不需要传参，小括号可不写，需要传参函数名后加括号。<br>4.new运行的函数称为构造函数<br>5.以实例为上下文运行构造函数，运行完成会自动返回这个实例<br>6、this.xxx这个属性是实例的属性，var a=10;只是函数内部的私有属性和实例无关<br>7.若手动增加的返回值return：<br>若返回的是引用类型的数据类型则会覆盖默认返回的实例<br>若返回的是基本类型的数据则不会覆盖。<br>8.this.xxx这些属性都是实例私有的，各个实例之间互不影响。</li>
+</ul>
+</blockquote>
+<p><code>构造函数的创建方式</code></p>
+<blockquote>
+<p>new  Array(10):创建一个长度为10的数组，数组中的而每一项都是空；<br>new Array(“10”):如果只传递一个实参，并且实参不是数字，相当于把当前数值作为数组的第一项存储进来，如果传递多个实参，不是设置长度，而是把传递的内容当做数组的每一项存储起来。</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">var obj=&#123;name:&apos;dali&apos;&#125;;//</span><br><span class="line">var obj=new Object();//=&gt;一般只用于创建空对象，如果需要增加键值对，创建完成后依次添加即可。</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">var num=12;//字面量创建出来的是一个基本数据类型值（也是Number的一个实例，可以调取Number赋予他的方法</span><br><span class="line">var num=new Number(12);//构造函数方式创建出来的也是Number的一个实例（也是可以使用Number赋予的方法），但是获取的结果是对象数据类型的</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>优点：实现产品的差异化，实现分类<br>缺点：所有的属性都是私有的，没法实现公有化<br>例如：有些功能是属于这个类的实例所公有的功能，不需要在每个实例上都实现一遍，只需要每个实例调用下公有的这个功能即可<br>普通函数执行 VS 构造函数执行</p>
+</blockquote>
+<blockquote>
+<p><code>普通函数执行</code><br>1、开辟一个新的私有作用域<br>2、形参赋值<br>3、变量提升<br>4、代码自上而下执行（return后面的值就是当前函数返回的结果）<br>5、栈内存释放或者不释放问题</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">1.function fn(num)&#123;</span><br><span class="line">2.    this.num=num;//=&gt;this:window 给全局对象增加一个num的属性名，属性值是10</span><br><span class="line">3.    var total=null;</span><br><span class="line">4.    total+=num;</span><br><span class="line">5.    return total;</span><br><span class="line">6.&#125;</span><br><span class="line">7.var f=fn(10);//=&gt;f:10</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p><code>构造函数执行</code><br> 1、首先和普通函数执行一样，也需要开辟一个新的私有作用域<br>2、在私有作用域中完成类似于普通函数的操作：形参赋值以及变量提升 –都是<code>私有变量</code>。<br>3、在代码自上而下执行之前，构造函数有属于自己比较特殊的操作：<code>浏览器会在当前的作用域中默认创建一个对象数据类型的值（一个堆内存：暂不存储任何东西），并且会让当前函数中的执行主体this指向创建的这个对象（这个堆内存的地址）</code><br>4、像普通函数一样，代码自上而下执行：<code>this.xxx=xxx这里操作都是在给创建的这个对象（这个堆内存里）增加属性名和属性值</code><br>5、代码执行完成后，即时函数中没有写return，在构造函数模式中：<code>浏览器会默认的把创建的对象返回到函数的外面</code></p>
+</blockquote>
+<blockquote>
+<p>构造函数执行，即具备普通函数执行的一面，也同时具备自己独有的一些操作；<br>在构造函数执行期间，<code>浏览器默认创建的对象（也就是函数体中的this）就是当前这个类的一个实例，代码执行中的this.xxx=xxx都是给实例设置&quot;私有属性&quot;，浏览器会把默认创建的实例返回，供外面接收，再次执行new Fn()，就是把上面的操作克隆一份，会形成新的实例（新的内存空间），所以说实例是相互独立的。返回的结果是Fn这个类的一个实例</code><br><code>深入理解构造函数执行的步骤</code><br>当构造函数或者类，执行的时候不需要传递任何的实参值，此时我们是否加小括号就不重要了（不传递实参的情况下，小括号可以省略）</p>
+</blockquote>
+<blockquote>
+<p>构造函数执行，同时具备了普通函数执行的一面，也有自己特殊的一面，但是和实例相关的，只有自己特殊的一面才相关（也就是 this.xxx=xxx才相当于给当前实例增加的私有属性），函数体中出现的私有变量，和实例都没有直接的关系</p>
+</blockquote>
+<blockquote>
+<p>通过类创建出来的每一个实例都是单独的个体（单独的堆内存空间），实例和实例之间是不相同并且独立互不影响的（市面上部分开发把这种模式叫做单例模式，这种说法是错的，JS中的这种模式叫做构造函数设计模式）</p>
+</blockquote>
+<blockquote>
+<p>在构造函数体中，通过this.xxx=xxx给实例设置的属性都是当前实例的私有属性<br>当构造函数体中我们自己<code>手动的设置了return</code>（<code>默认返回的是实例:对象类型值</code>）, return的是一个<code>基本类型值</code>，对最后返回的实例<code>没有任何的影响</code>，但是如果返回的是<code>引用数据类型</code>的值，<code>会</code>把默认返回的实例<code>替换掉</code>；<br>构造函数执行的时候尽量减少return的使用，防止覆盖实例。<br>如果有return且后面没有返回值，就是结束代码执行的作用并不会覆盖返回的实例。</p>
+</blockquote>
+<h3 id="原型"><a href="#原型" class="headerlink" title="原型"></a>原型</h3><blockquote>
+<p>1、所有的函数都天生自带一个属性：prototype（原型）, 它是一个<code>对象</code>数据类型的值，在当前prototype对象中，存储了类需要给其实例使用的<code>公有</code>的属性和方法</p>
+</blockquote>
+<blockquote>
+<p>2、prototype这个对象，浏览器会默认为其开一个<code>堆内存</code>，在这个堆内存中天生自带一个属性：<code>constructor</code>（构造函数），这个属性存储的值就是当前函数本身</p>
+</blockquote>
+<blockquote>
+<p>3、每一个类的实例（每一个对象）都天生自带一个属性：<code>__proto__</code>属性值是当前对象所属类的原型（prototype）<br>原型的基础知识：<br>1.所有的函数（类）（构造函数）里有一个属性叫prototype，protoype是一个对象数据类型会开辟一个堆内存，存储了供其实例使用的公共属性和方法。<br>2.prototype这个对象自带一个属性constructor，他指向与构造函数本身。<br>3.每一个实例（对象）都自带一个属性<code>__proto__</code>这个属性指向所属类的原型</p>
+</blockquote>
+<blockquote>
+<p>prototype里面的属性的都是公有的，所有实例都能访问到<br>构造函数里的this.xxx属性都是实例私有的</p>
+</blockquote>
+<blockquote>
+<p>在实际项目基于面向对象开发的时候（构造原型设计模式）我们根据需要很多时候会定向类的原型（让类的原型指向自己开辟的堆内存）<br>存在的问题<br>1.自己开辟的堆内存中没有constructor属性，导致累的额原型构造函数缺失（解决：自己手动在堆内存中增加constructor属性）<br>2.当原型重定向后浏览器默认开辟的那个原型堆内存会被释放掉，如果之前存储了一些方法或者属性这些东西会丢失(所以内置类的原型不允许重定向到自己开辟的堆内存，因为内置类原型上自带的很多属性方法，重定向之后就都没了，这样是不被允许的)</p>
+</blockquote>
+<h4 id="原型链"><a href="#原型链" class="headerlink" title="原型链"></a>原型链</h4><blockquote>
+<p>属性查找顺序：<br>1.先在实例上找，若没找到则通过<code>__proto__</code>所属类的原型找，若还没找到，则继续通过<code>__proto__</code>去父类的原型上找…Object.prototype若没找到，则说明不存在。</p>
+</blockquote>
+<blockquote>
+<p><code>isPrototypeOf</code> 判断一个对象是否是在另一个对象的原型链上<br><code>hasOwnproperty</code>判断是否是私有属性<br><code>propertyIsEnumerable</code>是否是可枚举的<br>toSring()转化为字符串，功能是用来检测数据类型，一定要调用的是原型上的toString方法<br>深入学习函数（函数的三种身份：普通函数、类、对象）</p>
+<ul>
+<li>普通函数<br>作用域，形参赋之，变量提升，代码从上到下<br>函数内变量查找的属性<br>内存释放</li>
+<li>构造函数（类）</li>
+<li>fn instanceOf Object//-&gt;true<br>Function.__proto__.__proto__==Object.prototype//-&gt;true</li>
+</ul>
+</blockquote>
+<blockquote>
+<p>Object.__proto__==Function.prototype//-&gt;true<br>对象</p>
+</blockquote>
+<blockquote>
+<p><code>Object这个</code>类<code>是Function的一个实例
+Function的原型是Function.prototype是Object这个类的一个实例
+因为Function既是一个函数（类）也是一个对象，自带的\__proto__指向Function.prototype，而Function.prototype的\__proto__又指向Object的原型Object.prototype。因此可以说Function是Object的一个实例</code><br>所有对象都是Object的一实例。就是Object原型上的方法都可以用。<br>所有函数都是Function上的一个实例Function原型上的方法都可以用。call、aplly、bind都可以用<br>面试题<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Foo</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    getName = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="number">1</span>);</span><br><span class="line">    &#125;;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>;</span><br><span class="line">&#125;</span><br><span class="line">Foo.getName = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="number">2</span>);</span><br><span class="line">&#125;;</span><br><span class="line">Foo.prototype.getName = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="number">3</span>);</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">var</span> getName = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="number">4</span>);</span><br><span class="line">&#125;;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getName</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="number">5</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Foo.getName();<span class="comment">//=&gt;2 把FOO作为对象,找其私有属性</span></span><br><span class="line">getName();<span class="comment">//=&gt;4 执行全局下的GET-NAME</span></span><br><span class="line">Foo().getName();<span class="comment">//=&gt;1 先把FOO作为普通函数执行,把执行的结果window调取GET-NAME在执行</span></span><br><span class="line"><span class="built_in">window</span>.getName();<span class="comment">//=&gt;1</span></span><br><span class="line"><span class="keyword">new</span> Foo.getName();<span class="comment">//=&gt;先获取Foo.getName的值(假设B),然后再new B()相当于创建B的实例 =&gt;2  (new Foo.getName;一样的)</span></span><br><span class="line"><span class="keyword">new</span> Foo().getName();<span class="comment">//=&gt;new Foo()当做一个整体获取实例，把得到的实例在调取GET-NAME  =&gt;3</span></span><br><span class="line"><span class="keyword">new</span> <span class="keyword">new</span> Foo().getName();</span><br><span class="line"><span class="comment">//=&gt;var f=new Foo()//=&gt;实例是this这是空的</span></span><br><span class="line"><span class="comment">//=&gt;new f.getName();  =&gt;new (f.getName)(); =&gt;3</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//obj.getX();//=&gt;先获取obj的getX的属性值，然后把获取的值执行</span></span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<h3 id="call-apply-bind"><a href="#call-apply-bind" class="headerlink" title="call  apply bind"></a>call  apply bind</h3><blockquote>
+<p>都是天生自带的方法(Function.prototype)，所有的函数都可以调取这三个方法<br><code>三个方法都是改变THIS指向的</code><br><code>call</code><br>fn.call(context,para1,…)<br>把fn方法执行，并且让fn方法中的this变为context,而para1…都是给fn传递的实参<br>1.非严格模式下如果参数不传或者第一个传递的是null、undefined，this指向window<br>2.严格模式下第一个参数是谁，this就指向谁（包括null、undefined）不传this是undefined</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//=&gt;非严格模式</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fn</span>(<span class="params">num1,num2</span>)</span>&#123;</span><br><span class="line">	<span class="built_in">console</span>.log(<span class="keyword">this</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> obj=&#123;<span class="attr">fn</span>:fn&#125;;</span><br><span class="line">fn();<span class="comment">//=&gt;this:window</span></span><br><span class="line">obj.fn();<span class="comment">//=&gt;this:obj</span></span><br><span class="line"><span class="keyword">var</span> opp=&#123;&#125;;</span><br><span class="line"><span class="comment">//opp.fn();//=&gt;报错:opp中没有fn这个属性</span></span><br><span class="line">fn.call(opp);<span class="comment">//=&gt;this:opp num1&amp;&amp;num2都是undefined</span></span><br><span class="line">fn.call(<span class="number">1</span>,<span class="number">2</span>);<span class="comment">//=&gt;this:1 num1=2 num2=undefined</span></span><br><span class="line">fn.call(opp,<span class="number">1</span>,<span class="number">2</span>);<span class="comment">//=&gt;this:opp num1=1 num2=2</span></span><br><span class="line"><span class="comment">//-&gt;CALL方法的几个特殊性</span></span><br><span class="line">fn.call();<span class="comment">//=&gt;this:window   num1&amp;&amp;num2都是undefined</span></span><br><span class="line">fn.call(<span class="literal">null</span>);<span class="comment">//=&gt;this:window</span></span><br><span class="line">fn.call(<span class="literal">undefined</span>);<span class="comment">//=&gt;this:window</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//=&gt;JS严格模式下</span></span><br><span class="line"><span class="meta">"use strict"</span>;</span><br><span class="line">fn.call();<span class="comment">//=&gt;this:undefined</span></span><br><span class="line">fn.call(<span class="literal">undefined</span>);<span class="comment">//=&gt;this:undefined</span></span><br><span class="line">fn.call(<span class="literal">null</span>);<span class="comment">//=&gt;this:null</span></span><br></pre></td></tr></table></figure>
+<p><code>apply</code></p>
+<blockquote>
+<p>apply的语法和call基本一致，作用原理也基本一致，唯一的区别：apply把传递给函数的实参以数组形式存放（但是也相当于在给函数一个个的传递实参值）<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">fn.call(<span class="literal">null</span>,<span class="number">10</span>,<span class="number">20</span>,<span class="number">30</span>);</span><br><span class="line">fn.apply(<span class="literal">null</span>,[<span class="number">10</span>,<span class="number">20</span>,<span class="number">30</span>]); <span class="comment">//=&gt;传递给fn的时候也是一个个的传递进去的</span></span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<p><code>bind</code></p>
+<blockquote>
+<p>也是改变THIS的方法，它在IE6~8下不兼容；它和call(以及apply)改变this的原理不一样，区别于立即执行还是等待执行。</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">fn.call(opp,<span class="number">10</span>,<span class="number">20</span>); <span class="comment">//=&gt;把fn执行,让fn中的this变为opp,并且把10&amp;&amp;20分别传递给fn</span></span><br><span class="line"></span><br><span class="line">fn.bind(opp,<span class="number">10</span>,<span class="number">20</span>); <span class="comment">//=&gt;预先让fn中的this指向opp,并且把10和20预先传递给fn,此时的fn没有被执行(只有当执行的时候this和实参才会起到应有的作用)</span></span><br><span class="line"><span class="comment">//=&gt;需求：点击box这个盒子的时候，需要执行fn，并且让fn中的this指向opp</span></span><br><span class="line">oBox.onclick=fn; <span class="comment">//=&gt;点击的时候执行了fn,但此时fn中的this是oBox</span></span><br><span class="line"></span><br><span class="line">oBox.onclick=fn.call(opp); <span class="comment">//=&gt;绑定事件的时候就已经把fn立即执行了(call本身就是立即执行函数),然后把fn执行的返回值绑定给事件</span></span><br><span class="line"></span><br><span class="line">oBox.onclick=fn.bind(opp);</span><br><span class="line"><span class="comment">//=&gt;fn.bind(opp)：fn调取Function.prototype上的bind方法，执行这个方法返回了一个匿名函数</span></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> * function()&#123;</span></span><br><span class="line"><span class="comment"> *     fn.call(opp);</span></span><br><span class="line"><span class="comment"> * &#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line">oBox.onclick=<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">	<span class="comment">//=&gt;this:oBox</span></span><br><span class="line">	fn.call(opp);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>思考题<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">function fn1()&#123;console.log(1);&#125;</span><br><span class="line"> function fn2()&#123;console.log(2);&#125;</span><br><span class="line"> fn1.call(fn2);//=&gt;找到CALL-AA把它执行,CALL-AA中的THIS是FN1,第一个参数传递的是FN2  =&gt;在CALL-AA中执行的是FN1 =&gt;1</span><br><span class="line"></span><br><span class="line"> fn1.call.call(fn2);//=&gt;找到CALL-AA让它执行,CALL-AA中的THIS是FN1.CALL,第一个参数是FN2  (把FN1.CALL中的THIS变为FN2，再让FN1.CALL执行  =&gt;先找到CALL-AA，把它执行，只不过此时它中的THIS是FN2 =&gt;让FN2中的THIS变为UNDEFINED，因为执行FN1.CALL的时候没有传递参数值，然后让FN2执行)  =&gt;2</span><br><span class="line"></span><br><span class="line"> Function.prototype.call(fn1);//=&gt;先找到CALL-AA把它执行，它中的THIS是Function.prototype =&gt;让F.P中的THIS变为FN1,然后让F.P执行,F.P是一个匿名函数也是一个空函数，执行没有任何的输出</span><br><span class="line">Function.prototype.call.call(fn1);//=&gt;先找到CALL-AA把它执行，它中的THIS是F.P.CALL =&gt;把F.P.CALL中的THIS修改为FN1,让F.P.CALL执行  =&gt;F.P.CALL(CALL-AA)第二次把它执行(此时它里面的THIS已经是FN1) =&gt;这一次其实在CALL-AA中是让FN1执行 =&gt;1</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<blockquote>
+<p>查看函数原型上的方法：<br>call/apply/bind-&gt;改变调用主体的this关键字<br>call()第一个参数：用来改变<code>.</code>前面方法的this关键字，从第二个参数开始，以散列式的方式给<code>.</code>前面的方法传参.—散列式.<br>fn.apply()第一个参数：用来改变<code>.</code>前面方法的this关键字，第二个参数是用来给<code>.</code>前面的方法传参（把所有的参数放在数组里传给<code>.</code>前面的方法）—打包式.</p>
+</blockquote>
+<p>非严格模式下</p>
+<blockquote>
+<p>call/apply第一个参数不传，传null,传undefined-&gt;<code>.</code>前面方法里的this都是window<br>严格模式下-》规范<br>好处：<br>1.更加安全高效<br>2.提高编译器编译代码的速度<br>3.跟高版本浏览器接轨<br>第一个参数不传是undefined，其他传什么就是什么<br>fn1.call.call.call.call(fn2);<br>最后一个call作用<br>1.让点前面方法里的this关键字改成fn2-&gt;call方法里this-&gt;fn2<br>2.让点前面方法运行-&gt;function.prototype.call()-&gt;this()-&gt;fn2()</p>
+</blockquote>
+<h3 id="hasOwnProperty-VS-in"><a href="#hasOwnProperty-VS-in" class="headerlink" title="hasOwnProperty VS in"></a>hasOwnProperty VS in</h3><blockquote>
+<p>in：用来检测当前这个属性是否隶属于对象（不管是对象私有的还是公有的属性，只要有返回的就是true）</p>
+</blockquote>
+<blockquote>
+<p>hasOwnProperty：用来检测当前这个属性是否是对象的私有属性（不仅要是对象的属性，而且需要是私有的才可以）<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">var obj=&#123;name:&apos;珠峰培训&apos;,age:8&#125;;</span><br><span class="line">&apos;name&apos; in obj  //=&gt;true</span><br><span class="line">&apos;sex&apos; in obj   //=&gt;false</span><br><span class="line">&apos;hasOwnProperty&apos; in obj //=&gt;true  hasOwnProperty是Object这个内置类中提供的属性方法，只要当前对象是Object的一个实例，就可以使用这个方法</span><br><span class="line"></span><br><span class="line">obj.hasOwnProperty(&apos;name&apos;) //=&gt;true</span><br><span class="line">obj.hasOwnProperty(&apos;hasOwnProperty&apos;) //=&gt;false</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<p>检测一个属性是否是当前对象的公有属性<br>1、是对象的一个属性<br>2、不是对象的私有属性<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">function hasPubProperty(attr,obj)&#123;</span><br><span class="line">    return (attr in obj) &amp;&amp; (obj.hasOwnProperty(attr)===false);</span><br><span class="line">&#125;</span><br><span class="line">hasPubProperty(&apos;hasOwnProperty&apos;,&#123;xxx:&apos;xxx&apos;&#125;);</span><br></pre></td></tr></table></figure></p>
+<h3 id="类的继承：封装和多态"><a href="#类的继承：封装和多态" class="headerlink" title="类的继承：封装和多态"></a>类的继承：封装和多态</h3><p><code>[封装]</code>：把实现一个功能的js代码进行封装主要目的：低耦合高内聚<br><code>[多态]</code>：重载：方法名相同，参数的个数或者类型不同，此时名字相同的方法叫做方法的重载（后台语言的重载），js中不存在重载的<br>重写：子类重写父类的方法<br><code>[继承]</code>：子类继承父类的方法和属性<br><code>原型继承</code>:让子类原型指向父类的一个实例。原型继承方式：B.prototype=new A();A的实例本身具备父类A的私有属性和公有方法，子类B的原型指向它，那么子类的B的实例就可以找到这些属性和方法了.<br>和传统后台语言的继承不一样，子类继承父类并不是把父类的属性方法克隆一份给子类的（这样处理子类和父类就没有直接关系了）js中的原型继承是让子类和父类建立原型链接方式，子类的实例调取父类原型上的方法都是基于原型链的查找机制完成的。存在问题是：子类可以重写父类原型上的方法（重写），子类和父类还有关系的<br>B.prototype.__proto__.getX=null;//把父类A的原型上的getX重写为null，A的其他实例会受到影响<br><code>原型继承存在的问题</code>：<br>1.父类实例私有的属性以及公有的属性都变为子类实例的共有属性<br>2.如果子类B的原型上之前有属性方法，重新执行A的实例后，之前的方法都没用了。</p>
+<p><code>call继承</code>:把父类A作为普通函数执行，让A中的this变为B的实例，相当于给B的实例增加一些属性和方法<br>new A()把A作为类创建它的实例this:实例。<br>A()把A当做普通函数执行this：window<br><code>弊端</code>：把父类A当做普通函数执行，和父类原型没有关系了，仅仅是把A中的私有属性变为子类B实例的私有属性而已，A原型上的公有属性和B及它的实例没啥关系.<br><code>寄生组合继承</code>:A的私有变为B的私有，A的公有变为B的公有<br>和原型继承的唯一区别：B.prototype=new A();创建的A的实例虽然指向了A的原型但是实例中不是空的，存放了A的私有属性，这些属性变为B的公有属性，B.prototype=Object.create(A.prototype)：<code>好处</code>在于我们是创建一个没有任何私有属性的空对象，指向A的原型，这样B的公有属性中就不会存在A的私有属性。<br>ES6class类实现继承:创建类是有标准的语法的(这种语法创建出来的类只能new执行，不能当做普通函数执行)<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">class Fn&#123;</span><br><span class="line">constructor(n,m)&#123;</span><br><span class="line">//等价于构造体，代表函数</span><br><span class="line">this.x=n;</span><br><span class="line">this.y=m;&#125;</span><br><span class="line">//直接给Fn的原型上设置方法(只能设置方法不能设置属性)：</span><br><span class="line">getX()&#123;&#125;</span><br><span class="line">//把Fn当做一个普通对象设置的私有方法(和实例没有关系)，同样只能设置方法不能写属性：</span><br><span class="line">static AA()&#123;&#125;</span><br><span class="line">&#125;</span><br><span class="line">//属性可以添加在外面</span><br><span class="line">//Fn.prototype.bb=100;</span><br><span class="line">let f=new Fn(10,20)</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">class A&#123;</span><br><span class="line">construtor()&#123;this.x=100;&#125;</span><br><span class="line">getX()&#123;console.log(this.x)&#125;</span><br><span class="line">&#125;</span><br><span class="line">class B extends A&#123;//extends类似于实现了原型继承。</span><br><span class="line">construtor()&#123;super();//类似于call继承，在这里super相当于把A的constructor给执行了并且让方法中的this是B的实例，super当中传递的实参都是在给A的constructor传递</span><br><span class="line">this.y=200;&#125;</span><br><span class="line">getY()&#123;console.log(this.y)&#125;</span><br><span class="line">&#125;</span><br><span class="line">let f= new B();</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">//public void fn(int n,int m)</span><br><span class="line">//public void fn(string n,string m)&#123;&#125;</span><br><span class="line">//public void fn(int n,int m,int z)&#123;&#125;</span><br><span class="line">根据传递参数的不同执行不同的方法</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">function fn(n,m)&#123;&#125;;</span><br><span class="line">function fn(n,m,x)&#123;</span><br><span class="line">//后面的方法会把前面的方法覆盖掉，不管传递多少实参，执行的都是后面的这个方法（js中的重载值得是：同一个方法根据传参不一样，实现不同的功能）</span><br><span class="line">&#125;;</span><br><span class="line">fn(1,2);</span><br><span class="line">fn(1,2,3)</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">function A()&#123;</span><br><span class="line">this.x=100;</span><br><span class="line">&#125;</span><br><span class="line">A.prototype=&#123;</span><br><span class="line">constructor=A;</span><br><span class="line">getX:function()&#123;</span><br><span class="line">console.log(this.x)&#125;&#125;;</span><br><span class="line">function B()&#123;</span><br><span class="line">this.y=200&#125;</span><br><span class="line">B.prototype=new A();</span><br><span class="line">let f=new B();</span><br><span class="line">//原型继承：方式：B.prototype=new A();A的实例本身具备父类A的私有属性和公有方法，子类B的原型指向它，那么子类的B的实例就可以找到这些属性和方法了</span><br><span class="line">//和传统后台语言的继承不一样，子类继承父类并不是把父类的属性方法克隆一份给子类的（这样处理子类和父类就没有直接关系了）js中的原型继承是让子类和父类建立原型链接方式，子类的实例调取父类原型上的方法都是基于原型链的查找机制完成的。存在问题是：子类可以重写父类原型上的方法（重写），子类和父类还有关系的</span><br><span class="line">B.prototype.__proto__.getX=null;//把父类A的原型上的getX重写为null，A的其他实例会受到影响</span><br><span class="line">`原型继承存在的问题`：</span><br><span class="line">1.父类实例私有的属性以及公有的属性都变为子类实例的共有属性</span><br><span class="line">2.如果子类B的原型上之前有属性方法，重新执行A的实例后，之前的方法都没用了。</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">function A()&#123;</span><br><span class="line">this.x=100;</span><br><span class="line">&#125;</span><br><span class="line">A.prototype=&#123;</span><br><span class="line">constructor=A;</span><br><span class="line">getX:function()&#123;</span><br><span class="line">console.log(this.x)&#125;&#125;;</span><br><span class="line">function B()&#123;</span><br><span class="line">A.call(this);//call继承，把A执行,让A中的this变为f；</span><br><span class="line">this.y=200&#125;</span><br><span class="line"></span><br><span class="line">let f=new B();</span><br><span class="line"></span><br><span class="line">弊端：把父类A当做普通函数执行，和父类原型没有关系了，仅仅是把A中的私有属性变为子类B实例的私有属性而已，A原型上的公有属性和B及它的实例没啥关系</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">function A()&#123;</span><br><span class="line">this.x=100;</span><br><span class="line">&#125;</span><br><span class="line">A.prototype=&#123;</span><br><span class="line">constructor=A;</span><br><span class="line">getX:function()&#123;</span><br><span class="line">console.log(this.x)&#125;&#125;;</span><br><span class="line">function B()&#123;</span><br><span class="line">A.call(this);//call继承，把A执行,让A中的this变为f；</span><br><span class="line">this.y=200&#125;</span><br><span class="line">//B.prototype=A.prototype;//这是组合继承，一般都不这样处理，容易修改父类A原型上的东西，导致A的其他实例也受到影响。</span><br><span class="line">B.prototype=Object.create(A.prototype)</span><br><span class="line">let f=new B();</span><br><span class="line">//Object.create:内置Object类天生自带的方法</span><br><span class="line">1.创建一个空对象</span><br><span class="line">2。让新创建的空对象__proto__指向第一个传递进来的对象（把OBJ作为新创建空对象的原型）</span><br><span class="line">let obj=&#123;name:&apos;haha&apos;&#125;;</span><br><span class="line">Object.create(obj)</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/05/04/数据类型的检测方式/" rel="next" title="数据类型的检测方式">
+                <i class="fa fa-chevron-left"></i> 数据类型的检测方式
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/05/04/DOM精讲/" rel="prev" title="DOM精讲">
+                DOM精讲 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">tiandali</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#面向对象（OOP）"><span class="nav-number">1.</span> <span class="nav-text">面向对象（OOP）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#单例模式-singleton-Pattern"><span class="nav-number">2.</span> <span class="nav-text">单例模式(singleton Pattern)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#高级单例模式"><span class="nav-number">3.</span> <span class="nav-text">高级单例模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#工厂模式-factory-pattern"><span class="nav-number">4.</span> <span class="nav-text">工厂模式(factory pattern)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#构造函数-constructor"><span class="nav-number">5.</span> <span class="nav-text">构造函数(constructor)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#原型"><span class="nav-number">6.</span> <span class="nav-text">原型</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#原型链"><span class="nav-number">6.1.</span> <span class="nav-text">原型链</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#call-apply-bind"><span class="nav-number">7.</span> <span class="nav-text">call  apply bind</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#hasOwnProperty-VS-in"><span class="nav-number">8.</span> <span class="nav-text">hasOwnProperty VS in</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#类的继承：封装和多态"><span class="nav-number">9.</span> <span class="nav-text">类的继承：封装和多态</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">tiandali</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

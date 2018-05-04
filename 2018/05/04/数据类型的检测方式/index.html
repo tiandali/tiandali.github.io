@@ -1,0 +1,687 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="JS中的数据类型检测typeof 用来检测数据类型的运算符语法：typeof  [value]返回结果：首先是一个字符串，字符串中包含了我们需要检测的数据类型1234567891011121314151617181920212223typeof 12 =&amp;gt;&apos;number&apos;typeof NaN =&amp;gt;&apos;number&apos;typeof &apos;&apos; =&amp;gt;&apos;string&apos;var flag=true;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="数据类型的检测方式">
+<meta property="og:url" content="http://yoursite.com/2018/05/04/数据类型的检测方式/index.html">
+<meta property="og:site_name" content="tiandali">
+<meta property="og:description" content="JS中的数据类型检测typeof 用来检测数据类型的运算符语法：typeof  [value]返回结果：首先是一个字符串，字符串中包含了我们需要检测的数据类型1234567891011121314151617181920212223typeof 12 =&amp;gt;&apos;number&apos;typeof NaN =&amp;gt;&apos;number&apos;typeof &apos;&apos; =&amp;gt;&apos;string&apos;var flag=true;">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2018-05-04T10:24:03.585Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="数据类型的检测方式">
+<meta name="twitter:description" content="JS中的数据类型检测typeof 用来检测数据类型的运算符语法：typeof  [value]返回结果：首先是一个字符串，字符串中包含了我们需要检测的数据类型1234567891011121314151617181920212223typeof 12 =&amp;gt;&apos;number&apos;typeof NaN =&amp;gt;&apos;number&apos;typeof &apos;&apos; =&amp;gt;&apos;string&apos;var flag=true;">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/05/04/数据类型的检测方式/"/>
+
+
+
+
+
+  <title>数据类型的检测方式 | tiandali</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">tiandali</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/04/数据类型的检测方式/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="tiandali">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="tiandali">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">数据类型的检测方式</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-05-04T17:58:32+08:00">
+                2018-05-04
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="JS中的数据类型检测"><a href="#JS中的数据类型检测" class="headerlink" title="JS中的数据类型检测"></a>JS中的数据类型检测</h3><h4 id="typeof"><a href="#typeof" class="headerlink" title="typeof"></a>typeof</h4><blockquote>
+<p>用来检测数据类型的运算符<br>语法：typeof  [value]<br>返回结果：首先是一个字符串，字符串中包含了我们需要检测的数据类型<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typeof</span> <span class="number">12</span> =&gt;<span class="string">'number'</span></span><br><span class="line"><span class="keyword">typeof</span> <span class="literal">NaN</span> =&gt;<span class="string">'number'</span></span><br><span class="line"><span class="keyword">typeof</span> <span class="string">''</span> =&gt;<span class="string">'string'</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> flag=<span class="literal">true</span>;</span><br><span class="line"><span class="keyword">typeof</span> flag =&gt;<span class="string">'boolean'</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">typeof</span> <span class="literal">undefined</span> =&gt;<span class="string">'undefined'</span></span><br><span class="line"><span class="keyword">typeof</span> <span class="literal">null</span> =&gt;<span class="string">'object'</span> 虽然是基本类型值，但是它属于空对象指针，检测的结果是对象（局限性）</span><br><span class="line"></span><br><span class="line"><span class="keyword">typeof</span> &#123;&#125; =&gt;<span class="string">'object'</span></span><br><span class="line"><span class="keyword">typeof</span> <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;&#125;  =&gt;<span class="string">'function'</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">typeof</span> [] =&gt;<span class="string">'object'</span></span><br><span class="line"><span class="keyword">typeof</span> /^$/ =&gt;<span class="string">'object'</span></span><br><span class="line"><span class="comment">//=&gt;使用typeof有自己的局限性：不能具体细分出当前的值是数组还是正则（也就是不能细分对象类型的值）</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">typeof</span> (<span class="number">1</span>&gt;<span class="number">1</span>?<span class="number">0</span>:<span class="number">2</span>);  =&gt;<span class="string">'number'</span></span><br><span class="line"><span class="keyword">typeof</span> <span class="number">1</span>&gt;<span class="number">1</span>?<span class="number">0</span>:<span class="number">2</span>;  =&gt;<span class="number">2</span>  <span class="comment">//=&gt;先计算typeof 1-&gt;'number'  =&gt;'number'&gt;1?0:2</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">typeof</span> <span class="keyword">typeof</span> [] =&gt;<span class="string">'string'</span></span><br><span class="line"><span class="comment">//=&gt;typeof []  =&gt;'object'</span></span><br><span class="line"><span class="comment">//=&gt;typeof 'object'  =&gt;'string'</span></span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<h4 id="instanceof-amp-constructor"><a href="#instanceof-amp-constructor" class="headerlink" title="instanceof &amp; constructor"></a>instanceof &amp; constructor</h4><blockquote>
+<p>instanceof ：检测某一个实例是否隶属于某个类<br>constructor：构造函数</p>
+<p>使用instanceof检测某个值是否属于某一个数据类型的内置类，从而检测出它是否是这个类型的值；使用instanceof可以实现typeof实现不了的，对对象类型值详细的区分检测；<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[] <span class="keyword">instanceof</span> <span class="built_in">Array</span>  =&gt;<span class="literal">true</span></span><br><span class="line">[] <span class="keyword">instanceof</span> <span class="built_in">RegExp</span> =&gt;<span class="literal">false</span></span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<blockquote>
+<p>使用instanceof检测也有自己的弊端:<br>1、基本类型值无法基于它检测<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> num=<span class="number">12</span>;</span><br><span class="line">num.toFixed(<span class="number">2</span>)  =&gt;<span class="string">'12.00'</span>  <span class="comment">//=&gt;12是Number类的一个实例，可以调取Number.prototype上的方法，但是它是基本类型值</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> num2=<span class="keyword">new</span> <span class="built_in">Number</span>(<span class="number">12</span>);</span><br><span class="line">num2.toFixed(<span class="number">2</span>) =&gt;<span class="string">'12.00'</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">typeof</span> num =&gt;<span class="string">'number'</span></span><br><span class="line"><span class="keyword">typeof</span> num2 =&gt;<span class="string">'object'</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//=&gt;不管是哪一种方式创建基本类型值，都是自己所属类的实例（只不过类型不一样而已）</span></span><br><span class="line">num <span class="keyword">instanceof</span> <span class="built_in">Number</span>  =&gt;<span class="literal">false</span></span><br><span class="line">num2 <span class="keyword">instanceof</span> <span class="built_in">Number</span> =&gt;<span class="literal">true</span></span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<blockquote>
+<p>2、instanceof检测的原理是基于原型链检测的：只要当前类在实例的原型链上，最后返回的结果都是true<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> ary=[];</span><br><span class="line">ary <span class="keyword">instanceof</span> <span class="built_in">Array</span>  =&gt;<span class="literal">true</span></span><br><span class="line">ary <span class="keyword">instanceof</span> <span class="built_in">Object</span> =&gt;<span class="literal">true</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Fn</span>(<span class="params"></span>)</span>&#123;&#125;</span><br><span class="line">Fn.prototype=<span class="keyword">new</span> <span class="built_in">Array</span>();<span class="comment">//=&gt;原型继承(Fn是Array的子类)</span></span><br><span class="line"><span class="keyword">var</span> f=<span class="keyword">new</span> Fn();</span><br><span class="line">f <span class="keyword">instanceof</span> <span class="built_in">Array</span> =&gt;<span class="literal">true</span> <span class="comment">//=&gt;但是我们的f其实不应该是数组，虽然在它的原型上可以找到数组，但是它不具备数组的基础结构，这也是instanceof的弊端</span></span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<p><code>constructor</code></p>
+<blockquote>
+<p>获取当前要检测数据值的constructor，判断它是否是某一个数据类型内置类来检测<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> ary=[];</span><br><span class="line">ary.constructor===<span class="function"><span class="params">Array</span> =&gt;</span><span class="literal">true</span></span><br><span class="line">ary.constructor===<span class="function"><span class="params">RegExp</span> =&gt;</span><span class="literal">false</span></span><br><span class="line">ary.constructor===<span class="function"><span class="params">Object</span> =&gt;</span><span class="literal">false</span></span><br><span class="line"></span><br><span class="line">ary.constructor=<span class="string">'AA'</span>;</span><br><span class="line">ary.constructor===<span class="function"><span class="params">Array</span> =&gt;</span><span class="literal">false</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//=&gt;constructor检测数据类型非常不可靠，因为这个属性是经常容易被修改的</span></span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<h4 id="Object-prototype-toString-call-value"><a href="#Object-prototype-toString-call-value" class="headerlink" title="Object.prototype.toString.call([value])"></a>Object.prototype.toString.call([value])</h4><blockquote>
+<p>获取Object.prototype上的toString方法，让方法中的this变为需要检测的数据类型值，并且让方法执行</p>
+<p>在Number、String、Boolean、Array、Function、RegExp…这些类的原型上都有一个toString方法：这个方法就是把本身的值转换为字符串的<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">(<span class="number">12</span>).toString() =&gt;<span class="string">'12'</span></span><br><span class="line">(<span class="literal">true</span>).toString() =&gt;<span class="string">'true'</span></span><br><span class="line">[<span class="number">12</span>,<span class="number">23</span>].toString() =&gt;<span class="string">'12,23'</span></span><br><span class="line">...</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<blockquote>
+<p>在Object这个类的原型上也有一个方法toString，但是这个方法并不是把值转换为字符串，而是<code>返回当前值的所属类详细信息，固定结构：&#39;[object 所属的类]&#39;</code><br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> obj=&#123;<span class="attr">name</span>:<span class="string">'珠峰'</span>&#125;;</span><br><span class="line">obj.toString() <span class="comment">//=&gt;"[object Object]" 调取的正是Object.prototype.toString</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> * obj.toString()</span></span><br><span class="line"><span class="comment"> *   首先执行Object.prototype.toString方法</span></span><br><span class="line"><span class="comment"> *   这个方法中的this就是我们操作的数据值obj</span></span><br><span class="line"><span class="comment"> *   =&gt;总结：Object.prototype.toString执行的时候会返回当前方法中this的所属类信息</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> *   也就是，我想知道谁的所属类信息，我们就把这个toString方法执行，并且让this变为我们检测的这个数据值，那么方法返回的结果就是当前检测这个值的所属类信息</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> *   Object.prototype.toString.call([value])</span></span><br><span class="line"><span class="comment"> *   (&#123;&#125;).toString.call([value])</span></span><br><span class="line"><span class="comment"> */</span></span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Object</span>.prototype.toString.call(<span class="number">12</span>) =&gt;<span class="string">"[object Number]"</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">Object</span>.prototype.toString.call(<span class="literal">true</span>) =&gt;<span class="string">"[object Boolean]"</span></span><br><span class="line"></span><br><span class="line">...</span><br><span class="line"></span><br><span class="line"><span class="string">"[object Number]"</span></span><br><span class="line"><span class="string">"[object Boolean]"</span></span><br><span class="line"><span class="string">"[object String]"</span></span><br><span class="line"><span class="string">"[object Null]"</span></span><br><span class="line"><span class="string">"[object Undefined]"</span></span><br><span class="line"><span class="string">"[object Object]"</span></span><br><span class="line"><span class="string">"[object Array]"</span></span><br><span class="line"><span class="string">"[object RegExp]"</span></span><br><span class="line"><span class="string">"[object Function]"</span></span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>使用toString检测数据类型，不管你是啥值，我们都可以正常检测出需要的结果（这个方法检测是万能的）</p>
+</blockquote>
+<h3 id="检测数据类型方法的封装"><a href="#检测数据类型方法的封装" class="headerlink" title="检测数据类型方法的封装"></a>检测数据类型方法的封装</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">~<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> obj = &#123;</span><br><span class="line">        isNumber: <span class="string">'Number'</span>,</span><br><span class="line">        isString: <span class="string">'String'</span>,</span><br><span class="line">        isBoolean: <span class="string">'Boolean'</span>,</span><br><span class="line">        isNull: <span class="string">'Null'</span>,</span><br><span class="line">        isUndefined: <span class="string">'Undefined'</span>,</span><br><span class="line">        isPlanObject: <span class="string">'Object'</span>,</span><br><span class="line">        isArray: <span class="string">'Array'</span>,</span><br><span class="line">        isRegExp: <span class="string">'RegExp'</span>,</span><br><span class="line">        isFunction: <span class="string">'Function'</span></span><br><span class="line">    &#125;;</span><br><span class="line">    <span class="keyword">var</span> check = &#123;&#125;;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">var</span> key <span class="keyword">in</span> obj) &#123;</span><br><span class="line">        <span class="keyword">if</span> (obj.hasOwnProperty(key)) &#123;</span><br><span class="line">            check[key] = (<span class="function"><span class="keyword">function</span> (<span class="params">classValue</span>) </span>&#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="function"><span class="keyword">function</span> (<span class="params">val</span>) </span>&#123;</span><br><span class="line">                    <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">RegExp</span>(<span class="string">'\\[object '</span> + classValue + <span class="string">'\\]'</span>).test(<span class="built_in">Object</span>.prototype.toString.call(val));</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;)(obj[key]);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">window</span>.check = check;</span><br><span class="line">&#125;();</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/05/04/数据类型/" rel="next" title="数据类型">
+                <i class="fa fa-chevron-left"></i> 数据类型
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/05/04/面向对象的理解/" rel="prev" title="面向对象的理解">
+                面向对象的理解 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">tiandali</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#JS中的数据类型检测"><span class="nav-number">1.</span> <span class="nav-text">JS中的数据类型检测</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#typeof"><span class="nav-number">1.1.</span> <span class="nav-text">typeof</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#instanceof-amp-constructor"><span class="nav-number">1.2.</span> <span class="nav-text">instanceof &amp; constructor</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Object-prototype-toString-call-value"><span class="nav-number">1.3.</span> <span class="nav-text">Object.prototype.toString.call([value])</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#检测数据类型方法的封装"><span class="nav-number">2.</span> <span class="nav-text">检测数据类型方法的封装</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">tiandali</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
