@@ -1,0 +1,685 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="call  apply  bind 都是天生自带的方法(Function.prototype)，所有的函数都可以调取这三个方法三个方法都是改变THIS指向的  callcall  fn.call(context,para1,…)把fn方法执行，并且让fn方法中的this变为context,而para1…都是给fn传递的实参1.非严格模式下如果参数不传或者第一个传递的是null、undefined，">
+<meta property="og:type" content="article">
+<meta property="og:title" content="call、apply、bind">
+<meta property="og:url" content="http://yoursite.com/2018/05/22/call、apply、bind/index.html">
+<meta property="og:site_name" content="tiandali">
+<meta property="og:description" content="call  apply  bind 都是天生自带的方法(Function.prototype)，所有的函数都可以调取这三个方法三个方法都是改变THIS指向的  callcall  fn.call(context,para1,…)把fn方法执行，并且让fn方法中的this变为context,而para1…都是给fn传递的实参1.非严格模式下如果参数不传或者第一个传递的是null、undefined，">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2018-05-21T17:15:48.044Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="call、apply、bind">
+<meta name="twitter:description" content="call  apply  bind 都是天生自带的方法(Function.prototype)，所有的函数都可以调取这三个方法三个方法都是改变THIS指向的  callcall  fn.call(context,para1,…)把fn方法执行，并且让fn方法中的this变为context,而para1…都是给fn传递的实参1.非严格模式下如果参数不传或者第一个传递的是null、undefined，">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/05/22/call、apply、bind/"/>
+
+
+
+
+
+  <title>call、apply、bind | tiandali</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">tiandali</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/22/call、apply、bind/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="tiandali">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="tiandali">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">call、apply、bind</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-05-22T01:07:18+08:00">
+                2018-05-22
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="call-apply-bind"><a href="#call-apply-bind" class="headerlink" title="call  apply  bind"></a>call  apply  bind</h3><blockquote>
+<p>都是天生自带的方法(Function.prototype)，所有的函数都可以调取这三个方法<br><code>三个方法都是改变THIS指向的</code></p>
+</blockquote>
+<h4 id="call"><a href="#call" class="headerlink" title="call"></a>call</h4><p><code>call</code></p>
+<blockquote>
+<p>fn.call(context,para1,…)<br>把fn方法执行，并且让fn方法中的this变为context,而para1…都是给fn传递的实参<br>1.非严格模式下如果参数不传或者第一个传递的是null、undefined，this指向window<br>2.严格模式下第一个参数是谁，this就指向谁（包括null、undefined）不传this是undefined</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//=&gt;非严格模式</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fn</span>(<span class="params">num1,num2</span>)</span>&#123;</span><br><span class="line">	<span class="built_in">console</span>.log(<span class="keyword">this</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> obj=&#123;<span class="attr">fn</span>:fn&#125;;</span><br><span class="line">fn();<span class="comment">//=&gt;this:window</span></span><br><span class="line">obj.fn();<span class="comment">//=&gt;this:obj</span></span><br><span class="line"><span class="keyword">var</span> opp=&#123;&#125;;</span><br><span class="line"><span class="comment">//opp.fn();//=&gt;报错:opp中没有fn这个属性</span></span><br><span class="line">fn.call(opp);<span class="comment">//=&gt;this:opp num1&amp;&amp;num2都是undefined</span></span><br><span class="line">fn.call(<span class="number">1</span>,<span class="number">2</span>);<span class="comment">//=&gt;this:1 num1=2 num2=undefined</span></span><br><span class="line">fn.call(opp,<span class="number">1</span>,<span class="number">2</span>);<span class="comment">//=&gt;this:opp num1=1 num2=2</span></span><br><span class="line"><span class="comment">//-&gt;CALL方法的几个特殊性</span></span><br><span class="line">fn.call();<span class="comment">//=&gt;this:window   num1&amp;&amp;num2都是undefined</span></span><br><span class="line">fn.call(<span class="literal">null</span>);<span class="comment">//=&gt;this:window</span></span><br><span class="line">fn.call(<span class="literal">undefined</span>);<span class="comment">//=&gt;this:window</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//=&gt;JS严格模式下</span></span><br><span class="line"><span class="meta">"use strict"</span>;</span><br><span class="line">fn.call();<span class="comment">//=&gt;this:undefined</span></span><br><span class="line">fn.call(<span class="literal">undefined</span>);<span class="comment">//=&gt;this:undefined</span></span><br><span class="line">fn.call(<span class="literal">null</span>);<span class="comment">//=&gt;this:null</span></span><br></pre></td></tr></table></figure>
+<h4 id="apply"><a href="#apply" class="headerlink" title="apply"></a>apply</h4><blockquote>
+<p>apply的语法和call基本一致，作用原理也基本一致，唯一的区别：apply把传递给函数的实参以数组形式存放（但是也相当于在给函数一个个的传递实参值）<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">fn.call(<span class="literal">null</span>,<span class="number">10</span>,<span class="number">20</span>,<span class="number">30</span>);</span><br><span class="line">fn.apply(<span class="literal">null</span>,[<span class="number">10</span>,<span class="number">20</span>,<span class="number">30</span>]); <span class="comment">//=&gt;传递给fn的时候也是一个个的传递进去的</span></span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<h4 id="bind"><a href="#bind" class="headerlink" title="bind"></a>bind</h4><p><code>bind</code>预处理机制</p>
+<blockquote>
+<p>也是改变THIS的方法，它在IE6~8下不兼容；它和call(以及apply)改变this的原理不一样，区别于立即执行还是等待执行。<br>把所有参数传给点前面的方法，返回一个接受参数后的小函数，返回值是函数的定义<br>预处理机制：提前把所有的事情都弄好，最终函数执行需要手动运行</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">fn.call(opp,<span class="number">10</span>,<span class="number">20</span>); <span class="comment">//=&gt;把fn执行,让fn中的this变为opp,并且把10&amp;&amp;20分别传递给fn</span></span><br><span class="line"></span><br><span class="line">fn.bind(opp,<span class="number">10</span>,<span class="number">20</span>); <span class="comment">//=&gt;预先让fn中的this指向opp,并且把10和20预先传递给fn,此时的fn没有被执行(只有当执行的时候this和实参才会起到应有的作用)</span></span><br><span class="line"><span class="comment">//=&gt;需求：点击box这个盒子的时候，需要执行fn，并且让fn中的this指向opp</span></span><br><span class="line">oBox.onclick=fn; <span class="comment">//=&gt;点击的时候执行了fn,但此时fn中的this是oBox</span></span><br><span class="line"></span><br><span class="line">oBox.onclick=fn.call(opp); <span class="comment">//=&gt;绑定事件的时候就已经把fn立即执行了(call本身就是立即执行函数),然后把fn执行的返回值绑定给事件</span></span><br><span class="line"></span><br><span class="line">oBox.onclick=fn.bind(opp);</span><br><span class="line"><span class="comment">//=&gt;fn.bind(opp)：fn调取Function.prototype上的bind方法，执行这个方法返回了一个匿名函数</span></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> * function()&#123;</span></span><br><span class="line"><span class="comment"> *     fn.call(opp);</span></span><br><span class="line"><span class="comment"> * &#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line">oBox.onclick=<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">	<span class="comment">//=&gt;this:oBox</span></span><br><span class="line">	fn.call(opp);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>思考题<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fn1</span>(<span class="params"></span>)</span>&#123;<span class="built_in">console</span>.log(<span class="number">1</span>);&#125;</span><br><span class="line"> <span class="function"><span class="keyword">function</span> <span class="title">fn2</span>(<span class="params"></span>)</span>&#123;<span class="built_in">console</span>.log(<span class="number">2</span>);&#125;</span><br><span class="line"> fn1.call(fn2);<span class="comment">//=&gt;找到CALL-AA把它执行,CALL-AA中的THIS是FN1,第一个参数传递的是FN2  =&gt;在CALL-AA中执行的是FN1 =&gt;1</span></span><br><span class="line"></span><br><span class="line"> fn1.call.call(fn2);<span class="comment">//=&gt;找到CALL-AA让它执行,CALL-AA中的THIS是FN1.CALL,第一个参数是FN2  (把FN1.CALL中的THIS变为FN2，再让FN1.CALL执行  =&gt;先找到CALL-AA，把它执行，只不过此时它中的THIS是FN2 =&gt;让FN2中的THIS变为UNDEFINED，因为执行FN1.CALL的时候没有传递参数值，然后让FN2执行)  =&gt;2</span></span><br><span class="line"></span><br><span class="line"> <span class="built_in">Function</span>.prototype.call(fn1);<span class="comment">//=&gt;先找到CALL-AA把它执行，它中的THIS是Function.prototype =&gt;让F.P中的THIS变为FN1,然后让F.P执行,F.P是一个匿名函数也是一个空函数，执行没有任何的输出</span></span><br><span class="line"><span class="built_in">Function</span>.prototype.call.call(fn1);<span class="comment">//=&gt;先找到CALL-AA把它执行，它中的THIS是F.P.CALL =&gt;把F.P.CALL中的THIS修改为FN1,让F.P.CALL执行  =&gt;F.P.CALL(CALL-AA)第二次把它执行(此时它里面的THIS已经是FN1) =&gt;这一次其实在CALL-AA中是让FN1执行 =&gt;1</span></span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<blockquote>
+<p>查看函数原型上的方法：<br>call/apply/bind-&gt;改变调用主体的this关键字<br>call()第一个参数：用来改变<code>.</code>前面方法的this关键字，从第二个参数开始，以散列式的方式给<code>.</code>前面的方法传参.—散列式.<br>fn.apply()第一个参数：用来改变<code>.</code>前面方法的this关键字，第二个参数是用来给<code>.</code>前面的方法传参（把所有的参数放在数组里传给<code>.</code>前面的方法）—打包式.</p>
+</blockquote>
+<p>非严格模式下</p>
+<blockquote>
+<p>call/apply第一个参数不传，传null,传undefined-&gt;<code>.</code>前面方法里的this都是window<br>严格模式下-》规范<br>好处：<br>1.更加安全高效<br>2.提高编译器编译代码的速度<br>3.跟高版本浏览器接轨<br>第一个参数不传是undefined，其他传什么就是什么<br>fn1.call.call.call.call(fn2);<br>最后一个call作用<br>1.让点前面方法里的this关键字改成fn2-&gt;call方法里this-&gt;fn2<br>2.让点前面方法运行-&gt;function.prototype.call()-&gt;this()-&gt;fn2()</p>
+</blockquote>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/05/22/函数的三种角色/" rel="next" title="函数的三种角色">
+                <i class="fa fa-chevron-left"></i> 函数的三种角色
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/05/22/JQuery解读/" rel="prev" title="JQuery解读">
+                JQuery解读 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">tiandali</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">19</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#call-apply-bind"><span class="nav-number">1.</span> <span class="nav-text">call  apply  bind</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#call"><span class="nav-number">1.1.</span> <span class="nav-text">call</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#apply"><span class="nav-number">1.2.</span> <span class="nav-text">apply</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#bind"><span class="nav-number">1.3.</span> <span class="nav-text">bind</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">tiandali</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,731 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="jQuery  “类库”：提供一些真实项目中的常用方法；任何项目都可以把类库导入进来调取里面的方法实现自己需要的业务逻辑。zepto:移动端的类库     插件;具备一定的业务功能，例如我们可以封装轮播图插件、选项卡插件、模态框插件等（插件规定了当前这个功能的样式结构把实现功能的js进行封装，以后想实现这个功能直接导入插件即可）swiper/iscroll/jquery-dialog/jquery">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JQuery解读">
+<meta property="og:url" content="http://yoursite.com/2018/05/22/JQuery解读/index.html">
+<meta property="og:site_name" content="tiandali">
+<meta property="og:description" content="jQuery  “类库”：提供一些真实项目中的常用方法；任何项目都可以把类库导入进来调取里面的方法实现自己需要的业务逻辑。zepto:移动端的类库     插件;具备一定的业务功能，例如我们可以封装轮播图插件、选项卡插件、模态框插件等（插件规定了当前这个功能的样式结构把实现功能的js进行封装，以后想实现这个功能直接导入插件即可）swiper/iscroll/jquery-dialog/jquery">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2018-05-21T17:33:03.559Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="JQuery解读">
+<meta name="twitter:description" content="jQuery  “类库”：提供一些真实项目中的常用方法；任何项目都可以把类库导入进来调取里面的方法实现自己需要的业务逻辑。zepto:移动端的类库     插件;具备一定的业务功能，例如我们可以封装轮播图插件、选项卡插件、模态框插件等（插件规定了当前这个功能的样式结构把实现功能的js进行封装，以后想实现这个功能直接导入插件即可）swiper/iscroll/jquery-dialog/jquery">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/05/22/JQuery解读/"/>
+
+
+
+
+
+  <title>JQuery解读 | tiandali</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">tiandali</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/22/JQuery解读/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="tiandali">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="tiandali">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">JQuery解读</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-05-22T01:09:00+08:00">
+                2018-05-22
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="jQuery"><a href="#jQuery" class="headerlink" title="jQuery"></a>jQuery</h2><blockquote>
+<ul>
+<li>“类库”：提供一些真实项目中的常用方法；任何项目都可以把类库导入进来调取里面的方法实现自己需要的业务逻辑。<br>zepto:移动端的类库</li>
+</ul>
+</blockquote>
+<blockquote>
+<ul>
+<li>插件;具备一定的业务功能，例如我们可以封装轮播图插件、选项卡插件、模态框插件等（插件规定了当前这个功能的样式结构把实现功能的js进行封装，以后想实现这个功能直接导入插件即可）swiper/iscroll/jquery-dialog/jquery-drag/jquery-datepicker/ECharts…</li>
+</ul>
+</blockquote>
+<blockquote>
+<ul>
+<li>UI组件:把结构css/js全都封装好了想要实现一个功能直接导入进来即可bootstrap…</li>
+</ul>
+</blockquote>
+<blockquote>
+<ul>
+<li>框架：具备一定的编程思想要求我们按照框架的思想开发，一般框架中提供了常用的类库方法提供了强大的功能插件有的也提供了强大的UI组件…React (React native)/VUE/Angular/Backbone/Sea.js/Require.js…</li>
+</ul>
+</blockquote>
+<p>jQuery是基于js封装的一个类库提供了很多方法而且这些方法是兼容所有浏览器的<br>jQ版本：v1（常用 1.8.3/1.9.3/1.11.3）v2（移动端,但不如zepto) v3()<br>jq选择器：基于各种选择器创建一个jq实例（jq对象）：$()<br>两个参数：<br><code>selector</code>：选择器的类型一般都是字符串但是支持函数或者元素对象。<br><code>context</code>：基于选择器获取元素时候指定的上下文默认是document。<br>jq对象：一个类数组结构（jq实例）这个类数组集合当中包含了获取到的元素。</p>
+<h3 id="JQ的核心原理解读（分析原代码）"><a href="#JQ的核心原理解读（分析原代码）" class="headerlink" title="JQ的核心原理解读（分析原代码）"></a>JQ的核心原理解读（分析原代码）</h3><blockquote>
+<p>JQ是一个常用方法类库（常用的DOM库），提供了很多真实项目开发中需要使用的属性和方法（这些方法JQ已经帮我们完善了浏览器兼容处理以及一些细节的优化）</p>
+</blockquote>
+<p><code>jQuery本身是一个类
+JQ是基于构造函数模式构建的类库</code></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> jQuery=<span class="function"><span class="keyword">function</span>(<span class="params">selector,context</span>)</span>&#123;</span><br><span class="line">	<span class="keyword">return</span> <span class="keyword">new</span> jQuery.fn.init(selector, context);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">jQuery.fn=jQuery.prototype=&#123;</span><br><span class="line">	jquery:version,</span><br><span class="line">	<span class="keyword">constructor</span>:jQuery,</span><br><span class="line">	...</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">...</span><br><span class="line"></span><br><span class="line">init=jQuery.fn.init=function(selector, context)&#123;</span><br><span class="line">	<span class="keyword">if</span>(<span class="keyword">typeof</span> selector==<span class="string">"string"</span>)&#123;</span><br><span class="line">		...</span><br><span class="line">	&#125;<span class="keyword">else</span> <span class="keyword">if</span>(selector.nodeType)&#123;</span><br><span class="line">		...</span><br><span class="line">	&#125;<span class="keyword">else</span> <span class="keyword">if</span>(jQuery.isFunction(selector))&#123;</span><br><span class="line">		...</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> jQuery.makeArray(selector,<span class="keyword">this</span> );<span class="comment">//=&gt;返回的是一个类数组</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">init.prototype=jQuery.fn;</span><br><span class="line"></span><br><span class="line">...</span><br><span class="line"></span><br><span class="line"><span class="built_in">window</span>.jQuery=<span class="built_in">window</span>.$=jQuery;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>当我们在JS中执行：<br>\$()<br>jQuery()</p>
+<p>都是在创建一个JQ类的实例（$===jQuery），这些实例都是一个类数组（我们把这个类数组称之为JQ对象），JQ的实例可以使用JQ原型上提供的公有的属性和方法</p>
+<p>项目中我们把\$()称之为JQ的选择器，因为执行这个方法可以传递一个selector参数进去，通过selector我们可以获取到需要操作的DOM元素集合（JQ类数组集合）；传递的第二个参数context它是当前获取元素的上下文（不传递默认是document，如果传递，我们传递一个JS元素对象即可）</p>
+<p>但是把它叫做JQ选择器有点笼统，因为传递的selector支持三种格式：<br>传递的是个字符串，就是我们所谓的选择器，能够通过选择器获取到元素<br>传递的是个元素对象，它的意思是把JS原生对象转换为JQ对象<br>传递的是个函数，它代表等DOM结构加载完成在执行对应的JS代码（类似于window.onload）</p>
+<p>…</p>
+</blockquote>
+<p><code>JQ的选择器</code><br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">$===jQuery  <span class="comment">//=&gt;true</span></span><br><span class="line">$()===jQuery() <span class="comment">//=&gt;false 不同实例</span></span><br><span class="line">$() <span class="keyword">instanceof</span> jQuery <span class="comment">//=&gt;true</span></span><br><span class="line"><span class="keyword">var</span> $example=$(); <span class="comment">//=&gt;我们用JQ选择器获取的值，一般都是用以$开头的变量名来存储（以后看见变量名是以$开头的，我们就知道是JQ获取的实例[JQ对象]）</span></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">$example</span></span><br><span class="line"><span class="comment">[xxx:xxx  私有的属性]</span></span><br><span class="line"><span class="comment">0:某一个元素对象</span></span><br><span class="line"><span class="comment">...</span></span><br><span class="line"><span class="comment">length:类数组的长度</span></span><br><span class="line"><span class="comment">context:document</span></span><br><span class="line"><span class="comment">selector:'传递的选择器内容'</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">__protot__：jQuery.prototype</span></span><br><span class="line"><span class="comment">   [xxx:xxx 公有的属性和方法]</span></span><br><span class="line"><span class="comment">   add</span></span><br><span class="line"><span class="comment">   addClass</span></span><br><span class="line"><span class="comment">   ...</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment"> __proto__:Object.prototype</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure></p>
+<blockquote>
+<p>第一个参数[selector]传递的是一个字符串，就是通过选择器获取需要的元素集合（获取的结果怎么着都是类数组集合：获取多个元素也就是索引多点，获取一个元素也就是只有索引0，一个都没获取到就是一个空的类数组集合[而不是null]）</p>
+<p>一般CSS或者CSS3中支持的选择器，JQ都支持<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//=&gt;基本选择器</span></span><br><span class="line">$(<span class="string">'#xxx'</span>)</span><br><span class="line">$(<span class="string">'.xxx'</span>)</span><br><span class="line">$(<span class="string">'xxx'</span>)</span><br><span class="line">$(<span class="string">'*'</span>)</span><br><span class="line">$(<span class="string">'.xxx,#xxx'</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">//=&gt;后代选择器</span></span><br><span class="line">$(<span class="string">'.box a'</span>)</span><br><span class="line">$(<span class="string">'.box&gt;a'</span>)</span><br><span class="line"><span class="comment">//$('.box~a')</span></span><br><span class="line"><span class="comment">//$('.box+a') 不常用</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//=&gt;伪类选择器</span></span><br><span class="line">$(<span class="string">'.box:contains(xxx)'</span>) 包含某某某内容的</span><br><span class="line">$(<span class="string">'a:first'</span>)</span><br><span class="line">$(<span class="string">'a:last'</span>)</span><br><span class="line">$(<span class="string">'a:eq(1)'</span>) 索引为<span class="number">1</span>的</span><br><span class="line">$(<span class="string">'a:gt(1)'</span>) 索引大于<span class="number">1</span>的</span><br><span class="line">$(<span class="string">'a:lt(10)'</span>) 索引小于<span class="number">10</span>的</span><br><span class="line">$(<span class="string">'a:not()'</span>) 不包含什么的</span><br><span class="line">$(<span class="string">'a:not(:gt(5))'</span>) 获取所有的a，但是不包含索引大于<span class="number">5</span>的（前六个）</span><br><span class="line">...</span><br><span class="line"></span><br><span class="line"><span class="comment">//=&gt;属性选择器</span></span><br><span class="line">...</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<h4 id="JQ对象和原生JS对象转换"><a href="#JQ对象和原生JS对象转换" class="headerlink" title="JQ对象和原生JS对象转换"></a><code>JQ对象和原生JS对象转换</code></h4><blockquote>
+<p>JQ对象：通过$()获取的JQ实例(类数组)<br>原生JS对象：通过ES中提供的属性或者方法获取的JS元素对象(nodeType===1)</p>
+<p>把JQ对象转换为原生JS对象<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> oBox=<span class="built_in">document</span>.getElementById(<span class="string">'box'</span>);<span class="comment">//=&gt;原生JS对象</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//oBox.addClass();//=&gt;报错：oBox不是JQ对象，不能使用JQ原型上的方法</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> $box=$(oBox); <span class="comment">//=&gt;把原生JS对象转换为JQ对象</span></span><br><span class="line">$box.addClass(<span class="string">'bg'</span>);</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<blockquote>
+<p>把JQ对象转换为原生JS对象<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> $body=$(<span class="string">'body'</span>);</span><br><span class="line"><span class="comment">//$body.className //=&gt;undefined，因为className是JS原生内置的属性，JQ对象不能直接的用</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//$body[索引]：在集合中获取指定索引的内容（获取的内容就是原生JS对象）</span></span><br><span class="line"><span class="comment">//$body.get(索引)：等价于 $body[索引]，获取指定索引位置的元素（原生JS对象）</span></span><br><span class="line"><span class="comment">//$body.eq(索引)：获取指定索引位置的元素对象（获取的结果还是一个新的JQ对象）</span></span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<h4 id="selector是一个方法"><a href="#selector是一个方法" class="headerlink" title="selector是一个方法"></a><code>selector是一个方法</code></h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">	<span class="comment">//=&gt;当页面中的DOM结构加载完成，就会执行回调函数中的JS代码</span></span><br><span class="line">	<span class="comment">//=&gt;类似于window.onload：等到页面中的DOM结构以及资源文件都加载完成才会执行对应的JS代码</span></span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">$(<span class="built_in">document</span>).ready(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">	<span class="comment">//=&gt;这种写法和上面的写法一模一样</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>和window.onload不太一样<br>1、$(function(){}) 可一在同一个页面中使用多次，多次都生效（所以在使用JQ完成代码的时候，我们一般都会把代码放在回调函数中：首先不仅是等到结构加载完在执行，而且还形成了一个闭包）<br>原理：利用了DOM二级事件绑定(可以执行多次)，监听的是DOMContentLoaded事件(DOM结构加载完成就会触发执行)</p>
+<p>2、window.onload本身就是资源都加载完成才会执行，使用的是DOM零级事件绑定，在同一个页面中只能使用一次<br>window.onload=function()…<br>window.onload=function()…<br>只能留最后一个，最后一次赋值替换了原有赋值</p>
+</blockquote>
+<h3 id="JQ即是一个类也是一个对象"><a href="#JQ即是一个类也是一个对象" class="headerlink" title="JQ即是一个类也是一个对象"></a>JQ即是一个类也是一个对象</h3><blockquote>
+<p>jQuery.prototype上设置了很多的属性和方法，这些是供JQ实例（DOM集合或者DOM元素）使用的属性和方法<br>addClass<br>css<br>removeClass<br>attr<br>…</p>
+<p>jQuery也是一个普通的对象，在对象上也有一些自己的属性和方法（和实例没有任何的关系）,这些都是工具类的方法<br>ajax<br>isFunction<br>unique<br>…</p>
+</blockquote>
+<h4 id="jQuery-prototype"><a href="#jQuery-prototype" class="headerlink" title="jQuery.prototype"></a><code>jQuery.prototype</code></h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="string">'#box'</span>).index()：获取当前元素的索引（是在自己兄弟元素中的索引，它有几个哥哥，索引就是几）</span><br><span class="line"></span><br><span class="line">$(<span class="string">'body'</span>).data(key,value)</span><br><span class="line">只传递key是获取</span><br><span class="line">如果传递了value是设置</span><br><span class="line">我们通过这个方法可以获取到在HTML结构上设置的data-xxx的自定义属性值</span><br><span class="line"><span class="comment">//&lt;body data-index='12'&gt;&lt;/body&gt;</span></span><br><span class="line"><span class="comment">//$('body').data('index') =&gt;12</span></span><br><span class="line"></span><br><span class="line">$(<span class="string">'#box'</span>).attr()：设置或者批量设置或者获取当前元素的自定义属性(内置属性也可以)  removeAttr</span><br><span class="line">$(<span class="string">'#box'</span>).prop()：和attr一样也是操作元素属性的，但是prop一般都操作表单元素的内置或者自定义属性 removeProp</span><br><span class="line"></span><br><span class="line">addClass：增加样式类</span><br><span class="line">removeClass：移除样式类</span><br><span class="line">toggleClass：当前样式类有就是移除，没有就是增加</span><br><span class="line">hasClass：验证是否存在某个样式类名</span><br><span class="line"></span><br><span class="line">$(<span class="string">'#box'</span>).html([val])：不传val就是获取内容，传递val就是设置内容，等价于原生的innerHTML</span><br><span class="line">$(<span class="string">'input'</span>).val([val])：表单元素value值的操作(设置或者获取)</span><br><span class="line"></span><br><span class="line">css：设置或者批量设置或者获取元素的样式（获取的结果没有去单位）</span><br><span class="line"></span><br><span class="line">offset()：获取距离BODY的偏移</span><br><span class="line">position()：获取距离父级参照物的偏移</span><br><span class="line">scrollTop/scrollLeft([val])：获取或者设置当前元素卷去的高度或者宽度</span><br><span class="line">height/width([val])</span><br><span class="line">innerWidth/innerHeight()：等价于clientWidth/clientHeight</span><br><span class="line">outerWidth/outerHeight()：等价于offsetWidth/offsetHeight</span><br><span class="line"></span><br><span class="line">$(<span class="string">'#box'</span>).on(<span class="string">'click'</span>,<span class="function"><span class="keyword">function</span>...)：<span class="title">JQ</span>中的事件绑定</span></span><br><span class="line"><span class="function">...</span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function"><span class="title">$</span>(<span class="params"><span class="string">'#box'</span></span>).<span class="title">remove</span>(<span class="params"></span>)：把当前盒子在容器中移除</span></span><br><span class="line"><span class="function"><span class="title">$</span>(<span class="params"><span class="string">'#box'</span></span>).<span class="title">clone</span>(<span class="params">true</span>)：把当前盒子深度克隆一份</span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function"><span class="title">filter</span></span></span><br><span class="line"><span class="function"><span class="title">children</span></span></span><br><span class="line"><span class="function"><span class="title">find</span></span></span><br><span class="line"><span class="function">...</span></span><br></pre></td></tr></table></figure>
+<p><code>写在对象上的方法</code><br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> j=$.noConflict()：如果当前项目中引入了两个类库，都是使用$操作的，为了防止$使用权的冲突，JQ做了一个处理，可以让我们转让$的使用权；此处返回的值j就是代表原始$的变量，以后可以使用j()执行（使用jQuery()执行也可以）</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> j=$.noConflict(<span class="literal">true</span>)：深度转让，把jQuery和$的使用权都转让了，此时只能使用j()执行了</span><br><span class="line"></span><br><span class="line">$.ajax()：帮助我们发送ajax请求</span><br><span class="line"></span><br><span class="line">...</span><br></pre></td></tr></table></figure></p>
+<h4 id="筛选方法"><a href="#筛选方法" class="headerlink" title="筛选方法"></a><code>筛选方法</code></h4><blockquote>
+<p>filter：同级过滤<br>children：子集过滤<br>find：后代过滤<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> $links=$(<span class="string">'a'</span>);</span><br><span class="line">$links.filter(<span class="string">'.bg'</span>); <span class="comment">//=&gt;首先获取所有的A，在所有的A中把具备样式类为bg的获取到（二次筛选）</span></span><br><span class="line"></span><br><span class="line">$(<span class="string">'#box'</span>).children(<span class="string">'a'</span>); <span class="comment">//=&gt;首先获取#box所有的子元素，在所有子元素中筛选出标签名为a的元素集合 &lt;=&gt; $('#box&gt;a')</span></span><br><span class="line"></span><br><span class="line">$(<span class="string">'#box'</span>).find(<span class="string">'.bg'</span>); <span class="comment">//=&gt;首先获取#box后代中所有的元素，在所有的元素中筛选出样式类名中具备bg的元素集合 &lt;=&gt; $('#box .bg')</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//prev：获取上一个哥哥  $('#box').prev('a')</span></span><br><span class="line"><span class="comment">//prevAll：所有的哥哥</span></span><br><span class="line"><span class="comment">//next：下一个弟弟</span></span><br><span class="line"><span class="comment">//nextAll：所有的弟弟</span></span><br><span class="line"><span class="comment">//siblings：所有的兄弟</span></span><br><span class="line"><span class="comment">//parent：父亲元素</span></span><br><span class="line"><span class="comment">//parents：所有的祖先元素（一直到html为止）</span></span><br><span class="line">...</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<h4 id="each"><a href="#each" class="headerlink" title="each"></a><code>each</code></h4><blockquote>
+<p>JQ中的each有三种<br>1、写在原型上的each：遍历JQ对象中的每一项<br>2、写在对象上的each：工具方法，可以用来遍历数组、类数组、对象等<br>3、内置的each其实也是调用原型上的each处理的，只不过JQ在处理的时候会内部自己调用<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//=&gt;内置EACH</span></span><br><span class="line">$(<span class="string">'a'</span>).addClass(<span class="string">'select'</span>); <span class="comment">//=&gt;我们获取的A可能有很多个，执行一次addClass，相当于给每个获取的A都增加了一个叫做select的样式类（JQ中大部分方法在执行的时候，都会把获取的JQ集合中的每一项调用each进行遍历，把需要操作的任务对每一个遍历的元素进行操作）</span></span><br><span class="line"></span><br><span class="line">$(<span class="string">'a'</span>).css(<span class="string">'width'</span>); <span class="comment">//=&gt;获取的时候只返回第一个元素的样式（设置走内置EACH批量处理，获取只处理第一个）</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//=&gt;原型上的EACH</span></span><br><span class="line">$(<span class="string">'a'</span>).each(<span class="function"><span class="keyword">function</span>(<span class="params">index,item</span>)</span>&#123;</span><br><span class="line">	<span class="comment">//=&gt;传递参数的顺序和数组内置的forEach顺序相反：ary.forEach(function(item,index)&#123;...&#125;);</span></span><br><span class="line">    <span class="comment">//=&gt;获取的A有多少个，回调函数被触发执行多少次：index当前遍历这一项的索引 item是当前遍历这一项的内容</span></span><br><span class="line">    <span class="comment">//=&gt;this -&gt; item (原生JS对象) 方法中的this是当前遍历的这一项</span></span><br><span class="line">    <span class="comment">//=&gt;$(this) 也是当前遍历这一项，但是属于JQ对象</span></span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">//=&gt;JQ对象上提供的工具方法：each</span></span><br><span class="line">$.each([数组/类数组], <span class="function"><span class="keyword">function</span>(<span class="params">index,item</span>) </span>&#123;</span><br><span class="line">	<span class="comment">//=&gt;this:item</span></span><br><span class="line">&#125;);</span><br><span class="line">$.each([对象],<span class="function"><span class="keyword">function</span>(<span class="params">key,value</span>)</span>&#123;</span><br><span class="line">	<span class="comment">//=&gt;this:value</span></span><br><span class="line">	<span class="comment">//=&gt;JQ也是采用for in循环用来遍历对象的，这样的话就存在可能把公有属性和方法遍历到的问题</span></span><br><span class="line">	<span class="keyword">if</span>([对象].hasOwnProperty(key))&#123;</span><br><span class="line"></span><br><span class="line">	&#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<h4 id="extend"><a href="#extend" class="headerlink" title="extend"></a><code>extend</code></h4><blockquote>
+<p>\$.extend()：把方法扩展到JQ对象上，这个操作一般是用来完善类库的<br>$.fn.extend()：把方法扩展到JQ的原型上，供JQ的实例（DOM集合）使用，这个操作一般是用来写JQ插件的<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//=&gt;扩展工具方法，用来完善类库</span></span><br><span class="line">$.extend(&#123;</span><br><span class="line">	aa:<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;&#125;</span><br><span class="line">&#125;);</span><br><span class="line">$.aa();</span><br><span class="line"></span><br><span class="line"><span class="comment">//=&gt;扩展到原型上供实例调用的</span></span><br><span class="line">$.fn.extend(&#123;</span><br><span class="line">	bb:<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">		<span class="comment">//=&gt;this:操作当前这个方法的JQ实例（JQ对像），此处不需要再$(this)转换为JQ对像</span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;);</span><br><span class="line">$(<span class="string">'xxx'</span>).bb();</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<h4 id="animate"><a href="#animate" class="headerlink" title="animate"></a><code>animate</code></h4><blockquote>
+<p>JQ中提供了元素运动的动画库<br>stop：结束当前元素正在运行的动画，继续执行下一个新动画（一般我们实现动画,stop方法基本上必然执行）<br>finish：和stop类似，finish需要让元素立即运动到上一个动画的目标位置，从目标位置执行下一个动画，而stop是从上一个动画停止的位置执行下一个动画</p>
+<p>animate([target],[duration],[effect],[callBack])：<br>[target] 对象<br>[duration] MS<br>[effect]  linear、ease、ease-in、ease-out、ease-in-out<br>[callBack] 回调函数，动画结束做的事情</p>
+<p>show(1000/‘fast’/‘slow’)<br>hide<br>toggle</p>
+<p>fadeIn<br>fadeOut<br>fadeToggle</p>
+<p>slideUp<br>slideDown<br>slideToggle<br>…</p>
+</blockquote>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/05/22/call、apply、bind/" rel="next" title="call、apply、bind">
+                <i class="fa fa-chevron-left"></i> call、apply、bind
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/05/22/H5、css3常用标签/" rel="prev" title="H5、css3常用标签">
+                H5、css3常用标签 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">tiandali</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">19</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#jQuery"><span class="nav-number">1.</span> <span class="nav-text">jQuery</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#JQ的核心原理解读（分析原代码）"><span class="nav-number">1.1.</span> <span class="nav-text">JQ的核心原理解读（分析原代码）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#JQ对象和原生JS对象转换"><span class="nav-number">1.1.1.</span> <span class="nav-text">JQ对象和原生JS对象转换</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#selector是一个方法"><span class="nav-number">1.1.2.</span> <span class="nav-text">selector是一个方法</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#JQ即是一个类也是一个对象"><span class="nav-number">1.2.</span> <span class="nav-text">JQ即是一个类也是一个对象</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#jQuery-prototype"><span class="nav-number">1.2.1.</span> <span class="nav-text">jQuery.prototype</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#筛选方法"><span class="nav-number">1.2.2.</span> <span class="nav-text">筛选方法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#each"><span class="nav-number">1.2.3.</span> <span class="nav-text">each</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#extend"><span class="nav-number">1.2.4.</span> <span class="nav-text">extend</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#animate"><span class="nav-number">1.2.5.</span> <span class="nav-text">animate</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">tiandali</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,670 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="类的继承：封装和多态[封装]：把实现一个功能的js代码进行封装主要目的：低耦合高内聚[多态]：重载：方法名相同，参数的个数或者类型不同，此时名字相同的方法叫做方法的重载（后台语言的重载），js中不存在重载的重写：子类重写父类的方法[继承]：子类继承父类的方法和属性 继承方法原型继承原型继承:让子类原型指向父类的一个实例。原型继承方式：B.prototype=new A();A的实例本身具备父类A的">
+<meta property="og:type" content="article">
+<meta property="og:title" content="类的继承：封装和多态">
+<meta property="og:url" content="http://yoursite.com/2018/05/22/类的封装：继承和多态/index.html">
+<meta property="og:site_name" content="tiandali">
+<meta property="og:description" content="类的继承：封装和多态[封装]：把实现一个功能的js代码进行封装主要目的：低耦合高内聚[多态]：重载：方法名相同，参数的个数或者类型不同，此时名字相同的方法叫做方法的重载（后台语言的重载），js中不存在重载的重写：子类重写父类的方法[继承]：子类继承父类的方法和属性 继承方法原型继承原型继承:让子类原型指向父类的一个实例。原型继承方式：B.prototype=new A();A的实例本身具备父类A的">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2018-05-21T16:58:16.995Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="类的继承：封装和多态">
+<meta name="twitter:description" content="类的继承：封装和多态[封装]：把实现一个功能的js代码进行封装主要目的：低耦合高内聚[多态]：重载：方法名相同，参数的个数或者类型不同，此时名字相同的方法叫做方法的重载（后台语言的重载），js中不存在重载的重写：子类重写父类的方法[继承]：子类继承父类的方法和属性 继承方法原型继承原型继承:让子类原型指向父类的一个实例。原型继承方式：B.prototype=new A();A的实例本身具备父类A的">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/05/22/类的封装：继承和多态/"/>
+
+
+
+
+
+  <title>类的继承：封装和多态 | tiandali</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">tiandali</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/22/类的封装：继承和多态/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="tiandali">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="tiandali">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">类的继承：封装和多态</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-05-22T00:29:16+08:00">
+                2018-05-22
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="类的继承：封装和多态"><a href="#类的继承：封装和多态" class="headerlink" title="类的继承：封装和多态"></a>类的继承：封装和多态</h3><p><code>[封装]</code>：把实现一个功能的js代码进行封装主要目的：低耦合高内聚<br><code>[多态]</code>：重载：方法名相同，参数的个数或者类型不同，此时名字相同的方法叫做方法的重载（后台语言的重载），js中不存在重载的<br>重写：子类重写父类的方法<br><code>[继承]</code>：子类继承父类的方法和属性</p>
+<h4 id="继承方法"><a href="#继承方法" class="headerlink" title="继承方法"></a>继承方法</h4><h5 id="原型继承"><a href="#原型继承" class="headerlink" title="原型继承"></a>原型继承</h5><p><code>原型继承</code>:让子类原型指向父类的一个实例。<br>原型继承方式：<code>B.prototype=new A();</code><br>A的实例本身具备父类A的私有属性和公有方法，子类B的原型指向它，那么子类的B的实例就可以找到这些属性和方法了.<br>和传统后台语言的继承不一样，子类继承父类并不是把父类的属性方法克隆一份给子类的（这样处理子类和父类就没有直接关系了）js中的原型继承是让子类和父类建立原型链接方式，子类的实例调取父类原型上的方法都是基于原型链的查找机制完成的。存在问题是：子类可以重写父类原型上的方法（重写），子类和父类还有关系的</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">B.prototype.\__proto__.getX=null;//把父类A的原型上的getX重写为null，A的其他实例会受到影响</span><br></pre></td></tr></table></figure>
+<p><code>原型继承存在的问题</code>：<br>1.父类实例私有的属性以及公有的属性都变为子类实例的共有属性<br>2.如果子类B的原型上之前有属性方法，重新执行A的实例后，之前的方法都没用了。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">function A()&#123;</span><br><span class="line">this.x=100;</span><br><span class="line">&#125;</span><br><span class="line">A.prototype=&#123;</span><br><span class="line">constructor=A;</span><br><span class="line">getX:function()&#123;</span><br><span class="line">console.log(this.x)&#125;&#125;;</span><br><span class="line">function B()&#123;</span><br><span class="line">this.y=200&#125;</span><br><span class="line">B.prototype=new A();</span><br><span class="line">let f=new B();</span><br><span class="line">//原型继承：方式：B.prototype=new A();A的实例本身具备父类A的私有属性和公有方法，子类B的原型指向它，那么子类的B的实例就可以找到这些属性和方法了</span><br><span class="line">//和传统后台语言的继承不一样，子类继承父类并不是把父类的属性方法克隆一份给子类的（这样处理子类和父类就没有直接关系了）js中的原型继承是让子类和父类建立原型链接方式，子类的实例调取父类原型上的方法都是基于原型链的查找机制完成的。存在问题是：子类可以重写父类原型上的方法（重写），子类和父类还有关系的</span><br><span class="line">B.prototype.__proto__.getX=null;//把父类A的原型上的getX重写为null，A的其他实例会受到影响</span><br><span class="line">`原型继承存在的问题`：</span><br><span class="line">1.父类实例私有的属性以及公有的属性都变为子类实例的共有属性</span><br><span class="line">2.如果子类B的原型上之前有属性方法，重新执行A的实例后，之前的方法都没用了。</span><br></pre></td></tr></table></figure></p>
+<h5 id="call继承"><a href="#call继承" class="headerlink" title="call继承"></a>call继承</h5><p><code>call继承</code>:把父类A作为普通函数执行，让A中的this变为B的实例，相当于给B的实例增加一些属性和方法<br>new A()把A作为类创建它的实例this:实例。<br>A()把A当做普通函数执行this：window<br><code>弊端</code>：把父类A当做普通函数执行，和父类原型没有关系了，仅仅是把A中的私有属性变为子类B实例的私有属性而已，A原型上的公有属性和B及它的实例没啥关系.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">function A()&#123;</span><br><span class="line">this.x=100;</span><br><span class="line">&#125;</span><br><span class="line">A.prototype=&#123;</span><br><span class="line">constructor=A;</span><br><span class="line">getX:function()&#123;</span><br><span class="line">console.log(this.x)&#125;&#125;;</span><br><span class="line">function B()&#123;</span><br><span class="line">A.call(this);//call继承，把A执行,让A中的this变为f；</span><br><span class="line">this.y=200&#125;</span><br><span class="line"></span><br><span class="line">let f=new B();</span><br><span class="line"></span><br><span class="line">弊端：把父类A当做普通函数执行，和父类原型没有关系了，仅仅是把A中的私有属性变为子类B实例的私有属性而已，A原型上的公有属性和B及它的实例没啥关系</span><br></pre></td></tr></table></figure>
+<h5 id="寄生组合继承"><a href="#寄生组合继承" class="headerlink" title="寄生组合继承"></a>寄生组合继承</h5><p><code>寄生组合继承</code>:A的私有变为B的私有，A的公有变为B的公有<br>和原型继承的唯一区别：B.prototype=new A();创建的A的实例虽然指向了A的原型但是实例中不是空的，存放了A的私有属性，这些属性变为B的公有属性，B.prototype=Object.create(A.prototype)：<code>好处</code>在于我们是创建一个没有任何私有属性的空对象，指向A的原型，这样B的公有属性中就不会存在A的私有属性。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">function A()&#123;</span><br><span class="line">this.x=100;</span><br><span class="line">&#125;</span><br><span class="line">A.prototype=&#123;</span><br><span class="line">constructor=A;</span><br><span class="line">getX:function()&#123;</span><br><span class="line">console.log(this.x)&#125;&#125;;</span><br><span class="line">function B()&#123;</span><br><span class="line">A.call(this);//call继承，把A执行,让A中的this变为f；</span><br><span class="line">this.y=200&#125;</span><br><span class="line">//B.prototype=A.prototype;//这是组合继承，一般都不这样处理，容易修改父类A原型上的东西，导致A的其他实例也受到影响。</span><br><span class="line">B.prototype=Object.create(A.prototype)</span><br><span class="line">let f=new B();</span><br><span class="line">//Object.create:内置Object类天生自带的方法</span><br><span class="line">1.创建一个空对象</span><br><span class="line">2。让新创建的空对象__proto__指向第一个传递进来的对象（把OBJ作为新创建空对象的原型）</span><br><span class="line">let obj=&#123;name:&apos;haha&apos;&#125;;</span><br><span class="line">Object.create(obj)</span><br></pre></td></tr></table></figure>
+<h5 id="ES6class类实现继承"><a href="#ES6class类实现继承" class="headerlink" title="ES6class类实现继承"></a>ES6class类实现继承</h5><p>ES6class类实现继承:创建类是有标准的语法的(这种语法创建出来的类只能new执行，不能当做普通函数执行)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">class Fn&#123;</span><br><span class="line">constructor(n,m)&#123;</span><br><span class="line">//等价于构造体，代表函数</span><br><span class="line">this.x=n;</span><br><span class="line">this.y=m;&#125;</span><br><span class="line">//直接给Fn的原型上设置方法(只能设置方法不能设置属性)：</span><br><span class="line">getX()&#123;&#125;</span><br><span class="line">//把Fn当做一个普通对象设置的私有方法(和实例没有关系)，同样只能设置方法不能写属性：</span><br><span class="line">static AA()&#123;&#125;</span><br><span class="line">&#125;</span><br><span class="line">//属性可以添加在外面</span><br><span class="line">//Fn.prototype.bb=100;</span><br><span class="line">let f=new Fn(10,20)</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">class A&#123;</span><br><span class="line">construtor()&#123;this.x=100;&#125;</span><br><span class="line">getX()&#123;console.log(this.x)&#125;</span><br><span class="line">&#125;</span><br><span class="line">class B extends A&#123;//extends类似于实现了原型继承。</span><br><span class="line">construtor()&#123;super();//类似于call继承，在这里super相当于把A的constructor给执行了并且让方法中的this是B的实例，super当中传递的实参都是在给A的constructor传递</span><br><span class="line">this.y=200;&#125;</span><br><span class="line">getY()&#123;console.log(this.y)&#125;</span><br><span class="line">&#125;</span><br><span class="line">let f= new B();</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">//public void fn(int n,int m)</span><br><span class="line">//public void fn(string n,string m)&#123;&#125;</span><br><span class="line">//public void fn(int n,int m,int z)&#123;&#125;</span><br><span class="line">根据传递参数的不同执行不同的方法</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">function fn(n,m)&#123;&#125;;</span><br><span class="line">function fn(n,m,x)&#123;</span><br><span class="line">//后面的方法会把前面的方法覆盖掉，不管传递多少实参，执行的都是后面的这个方法（js中的重载值得是：同一个方法根据传参不一样，实现不同的功能）</span><br><span class="line">&#125;;</span><br><span class="line">fn(1,2);</span><br><span class="line">fn(1,2,3)</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/05/04/DOM精讲/" rel="next" title="DOM精讲">
+                <i class="fa fa-chevron-left"></i> DOM精讲
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/05/22/函数的三种角色/" rel="prev" title="函数的三种角色">
+                函数的三种角色 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">tiandali</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">19</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#类的继承：封装和多态"><span class="nav-number">1.</span> <span class="nav-text">类的继承：封装和多态</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#继承方法"><span class="nav-number">1.1.</span> <span class="nav-text">继承方法</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#原型继承"><span class="nav-number">1.1.1.</span> <span class="nav-text">原型继承</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#call继承"><span class="nav-number">1.1.2.</span> <span class="nav-text">call继承</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#寄生组合继承"><span class="nav-number">1.1.3.</span> <span class="nav-text">寄生组合继承</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#ES6class类实现继承"><span class="nav-number">1.1.4.</span> <span class="nav-text">ES6class类实现继承</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">tiandali</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

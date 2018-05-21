@@ -79,13 +79,17 @@
 
 
 
-<meta property="og:type" content="website">
-<meta property="og:title" content="tiandali">
-<meta property="og:url" content="http://yoursite.com/archives/2018/04/index.html">
+<meta name="description" content="promise他是es6中新增加的类，（new promise）为了管理js中的异步编程的，也称为promise设计模式。三个状态：pendding(准备：初始化成功)fulfilled（成功）rejected（失败）12345678new Promise((resolve，reject)=&amp;gt;&amp;#123;//resolve:当异步操作执行成功，我们执行resolve方法//reject：当异">
+<meta property="og:type" content="article">
+<meta property="og:title" content="promise">
+<meta property="og:url" content="http://yoursite.com/2018/05/22/promise/index.html">
 <meta property="og:site_name" content="tiandali">
+<meta property="og:description" content="promise他是es6中新增加的类，（new promise）为了管理js中的异步编程的，也称为promise设计模式。三个状态：pendding(准备：初始化成功)fulfilled（成功）rejected（失败）12345678new Promise((resolve，reject)=&amp;gt;&amp;#123;//resolve:当异步操作执行成功，我们执行resolve方法//reject：当异">
 <meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2018-05-21T17:44:06.337Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="tiandali">
+<meta name="twitter:title" content="promise">
+<meta name="twitter:description" content="promise他是es6中新增加的类，（new promise）为了管理js中的异步编程的，也称为promise设计模式。三个状态：pendding(准备：初始化成功)fulfilled（成功）rejected（失败）12345678new Promise((resolve，reject)=&amp;gt;&amp;#123;//resolve:当异步操作执行成功，我们执行resolve方法//reject：当异">
 
 
 
@@ -115,13 +119,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/archives/2018/04/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/05/22/promise/"/>
 
 
 
 
 
-  <title>Archive | tiandali</title>
+  <title>promise | tiandali</title>
   
 
 
@@ -140,7 +144,7 @@
     
   
 
-  <div class="container sidebar-position-left page-archive">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -214,74 +218,145 @@
           <div id="content" class="content">
             
 
+  <div id="posts" class="posts-expand">
+    
+
+  
+
   
   
   
-  <div class="post-block archive">
-    <div id="posts" class="posts-collapse">
-      <span class="archive-move-on"></span>
-
-      <span class="archive-page-counter">
-        
-        
-        
-          
-        
-        Um..! 19 posts in total. Keep on posting.
-      </span>
-
-      
-
-        
-        
-        
-
-        
-          
-          <div class="collection-title">
-            <h1 class="archive-year" id="archive-year-2018">2018</h1>
-          </div>
-        
-        
-
-        
 
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/22/promise/">
 
-      <h2 class="post-title">
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="tiandali">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="tiandali">
+    </span>
+
+    
+      <header class="post-header">
+
         
-            <a class="post-title-link" href="/2018/04/21/node-git基本应用/" itemprop="url">
-              
-                <span itemprop="name">node&&git基本应用</span>
-              
-            </a>
         
-      </h2>
+          <h1 class="post-title" itemprop="name headline">promise</h1>
+        
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-04-21T04:24:40+08:00"
-              content="2018-04-21" >
-          04-21
-        </time>
-      </div>
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-05-22T01:11:24+08:00">
+                2018-05-22
+              </time>
+            
 
-    </header>
-  </article>
+            
 
+            
+          </span>
 
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
+      
 
+      
+        <h4 id="promise"><a href="#promise" class="headerlink" title="promise"></a>promise</h4><p>他是es6中新增加的类，（new promise）为了管理js中的异步编程的，也称为promise设计模式。<br>三个状态：<br>pendding(准备：初始化成功)<br>fulfilled（成功）<br>rejected（失败）<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve，reject</span>)=&gt;</span>&#123;</span><br><span class="line"><span class="comment">//resolve:当异步操作执行成功，我们执行resolve方法</span></span><br><span class="line"><span class="comment">//reject：当异步操作执行失败，我们执行reject方法</span></span><br><span class="line"><span class="comment">//执行一个一步的任务（new promise的时候创建一个promise实例立即把当前函数体中的异步操作执行）promise本身是同步的，他可以管理异步操作，</span></span><br><span class="line">setTimeout(<span class="function"><span class="params">()</span>=&gt;</span>&#123;resolve(<span class="number">100</span>)&#125;,<span class="number">1000</span>)；</span><br><span class="line"><span class="built_in">console</span>.log(<span class="number">1</span>);<span class="comment">//先输出1；</span></span><br><span class="line">&#125;).then(<span class="function">(<span class="params">resolve</span>)=&gt;</span>&#123;<span class="built_in">console</span>.log(<span class="string">'ok'</span>)&#125;,(reject)=&gt;&#123;<span class="built_in">console</span>.log(<span class="string">'no'</span>)&#125;);</span><br><span class="line"><span class="built_in">console</span>.log(<span class="number">2</span>);<span class="comment">//在输出2；</span></span><br></pre></td></tr></table></figure></p>
+
+      
     </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/05/22/回调函数/" rel="next" title="回调函数">
+                <i class="fa fa-chevron-left"></i> 回调函数
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/05/22/animate/" rel="prev" title="animate">
+                animate <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
+  </article>
 
-  
 
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -289,6 +364,10 @@
 
 
           
+
+  
+
+
 
         </div>
         
@@ -309,8 +388,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -352,6 +440,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#promise"><span class="nav-number">1.</span> <span class="nav-text">promise</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -485,6 +589,10 @@
   
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 

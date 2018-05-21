@@ -79,13 +79,17 @@
 
 
 
+<meta name="description" content="类的继承：封装和多态[封装]：把实现一个功能的js代码进行封装主要目的：低耦合高内聚[多态]：重载：方法名相同，参数的个数或者类型不同，此时名字相同的方法叫做方法的重载（后台语言的重载），js中不存在重载的重写：子类重写父类的方法[继承]：子类继承父类的方法和属性原型继承:让子类原型指向父类的一个实例。原型继承方式：B.prototype=new A();A的实例本身具备父类A的私有属性和公有方法">
 <meta property="og:type" content="website">
-<meta property="og:title" content="tiandali">
-<meta property="og:url" content="http://yoursite.com/archives/2018/04/index.html">
+<meta property="og:title" content="类的继承：封装和多态">
+<meta property="og:url" content="http://yoursite.com/类的继承：封装和多态/index.html">
 <meta property="og:site_name" content="tiandali">
+<meta property="og:description" content="类的继承：封装和多态[封装]：把实现一个功能的js代码进行封装主要目的：低耦合高内聚[多态]：重载：方法名相同，参数的个数或者类型不同，此时名字相同的方法叫做方法的重载（后台语言的重载），js中不存在重载的重写：子类重写父类的方法[继承]：子类继承父类的方法和属性原型继承:让子类原型指向父类的一个实例。原型继承方式：B.prototype=new A();A的实例本身具备父类A的私有属性和公有方法">
 <meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2018-05-21T16:35:07.995Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="tiandali">
+<meta name="twitter:title" content="类的继承：封装和多态">
+<meta name="twitter:description" content="类的继承：封装和多态[封装]：把实现一个功能的js代码进行封装主要目的：低耦合高内聚[多态]：重载：方法名相同，参数的个数或者类型不同，此时名字相同的方法叫做方法的重载（后台语言的重载），js中不存在重载的重写：子类重写父类的方法[继承]：子类继承父类的方法和属性原型继承:让子类原型指向父类的一个实例。原型继承方式：B.prototype=new A();A的实例本身具备父类A的私有属性和公有方法">
 
 
 
@@ -115,13 +119,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/archives/2018/04/"/>
+  <link rel="canonical" href="http://yoursite.com/类的继承：封装和多态/"/>
 
 
 
 
 
-  <title>Archive | tiandali</title>
+  <title>类的继承：封装和多态 | tiandali</title>
   
 
 
@@ -140,7 +144,7 @@
     
   
 
-  <div class="container sidebar-position-left page-archive">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -214,74 +218,38 @@
           <div id="content" class="content">
             
 
-  
-  
-  
-  <div class="post-block archive">
-    <div id="posts" class="posts-collapse">
-      <span class="archive-move-on"></span>
+  <div id="posts" class="posts-expand">
+    
+    
+    
+    <div class="post-block page">
+      <header class="post-header">
 
-      <span class="archive-page-counter">
-        
-        
-        
-          
-        
-        Um..! 19 posts in total. Keep on posting.
-      </span>
+	<h1 class="post-title" itemprop="name headline">类的继承：封装和多态</h1>
+
+
+
+</header>
 
       
+      
+      
+      <div class="post-body">
+        
+        
+          <h3 id="类的继承：封装和多态"><a href="#类的继承：封装和多态" class="headerlink" title="类的继承：封装和多态"></a>类的继承：封装和多态</h3><p><code>[封装]</code>：把实现一个功能的js代码进行封装主要目的：低耦合高内聚<br><code>[多态]</code>：重载：方法名相同，参数的个数或者类型不同，此时名字相同的方法叫做方法的重载（后台语言的重载），js中不存在重载的<br>重写：子类重写父类的方法<br><code>[继承]</code>：子类继承父类的方法和属性<br><code>原型继承</code>:让子类原型指向父类的一个实例。<br>原型继承方式：B.prototype=new A();A的实例本身具备父类A的私有属性和公有方法，子类B的原型指向它，那么子类的B的实例就可以找到这些属性和方法了.<br>和传统后台语言的继承不一样，子类继承父类并不是把父类的属性方法克隆一份给子类的（这样处理子类和父类就没有直接关系了）js中的原型继承是让子类和父类建立原型链接方式，子类的实例调取父类原型上的方法都是基于原型链的查找机制完成的。存在问题是：子类可以重写父类原型上的方法（重写），子类和父类还有关系的<br>B.prototype.__proto__.getX=null;//把父类A的原型上的getX重写为null，A的其他实例会受到影响<br><code>原型继承存在的问题</code>：<br>1.父类实例私有的属性以及公有的属性都变为子类实例的共有属性<br>2.如果子类B的原型上之前有属性方法，重新执行A的实例后，之前的方法都没用了。</p>
+<p><code>call继承</code>:把父类A作为普通函数执行，让A中的this变为B的实例，相当于给B的实例增加一些属性和方法<br>new A()把A作为类创建它的实例this:实例。<br>A()把A当做普通函数执行this：window<br><code>弊端</code>：把父类A当做普通函数执行，和父类原型没有关系了，仅仅是把A中的私有属性变为子类B实例的私有属性而已，A原型上的公有属性和B及它的实例没啥关系.<br><code>寄生组合继承</code>:A的私有变为B的私有，A的公有变为B的公有<br>和原型继承的唯一区别：B.prototype=new A();创建的A的实例虽然指向了A的原型但是实例中不是空的，存放了A的私有属性，这些属性变为B的公有属性，B.prototype=Object.create(A.prototype)：<code>好处</code>在于我们是创建一个没有任何私有属性的空对象，指向A的原型，这样B的公有属性中就不会存在A的私有属性。<br>ES6class类实现继承:创建类是有标准的语法的(这种语法创建出来的类只能new执行，不能当做普通函数执行)</p>
 
         
-        
-        
-
-        
-          
-          <div class="collection-title">
-            <h1 class="archive-year" id="archive-year-2018">2018</h1>
-          </div>
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/04/21/node-git基本应用/" itemprop="url">
-              
-                <span itemprop="name">node&&git基本应用</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-04-21T04:24:40+08:00"
-              content="2018-04-21" >
-          04-21
-        </time>
       </div>
-
-    </header>
-  </article>
-
-
-
       
-
+      
+      
     </div>
+    
+    
+    
   </div>
-  
-  
-  
-
-  
-
 
 
           </div>
@@ -289,6 +257,10 @@
 
 
           
+
+  
+
+
 
         </div>
         
@@ -309,8 +281,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -325,7 +306,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">19</span>
+                  <span class="site-state-item-count">6</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -352,6 +333,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#类的继承：封装和多态"><span class="nav-number">1.</span> <span class="nav-text">类的继承：封装和多态</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -485,6 +482,10 @@
   
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 

@@ -1,0 +1,779 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="dom事件  1.什么是事件？事件就是一件事情或者行为（对于元素来说他的很多事件都是天生自带）只要我们去操作这个元素就会触发事件。事件就是元素天生自带的行为，我们操作元素就会触发相关的事件行为     2.事件绑定：给元素天生自带的事件行为绑定方法，当事件触发会把对应的方法执行 3.元素天生自带的事件鼠标事件click:点击（pc端是点击，移动端的click代表单击，并且使用click会有300m">
+<meta property="og:type" content="article">
+<meta property="og:title" content="dom事件">
+<meta property="og:url" content="http://yoursite.com/2018/05/22/dom事件/index.html">
+<meta property="og:site_name" content="tiandali">
+<meta property="og:description" content="dom事件  1.什么是事件？事件就是一件事情或者行为（对于元素来说他的很多事件都是天生自带）只要我们去操作这个元素就会触发事件。事件就是元素天生自带的行为，我们操作元素就会触发相关的事件行为     2.事件绑定：给元素天生自带的事件行为绑定方法，当事件触发会把对应的方法执行 3.元素天生自带的事件鼠标事件click:点击（pc端是点击，移动端的click代表单击，并且使用click会有300m">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="http://yoursite.com/2018/05/22/dom事件/1526092054663.png">
+<meta property="og:image" content="http://yoursite.com/2018/05/22/dom事件/1526128583713.png">
+<meta property="og:updated_time" content="2018-05-21T17:48:45.710Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="dom事件">
+<meta name="twitter:description" content="dom事件  1.什么是事件？事件就是一件事情或者行为（对于元素来说他的很多事件都是天生自带）只要我们去操作这个元素就会触发事件。事件就是元素天生自带的行为，我们操作元素就会触发相关的事件行为     2.事件绑定：给元素天生自带的事件行为绑定方法，当事件触发会把对应的方法执行 3.元素天生自带的事件鼠标事件click:点击（pc端是点击，移动端的click代表单击，并且使用click会有300m">
+<meta name="twitter:image" content="http://yoursite.com/2018/05/22/dom事件/1526092054663.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/05/22/dom事件/"/>
+
+
+
+
+
+  <title>dom事件 | tiandali</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">tiandali</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/22/dom事件/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="tiandali">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="tiandali">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">dom事件</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-05-22T01:12:12+08:00">
+                2018-05-22
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="dom事件"><a href="#dom事件" class="headerlink" title="dom事件"></a>dom事件</h3><blockquote>
+<ul>
+<li>1.什么是事件？<br>事件就是一件事情或者行为（对于元素来说他的很多事件都是天生自带）只要我们去操作这个元素就会触发事件。<br>事件就是元素天生自带的行为，我们操作元素就会触发相关的事件行为</li>
+</ul>
+</blockquote>
+<blockquote>
+<ul>
+<li>2.事件绑定：给元素天生自带的事件行为绑定方法，当事件触发会把对应的方法执行</li>
+<li>3.元素天生自带的事件<br><strong>鼠标事件</strong><br><code>click</code>:点击（pc端是点击，移动端的click代表单击，并且使用click会有300ms的延迟）<br><code>dblclick</code>:双击<br><code>mouseover</code>:鼠标经过<br><code>mouseout</code>:鼠标移出<br><code>mouseenter</code>:鼠标进入<br><code>mouseleave</code>:鼠标离开<br><code>mousemove</code>:鼠标移动<br><code>mousedown</code>:鼠标按下（鼠标左右键都起作用他是按下即触发，click是按下抬起才出发，而且是先把down和up先触发，click才触发）<br><code>mouseup</code>:鼠标抬起<br><code>mousewheel</code>:鼠标滚轮滚动<br><strong>键盘事件</strong><br><code>keydown</code>:键盘按下<br><code>keyup</code>:键盘抬起<br><code>keypress</code>:和keydown类似只不过keydown返回的是键盘码。keypress返回的是ASCII码值<br><img src="./1526092054663.png" alt="Alt text"></li>
+</ul>
+</blockquote>
+<p><code>input</code>:由于pc有实体物理键盘，可以监听到键盘的按下和抬起，但是<code>移动端</code>是虚拟的键盘，所以keydown和keyup在大部分手机上都没有，我们使用input事件统一代替他们（内容改变事件）</p>
+<p><strong>表单元素常用的事件</strong><br><code>focus</code>：获取焦点<br><code>blur</code>:失去焦点<br><code>change</code>:内容改变<br><strong>其他常用事件</strong><br><code>load</code>:加载完成<br><code>unload</code>:<br><code>beforeunload</code>:<br><code>scroll</code>:滚动条滚动事件<br><code>resize</code>：大小改变事件window.onresize=function(){}当浏览器窗口大小发生改变会触发这个事件执行对应的事情。<br><code>readystatechange</code>:ajax状态改变<br><strong>移动端手指事件</strong><br><code>gesture</code>:多指操作<br><code>touchstart</code>:手指按下<br><code>touchmove</code>:手指移动<br><code>touchend</code>：手指离开<br><code>touchcancel</code>:因为意外情况导致手指操作取消<br><code>gesturestart</code>:多指按下<br><code>gesturechange</code>:多指改变<br><code>gestureend</code>:手指离开<br><strong>h5中的audio、video音频事件</strong><br><code>canplay</code>；可以播放（播放过程中可能出现由于资源没有加载完成导致卡顿<br><code>canplaythrough</code>：资源加载完成可以正常无障碍播放</p>
+<p>事件绑定</p>
+<blockquote>
+<p><strong>DOM0级事件绑定</strong><br>[element].onxxx=function(){};</p>
+</blockquote>
+<hr>
+<blockquote>
+<p><strong>DOM2级事件绑定</strong><br>[element].addEventListener(‘xxx’,function(){},false);<br>[element].attachEvent(‘onxxx’,function(){});[ie6-8];</p>
+</blockquote>
+<hr>
+<blockquote>
+<p>给元素的事件行为绑定方法，当行为触发的时候浏览器会把绑定的方法执行<br>    1.方法中的this：当前操作的元素（除非自己改动this，比如箭头函数，或者bind）<br>    2.事件绑定属于异步操作，绑定的时候方法没有执行，还是创建方法的阶段呢，当行为触发浏览器才会把方法执行。（当然也有变态的执行方式：bo.onclick(),这样执行仅仅是把它当做一个变量和函数执行，和事件没啥关系。）<br>    3.浏览器不仅把这个方法执行了，还记录了当前本次操作的相关信息（如果是鼠标点击，浏览器记录点击的位置，点的是谁等信息），把这些信息都存储到一个对象中（这个对象就是实践对象：记录当前本次操作信息的对象）；更重要的是标准浏览器会把这个对象（堆内存）传递给执行的方法。我们可以在方法中通过形参或者实参集合等方式受到传递的事件对象信息；</p>
+</blockquote>
+<blockquote>
+<p>目的：给当前元素的某个事件绑定方法不管是基于dom0还是dom2都是为了触发元素的相关行为的时候能做点事情也就是把绑定的方法执行；不仅把方法执行了而且浏览器还给方法传递了一个实参信息值===》这个值就是<code>事件对象ev</code><br>目的：事件对象中记录了很多属性名和属性值，这些信息中包含了当前操作的基础信息，例如鼠标点击位置的x/y轴坐标，鼠标点击的是谁（事件源）等信息</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">box.onclick=<span class="function"><span class="keyword">function</span>(<span class="params">ev</span>)</span>&#123;<span class="comment">//定义一个形参ev用来接收方法执行的时候，浏览器传递的信息值（事件对象mouseevent鼠标事件对象，keyboardevent键盘事件对象，event普通事件对象。。）</span></span><br><span class="line"><span class="comment">//目的：事件对象中记录了很多属性名和属性值，这些信息中包含了当前操作的基础信息，例如鼠标点击位置的x/y轴坐标，鼠标点击的是谁（事件源）等信息</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(ev);&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>  <code>ev.target</code>:事件源（操作的是哪个元素） <code>ev.srcElement;</code>低版本浏览器<br> <code>ev.clientX/ev.clientY</code>:当前鼠标触发点距离当前窗口左上角的x/y轴坐标<br>    <code>ev.pageX/ev.pageY</code>:当前鼠标触发点距离body（第一屏）左上角的x/y轴坐标。<br>    <code>ev.preventDefault()</code>:阻止默认行为<br>    <code>ev.stopPropagation()</code>:阻止事件的冒泡传播<br>     <code>ev.cancelBubble = true;</code>//=&gt;低版本阻止冒泡传播<br>   <code>ev.type</code>:当前事件类型<br>   <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">   [用到其中的几个属性，需要处理兼容]</span><br><span class="line">    box。onclick=<span class="function"><span class="keyword">function</span>(<span class="params">ev</span>)</span>&#123;</span><br><span class="line">    ev=ev||<span class="built_in">window</span>.event;</span><br><span class="line">    <span class="keyword">let</span> target=ev.target||ev.srcElement,</span><br><span class="line">    pageY=ev.pageY||(ev.clientY+(<span class="built_in">document</span>.documentElement.scrollTop||<span class="built_in">document</span>.body.scrollTop))&#125;;</span><br><span class="line">    [很多地方都用到这些属性，而且用的多]</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">handleEvent</span>(<span class="params">ev</span>)</span>&#123;</span><br><span class="line">   <span class="keyword">if</span>(<span class="built_in">window</span>.event&amp;&amp;!ev)&#123;<span class="comment">//低版本浏览器，我们需要处理的不仅仅是把ev赋值，还要把高版本中有低版本没有的属性给ev加上</span></span><br><span class="line">   ev=<span class="built_in">window</span>.event;</span><br><span class="line">   ev.target=ev.srcElement;</span><br><span class="line">   ev.pageX=ev.clientX+(<span class="built_in">document</span>.documentElement.scrollLeft||<span class="built_in">document</span>.body.scrollLeft;</span><br><span class="line">   ev.pageY=ev.clientY+(<span class="built_in">document</span>.documentElement.scrollTop||<span class="built_in">document</span>.body.scrollTop;</span><br><span class="line">   ev.which=ev.keyCode;</span><br><span class="line">   ev.preventDefault=<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">   ev.return=<span class="literal">false</span>;</span><br><span class="line"> &#125;</span><br><span class="line">ev.stopPropagation=<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">ev.cancelBubble=<span class="literal">true</span></span><br><span class="line">&#125;</span><br><span class="line">   &#125;</span><br><span class="line">    <span class="keyword">return</span> ev;</span><br><span class="line">    &#125;</span><br><span class="line">    box.onclick=<span class="function"><span class="keyword">function</span>(<span class="params">ev</span>)</span>&#123;</span><br><span class="line">    ev.handleEvent(ev);</span><br><span class="line">    <span class="keyword">let</span> target=ev.target;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<hr>
+<blockquote>
+<p><strong>keyboardEvent</strong><br>ev.code:当前按键“keyE”<br>ev.key:当前按键’e’<br>ev.which/ev.keycode:当前按键的键盘码69</p>
+</blockquote>
+<hr>
+<blockquote>
+<p>常用的键盘码<br> <code>左 - 上 - 右 - 下</code> ：37-38-39-40<br> <code>Backspace删除键</code>：18<br> <code>Enter</code>：13<br> <code>Space</code>：32<br><code>Delete</code>：46</p>
+<p><code>Shift</code>：16<br><code>Alt</code>：18<br><code>Ctrl</code>：17<br><code>Esc</code>：27<br><code>F1-F12</code>：112-123<br><code>0-9</code>：48-57<br><code>a-z</code>：小写字母<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">box.onclick = <span class="function"><span class="keyword">function</span>(<span class="params">ev</span>)</span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(!ev)&#123;</span><br><span class="line">	<span class="comment">//兼容思想：低版本没有的属性，我们手动设置一些：按照自己有的先获取到值，然后赋值给标准对应的新属性（经过判断处理后，低版本中也有target/pageX/pageY这些属性），后期在使用的时候，直接按照高版本的使用即可</span></span><br><span class="line">		ev = <span class="built_in">window</span>.event;</span><br><span class="line">		<span class="built_in">console</span>.log(ev.srcElement); <span class="comment">//=&gt;ev.srcElement是获取事件源（标准浏览器使用的是ev.target）</span></span><br><span class="line">		<span class="built_in">console</span>.log(ev.ev.pageX); <span class="comment">//=&gt;低版本浏览器的事件对象中不存在pageX/pageY</span></span><br><span class="line">		ev.target = ev.srcElement；</span><br><span class="line">		ev.pageX = ev.clientX+(<span class="built_in">document</span>.documentElement.scrollLeft||<span class="built_in">document</span>.body.scrollLeft)</span><br><span class="line">		ev.pageY = ev.clientX+(<span class="built_in">document</span>.documentElement.scrollTop||<span class="built_in">document</span>.body.scrollTop)</span><br><span class="line">		ev.which = ev.keyCode;</span><br><span class="line">		<span class="comment">//ev.preventDefault  ev.stopPropagation 低版本不存在</span></span><br><span class="line">		ev.preventDefault = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">			ev.returnValue = <span class="literal">false</span>; <span class="comment">//低版本阻止默认行为</span></span><br><span class="line">		&#125;</span><br><span class="line">		ev.stopPropagation = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">			ev.cancelBubble= <span class="literal">true</span>; <span class="comment">//低版本阻止冒泡传播</span></span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">//=&gt;直接按照高版本的规则使用</span></span><br><span class="line">	<span class="built_in">console</span>.log(ev.target,ev.which);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//兼容处理方法二</span></span><br><span class="line">box.onclick = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="comment">//用到谁，给谁处理兼容</span></span><br><span class="line">        ev=ev || <span class="built_in">window</span>.event;</span><br><span class="line">        <span class="keyword">var</span> target = ev.target || ev.srcElement;</span><br><span class="line">        ev.preventDefault()?ev.preventDefault()():ev.returnValue=<span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<h4 id="事件的默认行为"><a href="#事件的默认行为" class="headerlink" title="事件的默认行为"></a>事件的默认行为</h4><blockquote>
+<p>事件本身就是天生就有的，某些事件触发即使你没有绑定方法也会存在一些效果，这些默认的效果就是<code>事件的默认行为</code><br> 1.点击A实现页面跳转<br>    2.锚点定位（href=“元素的ID”），点击的时候url中设置对应的hash值（#xxx），页面加载完成后会定位到ID和hash值相同的盒子位置。真实项目中就是一个普通按钮，不想实现页面跳转或者锚点定位。此时我们需要阻止点击A的时候的默认行为。<br>    结构上阻止：<code>href=&quot;JavaScript:;&quot;</code>或者void(0),null;undefined;<br>    js方法阻止：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">link.onclick=function（ev）&#123;</span><br><span class="line">    ev=ev||window.event;</span><br><span class="line">    ev.preventDefault?ev.preventDefault():ev.returnValue=false;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">或者link.onclick=function()&#123;</span><br><span class="line">   return false;</span><br><span class="line">   //原理：点击A的时候首先触发的是click其次才会触发它的默认行为，我们在click中返回false其意思是阻止下一步继续操作。</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+<p>基于hash值可以实现spa单页面应用<br><strong>input标签也有自己的默认行为</strong><br>1.输入内容可以呈现到文本框中<br>2.输入内容的时候会把之前输入的一些信息呈现出来，并不是所有浏览器和所有情况下都有</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">    //真实项目中我们根据需求可能会组织文本框输入内容，此时其实就是阻止他的默认行为</span><br><span class="line">userInp.onkeydown=userInp.onkeyup=function(ev)&#123;</span><br><span class="line">let val=this.value.trim(),</span><br><span class="line">len=val.length;</span><br><span class="line">if(len&gt;10)&#123;</span><br><span class="line">this.value=val.substr(0,10);超过十位的截掉</span><br><span class="line">有值的键是不允许输入的del/back-space/space/shift/ctrl/alt/tab...</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>submit按钮也存在默认行为</strong><br>1.点击按钮页面会刷新</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;from action=&apos;wangzhi&apos;&gt;&lt;input type=&apos;submit&apos;&gt;&lt;/from&gt;</span><br></pre></td></tr></table></figure>
+<h4 id="事件的传播机制"><a href="#事件的传播机制" class="headerlink" title="事件的传播机制"></a>事件的传播机制</h4><blockquote>
+<p>冒泡传播：触发当前元素的某一个事件（点击事件）行为不仅当前元素事件行为触发，而且其祖先元素的相关事件行为也会一次被触发，这种机制就是<code>事件的冒泡传播机制</code>。</p>
+<ul>
+<li>捕获阶段：点击inner的时候首先会从最外层开始向内查找的（找到操作的事件源），查找的目的是构建出冒泡传播阶段需要传播的路线（查找就是按照HTML层级结构找的）</li>
+<li>目标阶段：把事件源的相关操作行为触发（如果绑定了方法则把方法执行）</li>
+<li>冒泡传播：按照捕获阶段规划的路线自内而外把当前事件源的祖先元素的相关事件行为一次触发（如果某一个祖先元素事件行为绑定了方法，则把方法执行，没绑定方法，行为触发了，什么都不做，继续向上传播即可）<br><img src="./1526128583713.png" alt="Alt text"></li>
+</ul>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">xxx.onxxx=function()&#123;&#125;;dom0事件绑定，给元素的事件行为绑定方法这些都是在当前元素事件行为的冒泡阶段或者目标阶段执行的</span><br><span class="line">  xxx.addEventListener(&apos;xxx&apos;,function()&#123;&#125;,false)第三个参数false也是控制绑定的方法在事件传播的冒泡阶段或者目标阶段执行，只有第三个参数为true才代表让当前方法在事件传播的冒泡阶段或者目标阶段执行</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>不同浏览器对最外层祖先元素的定义是不一样的<br>谷歌：window-&gt;document-&gt;html-&gt;body…<br>IE高：window-&gt;html-&gt;body…<br>IE低：html-&gt;body…<br><strong>关于事件对象的一些理解</strong><br>1.事件对象是用来存储当前本次操作的相关信息，和操作有关，和元素无必然关联，<br>2.当我们基于鼠标或者键盘等操作的时候，浏览器会把本次操作的信息存储起来（标准浏览器存储到默认的内存中（自己找不到），IE低版本存储到window.event中了）存储的值是一个对象（堆内存）;操作肯定会触发元素的某个行为，绑定的方法，执行此时标准浏览器会把之前存储的对象（准确来说是堆内存地址）当做实参传递给每一个执行方法，所以操作一次即使更多方法中都有ev，但是存储的值都是一个（本次操作信息的对象而已）<br><strong>mouseenter和mouseover区别</strong><br>over属于滑过覆盖事件，从父元素进入到子元素属于离开了父元素，会触发父元素的out触发子元素的over<br>enter属于进入，从父元素进入子元素，并不算离开父元素，不会触发父元素的leave触发子元素的enter。<br>enter和leave阻止了事件的冒泡传播，而over和out还存在冒泡传播。<br>所以对于父元素嵌套子元素这种情况使用over会发生很多不愿意操作的事情，此时我们使用enter会更简单，操作方便，所以真实项目中用enter的使用会比over多。</p>
+</blockquote>
+<h4 id="事件委托"><a href="#事件委托" class="headerlink" title="事件委托"></a>事件委托</h4><blockquote>
+<p>利用事件的冒泡传播机制，如果一个容器的后代元素中很多元素的点击行为都要做一些处理此时我们不需要像以前一样一个一个获取然后绑定了，我们只需要给容器的click绑定方法即可，这样不管点击是哪个后代元素，都会根据冒泡传播的传递机制，把容器的click行为触发，把对应的方法执行，根据事件源我们可以知道点击的是谁从而做不同的事情</p>
+</blockquote>
+<h4 id="初步了解JS中事件绑定的方式"><a href="#初步了解JS中事件绑定的方式" class="headerlink" title="初步了解JS中事件绑定的方式"></a>初步了解JS中事件绑定的方式</h4><blockquote>
+<p>DOM0事件绑定<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">oBox.onclick=<span class="function"><span class="keyword">function</span>(<span class="params">e</span>)</span>&#123;</span><br><span class="line">	<span class="comment">//=&gt;this:oBox</span></span><br><span class="line">	e=e||<span class="built_in">window</span>.event;</span><br><span class="line">&#125;</span><br><span class="line">oBox.onmouseenter=<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;&#125;</span><br><span class="line">...</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<blockquote>
+<p>DOM2事件绑定<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//=&gt;标准浏览器</span></span><br><span class="line">oBox.addEventListener(<span class="string">'click'</span>,<span class="function"><span class="keyword">function</span>(<span class="params">e</span>)</span>&#123;</span><br><span class="line">	<span class="comment">//=&gt;this:oBox</span></span><br><span class="line">	<span class="comment">//=&gt;e:事件对象</span></span><br><span class="line">&#125;,<span class="literal">false</span>);</span><br><span class="line"><span class="comment">//=&gt;false:让当前绑定的方法在冒泡传播阶段执行（一般都用FALSE）</span></span><br><span class="line"><span class="comment">//=&gt;true:让当前绑定的方法在捕获阶段执行(一般不用)</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//=&gt;IE6~8</span></span><br><span class="line">oBox.attachEvent(<span class="string">'onclick'</span>,<span class="function"><span class="keyword">function</span>(<span class="params">e</span>)</span>&#123;</span><br><span class="line">	<span class="comment">//=&gt;e:事件对象，不同于DOM0事件绑定，使用attachEvent绑定方法，当事件触发方法执行的时候，浏览器也会把事件对象当做实参传递给函数（传递的值和window.event是相同的），所以IE6~8下获取的事件对象对于：pageX\pageY\target...依然没有，还是存在兼容性（事件对象兼容处理在DOM2中依然存在）</span></span><br><span class="line">&#125;);</span><br><span class="line"><span class="comment">//=&gt;此时绑定的方法都是在冒泡传播阶段执行</span></span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<blockquote>
+<p>有DOM0和DOM2事件绑定，那么DOM1事件绑定呢？<br>因为在DOM第一代升级迭代的时候，DOM元素的事件绑定方式依然沿用的是DOM0代绑定的方式，在此版本DOM中，事件绑定没有升级处理</p>
+</blockquote>
+<h4 id="DOM0事件绑定和DOM2事件绑定的区别"><a href="#DOM0事件绑定和DOM2事件绑定的区别" class="headerlink" title="DOM0事件绑定和DOM2事件绑定的区别"></a>DOM0事件绑定和DOM2事件绑定的区别</h4><blockquote>
+<p><strong><code>DOM0事件绑定的原理</code></strong><br>1、给当前元素对象的某一个私有属性（onxxx这样的私有属性）赋值的过程（之前属性默认值是null，如果我们给赋值一个函数，相当于绑定了一个方法）<br>2、当我们赋值成功（赋值一个函数），此时浏览器会把DOM元素和赋值的函数建立关联，以及建立DOM元素行为操作的监听，当某一个行为被用户触发，浏览器会把相关行为赋值的函数执行</p>
+<p>特点：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//=&gt;1、只有DOM元素天生拥有这个私有属性（onxxx事件私有属性），我们赋值的方法才叫做事件绑定，否则属于给当前元素设置一个自定义属性而已</span></span><br><span class="line"><span class="built_in">document</span>.body.onclick=<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;&#125;<span class="comment">//-&gt;事件绑定</span></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> * 手动点击页面中的BODY触发方法执行</span></span><br><span class="line"><span class="comment"> * document.body.onclick() 这样执行也可以</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">document</span>.body.onzhufeng=<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;&#125;<span class="comment">//-&gt;设置自定义属性</span></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> * 只能document.body.onzhufeng()这样执行</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//=&gt;2、移除事件绑定的时候，我们只需要赋值为null即可</span></span><br><span class="line"><span class="built_in">document</span>.body.onclick=<span class="literal">null</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">//=&gt;3、在DOM0事件绑定中，只能给当前元素的某一个事件行为（某一个事件私有属性）绑定一个方法，绑定多个方法，最后一次绑定的会把之前绑定的都替换掉</span></span><br><span class="line"><span class="built_in">document</span>.body.onclick=<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">	<span class="built_in">console</span>.log(<span class="number">1</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">document</span>.body.onclick=<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">	<span class="built_in">console</span>.log(<span class="number">2</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//=&gt;点击BODY只能输出2，因为第二次赋值的函数把第一次赋值的函数给替换了</span></span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<blockquote>
+<p><strong><code>DOM2事件绑定的原理</code></strong><br>1、我们DOM2事件绑定使用的addEventListener/attachEvent都是在EventTarget这个内置类的原型上定义的，我们调取使用的时候，首先通过原型链找到这个方法，然后执行完成事件绑定的效果</p>
+<p>2、浏览器首先会给当前元素的某一个事件行为开辟一个事件池（事件队列）[其实是浏览器有一个统一的事件池，我们每个元素的某个行为绑定的方法都放在这个事件池中，只是通过相关的标识来区分的]，当我们通过addEventListener做事件监听的时候，会把绑定的方法存放在事件池中</p>
+<p>3、当元素的某一个行为触发，浏览器会到对应的事件池中，把当前存放在事件池中的所有方法，依次按照存放的先后顺序执行</p>
+<p>特点：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//=&gt;1、所有DOM0支持的事件行为，DOM2都可以使用，不仅如此，DOM2还支持一些DOM0没有的事件行为：DOMContentLoaded...</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">window</span>.onDOMContentLoaded === <span class="literal">undefined</span>; <span class="comment">//=&gt;DOM0中没有这个属性</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">window</span>.addEventListener(<span class="string">'DOMContentLoaded'</span>,<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">	<span class="comment">//=&gt;标准浏览器中兼容这个事件：当浏览器中的DOM结构加载完成，就会触发这个事件（也会把绑定的方法执行）</span></span><br><span class="line">&#125;,<span class="literal">false</span>);</span><br><span class="line"></span><br><span class="line"><span class="built_in">window</span>.attachEvent(<span class="string">'onDOMContentLoaded'</span>,<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">	<span class="comment">//=&gt;IE6~8中的DOM2也不支持这个事件</span></span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">//=&gt;2、DOM2中可以给当前元素的某一个事件行为绑定‘多个不同的方法’（因为绑定的所有方法都存放在事件池中了）</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fn1</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">	<span class="built_in">console</span>.log(<span class="number">1</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fn2</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">	<span class="built_in">console</span>.log(<span class="number">2</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fn3</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">	<span class="built_in">console</span>.log(<span class="number">3</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">document</span>.body.addEventListener(<span class="string">'click'</span>,fn1,<span class="literal">false</span>);</span><br><span class="line"><span class="built_in">document</span>.body.addEventListener(<span class="string">'click'</span>,fn3,<span class="literal">false</span>);</span><br><span class="line"><span class="built_in">document</span>.body.addEventListener(<span class="string">'click'</span>,fn2,<span class="literal">false</span>);</span><br><span class="line"><span class="built_in">document</span>.body.addEventListener(<span class="string">'click'</span>,fn3,<span class="literal">false</span>);<span class="comment">//=&gt;本次向事件池中存储的时候，发现fn3已经在事件池中存在了，不能再存储了</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//3、DOM2事件绑定的移除比较麻烦一些，需要和绑定的时候：事件类型、绑定的方法、传播阶段，三个完全一致才可以移除掉</span></span><br><span class="line"><span class="built_in">document</span>.body.removeEventListener(<span class="string">'click'</span>,fn2,<span class="literal">false</span>);</span><br><span class="line"></span><br><span class="line"><span class="built_in">document</span>.body.addEventListener(<span class="string">'click'</span>,<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">	<span class="built_in">console</span>.log(<span class="number">1</span>);</span><br><span class="line">&#125;,<span class="literal">false</span>);</span><br><span class="line"></span><br><span class="line"><span class="built_in">document</span>.body.removeEventListener(<span class="string">'click'</span>,<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">	<span class="built_in">console</span>.log(<span class="number">1</span>);</span><br><span class="line">&#125;,<span class="literal">false</span>);</span><br><span class="line"><span class="comment">//=&gt;DOM2事件绑定需要我们养成‘未雨绸缪’的能力，绑定方法的时候尽量不用匿名函数，为后期可能会把方法在事件池中移除掉做准备</span></span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<blockquote>
+<p> dom0:<br>   box.onclick=function(){};每一个元素对象都是对应类的实例，浏览器天生为其设置了很多私有属性和公有的属性方法，而onclick就是其中的一个私有属性（事件类私有属性，还有很多其他的事件私有属性，）<br>这些属性值默认为null<br>dom0事件绑定的原理：就是给元素的某一个事件私有属性赋值（浏览器会建立监听机会，当我们触发元素的某个行为，浏览器会把属性中赋的值去执行）<br>dom0事件绑定，只允许给当前元素的某个事件行为绑定一个方法，多次绑定后面绑定的会替换前面绑定的，以最后一次绑定的方法为主</p>
+</blockquote>
+<blockquote>
+<p>dom2：<br>box.addEventListener(‘click’,function(){},false)还有removeEventListener(‘click’,function(){},false)移除，（使用的方法都是EventTarget.prototype定义的），完成时间帮顶是基于事件池机制完成的。<br>在IE低版本当中使用的是attachEvent来处理的，box.attachEvent(‘onclick’,function(){})移除使用的是dettachEvent</p>
+</blockquote>
+<blockquote>
+<p>dom2事件绑定可以给当前元素的某一个事件行为绑定“多个不同的方法”。<br>dom2事件绑定的兼容<br>谷歌vsie高版本<br>在一处事件绑定的时候如果移除操作发生在正要执行的方法之前，如点击的时候，正要执行F8但是在执行Fn4的时候沃恩吧fn8从是坚持中移除了，谷歌下是立即移除生效，第一次也不再执行FN8了而IE是当前本次不生效，下一次点击才生效，第一次点击还是要执行FN8的<br>标准vsIE低版本<br>标准：addEventListener/removeEventListener<br>Ie低版本：attchEvent/dettachEvent<br>1.this问题：标准浏览器中行为触发方法执行方法中的this是当前元素本身，IE低版本中this执行了window<br>2.重复问题：标准浏览器中的是坚持是默认去重复的，同一个元素的同一个事件行为不能出现相同的绑定方法，但是IE低版本的事件池机制没有那么完善，不能默认去重，也就是可以给同个元素的同个事件绑定相同的方法了<br>3.顺序问题：标准浏览器是按照向事件池中存放的顺序依次执行的，而IE低版本是乱序执行的没有规律<br>IE低版本浏览器出现的所有问题都是由于本身自带的事件池机制不完善导致的</p>
+</blockquote>
+<blockquote>
+<p><code>dom0和dom2事件绑定的区别</code>：<br>1.机制不同：<br>dom0采用给私有属性赋值，所以只能绑定一个方法<br>dom2采用的是事件池机制，能绑定多个不同的方法<br>2.移除的操作不同：<br>box.onclick=function(){};<br>box.onclick=null;赋值为null就移除了<br>box.addEventListener(‘click’,function(){console.log(1)},false);<br>box.removeEventListener(‘click’,function(){console.log(1)},false);<br>dom2在移除的时候必须清楚要移除哪一个方法才能在事件池中移除掉所以基于dom2做事件绑定，我们要有瞻前顾后的思路，也就是绑定的时候考虑一下如何移除（技巧不要绑定匿名函数，都绑定实名函数）<br>3.dom2事件绑定中增加了一些domo无法操作的事件行为，例如DOMContentLoaded事件（当页面中的HTML结构加载完成就会触发执行）</p>
+</blockquote>
+<blockquote>
+<p>JQ中的事件绑定<br> on / off：基于DOM2事件绑定实现事件的绑定和移除（兼容了所有的浏览器）<br>one：只绑定一次，第一次执行完成后，会把绑定的方法移除(基于ON/OFF完成的)<br>click / mouseover / mouseout …：JQ提供快捷绑定方法，但是这些方法最后都是基于ON/OFF完成的<br>delegate：事件委托方法（1.7版本以前用的是live方法）<br> bind / unbind：正常绑定<br> <strong>window.onload和$(document).ready()</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">window.onload = function () &#123;</span><br><span class="line">        //=&gt;当页面中的资源都加载完成（HTML结构加载完、CSS和JS等资源加载完成等）才会触发执行</span><br><span class="line">    &#125;;</span><br><span class="line">    // window.addEventListener(&apos;load&apos;,function()&#123;&#125;); //=&gt;这样处理也可以执行多次了</span><br><span class="line"></span><br><span class="line">    //=&gt;$(document).ready(function()&#123;&#125;)</span><br><span class="line">    //原理：基于DOMContentLoaded完成的(IE中用的是onreadystatechange监听的，在document.readyState === &quot;complete&quot;时候执行函数)</span><br><span class="line">    $(function () &#123;</span><br><span class="line">        //=&gt;当页面中的HTML结构加载完成就会执行</span><br><span class="line"></span><br><span class="line">    &#125;);</span><br><span class="line"></span><br><span class="line">    $(function()&#123;</span><br><span class="line">        //=&gt;基于DOM2事件绑定的，所以在同一个页面中可以执行多次（绑定多个不同的方法），当结构加载完成，会依次执行这些方法</span><br><span class="line">    &#125;);</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<h4 id="window-onload和-document-ready-的区别"><a href="#window-onload和-document-ready-的区别" class="headerlink" title="window.onload和$(document).ready()的区别"></a>window.onload和$(document).ready()的区别</h4><blockquote>
+<p>window.onload：当浏览器中所有的资源内容（DOM结构、文本内容、图片…）都加载完成，触发load事件<br>1、它是基于DOM0事件绑定完成的，所以在同一个页面中只能给它绑定一个方法（绑定多个也以最后一个绑定的为主）</p>
+<p>2、如果想在一个页面中使用多次，我们应该是基于DOM2事件绑定的<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fn1</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">	<span class="comment">//=&gt;第一件事情</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fn2</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">	<span class="comment">//=&gt;第二件事情</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">window</span>.addEventListener(<span class="string">'load'</span>,fn1,<span class="literal">false</span>);</span><br><span class="line"><span class="built_in">window</span>.addEventListener(<span class="string">'load'</span>,fn2,<span class="literal">false</span>);</span><br><span class="line">...</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<blockquote>
+<p>\$(function(){}) 或者 $(document).ready(function(){})<br>当文档中的DOM结构加载完成就会被触发执行，而且在同一个页面中可以使用多次</p>
+<p>1、JQ中提供的方法，JQ是基于DOMContentLoaded这个事件完成这个操作的<br>2、JQ中的事件绑定都是基于DOM2事件绑定完成的<br>3、但是DOMContentLoaded在IE6~8下使用attachEvent也是不支持的，JQ在IE6~8中使用的是readystatechange这个事件处理的</p>
+</blockquote>
+<h4 id="DOM2事件绑定的兼容处理"><a href="#DOM2事件绑定的兼容处理" class="headerlink" title="DOM2事件绑定的兼容处理"></a>DOM2事件绑定的兼容处理</h4><blockquote>
+<p>语法上的兼容处理<br>[标准]<br>curEle.addEventListener(‘type’,fn,false);<br>[IE6~8]<br>curEle.attachEvent(‘ontype’,fn);<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//=&gt;ON:给当前元素的某个事件绑定某个方法</span></span><br><span class="line"><span class="keyword">var</span> on = <span class="function"><span class="keyword">function</span> (<span class="params">curEle, type, fn</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">document</span>.addEventListener) &#123;</span><br><span class="line">        <span class="comment">//=&gt;标准浏览器</span></span><br><span class="line">        curEle.addEventListener(type, fn, <span class="literal">false</span>);</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//=&gt;IE6~8</span></span><br><span class="line">    curEle.attachEvent(<span class="string">'on'</span> + type, fn);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">//=&gt;OFF:移除当前元素某个事件绑定的某个方法</span></span><br><span class="line"><span class="keyword">var</span> off = <span class="function"><span class="keyword">function</span> (<span class="params">curEle, type, fn</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">document</span>.removeEventListener) &#123;</span><br><span class="line">        curEle.removeEventListener(type, fn, <span class="literal">false</span>);</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//=&gt;IE6~8</span></span><br><span class="line">    curEle.detachEvent(<span class="string">'on'</span> + type, fn);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<blockquote>
+<p>除了语法上的区别，在处理的机制上有一些区别</p>
+<p>在IE6~8中使用attachEvent做事件绑定（把方法存放在当前元素指定事件类型的事件池中）</p>
+<p>1、顺序问题：当事件行为触发，执行对应事件池中存放方法的时候，IE低版本浏览器执行方法的顺序是乱序（标准浏览器是按照绑定的先后顺序依次执行的）</p>
+<p>2、重复问题：IE低版本浏览器在向事件池中增加方法的时候，没有去重机制，哪怕当前方法已经存放过了，还会重复的添加进去（标准浏览器的事件池机制很完善，可以自动去重：已经存在过的方法不允许在添加进来）</p>
+<p>3、THIS问题：IE低版本浏览器中，当事件行为触发，把事件池中方法执行，此时方法中的this指向window，而不是像标准浏览器一样，指向当前元素本身</p>
+<p>究其根本：其实都是IE低版本浏览器对于它内置事件池处理机制的不完善导致的</p>
+<p>DOM2事件绑定兼容处理的原理：告别LOW的IE6~8的内置事件池，而是自己创建一个类似于标准浏览器的“自定义事件池”，标准浏览器不需要处理兼容，只有IE6~8中才需要处理兼容</p>
+</blockquote>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/05/22/轮播图/" rel="next" title="轮播图">
+                <i class="fa fa-chevron-left"></i> 轮播图
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/05/22/常用设计模式/" rel="prev" title="常用设计模式">
+                常用设计模式 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">tiandali</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">19</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#dom事件"><span class="nav-number">1.</span> <span class="nav-text">dom事件</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#事件的默认行为"><span class="nav-number">1.1.</span> <span class="nav-text">事件的默认行为</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#事件的传播机制"><span class="nav-number">1.2.</span> <span class="nav-text">事件的传播机制</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#事件委托"><span class="nav-number">1.3.</span> <span class="nav-text">事件委托</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#初步了解JS中事件绑定的方式"><span class="nav-number">1.4.</span> <span class="nav-text">初步了解JS中事件绑定的方式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#DOM0事件绑定和DOM2事件绑定的区别"><span class="nav-number">1.5.</span> <span class="nav-text">DOM0事件绑定和DOM2事件绑定的区别</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#window-onload和-document-ready-的区别"><span class="nav-number">1.6.</span> <span class="nav-text">window.onload和$(document).ready()的区别</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#DOM2事件绑定的兼容处理"><span class="nav-number">1.7.</span> <span class="nav-text">DOM2事件绑定的兼容处理</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">tiandali</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
