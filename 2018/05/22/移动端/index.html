@@ -79,14 +79,17 @@
 
 
 
+<meta name="description" content="视口在写移动端(响应式)项目时，页面必须加上这句话(viewport) ，这句话一般加在head元素内(meta标签-文档编码后面)      meta : v p + tab 键123&amp;lt;meta name=&quot;viewport&quot;          content=&quot;width=device-width,（让HTML页面宽度等于设备宽度） user-scalable=no,（禁止用户手动缩放）">
 <meta property="og:type" content="article">
 <meta property="og:title" content="移动端">
 <meta property="og:url" content="http://yoursite.com/2018/05/22/移动端/index.html">
 <meta property="og:site_name" content="tiandali">
+<meta property="og:description" content="视口在写移动端(响应式)项目时，页面必须加上这句话(viewport) ，这句话一般加在head元素内(meta标签-文档编码后面)      meta : v p + tab 键123&amp;lt;meta name=&quot;viewport&quot;          content=&quot;width=device-width,（让HTML页面宽度等于设备宽度） user-scalable=no,（禁止用户手动缩放）">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-05-21T17:12:50.480Z">
+<meta property="og:updated_time" content="2018-05-22T06:03:33.002Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="移动端">
+<meta name="twitter:description" content="视口在写移动端(响应式)项目时，页面必须加上这句话(viewport) ，这句话一般加在head元素内(meta标签-文档编码后面)      meta : v p + tab 键123&amp;lt;meta name=&quot;viewport&quot;          content=&quot;width=device-width,（让HTML页面宽度等于设备宽度） user-scalable=no,（禁止用户手动缩放）">
 
 
 
@@ -296,7 +299,85 @@
       
 
       
-        
+        <h3 id="视口"><a href="#视口" class="headerlink" title="视口"></a>视口</h3><p><strong>在写移动端(响应式)项目时，页面必须加上这句话(viewport) ，这句话一般加在head元素内(meta标签-文档编码后面)</strong><br>      <strong>meta : v p + tab 键</strong><br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;meta name=<span class="string">"viewport"</span></span><br><span class="line">          content=<span class="string">"width=device-width,（让HTML页面宽度等于设备宽度） user-scalable=no,（禁止用户手动缩放） initial-scale=1.0,（初始缩放比例） maximum-scale=1.0, （最大放大比例）minimum-scale=1.0 （最小缩放比）"</span>&gt;</span><br><span class="line">不放大也不缩小,部分安卓机中设置user-scalable是不起作用的需要同这两个一起使用</span><br></pre></td></tr></table></figure></p>
+<blockquote>
+<p>layout viewport：布局视口（开发css等相关）<br>visual viewport：手机视口<br>ideal viewport：理想视口</p>
+</blockquote>
+<hr>
+<blockquote>
+<ul>
+<li>HTML的宽度&gt;手机宽度=&gt;把页面整体缩放</li>
+<li>页面内容宽度&gt;HTML页面的宽度=&gt;出现横向滚动条<br>真实项目中是不会出现横向滚动条的，想让他不出现横向滚动条就要保证的内容的宽度不会超过HTML页面的宽度</li>
+<li>移动端开发手机设备宽度不一定，HTML页面的宽度也不一定，所以内容的宽度一般也是不固定的（也就是所谓的百分比宽度）</li>
+<li>移动端开发：外层盒子的宽度一般都是百分比设定的，很少有些固定值的（里面具体的小元素宽度可以固定）=》流式响应式布局方案<br>在PC端我们开发的HTML页面运行在浏览器中，浏览器有多宽（一般浏览器代表设备的宽度）HTML就有多宽，也就是在浏览器宽度的视口中渲染和呈现我们的页面。</li>
+</ul>
+</blockquote>
+<hr>
+<p><strong>移动端和pc端有区别</strong>：<br>不管移动端设备（代指打开的浏览器）的宽度是多少，HTML页面的宽度就是980（或者1024）=&gt;导致的问题：如果在设备窗口中想把整个页面完全呈现出来，小窗口中展示大页面，我们只能把大页面进行缩放，HTML页面缩放了那么页面中所有内容都缩放了.<br><strong>解决方案</strong><br>只要让HTML5页面宽度和手机设备宽度保持一致即可，就不会出现首先渲染页面的时候把页面缩放的事情了。<br><strong>平时处理的移动端项目</strong><br>1.pc端和移动端公用一套项目的（结构相对简单：一般都是展示类的企业网站）<br>A：先做PC端，设计师给的设计稿一般都是给PC端的，一般宽度都不是写死的，宽度是自适应的（具体情况具体分析）<br>B：切换到手机上，使用@media（媒体查询）把不同设备上不合适的样式进行修改<br><strong>设计师一般只给一套设计稿</strong><br>2.pc端和移动端是分开的两套不同的项目<br>=》pc端单独做（做的时候不需要考虑移动端响应式）固定布局<br>=》移动端单独做，只需考虑移动端的响应式适配即可响应式布局</p>
+<ul>
+<li>A：依然给予@media来处理</li>
+<li>B:固定布局（viewport=》width=320px）:：按照设计稿把320尺寸的写好即可，所有的尺寸都可以固定，而且都是设计稿的一半，因为设计稿是大一倍的，在其他的设备上，让320的页面居中展示即可</li>
+<li>C：scale等比缩放布局（严格按照设计稿的尺寸来写样式，没有自适应宽度，都是固定写死的，在其他设备上，首先获取设备的宽度，让其除以设计稿的宽度，然后让原始写好的页面按照这个比例整体缩小即可）=》导致一些问题：如：字体变模糊</li>
+<li>D：rem 等比缩放，他是参考scale，只是用的是rem单位实现的缩放。但是一般宽度都让他自适应。其余的值可以写成固定值，在编写css样式的时候我们把所有的px单位都换算成rem单位，当加载完成的时候，根据当前设备的尺寸初一设计稿，根据比例动态调整rem和px的换算比例，弊端高度容易出现误差，一般缩放的是宽度，但是高度一般不是等比的。可以用@media修改，也可以把垂直方向的间距等用百分比设置</li>
+<li>E：css3中提供了flex-box伸缩盒模型，基于这个属性，可以让某些效果处理起来更方便</li>
+<li>A&amp;D&amp;E较多使用</li>
+</ul>
+<p><strong>一般会给两套设计稿，移动端+pc</strong><br>一般都是640<em>1136,或者（980不设高度），750</em>1334…<br>为什么给的设计稿都比参照手机大一倍？<br>目的是保证我们切下来的素材资源图片是大图<br>为什么要保证是大图？<br>因为很多手机都是二倍及三倍屏幕像素密度比DPR的<br>即使给的是二倍设计稿，但是部分手机的设备尺寸要大于设计稿的一半，有的手机是3倍DPR的，这样就导致一个问题，部分图片还是会变的模糊一些，此时我们找设计师单独的把模糊图片要一张大图即可<br>通俗的讲就是高分辨率手机要配合高分辨率图片，非高清的图片用高分辨率手机看着看更模糊</p>
+<h3 id="媒体查询"><a href="#媒体查询" class="headerlink" title="媒体查询"></a>媒体查询</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">media screen and (min-width:375px)&#123;</span><br><span class="line">    min-width:375px 大于等于375px</span><br><span class="line">    max-width:375px 小于等于375px</span><br><span class="line">&#125;</span><br><span class="line">  @media screen and (orientation: portrait)&#123;</span><br><span class="line">          //竖屏  </span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line">        @media screen and (orientation: landscape)&#123;</span><br><span class="line">//横屏</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure>
+<p>@media  [媒体设备]<br>all-&gt;所有设备<br>screen-&gt;所有屏幕设备（pc+电脑）<br>print-&gt;打印机设备<br>@media all and (max-width:480px){}<br><strong>当前页面的宽度小于等于480px</strong></p>
+<p>手机常用设备尺寸<br>苹果：320，375，414<br>安卓：320，360，480，540，640，（760…）<br>pad:768<em>1024,1024</em>1366</p>
+<h4 id="响应式布局"><a href="#响应式布局" class="headerlink" title="响应式布局"></a>响应式布局</h4><p>能够在不同尺寸的设备上都能良好的展示，这就是响应式布局设计（responsive layout）<br>公司中的产品形态：<br>pc端（全屏页面需要宽度自适应，但是一般都是固定宽度）<br>pc端+移动端用一套项目（简单的页面，产品介绍，公司展示类的官网）<br>移动端（移动端设备差异较大，需要做响应式布局开发）<br>嵌入到APP中的H5<br>微信分享出来的H5<br>微信公众号<br>小程序<br>靠浏览器访问的H5<br>react native、ionic/cordova…js开发APP框架，使用JS代码开发APP最后框架会把代码转换为安卓和IOS需要的代码</p>
+<blockquote>
+<p>如何实现响应式布局开发<br>最常用的方案：rem等比缩放响应式布局<br>做移动端H5开发，首先加meta标签。meta:vp<br>rem和px都是样式单位，px是固定单位，rem是相对单位，相当于当前页面根元素html的字体设置的单位<br>我们开始给HTML的字体大小设置为100px（1rem=100px），接下来我们写样式的时候把所有的尺寸都有rem设定，测量出来的px值/100就是应该设置的rem的值，如果HTML的fontsize不变，用rem和px一样，但是如果字体大小改变，也就是改变了rem和px之间的换算比例，那么之前所有rem做单位的样式都会自动按照最新的比例进行缩放。实现了改动HTMLfontsize整个页面中的元素都跟着缩放了，牵一发动全身。<br>真实项目中设计师给我们一套设计稿，常用的尺寸（640<em>1136,750</em>1334,640<em>960.。。。）拿到设计稿后，我们严格按照设计稿中的尺寸编写样式<br>HTML{<br>Ffont-size：100px;}<br>接下来鞋样室把测量出来的px都除以100变为rem,所有的单位都是基于rem来搞<br>假定设计稿是750，也就是相当于750的设备，1rem=100px;<br>我们的页面在320的设备上，我们需要修改HTML的字体大小，此时实现页面跟着整体缩放，：320/750</em>100，当前设备上HTML的字体大小。</p>
+</blockquote>
+<h4 id="gitHub发布自己项目"><a href="#gitHub发布自己项目" class="headerlink" title="gitHub发布自己项目"></a>gitHub发布自己项目</h4><ol>
+<li>登录gitHub</li>
+<li>创建空仓库</li>
+<li>settings -&gt; GitHub Pages  -&gt;choose a theme -&gt;随便选择一个模板即可（反正也没啥用，和我们的页面样式不一样） select theme -&gt; commit changes  （此时仓库就不是空的了）<br><a href="https://zhufengpeixun.github.io/H5RESUME/" target="_blank" rel="noopener">https://zhufengpeixun.github.io/H5RESUME/</a>  输入这个网址可以看到刚才发布的页面<br><a href="https://zhufengpeixun[gitHub用户名].github.io/H5RESUME[仓库名]/index.html[项目中的文件名]" target="_blank" rel="noopener">https://zhufengpeixun[gitHub用户名].github.io/H5RESUME[仓库名]/index.html[项目中的文件名]</a></li>
+<li>把创建好的远程仓库克隆到本地，并且把自己的项目原代码放到本地仓库中</li>
+<li>把本地仓库中的内容推送到远程仓库上<br>git add -A<br>git commit -m’备注信息’<br>git push origin master   （可能让你输入远程仓库的用户名和密码）</li>
+</ol>
+<p>易企秀<br>兔展</p>
+<h4 id="制作简易App"><a href="#制作简易App" class="headerlink" title="制作简易App"></a>制作简易App</h4><p>HBuilder:文件》打开目录》选择你要打包的项目》右键点击项目》发行》云打包原生APP》（不能有种中文）</p>
+<h3 id="Hybrid混合App开发"><a href="#Hybrid混合App开发" class="headerlink" title="Hybrid混合App开发"></a>Hybrid混合App开发</h3><p> 前端做的都是H5页面<br>运行在浏览器中<br>移动端不仅可以运行在浏览器中，还可以运行在App中（例如：微信、自己公司的App中）</p>
+<blockquote>
+<p>【优点】</p>
+<ul>
+<li>及时更新（不需要用户选择，我们只需要把服务器上的源文件更新，用户访问的用域是最新的）</li>
+<li>跨平台，成本低</li>
+</ul>
+<p>【弊端】</p>
+<ul>
+<li>不是直接运行在操作系统中的，是运行在浏览器或者App中的，所以不能直接的操作手机上的软硬件（运作模式：H5通知浏览器或者App我们想做什么 -&gt; 浏览器调取手机的软硬件 -&gt; 浏览器把信息返回给H5）</li>
+<li>性能没有App好</li>
+</ul>
+</blockquote>
+<h4 id="App不是H5，是原生的应用-NativeApp"><a href="#App不是H5，是原生的应用-NativeApp" class="headerlink" title="App不是H5，是原生的应用 NativeApp"></a>App不是H5，是原生的应用 NativeApp</h4><p>IOS : object-c / swift (需要C的功底)<br> 安卓: java-native （需要JAVA功底）</p>
+<blockquote>
+<p>【优点】<br>用户把安装包下载到手机上进行安装，后期程序是直接运行在手机操作系统中的</p>
+<ul>
+<li>性能高</li>
+<li>可以调取手机内置的软件或者硬件（例如：调取摄像头、重力感应器、通讯录等）【前提用户需要同意才可以】</li>
+</ul>
+<p>【弊端】<br>不能跨平台，一款产品需要两个团队开发两套不同的安装包</p>
+<ul>
+<li>成本大</li>
+<li>版本不统一</li>
+<li>不能及时更新</li>
+</ul>
+</blockquote>
+<h4 id="Hybrid混合App开发诞生"><a href="#Hybrid混合App开发诞生" class="headerlink" title="Hybrid混合App开发诞生"></a>Hybrid混合App开发诞生</h4><p>把传统的IOS / 安卓开发 与 H5开发结合在一起来做 （微信公众号开发：把我们做的H5运行在微信App中）</p>
+<h4 id="React-Native-ionic-微信小程序…"><a href="#React-Native-ionic-微信小程序…" class="headerlink" title="React Native ionic 微信小程序…"></a>React Native ionic 微信小程序…</h4><h4 id="SEO-网络运营推广（搜索引擎优化推广）"><a href="#SEO-网络运营推广（搜索引擎优化推广）" class="headerlink" title="SEO 网络运营推广（搜索引擎优化推广）"></a>SEO 网络运营推广（搜索引擎优化推广）</h4><p>目标：尽可能在搜索引擎中提升产品的权重（ALEX排名）<br>百度是一个搜索引擎，他养了一个宠物 “爬虫 / 蜘蛛” ，他会让爬虫有规律的去你网站中进行内容的收录（收录到自己的词库中），当用户在引擎中输入关键词进行查询，引擎会到自己的词库中进行匹配，把匹配的站点推荐展示</p>
+<p>如果我们向做SEO优化，应该尽可能的让引擎多收录一些关键词和内容</p>
+<blockquote>
+<p>给当前页面设置meta标签/title<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;title&gt;网站标题&lt;/title&gt;</span><br><span class="line">   &lt;meta name=&quot;keywords&quot; content=&quot;页面关键词&quot;&gt;</span><br><span class="line">   &lt;meta name=&quot;description&quot; content=&quot;页面描述&quot;&gt;</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<p>对于一个页面中h1-h6这些标签的权重较高，尤其是H1，我们尽可能把重要的关键词放到H1中（语义化标签合理使用）<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"> &lt;h1&gt;</span><br><span class="line"> &lt;img src=&quot;&quot; alt=&quot;&quot;/&gt;</span><br><span class="line"> 新浪网</span><br><span class="line"> &lt;/h1&gt;</span><br><span class="line">H1中的文字不需要展示给用户但是我们还会写一些文字主要是给爬虫看的，样式中fontsize等于零即可，img是不被收录的，但是ALT中编写的问题可以被收录所以img标签的alt属性一定要加，最好写一些关键词</span><br></pre></td></tr></table></figure></p>
+<blockquote>
+<p>前后端分离项目，（数据由客户端js获取和渲染）是不利于SEO优化的<br>使用JS数据绑定，页面的源代码中没有动态绑定的数据的，但是用户在页面中可以看见内容，而搜索引擎的爬虫就是从源代码进行抓取收录的，vue和react都是JS做数据绑定的。<br>目前市场上大部分都是前后端分离项目，也就是JS数据绑定，由客户端渲染，但是还有一部分项目依然是传统的服务端数据处理（非完全前后端分离项目）</p>
+</blockquote>
+<p>2.SEM百度竞价推广（千万不能信）</p>
+
       
     </div>
     
@@ -329,6 +410,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/05/22/弹性盒子案例/" rel="prev" title="弹性盒子案例">
+                弹性盒子案例 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -380,8 +465,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -396,7 +490,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">19</span>
+                  <span class="site-state-item-count">27</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -423,6 +517,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#视口"><span class="nav-number">1.</span> <span class="nav-text">视口</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#媒体查询"><span class="nav-number">2.</span> <span class="nav-text">媒体查询</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#响应式布局"><span class="nav-number">2.1.</span> <span class="nav-text">响应式布局</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#gitHub发布自己项目"><span class="nav-number">2.2.</span> <span class="nav-text">gitHub发布自己项目</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#制作简易App"><span class="nav-number">2.3.</span> <span class="nav-text">制作简易App</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Hybrid混合App开发"><span class="nav-number">3.</span> <span class="nav-text">Hybrid混合App开发</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#App不是H5，是原生的应用-NativeApp"><span class="nav-number">3.1.</span> <span class="nav-text">App不是H5，是原生的应用 NativeApp</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Hybrid混合App开发诞生"><span class="nav-number">3.2.</span> <span class="nav-text">Hybrid混合App开发诞生</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#React-Native-ionic-微信小程序…"><span class="nav-number">3.3.</span> <span class="nav-text">React Native ionic 微信小程序…</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#SEO-网络运营推广（搜索引擎优化推广）"><span class="nav-number">3.4.</span> <span class="nav-text">SEO 网络运营推广（搜索引擎优化推广）</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       

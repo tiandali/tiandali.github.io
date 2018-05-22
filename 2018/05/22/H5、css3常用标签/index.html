@@ -86,7 +86,7 @@
 <meta property="og:site_name" content="tiandali">
 <meta property="og:description" content="HTML5、CSS3 HTML5新增标签|标签|描述||–|–||header|头部||footer|尾部||nav|导航||section|区分大模块||aside|侧边栏||article|文章||figure|配图||figcaption|配图说明||video|视频||audio|音频|&amp;lt;|main|主体|| video 视频| audio音频||–|–|| src=”” 视频路径|">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-05-21T17:57:52.887Z">
+<meta property="og:updated_time" content="2018-05-21T18:10:09.221Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="H5、css3常用标签">
 <meta name="twitter:description" content="HTML5、CSS3 HTML5新增标签|标签|描述||–|–||header|头部||footer|尾部||nav|导航||section|区分大模块||aside|侧边栏||article|文章||figure|配图||figcaption|配图说明||video|视频||audio|音频|&amp;lt;|main|主体|| video 视频| audio音频||–|–|| src=”” 视频路径|">
@@ -354,16 +354,279 @@
 <p>13.canvas<br>canvas标签定义图形，比如图表和其他图像，canvas标签只是图形容器，您必须使用脚本来绘制图形;<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;canvas id=&quot;myCanvas&quot;&gt;&lt;/canvas&gt;</span><br><span class="line">&lt;script type=&quot;text/javascript&quot;&gt;</span><br><span class="line"></span><br><span class="line">var canvas=document.getElementById(&apos;myCanvas&apos;);</span><br><span class="line">var ctx=canvas.getContext(&apos;2d&apos;);</span><br><span class="line">ctx.fillStyle=&apos;#FF0000&apos;;</span><br><span class="line">ctx.fillRect(0,0,80,100);</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure></p>
 <p>总结：<br>1、新增加一些构建页面语义化的结构标签 ，对原有 标签进行了修改<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">header、nav、section、footer、article、aside、figure、figcaption、hgroup…</span><br><span class="line">(在IE6~8浏览器中不识别这些新增加的标签,导致布局结构混乱)在页面中引入</span><br></pre></td></tr></table></figure></p>
 <p>&lt;!–[if lt IE 9]&gt;</p>
-<p>&lt;![endif]–&gt;<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">2、给我们的INPUT表单元素增加了很多新的类型(不兼容)</span><br></pre></td></tr></table></figure></p>
-<p>原有:text、password、radio、checkbox、button、submit、reset、file…<br>新增:search、url、email、tel、number、date、time、color、range…<br>作用:<br>1)根据TYPE的类型不一样,会调取出最符合用户输入的物理键盘;<br>2)传统的表单验证:当某个行为触发的时候,我们获取用户输入的内容和自己编写的正则进行验证从而判断用户输入的是否符合规则;<br>3) HTML5中提供了CSS3/JS的新验证方式,不需要自己写正则,浏览器自己就已经实现了验证,我们只需要控制成功/不成功的样式或者其他操作即可<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">3、新增加了音视频处理AUDIO、VIDEO</span><br><span class="line"></span><br><span class="line">4、新增加CANVAS绘图</span><br></pre></td></tr></table></figure></p>
-<p><a href="http://www.hcharts.cn/(Highcharts)" target="_blank" rel="noopener">http://www.hcharts.cn/(Highcharts)</a><br><a href="http://echarts.baidu.com/(echarts)" target="_blank" rel="noopener">http://echarts.baidu.com/(echarts)</a><br>D3.js<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br></pre></td><td class="code"><pre><span class="line">5、新增加一些新的有助于开发的API:</span><br><span class="line">本地存储localStorage/sessionStorge、</span><br><span class="line">地理位置navigator.geolocation.getCurrentPosition、调取手机内部的GPS定位系统获取当前手机所在地的经纬度以及精准度</span><br><span class="line">还提供了一些API，让我们可以通过浏览器调取手机内部的软件或者硬件（但是性能都不咋高，而且兼容性不是特别好）</span><br><span class="line">websocket：socket.io、客户端和服务端新的传输方式（及时通讯IM系统基本上都是基于它完成的）</span><br><span class="line">webworks…离线缓存</span><br><span class="line">####   CSS3</span><br><span class="line">ID</span><br><span class="line">target</span><br><span class="line"></span><br><span class="line">&gt; A  .B&#123;&#125;   后代</span><br><span class="line">A.B&#123;&#125;    子代</span><br><span class="line">A&gt;B&#123;&#125;   具备A也具备B</span><br><span class="line">A+B&#123;&#125;   下一个弟弟</span><br><span class="line">A~B&#123;&#125;   兄弟</span><br><span class="line">`:nth-chld`某个元素下任意类型的子元素</span><br><span class="line">`:nth-of-type`某个元素下的同一类型中的第几个子元素</span><br><span class="line">`否定选择器`</span><br><span class="line">`:not()`</span><br><span class="line">`属性选择器`</span><br><span class="line">E[attr=val]</span><br><span class="line">E[attr|=val]只能等于var或只能以val-开头</span><br><span class="line">E[attr*=val]包含val字符串</span><br><span class="line">E[attr~=val]属性值有多个，其中有一个时val</span><br><span class="line">E[attr^=val]以val开头</span><br><span class="line">E[attr$=val]以val结尾</span><br><span class="line">`目标伪类选择器`</span><br><span class="line">`:target`用来匹配url指向的目标元素</span><br><span class="line">存在url指向该匹配元素时样式效果才会生效</span><br><span class="line">伪元素</span><br><span class="line">:first-line匹配第一行文本</span><br><span class="line">;first-letter匹配第一首字符</span><br><span class="line">:before和after DOM元素前后插入额外的内容</span><br><span class="line">`圆角`</span><br><span class="line">`border-radius`:左上 右上 右下 左下；</span><br><span class="line">`渐变`</span><br><span class="line">`linear-gradient`([&lt;起点&gt;||&lt;角度&gt;,]?&lt;点&gt;,&lt;点&gt;...)</span><br><span class="line">只能用在背景上</span><br><span class="line">颜色是沿着一条直线轴变化</span><br><span class="line">参数</span><br><span class="line">-起点：从什么方向开始渐变》left、top、left top</span><br><span class="line">-角度：从什么角度开始渐变》xxx deg的形式</span><br><span class="line">-点：渐变点的颜色和位置》red50%,位置可选</span><br><span class="line">重复现行渐变</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">`径向渐变`</span><br><span class="line">`radial-gradient`([[&lt;shape&gt;||&lt;size&gt;][at &lt;position&gt;]?,|at&lt;position&gt;,]?&lt;color-stop&gt;[,&lt;color-stop&gt;]+);</span><br><span class="line">从“一个点”向多方向颜色渐变</span><br><span class="line">shape形状：ellipse、circle或设置水平半径，垂直半径</span><br><span class="line">size：渐变的大小，即渐变到哪里停止，有如关键词：</span><br><span class="line">closest-side：最近边；farthest-side:最远边；</span><br><span class="line">closest-corner:最近角；farthest-corner：最远角（默认值）</span><br><span class="line">position;关键词|数值|变化</span><br><span class="line">重复的径向渐变</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">`背景`</span><br><span class="line">background -color/-image/-position/-repeat/-attachment</span><br><span class="line">`background-origin`</span><br><span class="line">padding-box从padding区域显示</span><br><span class="line">border-box从border区域显示</span><br><span class="line">contert-box从content区域显示</span><br><span class="line">`background-clip`</span><br><span class="line">padding-box从padding区域向外裁剪</span><br><span class="line">border-box从border区域往外裁剪</span><br><span class="line">content-box从content区域往外裁剪</span><br><span class="line">`text文本裁剪`</span><br><span class="line">`background-size`</span><br><span class="line">100px 100px:宽高具体值</span><br><span class="line">100% 100%宽高百分比</span><br><span class="line">cover以合适的比例图片进行缩放不会变形，用来铺满整个容器</span><br><span class="line">contain原始比例收缩，显示完整但不一定铺满（一边碰到容器的边缘，则停止覆盖，导致部分区域是没有背景图的）</span><br><span class="line">cover按原始比例收缩，可能显示不完整但铺满整个容器</span><br><span class="line">`background-attachment`</span><br><span class="line">背景图片是滚动的还是固定的fixed(固定的)默认是滚动的</span><br><span class="line">`box-shadow`:h水平方向偏移，v垂直方向偏移，blur模糊半径，spread扩展半径，color颜色，inset奖赏这个表示内阴影默认是外阴影。</span><br><span class="line">`text-shadow`:x y blur color</span><br><span class="line">x轴偏移 y轴偏移 模糊度 颜色</span><br><span class="line">多层阴影制作的文字立体效果设置多种颜色中间以逗号隔开</span><br><span class="line">`text-stroke`：2px blue</span><br><span class="line">通过设定1px的透明边框，可以让文字变得平滑</span><br><span class="line">颜色设定透明能创建镂空字体</span><br><span class="line">mask-image遮罩</span><br><span class="line">mask-position</span><br><span class="line">mask-repeat</span><br><span class="line">transform2D变换</span><br><span class="line">box-sizing:border-box/padding-box/content-box(默认值)改变的就是我们在css中设置的width、height到底代表啥，border-box让其代表整个盒子的宽高当我们去修改padding或者border盒子大小不变只会让内容缩放</span><br><span class="line">columns:多列布局</span><br><span class="line">flex：弹性盒子模型，布局</span><br><span class="line">perspective：视距 实现3D必用属性</span><br><span class="line">@media：媒体查询 实现响应式布局的一种方案</span><br><span class="line">@font-face：导入字体图标</span><br><span class="line">transition</span><br><span class="line">animation</span><br><span class="line"></span><br><span class="line">###   CSS样式表</span><br><span class="line">|元素|描述|</span><br><span class="line">|--|--|</span><br><span class="line">|style|写样式|</span><br><span class="line">|link|引入标签|</span><br><span class="line">|list-style：none|去除ul，ol，dl默认样式|</span><br><span class="line">|text-decoration: none;|去除a的下划线|</span><br><span class="line">|font-weight: normal;|去除字体加粗，斜体|</span><br><span class="line">|color: #ccc;|字体颜色|</span><br><span class="line">|background-color:#faa770;|背景颜色|</span><br><span class="line">|width: 100px;|盒子宽度|</span><br><span class="line">|height :100px;|盒子高度|</span><br><span class="line">|border-radius: 20px;|盒子圆角|</span><br><span class="line">|line-height:100px;|文本行高|</span><br><span class="line">|font-size : 16px ;|字体大小|</span><br><span class="line">|font-weight: bold;|字体加粗|</span><br><span class="line">|font-style: italic;|字体倾斜|</span><br><span class="line">|letter-spacing: 10px;|字体间距|</span><br><span class="line">|text-indent: 2em;|段落首行缩进|</span><br><span class="line">|cursor:pointer|鼠标经过加小手|</span><br><span class="line">|z-index:1;|改变重叠盒子层级关系|</span><br><span class="line">|border-top:1px solid red;|上边框|</span><br><span class="line">|border-right:1px solid red;|右边框|</span><br><span class="line">|border-bottom:1px solid red;|下边框|</span><br><span class="line">|border-left:1px solid red;|左边框|</span><br><span class="line">|border-width:10px; | 边框的宽度|</span><br><span class="line">|border-color:red; |边框的颜色|</span><br><span class="line">|border-style:solid(实线);dashed（虚线）；| 边框的样式|</span><br><span class="line">|border:10px solid #fff;|边框宽度 样式 颜色缩写|</span><br><span class="line">|padding:1px 2px 3px 4px;|盒子内边距 上 右  下 左|</span><br><span class="line">|margin:1px 2px 3px 4px;|盒子外边距 上 右  下 左|</span><br><span class="line">|position: relative;|相对定位|</span><br><span class="line">|position：absolute；|绝对定位|</span><br><span class="line">|position: fixed;|固定定位|</span><br><span class="line">|float：left|左浮动|</span><br><span class="line">|float：right|右浮动|</span><br><span class="line">|display：block|转为块元素|</span><br><span class="line">|display：inline|转为行内元素|</span><br><span class="line">|display:inline-block|转为行内块元素|</span><br><span class="line">|display：none|让元素隐藏|</span><br><span class="line">|overflow: hidden;|溢出盒子高度隐藏|</span><br><span class="line">|overflow: scroll;|不管内容是否超出，都会出现滚动条|</span><br><span class="line">|overflow: auto;|系统判断超出则出现滚动条不超出则不出现|</span><br><span class="line">|white-space: nowrap;|让文本强制换行|</span><br><span class="line">|text-overflow:ellipsis;|让超出的文本以三个小点的方式出现|</span><br><span class="line">|hover |鼠标经过时的状态|</span><br><span class="line">|active| 鼠标点击时的状态|</span><br><span class="line">|visited| 鼠标点击后的状态|</span><br><span class="line">|text-align:  right ; left ；|文字水平居右，左|</span><br><span class="line">|text-align: center;|文字水平居中|</span><br><span class="line">|line-height: 50px;|文本垂直居中|</span><br><span class="line">|vertical-align：top|平级元素顶部对齐|</span><br><span class="line">|vertical-align：middle；|平级元素中部对齐|</span><br><span class="line">|vertical-align：bottom;|平级元素底部对齐|</span><br><span class="line">|margin:0 auto;|盒子，版心，位置居中|</span><br><span class="line">|box-shadow: .02rem .02rem .02rem .02rem rgba(178,178,178,.75),-.02rem .02rem .02rem .02rem rgba(178,178,178,.75);|盒子阴影|</span><br><span class="line">|text-shadow： .02rem .02rem .02rem .02rem rgba(178,178,178,.75);|文字阴影|</span><br><span class="line">|link rel=&quot;icon&quot; href=&quot;img/favicon.ico&quot; type=&quot;image/x-icon|引入图标(页面标题的前面--页卡)|</span><br><span class="line">|给body或者父级元素设置font-size:0;|清除间隙问题|</span><br><span class="line">|opacity:0.5;|设置透明度|</span><br><span class="line">|filter:alpha(opacity=50)|设置透明度 兼容ie低版本8以下浏览器|</span><br><span class="line">|background: url(&quot;图片路径&quot;) no-repeat（不平铺）;|背景图片|</span><br><span class="line">|background-position: center center；|改变背景图片的位置、水平垂直居中|</span><br><span class="line">| background-size:100% 100%;|改变背景图片的大小|</span><br><span class="line"></span><br><span class="line">&gt;**background: red url(&quot;pic_02.png&quot;) no-repeat center center;-----这种写法格式是在项目中最常用**</span><br><span class="line">**background:背景颜色  背景图片的路径  背景图片是否平铺   改变背景图片的位置**&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">                        &gt;**实现隔行变色**&lt;</span><br><span class="line">-**单独获取容器中的某一个子元素** ——|||||||||||——  **EVEN : 偶数 \ ODD : 奇数**-</span><br></pre></td></tr></table></figure></p>
-<pre><code>* nth-child(n):当前容器所有子元素中的第N个
-    *    .box li:nth-child(1)：BOX容器所有子元素中的第一个并且标签名是LI的
-</code></pre><hr>
-<pre><code>* nth-of-type(n):先给当前容器按照某一个标签名进行分组,获取分组中的第N个
-    *    .box li:nth-of-type(1)：先获取BOX中所有的LI，在获取LI中的第一个
-</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">**实心小三角**</span><br></pre></td></tr></table></figure>
-<p><style><br>        div{<br>            border-color:  transparent（边框透明）  transparent   transparent   #0d0d0d ;<br>            border-style: solid;<br>            border-width: 40px;  }<br>    </style><br>    <div></div><br><code>`</code></p>
+<p>&lt;![endif]–&gt;<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">2、给我们的INPUT表单元素增加了很多新的类型(不兼容)</span><br><span class="line">```javascript</span><br><span class="line">原有:text、password、radio、checkbox、button、submit、reset、file…</span><br><span class="line">新增:search、url、email、tel、number、date、time、color、range…</span><br><span class="line">作用:</span><br><span class="line">1)根据TYPE的类型不一样,会调取出最符合用户输入的物理键盘;</span><br><span class="line">2)传统的表单验证:当某个行为触发的时候,我们获取用户输入的内容和自己编写的正则进行验证从而判断用户输入的是否符合规则;</span><br><span class="line">3) HTML5中提供了CSS3/JS的新验证方式,不需要自己写正则,浏览器自己就已经实现了验证,我们只需要控制成功/不成功的样式或者其他操作即可</span><br></pre></td></tr></table></figure></p>
+<p>3、新增加了音视频处理AUDIO、VIDEO</p>
+<p>4、新增加CANVAS绘图<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">http:<span class="comment">//www.hcharts.cn/(Highcharts)</span></span><br><span class="line">http:<span class="comment">//echarts.baidu.com/(echarts)</span></span><br><span class="line">D3.js</span><br></pre></td></tr></table></figure></p>
+<p>5、新增加一些新的有助于开发的API:<br>本地存储localStorage/sessionStorge、<br>地理位置navigator.geolocation.getCurrentPosition、调取手机内部的GPS定位系统获取当前手机所在地的经纬度以及精准度<br>还提供了一些API，让我们可以通过浏览器调取手机内部的软件或者硬件（但是性能都不咋高，而且兼容性不是特别好）<br>websocket：socket.io、客户端和服务端新的传输方式（及时通讯IM系统基本上都是基于它完成的）<br>webworks…离线缓存</p>
+<h4 id="CSS3"><a href="#CSS3" class="headerlink" title="CSS3"></a>CSS3</h4><p>ID<br>target</p>
+<blockquote>
+<p>A  .B{}   后代<br>A.B{}    子代<br>A&gt;B{}   具备A也具备B<br>A+B{}   下一个弟弟<br>A~B{}   兄弟<br><code>:nth-chld</code>某个元素下任意类型的子元素<br><code>:nth-of-type</code>某个元素下的同一类型中的第几个子元素<br><code>否定选择器</code><br><code>:not()</code><br><code>属性选择器</code><br>E[attr=val]<br>E[attr|=val]只能等于var或只能以val-开头<br>E[attr*=val]包含val字符串<br>E[attr~=val]属性值有多个，其中有一个时val<br>E[attr^=val]以val开头<br>E[attr$=val]以val结尾<br><code>目标伪类选择器</code><br><code>:target</code>用来匹配url指向的目标元素<br>存在url指向该匹配元素时样式效果才会生效<br>伪元素<br>:first-line匹配第一行文本<br>;first-letter匹配第一首字符<br>:before和after DOM元素前后插入额外的内容<br><code>圆角</code><br><code>border-radius</code>:左上 右上 右下 左下；<br><code>渐变</code><br><code>linear-gradient</code>([&lt;起点&gt;||&lt;角度&gt;,]?&lt;点&gt;,&lt;点&gt;…)<br>只能用在背景上<br>颜色是沿着一条直线轴变化<br>参数<br>-起点：从什么方向开始渐变》left、top、left top<br>-角度：从什么角度开始渐变》xxx deg的形式<br>-点：渐变点的颜色和位置》red50%,位置可选<br>重复现行渐变</p>
+</blockquote>
+<p><code>径向渐变</code><br><code>radial-gradient</code>([[<shape>||<size>][at <position>]?,|at<position>,]?<color-stop>[,<color-stop>]+);<br>从“一个点”向多方向颜色渐变<br>shape形状：ellipse、circle或设置水平半径，垂直半径<br>size：渐变的大小，即渐变到哪里停止，有如关键词：<br>closest-side：最近边；farthest-side:最远边；<br>closest-corner:最近角；farthest-corner：最远角（默认值）<br>position;关键词|数值|变化<br>重复的径向渐变</color-stop></color-stop></position></position></size></shape></p>
+<hr>
+<p><code>背景</code><br>background -color/-image/-position/-repeat/-attachment<br><code>background-origin</code><br>padding-box从padding区域显示<br>border-box从border区域显示<br>contert-box从content区域显示<br><code>background-clip</code><br>padding-box从padding区域向外裁剪<br>border-box从border区域往外裁剪<br>content-box从content区域往外裁剪<br><code>text文本裁剪</code><br><code>background-size</code><br>100px 100px:宽高具体值<br>100% 100%宽高百分比<br>cover以合适的比例图片进行缩放不会变形，用来铺满整个容器<br>contain原始比例收缩，显示完整但不一定铺满（一边碰到容器的边缘，则停止覆盖，导致部分区域是没有背景图的）<br>cover按原始比例收缩，可能显示不完整但铺满整个容器<br><code>background-attachment</code><br>背景图片是滚动的还是固定的fixed(固定的)默认是滚动的<br><code>box-shadow</code>:h水平方向偏移，v垂直方向偏移，blur模糊半径，spread扩展半径，color颜色，inset奖赏这个表示内阴影默认是外阴影。<br><code>text-shadow</code>:x y blur color<br>x轴偏移 y轴偏移 模糊度 颜色<br>多层阴影制作的文字立体效果设置多种颜色中间以逗号隔开<br><code>text-stroke</code>：2px blue<br>通过设定1px的透明边框，可以让文字变得平滑<br>颜色设定透明能创建镂空字体<br>mask-image遮罩<br>mask-position<br>mask-repeat<br>transform2D变换<br>box-sizing:border-box/padding-box/content-box(默认值)改变的就是我们在css中设置的width、height到底代表啥，border-box让其代表整个盒子的宽高当我们去修改padding或者border盒子大小不变只会让内容缩放<br>columns:多列布局<br>flex：弹性盒子模型，布局<br>perspective：视距 实现3D必用属性<br>@media：媒体查询 实现响应式布局的一种方案<br>@font-face：导入字体图标<br>transition<br>animation</p>
+<hr>
+<h3 id="CSS样式表"><a href="#CSS样式表" class="headerlink" title="CSS样式表"></a>CSS样式表</h3><table>
+<thead>
+<tr>
+<th>元素</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>style</td>
+<td>写样式</td>
+</tr>
+<tr>
+<td>link</td>
+<td>引入标签</td>
+</tr>
+<tr>
+<td>list-style：none</td>
+<td>去除ul，ol，dl默认样式</td>
+</tr>
+<tr>
+<td>text-decoration: none;</td>
+<td>去除a的下划线</td>
+</tr>
+<tr>
+<td>font-weight: normal;</td>
+<td>去除字体加粗，斜体</td>
+</tr>
+<tr>
+<td>color: #ccc;</td>
+<td>字体颜色</td>
+</tr>
+<tr>
+<td>background-color:#faa770;</td>
+<td>背景颜色</td>
+</tr>
+<tr>
+<td>width: 100px;</td>
+<td>盒子宽度</td>
+</tr>
+<tr>
+<td>height :100px;</td>
+<td>盒子高度</td>
+</tr>
+<tr>
+<td>border-radius: 20px;</td>
+<td>盒子圆角</td>
+</tr>
+<tr>
+<td>line-height:100px;</td>
+<td>文本行高</td>
+</tr>
+<tr>
+<td>font-size : 16px ;</td>
+<td>字体大小</td>
+</tr>
+<tr>
+<td>font-weight: bold;</td>
+<td>字体加粗</td>
+</tr>
+<tr>
+<td>font-style: italic;</td>
+<td>字体倾斜</td>
+</tr>
+<tr>
+<td>letter-spacing: 10px;</td>
+<td>字体间距</td>
+</tr>
+<tr>
+<td>text-indent: 2em;</td>
+<td>段落首行缩进</td>
+</tr>
+<tr>
+<td>cursor:pointer</td>
+<td>鼠标经过加小手</td>
+</tr>
+<tr>
+<td>z-index:1;</td>
+<td>改变重叠盒子层级关系</td>
+</tr>
+<tr>
+<td>border-top:1px solid red;</td>
+<td>上边框</td>
+</tr>
+<tr>
+<td>border-right:1px solid red;</td>
+<td>右边框</td>
+</tr>
+<tr>
+<td>border-bottom:1px solid red;</td>
+<td>下边框</td>
+</tr>
+<tr>
+<td>border-left:1px solid red;</td>
+<td>左边框</td>
+</tr>
+<tr>
+<td>border-width:10px;</td>
+<td>边框的宽度</td>
+</tr>
+<tr>
+<td>border-color:red;</td>
+<td>边框的颜色</td>
+</tr>
+<tr>
+<td>border-style:solid(实线);dashed（虚线）；</td>
+<td>边框的样式</td>
+</tr>
+<tr>
+<td>border:10px solid #fff;</td>
+<td>边框宽度 样式 颜色缩写</td>
+</tr>
+<tr>
+<td>padding:1px 2px 3px 4px;</td>
+<td>盒子内边距 上 右  下 左</td>
+</tr>
+<tr>
+<td>margin:1px 2px 3px 4px;</td>
+<td>盒子外边距 上 右  下 左</td>
+</tr>
+<tr>
+<td>position: relative;</td>
+<td>相对定位</td>
+</tr>
+<tr>
+<td>position：absolute；</td>
+<td>绝对定位</td>
+</tr>
+<tr>
+<td>position: fixed;</td>
+<td>固定定位</td>
+</tr>
+<tr>
+<td>float：left</td>
+<td>左浮动</td>
+</tr>
+<tr>
+<td>float：right</td>
+<td>右浮动</td>
+</tr>
+<tr>
+<td>display：block</td>
+<td>转为块元素</td>
+</tr>
+<tr>
+<td>display：inline</td>
+<td>转为行内元素</td>
+</tr>
+<tr>
+<td>display:inline-block</td>
+<td>转为行内块元素</td>
+</tr>
+<tr>
+<td>display：none</td>
+<td>让元素隐藏</td>
+</tr>
+<tr>
+<td>overflow: hidden;</td>
+<td>溢出盒子高度隐藏</td>
+</tr>
+<tr>
+<td>overflow: scroll;</td>
+<td>不管内容是否超出，都会出现滚动条</td>
+</tr>
+<tr>
+<td>overflow: auto;</td>
+<td>系统判断超出则出现滚动条不超出则不出现</td>
+</tr>
+<tr>
+<td>white-space: nowrap;</td>
+<td>让文本强制换行</td>
+</tr>
+<tr>
+<td>text-overflow:ellipsis;</td>
+<td>让超出的文本以三个小点的方式出现</td>
+</tr>
+<tr>
+<td>hover</td>
+<td>鼠标经过时的状态</td>
+</tr>
+<tr>
+<td>active</td>
+<td>鼠标点击时的状态</td>
+</tr>
+<tr>
+<td>visited</td>
+<td>鼠标点击后的状态</td>
+</tr>
+<tr>
+<td>text-align:  right ; left ；</td>
+<td>文字水平居右，左</td>
+</tr>
+<tr>
+<td>text-align: center;</td>
+<td>文字水平居中</td>
+</tr>
+<tr>
+<td>line-height: 50px;</td>
+<td>文本垂直居中</td>
+</tr>
+<tr>
+<td>vertical-align：top</td>
+<td>平级元素顶部对齐</td>
+</tr>
+<tr>
+<td>vertical-align：middle；</td>
+<td>平级元素中部对齐</td>
+</tr>
+<tr>
+<td>vertical-align：bottom;</td>
+<td>平级元素底部对齐</td>
+</tr>
+<tr>
+<td>margin:0 auto;</td>
+<td>盒子，版心，位置居中</td>
+</tr>
+<tr>
+<td>box-shadow: .02rem .02rem .02rem .02rem rgba(178,178,178,.75),-.02rem .02rem .02rem .02rem rgba(178,178,178,.75);</td>
+<td>盒子阴影</td>
+</tr>
+<tr>
+<td>text-shadow： .02rem .02rem .02rem .02rem rgba(178,178,178,.75);</td>
+<td>文字阴影</td>
+</tr>
+<tr>
+<td>link rel=”icon” href=”img/favicon.ico” type=”image/x-icon</td>
+<td>引入图标(页面标题的前面–页卡)</td>
+</tr>
+<tr>
+<td>给body或者父级元素设置font-size:0;</td>
+<td>清除间隙问题</td>
+</tr>
+<tr>
+<td>opacity:0.5;</td>
+<td>设置透明度</td>
+</tr>
+<tr>
+<td>filter:alpha(opacity=50)</td>
+<td>设置透明度 兼容ie低版本8以下浏览器</td>
+</tr>
+<tr>
+<td>background: url(“图片路径”) no-repeat（不平铺）;</td>
+<td>背景图片</td>
+</tr>
+<tr>
+<td>background-position: center center；</td>
+<td>改变背景图片的位置、水平垂直居中</td>
+</tr>
+<tr>
+<td>background-size:100% 100%;</td>
+<td>改变背景图片的大小</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>background: red url(“pic_02.png”) no-repeat center center;—–这种写法格式是在项目中最常用</strong><br> <strong>background:背景颜色  背景图片的路径  背景图片是否平铺   改变背景图片的位置</strong>&gt;</p>
+</blockquote>
+<blockquote>
+<p><strong>实现隔行变色</strong>&lt;<br>-<strong>单独获取容器中的某一个子元素</strong> ——|||||||||||——  <strong>EVEN : 偶数 \ ODD : 奇数</strong>-<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">* nth-child(n):当前容器所有子元素中的第N个</span><br><span class="line">    *    .box li:nth-child(1)：BOX容器所有子元素中的第一个并且标签名是LI的</span><br><span class="line">* nth-of-type(n):先给当前容器按照某一个标签名进行分组,获取分组中的第N个</span><br><span class="line">    *    .box li:nth-of-type(1)：先获取BOX中所有的LI，在获取LI中的第一个</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<p><strong>实心小三角</strong><br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;style&gt;</span><br><span class="line">        div&#123;</span><br><span class="line">            border-color:  transparent（边框透明）  transparent   transparent   #0d0d0d ;</span><br><span class="line">            border-style: solid;</span><br><span class="line">            border-width: <span class="number">40</span>px;  &#125;</span><br><span class="line">    &lt;<span class="regexp">/style&gt;</span></span><br><span class="line"><span class="regexp">    &lt;div&gt;&lt;/</span>div&gt;</span><br></pre></td></tr></table></figure></p>
 <table>
 <thead>
 <tr>
@@ -683,7 +946,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">19</span>
+                  <span class="site-state-item-count">27</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -720,7 +983,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#HTML5、CSS3"><span class="nav-number">1.</span> <span class="nav-text">HTML5、CSS3</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#input类型"><span class="nav-number">1.1.</span> <span class="nav-text">input类型</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#HTML5、CSS3"><span class="nav-number">1.</span> <span class="nav-text">HTML5、CSS3</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#input类型"><span class="nav-number">1.1.</span> <span class="nav-text">input类型</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#CSS3"><span class="nav-number">1.2.</span> <span class="nav-text">CSS3</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CSS样式表"><span class="nav-number">2.</span> <span class="nav-text">CSS样式表</span></a></li></ol></div>
             
 
           </div>

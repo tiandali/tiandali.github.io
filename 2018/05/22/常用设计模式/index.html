@@ -79,14 +79,17 @@
 
 
 
+<meta name="description" content="JAVASCRIPT中常用的设计模式学习各种设计模式有什么作用？  [ 开发 ]开发效率高利于团队协作 [ 维护 ]有利于代码的升级改版逻辑清晰，代码严谨，利于后期的维护 [ 通用 ]我们依托设计模式可以实现组件化、模块化、插件化、框架化以及一些常用类库方法的编写 技术语言发展路线语言语法更新迭代之路（路漫漫而其修远兮）语法初步稳定阶段 -&amp;gt; 研究核心语法和使用的早一批人 -&amp;gt;封装各种">
 <meta property="og:type" content="article">
 <meta property="og:title" content="常用设计模式">
 <meta property="og:url" content="http://yoursite.com/2018/05/22/常用设计模式/index.html">
 <meta property="og:site_name" content="tiandali">
+<meta property="og:description" content="JAVASCRIPT中常用的设计模式学习各种设计模式有什么作用？  [ 开发 ]开发效率高利于团队协作 [ 维护 ]有利于代码的升级改版逻辑清晰，代码严谨，利于后期的维护 [ 通用 ]我们依托设计模式可以实现组件化、模块化、插件化、框架化以及一些常用类库方法的编写 技术语言发展路线语言语法更新迭代之路（路漫漫而其修远兮）语法初步稳定阶段 -&amp;gt; 研究核心语法和使用的早一批人 -&amp;gt;封装各种">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-05-21T17:12:39.374Z">
+<meta property="og:updated_time" content="2018-05-22T06:14:52.428Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="常用设计模式">
+<meta name="twitter:description" content="JAVASCRIPT中常用的设计模式学习各种设计模式有什么作用？  [ 开发 ]开发效率高利于团队协作 [ 维护 ]有利于代码的升级改版逻辑清晰，代码严谨，利于后期的维护 [ 通用 ]我们依托设计模式可以实现组件化、模块化、插件化、框架化以及一些常用类库方法的编写 技术语言发展路线语言语法更新迭代之路（路漫漫而其修远兮）语法初步稳定阶段 -&amp;gt; 研究核心语法和使用的早一批人 -&amp;gt;封装各种">
 
 
 
@@ -296,7 +299,51 @@
       
 
       
-        
+        <h3 id="JAVASCRIPT中常用的设计模式"><a href="#JAVASCRIPT中常用的设计模式" class="headerlink" title="JAVASCRIPT中常用的设计模式"></a>JAVASCRIPT中常用的设计模式</h3><p>学习各种设计模式有什么作用？</p>
+<blockquote>
+<p>[ 开发 ]<br>开发效率高<br>利于团队协作</p>
+<p>[ 维护 ]<br>有利于代码的升级改版<br>逻辑清晰，代码严谨，利于后期的维护</p>
+<p>[ 通用 ]<br>我们依托设计模式可以实现组件化、模块化、插件化、框架化以及一些常用类库方法的编写</p>
+<p><code>技术语言发展路线</code><br>语言语法更新迭代之路（路漫漫而其修远兮）<br>语法初步稳定阶段 -&gt; 研究核心语法和使用的早一批人 -&gt;封装各种类库和插件 -&gt;大量研究核心的开发人员…  -&gt;出现各种设计模式 -&gt;框架(VUE、REACT)</p>
+</blockquote>
+<h4 id="插件、组件、类库、框架的区别"><a href="#插件、组件、类库、框架的区别" class="headerlink" title="插件、组件、类库、框架的区别"></a>插件、组件、类库、框架的区别</h4><blockquote>
+<p>类库：提供一些真实项目开发中常用的方法（方法做了完善处理：兼容处理、细节优化），方便我们开发和维护 [ jQuery、Zepto… ]</p>
+<p>插件：把项目中某一部分进行插件封装（是具备具体的业务逻辑的，更加有针对性），以后再有类似的需求，直接导入插件即可，相关业务逻辑代码不需要自己在编写了 [ jquery.drag.js 、jquery.dialog.js、jquery.validate.min.js 、datepicker日历插件、echarts统计图插件、iscroll插件…]</p>
+<p>组件：类似于插件，但是插件一般只是把JS部分封装，组件不仅封装了JS部分，而且把CSS部分也封装了，以后再使用的时候，我们直接的按照文档使用说明引入CSS/JS，搭建对应的结构，什么都不用做功能自然就有了 [ swiper组件、bootstrap组件… ]</p>
+<p>框架：比上面的三个都要庞大，它不仅仅提供了很多常用的方法、而且也可以支持一些插件的扩展（可以把一些插件集成到框架中运行）、更重要的是提供了非常优秀的代码管理设计思想…  [ REACT、VUE、ANGULAR、REACT NATIVE… ]</p>
+</blockquote>
+<h3 id="JS中常用的设计模式"><a href="#JS中常用的设计模式" class="headerlink" title="JS中常用的设计模式"></a>JS中常用的设计模式</h3><blockquote>
+<p>单例设计模式、构造原型设计模式、发布订阅设计模式、promise设计模式…</p>
+</blockquote>
+<h4 id="单例设计模式"><a href="#单例设计模式" class="headerlink" title="单例设计模式"></a><code>单例设计模式</code></h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//=&gt;单例模式：把实现当前这个模块所有的属性和方法汇总到同一个命名空间下（分组作用，避免了全局变量的污染）</span></span><br><span class="line"><span class="keyword">let</span> exampleRender=(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">	<span class="comment">//=&gt;实现当前模块具体业务逻辑的方法全部存放在闭包中</span></span><br><span class="line">	<span class="keyword">let</span> fn=<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">		<span class="comment">//...</span></span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> &#123;</span><br><span class="line">		init:<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">			<span class="comment">//=&gt;入口方法：控制当前模块具体的业务逻辑顺序</span></span><br><span class="line">			fn();</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;)();</span><br><span class="line">exampleRender.init();</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>真实项目中，我们如果想要实现具体的业务逻辑需求，都可以依托于单例模式构建；我们把项目划分成各大板块或者模块，把实现同一个板块的方法放在一个独立的命名空间下，方便团队协作开发；</p>
+</blockquote>
+<h4 id="构造原型模式"><a href="#构造原型模式" class="headerlink" title="构造原型模式"></a><code>构造原型模式</code></h4><p>：最贴近OOP面向对象编程思想的</p>
+<blockquote>
+<p>以后真实项目中，不管是封装类库还是插件或者UI组件，基本上都是基于构造原型模式来开发的<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Tool</span></span>&#123;</span><br><span class="line">	<span class="keyword">constructor</span>()&#123;</span><br><span class="line">		<span class="keyword">this</span>.isCompatible=<span class="string">'addEventListener'</span> <span class="keyword">in</span> <span class="built_in">document</span>;<span class="comment">//=&gt;如果不兼容返回FALSE(IE6~8)</span></span><br><span class="line">		</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">//=&gt;挂载到原型上的方法</span></span><br><span class="line">	css()&#123;</span><br><span class="line">		<span class="comment">//...</span></span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">//=&gt;挂载到普通对象上的方法</span></span><br><span class="line">	<span class="keyword">static</span> distinct()&#123;</span><br><span class="line">		<span class="comment">//...</span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Banner</span> <span class="keyword">extends</span> <span class="title">Tool</span></span>&#123;</span><br><span class="line">	<span class="keyword">constructor</span>(...arg)&#123;</span><br><span class="line">		<span class="keyword">super</span>();</span><br><span class="line">		<span class="keyword">this</span>.xxx=xxx;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">//=&gt;挂载到子类原型上的方法</span></span><br><span class="line">	bindData()&#123;</span><br><span class="line">		<span class="keyword">this</span>.css();<span class="comment">//=&gt;把父类原型上的方法执行（子类继承了父类，那么子类的实例就可以调取父类原型上的方法了）</span></span><br><span class="line">		<span class="keyword">this</span>.distinct===<span class="literal">undefined</span>;<span class="comment">//=&gt;子类的实例只能调取父类原型上的方法，以及父类给实例提供的私有属性方法，但是父类做为普通对象加入的静态方法，子类的实例是无法调取的 (只有这样才可以调取使用：Tool.distinct())</span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<blockquote>
+<p>我有三个类 A/B/C ，我想让C继承A和B<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span></span>&#123;</span><br><span class="line">	...</span><br><span class="line">&#125;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">B</span> <span class="keyword">extends</span> <span class="title">A</span></span>&#123;</span><br><span class="line">	...</span><br><span class="line">&#125;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">C</span> <span class="keyword">extends</span> <span class="title">B</span></span>&#123;</span><br><span class="line">	...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<p><code>发布订阅设计模式：观察者模式</code></p>
+<blockquote>
+<p>不同于单例和构造，发布订阅是小型设计模式，应用到某一个具体的需求中：凡是当到达某个条件之后要执行N多方法，我们都可以依托于发布订阅设计模式管理和规划我们的JS代码</p>
+<p>我们经常把发布订阅设计模式嵌套到其它的设计模式中</p>
+</blockquote>
+<h4 id="promise设计模式"><a href="#promise设计模式" class="headerlink" title="promise设计模式"></a><code>promise设计模式</code></h4><blockquote>
+<p>解决AJAX异步请求层级嵌套的问题</p>
+<p>它也是小型设计模式，目的是为了解决层级嵌套问题的，我们也会经常把它嵌套在其它的设计模式中运行<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">$.ajax(&#123;</span><br><span class="line">	url:<span class="string">'/A'</span>,</span><br><span class="line">	<span class="keyword">async</span>:<span class="literal">true</span>,<span class="comment">//=&gt;异步</span></span><br><span class="line">	success:<span class="function"><span class="keyword">function</span>(<span class="params">result</span>)</span>&#123;</span><br><span class="line">		$.ajax(&#123;</span><br><span class="line">			url:<span class="string">'/B'</span>,</span><br><span class="line">			<span class="keyword">async</span>:<span class="literal">true</span>,</span><br><span class="line">			success:<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">				<span class="comment">//=&gt;还会有后续嵌套</span></span><br><span class="line">			&#125;</span><br><span class="line">		&#125;);		</span><br><span class="line">	&#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<h4 id="发布订阅设计模式"><a href="#发布订阅设计模式" class="headerlink" title="发布订阅设计模式"></a>发布订阅设计模式</h4><blockquote>
+<p>俗称叫做“观察者模式”</p>
+<p>实现思路和原理：<br>1、我们先创建一个计划表（容器）<br>2、后期需要做什么事情，我们都依次把需要处理的事情增加到计划表中<br>3、当符合某个条件的时候，我们只需要通知计划表中的方法按照顺序依次执行即可</p>
+</blockquote>
+<p><code>JQ中的发布订阅</code></p>
+<blockquote>
+<p>JQ中提供了实现发布订阅设计模式的方法<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> $plan = $.Callbacks();<span class="comment">//=&gt;创建一个计划表</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> fn = <span class="function"><span class="keyword">function</span>(<span class="params">n,m</span>)</span>&#123;</span><br><span class="line">	<span class="comment">//=&gt;n=100 m=200</span></span><br><span class="line">&#125;</span><br><span class="line">$plan.add(fn);<span class="comment">//=&gt;向计划表中增加方法</span></span><br><span class="line">$plan.remove(fn);<span class="comment">//=&gt;从计划表中移除方法</span></span><br><span class="line"></span><br><span class="line">$plan.fire(<span class="number">100</span>，<span class="number">200</span>);<span class="comment">//=&gt;通知计划表中所有的方法按照顺序执行；100 200会分别作为实参传递给每一个需要执行的方法；</span></span><br></pre></td></tr></table></figure></p>
+</blockquote>
+
       
     </div>
     
@@ -384,8 +431,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -400,7 +456,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">19</span>
+                  <span class="site-state-item-count">27</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -427,6 +483,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#JAVASCRIPT中常用的设计模式"><span class="nav-number">1.</span> <span class="nav-text">JAVASCRIPT中常用的设计模式</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#插件、组件、类库、框架的区别"><span class="nav-number">1.1.</span> <span class="nav-text">插件、组件、类库、框架的区别</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#JS中常用的设计模式"><span class="nav-number">2.</span> <span class="nav-text">JS中常用的设计模式</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#单例设计模式"><span class="nav-number">2.1.</span> <span class="nav-text">单例设计模式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#构造原型模式"><span class="nav-number">2.2.</span> <span class="nav-text">构造原型模式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#promise设计模式"><span class="nav-number">2.3.</span> <span class="nav-text">promise设计模式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#发布订阅设计模式"><span class="nav-number">2.4.</span> <span class="nav-text">发布订阅设计模式</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
