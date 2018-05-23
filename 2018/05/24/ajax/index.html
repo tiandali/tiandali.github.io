@@ -1,0 +1,744 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="ajax  async javascript and xml在ajax的异步不是我们理解的同步异步编程，而是泛指局部刷新，但是我们在以后的Ajax请求中尽可能使用异步获取数据（因为异步数据获取不会阻塞下面代码的执行）客户端从服务器端获取数据XML:可扩展标记语言，利用扩展有规则标记，来存储相关数据和内容。好处是：清晰的展示出数据的结构json:也很清晰的展示出数据的结构，并且访问数据的时候操作起来">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ajax">
+<meta property="og:url" content="http://yoursite.com/2018/05/24/ajax/index.html">
+<meta property="og:site_name" content="tiandali">
+<meta property="og:description" content="ajax  async javascript and xml在ajax的异步不是我们理解的同步异步编程，而是泛指局部刷新，但是我们在以后的Ajax请求中尽可能使用异步获取数据（因为异步数据获取不会阻塞下面代码的执行）客户端从服务器端获取数据XML:可扩展标记语言，利用扩展有规则标记，来存储相关数据和内容。好处是：清晰的展示出数据的结构json:也很清晰的展示出数据的结构，并且访问数据的时候操作起来">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2018-05-23T17:25:57.533Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="ajax">
+<meta name="twitter:description" content="ajax  async javascript and xml在ajax的异步不是我们理解的同步异步编程，而是泛指局部刷新，但是我们在以后的Ajax请求中尽可能使用异步获取数据（因为异步数据获取不会阻塞下面代码的执行）客户端从服务器端获取数据XML:可扩展标记语言，利用扩展有规则标记，来存储相关数据和内容。好处是：清晰的展示出数据的结构json:也很清晰的展示出数据的结构，并且访问数据的时候操作起来">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/05/24/ajax/"/>
+
+
+
+
+
+  <title>ajax | tiandali</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">tiandali</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/24/ajax/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="tiandali">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="tiandali">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">ajax</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-05-24T01:25:15+08:00">
+                2018-05-24
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="ajax"><a href="#ajax" class="headerlink" title="ajax"></a>ajax</h3><blockquote>
+<p> async javascript and xml<br>在ajax的异步不是我们理解的同步异步编程，而是泛指局部刷新，但是我们在以后的Ajax请求中尽可能使用异步获取数据（因为异步数据获取不会阻塞下面代码的执行）<br>客户端从服务器端获取数据<br>XML:可扩展标记语言，利用扩展有规则标记，来存储相关数据和内容。<br>好处是：清晰的展示出数据的结构<br>json:也很清晰的展示出数据的结构，并且访问数据的时候操作起来比XML更方便<br>现实项目中服务器返回给客户端数据不单纯的是数据，而是数据和需要展示的结构拼接好的结果，类似于我们自己做的字符串拼接，是服务端把数据和结构拼接好返回给我们，此时返回的数据格式一般是XML格式的字符串</p>
+</blockquote>
+<p>ajax:客户端js中的方法，用来向服务器端发送请求，然后把服务器端返回的内容获取到，一般运行在客户端的浏览器中</p>
+<p><strong>ajax的诞生是为了实现局部刷新</strong></p>
+<blockquote>
+<p><strong>服务器端渲染的好处</strong><br> 1.有利于seo优化，有利于引擎收录，但是客户端做字符串拼接，呈现出来的内容在页面源代码是没有 的不利于seo<br>2.只要服务器端并发给力，页面加载速度与会比客户端渲染更快<br>很多大网站比如淘宝京东，首屏内容都是基于服务器端渲染的客户端获取XML数据后直接呈现，增加页面第一次打开速度而剩下屏中的内容都是基于Ajax获取数据，在客户端进行数据拼接渲染的</p>
+</blockquote>
+<blockquote>
+<ul>
+<li>基于Ajax向服务器发送请求获取数据，不管是json还是服务器渲染好的XML文档都是<strong>前后端分离</strong>的项目<br>A:不利于SEO优化（源代码中看不到动态添加的数据）<br>B：都可以实现“局部刷新”<br>例如京东，首屏数据是基于Ajax从服务器端获取的XML字符串（服务器端渲染）其他屏数据是从服务器获取json，客户端拼接字符串掺入到指定的区域中（客户端渲染）</li>
+</ul>
+</blockquote>
+<blockquote>
+<ul>
+<li>不基于Ajax，直接通过浏览器向服务器发送请求，服务器把需要呈现的内容返回，这种模式是<strong>非前后端分离项目</strong><br>A:不利于SEO优化<br>B:只能实现全局刷新<br>C:请求页面的后缀名一般都不是HTML，而是.php/.jsp/.aspx/.asp…也有HTML，但是是基于node做后台实现服务器渲染的，注意原始地址可能被重新修改URL重写</li>
+</ul>
+</blockquote>
+<blockquote>
+<ul>
+<li>还有一些项目，首屏是不分离的，浏览器向服务器发送请求，服务器端直接把首屏内容返回，客户端h直接显示，但是其他屏都是基于AJAX获取的，这种叫做<strong>前后端半分离</strong>，例如淘宝</li>
+</ul>
+</blockquote>
+<hr>
+<blockquote>
+<p>一：let xhr=new XMLHttpRequest;</p>
+<ul>
+<li>创建一个Ajax对象，ie6中不兼容的，使用的是new ActiveXobject来实现</li>
+</ul>
+</blockquote>
+<hr>
+<blockquote>
+<p>二：xhr.open(“get”,”json/data.json”,false，[username],[userpass]);</p>
+<ul>
+<li>发送前的基本信息配置：<br>1.get:从服务器获取数据，最常用，一般使用问号传参的方式，传递给服务器的内容存在<code>大小限制</code>，因为浏览器对于url有长度限制，还会出现<code>缓存</code>问题。可以在末尾加一个随机数解决。一般来说get不安全，而post相对安全一些<br>2.打开一个URL地址:向服务器端发送请求的API接口地址，<br>3.同步还是异步，true是异步；项目中都使用异步编程，防止阻塞后续代码执行。</li>
+</ul>
+</blockquote>
+<hr>
+<blockquote>
+<p>三：xhr.onreadystatechange=function(){<br>if（xhr.readyState=====4&amp;&amp;xhr.status=====200）{<br>let val=xhr.responseText;l}}</p>
+</blockquote>
+<blockquote>
+<ul>
+<li>事件监听：一般监听的都是ready-state-change事件，基于这个时间可以获取服务器返回的响应头响应主体内容<br>给onreadystatechange绑定一个方法，监听状态改变，一改变就触发</li>
+</ul>
+</blockquote>
+<blockquote>
+<p><strong>xhr.readyState:</strong><br>0 unsent 当前概念的请求还没有发送<br>1 opened url 地址已经打开<br>2 headers ——received响应头已经接受<br>3 loading 主要返回的内容正在服务器端进行准备处理<br>4 done 响应主题的内容已经成功返回到客户端</p>
+</blockquote>
+<hr>
+<blockquote>
+<p><strong>xhr.status状态码</strong><br>根据状态吗能够清楚的反映出当前交互的结果以及原因<br>200 ok 成功，只能证明服务器成功返回信息了，但是信息不一定是你业务需要的<br>301 永久转移/永久重定向 =》域名更改重新定向到新的域名<br>302 临时转移<br> 网站现在是基于https协议运作的，如果访问的是HTTP协议会基于307重定向到HTTPS协议上，一般用做服务器负载均衡。<br> 当一台服务器达到最大并发数的时候会把后续访问的用户临时转移到其他的服务器机组上处理。<br> 偶尔真实项目中会把所有的图片放到单独的服务器上、图片处理服务器这样减少主服务器的压力当用户向主服务器访问图片的时候，主服务器都把他转移到图片服务器上处理<br>307 临时重定向<br>304 not modified 设置缓存<br>对于不经常更新的资源文件例如../js/html/img等，服务器会结合客户端设置304缓存，第一次加载过这些资源就缓存到客户端了，下次再获取的时候是从缓存中获取；如果资源更新了，服务器端会通过最后修改时间来强制让客户端从服务器重新拉取；基于CTRL+F5强制刷新页面，304做的缓存就没有用了</p>
+</blockquote>
+<blockquote>
+<p>400   请求参数出现错误<br>401  无访问权限<br>404 客户端访问的地址不存在<br>413 和服务器交互的内容资源超过服务器最大限制</p>
+</blockquote>
+<blockquote>
+<p>500 未知的服务器错误<br>503 服务器超负载。</p>
+</blockquote>
+<hr>
+<blockquote>
+<p>关于XHR的属性和方法、</p>
+</blockquote>
+<blockquote>
+<p>xhr.response 响应主体<br>xhr.responseText 响应主体的内容是字符串（XML或者JSON字符串都可以）<br>xhr.responseXML 响应主体内容是XML</p>
+</blockquote>
+<blockquote>
+<p>xhr.status:返回的HTTP状态码<br>xhr.statusText：状态码的描述</p>
+</blockquote>
+<blockquote>
+<p>xhr.timeout：设置请求超时的时间<br>xhr.withCredentials 是否跨域false</p>
+</blockquote>
+<blockquote>
+<p>xhr.abort ()：强制中断<br>xhr.getALLResponseHeaders()获取响应头信息<br>xhr.getResponseHeader([key])获取key对应的响应头信息，例如xhr.getResponseHeader(‘data’)获取响应头中的时间<br>xhr.open()打开url请求<br>xhr.overrideMimeType()重写MIME类型<br>xhr.send()发送AJAX请求<br>xhr.setRequestHeader()设置请求头。</p>
+</blockquote>
+<hr>
+<blockquote>
+<p>四：xhr.send([请求主体内容])；</p>
+<ul>
+<li>发送请求，参数是请求主体中传递服务器的内容；<br>从这步开始当前Ajax任务开始，如果Ajax是同步的后续代码不会执行，要等到Ajax状态成功后再执行，反之异步不会</li>
+</ul>
+</blockquote>
+<hr>
+<blockquote>
+<p>关于HTTP请求方式的一点学习<br>所有的请求都可以给服务器端传递内容，也都可以从服务器端获取内容<br>get:从服务器获取数据，最常用，一般使用问号传参的方式，传递给服务器的内容存在<code>大小限制</code>，因为浏览器对于url有长度限制，还会出现<code>缓存</code>问题。可以在末尾加一个随机数解决。一般来说get不安全，而post相对安全一些<br>post:一般用于向服务器推送数据，一般使用请求主体的方式<br>put:一般用于，给服务器增加资源文件（上传图片）<br>delete:一般用于从服务器删除资源文件<br>head：一般用于获取服务器的响应头信息。<br>options:一般使用它向服务器发送一个探测性请求，如果服务器端返回的信息了，说明当前客户端和服务器建立了连接，我们可以继续执行其他请求了（trace是干这件事的，但是axios这个Ajax类库再给予cross domain进行跨域请求的时候，就是先发送options请求进行探测尝试，如果能连通服务器，才会继续发送其他请求的）<br>trace:回显服务器收到的请求，主要用于测试或诊断<br>connect:HTTP/1.1协议中预留给能够连接改为管道方式的</p>
+</blockquote>
+<hr>
+<blockquote>
+<p>get  vs  post<br>传递给服务器信息的方式不一样<br>get是基于URL地址问号传参的方式把信息传递给服务器，post是基于请求主体把信息传递给服务器.<br>get不安全，post相对安全<br>post是基于请求主体传递，相对来说不好被劫持，所以登陆注册等涉及安全性的交互操作，我们都应该用post请求<br>get 会产生不可控制的缓存，post不会<br>不可控：不是想要就要的，这是浏览器自主记忆的缓存，我们无法基于JS控制，真实项目中我们都会把这个缓存干掉<br>get请求产生缓存的原因;连续多次向相同的地址并且传递的参数信息也是相同的发送请求浏览器会把之前或获取的数据从还从中拿到返回，导致无法获取服务器最新的数据（post不会）<br>解决方案：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">xhr.open(&apos;get&apos;,`https://www.easy-mock.com/mock/5b0412beda8a195fb0978627/temp/list ?id=1000&amp;lx=2000&amp;_=$&#123;Math.random()&#125;`);//保证每次请求的地址不完全一致，在每一次请求的末尾追加一个随机数即可，(使用_作为属性名就是不想和其他的属性名冲突)</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/05/24/HTTP报文/" rel="next" title="HTTP报文">
+                <i class="fa fa-chevron-left"></i> HTTP报文
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">tiandali</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">32</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#ajax"><span class="nav-number">1.</span> <span class="nav-text">ajax</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">tiandali</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

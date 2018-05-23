@@ -229,6 +229,1265 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/22/盒子模型/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="tiandali">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="tiandali">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/05/22/盒子模型/" itemprop="url">盒子模型</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-05-22T01:10:35+08:00">
+                2018-05-22
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="js盒子模型"><a href="#js盒子模型" class="headerlink" title="js盒子模型"></a>js盒子模型</h3><p>提供一些属性和方法用来描述当前盒子的样式的</p>
+<h4 id="client"><a href="#client" class="headerlink" title="client"></a>client</h4><p><code>clientWidth/clientHight</code></p>
+<blockquote>
+<p>当前盒子可视区域的宽度和高度<br>可视区域：内容的宽高+padding<br>clientWidth=width+padding(left/right)<br>clientHight=height+padding(top/bottom)</p>
+</blockquote>
+<p>和内容是否已出以及我们是否设置了overflow:hidden;没有关系<br><code>clientTop</code>和<code>clientLeft</code><br>clientTop:盒子上边框的高度。<br>clientLeft：盒子左边框的宽度。<br>获取的结果就是border-width的值</p>
+<blockquote>
+<p>通过js盒子模型属性获取的结果是不带单位的，而且只能是整数（他会自动四舍五入）<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">获取当前页面一屏幕的宽度</span><br><span class="line">document.documentElement.clientWidth||document.body.clientWidth</span><br><span class="line"></span><br><span class="line">获取当前页面一屏幕的高度</span><br><span class="line">document.documentElement.clientHeight||document.body.clientHeight</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<h4 id="offset"><a href="#offset" class="headerlink" title="offset"></a>offset</h4><p><code>offsetWidth</code>和<code>offsetHeight</code><br>在clientWidth和clientHeight的基础上<code>加上</code>盒子的<code>边框</code>即可<br><code>offsetWidth=width+padding(左右)+border（左右）=clientHeight+border(左右)</code><br><code>在真实项目中想获取一个盒子的宽度和高度，我们一般用offsetWidth而不是clientwidth，border也是盒子的一部分</code></p>
+<p><code>offsetParent</code>：参照物<br><code>offsetLeft</code>：左偏移（）<br><code>offsetTop</code>：上偏移<br>offset系列（与溢出的内容无关）<br>偏移：<br>1.当前元素（边框以外）到参照物（边框以内）的距离<br>2.获取偏移量，当前元素不一定要设成定位元素。<br>3.当前元素找参照物的方式跟css里找参照物一样<br>4.默认的参照物是body，但实际上到窗口左边和上边的距离，body是文档的代理人，对body不要设置margin，float等属性<br>5.其他元素margin，float也会造成影响</p>
+<h4 id="scroll"><a href="#scroll" class="headerlink" title="scroll"></a>scroll</h4><p><code>scrollWidth</code>和<code>scrollHeight</code></p>
+<blockquote>
+<p>没有内容溢出的情况：获取的结果和clientWidth和clientHeight是一样的<br>有内容溢出的情况：真实内容的宽度或者高度（包含溢出的内容），加上左padding或者上padding。<code>获取的结果是一个约等于值，每个浏览器由于对行高或者文字的渲染不一样，结果也是不一样的，是否设置了overflow对最后获取的结果也有影响</code><br><img src="./1522516108981.png" alt="Alt text"><br><code>scrollLeft</code>：横向滚动条卷出去的宽度<br><code>scrollTop</code>：纵向滚动条卷出去的高度。<br>最大宽、高  等于= 整个文档（scrollwidth/height）宽、高，减去一屏的(clientwidth/height)宽、高<br>   scrollTop=scrollheight-clientheight<br>   <code>scrollLeft</code>、<code>scrollTop</code>是13个js盒子模型相关属性里唯一<code>两个可以赋值的属性</code>，其他的11个属性只能获取不能赋值,</p>
+</blockquote>
+<h4 id="通过js盒模型属性获取值的特点"><a href="#通过js盒模型属性获取值的特点" class="headerlink" title="通过js盒模型属性获取值的特点"></a>通过js盒模型属性获取值的特点</h4><blockquote>
+<ul>
+<li>1.若赋值是浮点数取得是整数部分,不会四舍五入</li>
+<li>2.13个js盒子模型获取的值都不带单位</li>
+<li>3.获取的结果都是复合样式值（好几个元素的样式组合在一起的值），如果只想获取单一样式值（例如只想获取padding）我们的盒子模型属性就操作不了了（这不能说没有用，真实项目中有时候我们就是需要获取组合的值来完成一些操作）</li>
+</ul>
+</blockquote>
+<h3 id="在js中获取元素具体的样式值"><a href="#在js中获取元素具体的样式值" class="headerlink" title="在js中获取元素具体的样式值"></a>在js中获取元素具体的样式值</h3><blockquote>
+<p>通过js盒子模型属性获取的结果都是盒子的组合样式值，不能直接获取某一个具体样式值，例如就想获得左padding<br><code>curEle.style.xxx</code><br>获取当前元素所有写在<code>行内</code>样式上的样式值<br>特殊：只有把样式写在行内样式上，才可以通过这种办法获取到（写在其他地方的样式获取不到）所以这种办法在真实项目中使用非常少。<br><code>window.getComputedStyle</code>/<code>currentStyle</code><br>只要当前元素在页面中显示出来我们就可以获取样式值，也就是获取所有经过浏览器计算过的样式<br>window.getComputedStyle:适用于标准浏览器，低版本IE浏览器不兼容，所以用curEle.currentStyle来获取需要的样式值。</p>
+</blockquote>
+<h3 id="封装css"><a href="#封装css" class="headerlink" title="封装css"></a>封装css</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br></pre></td><td class="code"><pre><span class="line">let utils = (function () &#123;</span><br><span class="line">    let getCss = function getCss(curEle, attr) &#123;</span><br><span class="line">        if (&apos;getComputedStyle&apos; in window) &#123;</span><br><span class="line">            let val = window.getComputedStyle(curEle, null)[attr];</span><br><span class="line">            let reg = /^-?\d+(\.\d+)?(px|rem|em|pt)?$/i;</span><br><span class="line">            reg.test(val) ? val = parseFloat(val) : null;</span><br><span class="line">            return val;</span><br><span class="line">        &#125;</span><br><span class="line">        //=&gt;throw new SyntaxError：抛出一个错误(语法错误),让浏览器崩溃,不在继续执行JS</span><br><span class="line">        throw new SyntaxError(&apos;您的浏览器版本过低，请升级到最新版本，谢谢配合！！&apos;);</span><br><span class="line">    &#125;;//获得</span><br><span class="line">    let setCss = function (curEle, attr, value) &#123;</span><br><span class="line">        /*细节处理：1.如果需要考虑IE6-8，透明度这个样式在低版本浏览器中不是使用opacity，而是filter（两套都要设置）*/</span><br><span class="line">        //2.</span><br><span class="line">        if (attr === &apos;opacity&apos;) &#123;</span><br><span class="line">            curEle.style.opacity = value;</span><br><span class="line">            curEle.style.filter = `alpha(opacity=$&#123;value * 100&#125;)`;</span><br><span class="line">            return;</span><br><span class="line">        &#125;</span><br><span class="line">        if (!isNaN(value)) &#123;</span><br><span class="line">            let reg = /^(width|height|fontSize|((margin|padding)?(top|left|right|bottom)?))$/i;</span><br><span class="line">            reg.test(attr) ? value += &apos;px&apos; : null;</span><br><span class="line">        &#125;</span><br><span class="line">        curEle[&apos;style&apos;][attr] = value;</span><br><span class="line">    &#125;;//设置单一属性</span><br><span class="line">    let setGroupCss = function (curEle, options = &#123;&#125;) &#123;</span><br><span class="line">        //遍历传递的options,有多少键值对，就循环多少次</span><br><span class="line">        for (let attr in options) &#123;</span><br><span class="line">            if (!options.hasOwnProperty(attr)) break;</span><br><span class="line">            //options:传递进来的需要修改的样式对象</span><br><span class="line">            //attr：每一次遍历到的几个中的某一项（要操作的属性名）</span><br><span class="line">            setCss(curEle, attr, options[attr])</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;;//批量设置多个属性</span><br><span class="line">    let css = function (...arg) &#123;</span><br><span class="line">        let len = arg.length;</span><br><span class="line">        fn = getCss;</span><br><span class="line">        len &gt;= 3 ? fn = setCss : null;</span><br><span class="line">        len === 2 &amp;&amp; (arg[1] instanceof Object) ? fn = setGroupCss : null;</span><br><span class="line">        return fn(...arg);</span><br><span class="line">    &#125;;//汇总前三个方法</span><br><span class="line">    let offset = function (curEle) &#123;</span><br><span class="line">        let curLeft = curEle.offsetLeft,</span><br><span class="line">            curTop = curEle.offsetTop;</span><br><span class="line">        p = curEle.offsetParent;</span><br><span class="line">        while (p.tagName !== &apos;BODY&apos;) &#123;</span><br><span class="line">            curLeft += p.clientLeft;</span><br><span class="line">            curLeft += p.offsetLeft;</span><br><span class="line">            curTop += p.clientTop;</span><br><span class="line">            curTop += p.offsetTop;</span><br><span class="line">            p = p.offsetParent;//=&gt;基于当前找到的父参照物继续向上查找</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        return &#123;</span><br><span class="line">            top: curTop,</span><br><span class="line">            left: curLeft</span><br><span class="line">        &#125;;</span><br><span class="line">    &#125;;//当前元素到页面边界的偏移量</span><br><span class="line">    let winHandle=function (attr,value) &#123;</span><br><span class="line">        if(typeof value!==&apos;undefined&apos;)&#123;</span><br><span class="line">            //设置盒子模型的属性值：scrolltop、scrollleft</span><br><span class="line">            document.documentElement[attr]=value;</span><br><span class="line">            document.body[attr]=value;</span><br><span class="line">            return;</span><br><span class="line">        &#125;</span><br><span class="line">        return document.documentElement[attr]||document.body[attr];</span><br><span class="line">    &#125;;//操作浏览器的盒子模型属性需要写两套（HTML和body）这个方法兼容处理了</span><br><span class="line"></span><br><span class="line">    return &#123;</span><br><span class="line">        css,</span><br><span class="line">        offset,</span><br><span class="line">        winHandle</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)();</span><br></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/22/H5、css3常用标签/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="tiandali">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="tiandali">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/05/22/H5、css3常用标签/" itemprop="url">H5、css3常用标签</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-05-22T01:09:55+08:00">
+                2018-05-22
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="HTML5、CSS3"><a href="#HTML5、CSS3" class="headerlink" title="HTML5、CSS3"></a>HTML5、CSS3</h3><blockquote>
+<p>HTML5新增标签<br>|标签|描述|<br>|–|–|<br>|header|头部|<br>|footer|尾部|<br>|nav|导航|<br>|section|区分大模块|<br>|aside|侧边栏|<br>|article|文章|<br>|figure|配图|<br>|figcaption|配图说明|<br>|video|视频|<br>|audio|音频|&lt;<br>|main|主体|<br>| video 视频| audio音频|<br>|–|–|<br>| src=”” 视频路径| autoplay 自动播放|<br>|controls 是否显示控件|loop 循环播放|&lt;<br>|–|–|<br>|表单|功能|<br>|–|–|<br>|input type=”number”|数字|<br>|input type=”tel”|电话号码输入框|<br>|input type=”url”|输入URL地址|<br>|input type=”range”|特定范围内的数值选择器（通过拖动滚动条改变一定范围内的数字）|<br>|input type=”search”|搜索输入框|<br>|input type=”email”|邮箱|<br>|input type=”color”|颜色选取器|<br>|input type=”datetime”|显示完整日期和时间UTC标准时间|<br>|input type=”datetime”|显示完整日期和时间|<br>|input type=”time”|显示时间|<br>|input type=”month”|显示月|<br>|input type=”week”|显示周|<br>|input type=”file”|上传文件|&lt;<br>|input type=”text”|”placeholder”输入框占位符，常用作输入提示，在光标聚焦时，占位符自动消失|<br>|input type=”text”|”autocomplete”是否保存用户输入值，默认on，关闭提示选择off|<br>|input type=”text”|”autofocus”自动聚焦|<br>|input type=”text”|”required”:此项必填不能为空|<br>|input type=”text”|”Pattern”:正则验证pattern=”\d{1,5}”|<br>from属性只要加上from属性，表单元素可以放到页面的任意位置。<br>formnovalidate和novalidatae他俩都表示不需要验证表单直接提交，novalidate用于form标签；formnovalidate用于submit类型的提交按钮。<br>表单验证</p>
+<ul>
+<li>validity对象，通过下面的valid可以查看验证是否通过</li>
+<li>oTex.addEvectListener(“invalid”,fn1,false);</li>
+<li>valid:验证不通过时返回false</li>
+<li>valueMissing:输入值为空时</li>
+<li>typeMismatch：控件值与预期类型不匹配</li>
+<li>patternMismatch:输入值不满足pattern正则</li>
+<li>customError：不符合自定义验证</li>
+<li>setCustomValidity();自定义验证</li>
+</ul>
+</blockquote>
+<h4 id="input类型"><a href="#input类型" class="headerlink" title="input类型"></a>input类型</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html lang=&quot;en&quot;&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">    &lt;meta charset=&quot;UTF-8&quot;&gt;</span><br><span class="line">    &lt;title&gt;Title&lt;/title&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line"></span><br><span class="line">&lt;!-- input表单元素的类型</span><br><span class="line">text  文本类型</span><br><span class="line">password  密码类型</span><br><span class="line">button 按钮类型</span><br><span class="line">submit 提交按钮类型</span><br><span class="line">reset 重置按钮类型</span><br><span class="line">file 文件类型</span><br><span class="line">radio 单选框类型</span><br><span class="line">checkbox 复选框类型</span><br><span class="line">--&gt;</span><br><span class="line">&lt;!-- 文本类型 --&gt;</span><br><span class="line">&lt;input type=&quot;text&quot;&gt;</span><br><span class="line"></span><br><span class="line">&lt;!--密码类型--&gt;</span><br><span class="line">&lt;input type=&quot;password&quot;&gt;</span><br><span class="line"></span><br><span class="line">&lt;!-- 按钮类型 --&gt;</span><br><span class="line">&lt;input type=&quot;button&quot; value=&quot;百度一下&quot;&gt;</span><br><span class="line"></span><br><span class="line">&lt;!-- 提交按钮 --&gt;</span><br><span class="line">&lt;input type=&quot;submit&quot; value=&quot;登录&quot;&gt;</span><br><span class="line"></span><br><span class="line">&lt;!-- 重置按钮--&gt;</span><br><span class="line">&lt;input type=&quot;reset&quot;&gt;</span><br><span class="line"></span><br><span class="line">&lt;!--文件类型--&gt;</span><br><span class="line">&lt;input type=&quot;file&quot;&gt;</span><br><span class="line"></span><br><span class="line">&lt;!--多选框类型--&gt;</span><br><span class="line">&lt;label&gt;&lt;input type=&quot;checkbox&quot;&gt; 自动登录&lt;/label&gt;</span><br><span class="line">&lt;label&gt;&lt;input type=&quot;checkbox&quot;&gt; 敲代码&lt;/label&gt;</span><br><span class="line">&lt;label&gt;&lt;input type=&quot;checkbox&quot;&gt; 滑板&lt;/label&gt;</span><br><span class="line">&lt;label&gt;&lt;input type=&quot;checkbox&quot;&gt; 健身&lt;/label&gt;</span><br><span class="line"></span><br><span class="line">&lt;!--单选框--&gt;</span><br><span class="line">&lt;label&gt;&lt;input type=&quot;radio&quot; name=&quot;sex&quot;&gt; 男&lt;/label&gt;</span><br><span class="line">&lt;label&gt;&lt;input type=&quot;radio&quot; name=&quot;sex&quot;&gt; 女&lt;/label&gt;</span><br><span class="line">&lt;label&gt;&lt;input type=&quot;radio&quot; name=&quot;sex&quot;&gt; 性别不详&lt;/label&gt;</span><br><span class="line"></span><br><span class="line">&lt;input type=&quot;image&quot;&gt;</span><br><span class="line">&lt;input type=&quot;hidden&quot;&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+<p>以上为常用HTML5标签<br>在之前的HTML页面中，大家基本上都是用了Div+CSS的布局方式。而搜索引擎去抓取页面的内容的时候，它只能猜测你的某个Div内的内容是文章内容容器，或者是导航模块的容器，或者是作者介绍的容器等等。也就是说整个HTML文档结构定义不清晰，HTML5中为了解决这个问题，专门添加了：页眉、页脚、导航、文章内容等跟结构相关的结构元素标签。</p>
+<p>1.header<br>标签定义文档的页眉,通常是一些引导和导航信息，它不局限写在网页头部，也可以写在网页内容里面。通常<code>&lt;header&gt;</code>标签至少包含（但不局限于）一个标题标记<code>(&lt;h1&gt;~&lt;h6&gt;)</code>,还可以包括<code>&lt;hgroup&gt;</code>标签，还可以包括表格内容、标识、搜索表单、<code>&lt;nav&gt;</code>导航等；<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;header&gt;</span><br><span class="line">    &lt;hgroup&gt;</span><br><span class="line">        &lt;h1&gt;网站标题&lt;/h1&gt;</span><br><span class="line">        &lt;h2&gt;网站副标题&lt;/h2&gt;</span><br><span class="line">    &lt;/hgroup&gt;</span><br><span class="line">&lt;/header&gt;</span><br></pre></td></tr></table></figure></p>
+<blockquote>
+<p>2.nav<br>nav标签代表页面的一个部分,是一个可以作为页面导航的链接组，其中的导航元素链接到其他页面或者当前页面的其他部分，使html代码在语义化方面更加精确，同时对于屏幕阅读器等设备的支持也更好；<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;nav&gt;</span><br><span class="line">    &lt;ul&gt;</span><br><span class="line">        &lt;li&gt;珠峰培训首页&lt;/li&gt;</span><br><span class="line">        &lt;li&gt;node培训课程&lt;/li&gt;</span><br><span class="line">        &lt;li&gt;html5培训课程&lt;/li&gt;</span><br><span class="line">        &lt;li&gt;珠峰论坛&lt;/li&gt;</span><br><span class="line">    &lt;/ul&gt;</span><br><span class="line">&lt;/nav&gt;</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<blockquote>
+<p>3.section<br>    section标签，定义文档中的节。比如章节、页眉、页脚或文档中的其他部分。一般用于成节的内容，会在文档流中开始一个新的节。它用来表现普通的文档内容或应用区块，通常由内容及其标题组成。但section元素标签并非一个普通的容器元素，它表示一段专题性的内容，一般会带有标题。</p>
+</blockquote>
+<blockquote>
+<p> 当我们描述一件具体的事物的时候，通常鼓励使用artice来代替section;当我们使用section时，仍然可以使用h1来作为标题，而不用担心它所处的位置，以及其它地方是否用到;当一个容器需要被直接定义样式或通过脚本定义行为时，推荐使用div元素而非section;<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;section&gt;</span><br><span class="line">    &lt;h1&gt;section是什么？&lt;/h1&gt;</span><br><span class="line">    &lt;p&gt;是一个独立的章节&lt;/p&gt;</span><br><span class="line">    &lt;article&gt;</span><br><span class="line">       &lt;h2&gt;关于section&lt;/h1&gt;</span><br><span class="line">        &lt;p&gt;section的介绍&lt;/p&gt;</span><br><span class="line">    &lt;/article&gt;</span><br><span class="line"> &lt;/section&gt;</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<blockquote>
+<p>4.article<br>article是一个特殊的section标签，它比section具有更明确的语义，它代表一个独立的，完整的相关内容块，可独立于页面其他内容使用。例如一篇完整的论坛帖子，一篇博客文章，一个用户评论等等。一般来说，article会有标题部分(通常包含在header内),有时也会包含footer。article可以嵌套，内层的article对外层的article标签有隶属关系。例如，一篇博客文章，可以用article显示，然后一些评论可以以article的形式嵌入其中;<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&lt;article&gt;</span><br><span class="line">    &lt;header&gt;</span><br><span class="line">        &lt;hgroup&gt;</span><br><span class="line">            &lt;h1&gt;这是一篇介绍HTML 5结构标签的文章&lt;/h1&gt;</span><br><span class="line">            &lt;h2&gt;HTML 5的革新&lt;/h2&gt;</span><br><span class="line">       &lt;/hgroup&gt;</span><br><span class="line">       &lt;time datetime=&quot;2016-11-18&quot;&gt;2016.11.18&lt;/time&gt;</span><br><span class="line">  &lt;/header&gt;</span><br><span class="line">  &lt;p&gt;文章内容详情&lt;/p&gt;</span><br><span class="line"> &lt;/article&gt;</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<blockquote>
+<p>5.aside<br>aside标签用来装载非正文的内容，被视为页面里面一个单独的部分。它包含的内容与页面的主要内容是分开的，可以被删除，而不会影响网页的内容、章节或是页面所要传达的信息。例如广告，成组的链接，侧边栏等等。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;aside&gt;</span><br><span class="line">     &lt;h1&gt;简介&lt;/h1&gt;</span><br><span class="line">     &lt;p&gt;我是简介内容，嘿嘿&lt;/p&gt;</span><br><span class="line"> &lt;/aside&gt;</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<blockquote>
+<p>6.footer<br>footer标签定义section或document的页脚，包含了与页面、文章或是内容有关的信息，比如说文章的作者或者日期。作为页面的页脚时，一般包含了版权、相关文件和链接。它和header标签使用基本一样，可以在一个页面中多次使用，如果在一个区段的后面加入footer,那么它就相当于该区段的页脚了。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;footer&gt;</span><br><span class="line">   &lt;span&gt;copyRight@珠峰培训&lt;/span&gt;</span><br><span class="line">&lt;/footer&gt;</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<blockquote>
+<p>7.hgroup<br>hgroup标签是对网页或区段section的标题元素(h1~h6)进行组合。例如,在一区段中你有连续的h系列的标签元素，则可以用hgroup将他们括起来。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;hgroup&gt;</span><br><span class="line">    &lt;h1&gt;主标题&lt;/h1&gt;</span><br><span class="line">    &lt;h2&gt;副标题&lt;/h2&gt;</span><br><span class="line">&lt;/hgroup&gt;</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<blockquote>
+<p>8.figure<br>用作文档中插图的图像，带有一个标题<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;figure&gt;</span><br><span class="line">      &lt;figcaption&gt;标题&lt;/figcaption&gt;</span><br><span class="line">      &lt;img src=&quot;img.jpg&quot; alt=&quot;figure标签&quot; title=&quot;figure标签&quot; /&gt;</span><br><span class="line"> &lt;/figure&gt;</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<blockquote>
+<p>9.figcaption<br>标签定义figure元素的标题(caption)。”figcaption”元素应该被置于”figure”元素的第一个或最后一个子元素的位置。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;figure&gt;</span><br><span class="line">      &lt;img src=&quot;img.jpg&quot; alt=&quot;figure标签&quot; title=&quot;figure标签&quot; /&gt;</span><br><span class="line">      &lt;figcaption&gt;标题&lt;/figcaption&gt;</span><br><span class="line"> &lt;/figure&gt;</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<blockquote>
+<p>10.datalist<br>datalist标签定义选型列表。请与input元素配合使用该元素，来定义input可能的值。datalist及其选项不会被显示出来，它仅仅是合法的输入值列表。请使用input元素的list属性来 绑定datalist。所有主流浏览器都支持此标签，除了Internet Explorer和Safari。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;input id=&quot;myCar&quot; list=&quot;cars&quot; /&gt;</span><br><span class="line">&lt;datalist id=&quot;cars&quot;&gt;</span><br><span class="line">  &lt;option value=&quot;BMW&quot;&gt;</span><br><span class="line">  &lt;option value=&quot;Ford&quot;&gt;</span><br><span class="line">  &lt;option value=&quot;Volvo&quot;&gt;</span><br><span class="line">&lt;/datalist&gt;</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<blockquote>
+<p>11.audio<br>定义声音，比如音乐或其它音频流：其相关的属性<br>autoplay 如果出现该属性，则音频在就绪后马上播放;<br>controls 如果出现该属性，则向用户显示控件，比如播放按钮;<br>loop 如果出现该属性，则每当音频结束时重新开始播放；<br>muted 规定视频输出应该被静音；<br>preload 如果出现该属性，则音频在页面加载时进行加载，并预备播放,如果出现”autoplay”则忽略该属性；<br>src 要播放的音频的url<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">&lt;audio id=&quot;audio&quot; preload=&quot;auto&quot; autoplay=&quot;autoplay&quot; loop=&quot;loop&quot; src=&quot;http://song4u.u.qiniudn.com/blog/audio/gt.mp3&quot;&gt;</span><br><span class="line">&lt;/audio&gt;</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<blockquote>
+<p>12.video<br>定义视频，比如电影片段或其它视频流：其相关的属性<br>autoplay 如果出现该属性，则视频在就绪后马上播放;<br>controls 如果出现该属性，则向用户显示控件，比如播放按钮;<br>height 设置视频播放器的高度;<br>loop 如果出现该属性，则当媒介文件完成播放后再次开始播放；<br>preload 如果出现该属性，则视频在页面加载时进行加载，并预备播放,如果出现”autoplay”则忽略该属性；<br>src 要播放的音频的url；<br>width 设置视频播放器的宽度；<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;video width=&quot;320&quot; height=&quot;240&quot; controls&gt;</span><br><span class="line">    &lt;source src=&quot;movie.mp4&quot; type=&quot;video/mp4&quot;&gt;</span><br><span class="line">    &lt;source src=&quot;movie.ogg&quot; type=&quot;video/ogg&quot;&gt;</span><br><span class="line"></span><br><span class="line">    您的浏览器不支持 video 标签。</span><br><span class="line">&lt;/video&gt;</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<p>13.canvas<br>canvas标签定义图形，比如图表和其他图像，canvas标签只是图形容器，您必须使用脚本来绘制图形;<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;canvas id=&quot;myCanvas&quot;&gt;&lt;/canvas&gt;</span><br><span class="line">&lt;script type=&quot;text/javascript&quot;&gt;</span><br><span class="line"></span><br><span class="line">var canvas=document.getElementById(&apos;myCanvas&apos;);</span><br><span class="line">var ctx=canvas.getContext(&apos;2d&apos;);</span><br><span class="line">ctx.fillStyle=&apos;#FF0000&apos;;</span><br><span class="line">ctx.fillRect(0,0,80,100);</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure></p>
+<p>总结：<br>1、新增加一些构建页面语义化的结构标签 ，对原有 标签进行了修改<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">header、nav、section、footer、article、aside、figure、figcaption、hgroup…</span><br><span class="line">(在IE6~8浏览器中不识别这些新增加的标签,导致布局结构混乱)在页面中引入</span><br></pre></td></tr></table></figure></p>
+<p>&lt;!–[if lt IE 9]&gt;</p>
+<p>&lt;![endif]–&gt;<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">2、给我们的INPUT表单元素增加了很多新的类型(不兼容)</span><br><span class="line">```javascript</span><br><span class="line">原有:text、password、radio、checkbox、button、submit、reset、file…</span><br><span class="line">新增:search、url、email、tel、number、date、time、color、range…</span><br><span class="line">作用:</span><br><span class="line">1)根据TYPE的类型不一样,会调取出最符合用户输入的物理键盘;</span><br><span class="line">2)传统的表单验证:当某个行为触发的时候,我们获取用户输入的内容和自己编写的正则进行验证从而判断用户输入的是否符合规则;</span><br><span class="line">3) HTML5中提供了CSS3/JS的新验证方式,不需要自己写正则,浏览器自己就已经实现了验证,我们只需要控制成功/不成功的样式或者其他操作即可</span><br></pre></td></tr></table></figure></p>
+<p>3、新增加了音视频处理AUDIO、VIDEO</p>
+<p>4、新增加CANVAS绘图<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">http:<span class="comment">//www.hcharts.cn/(Highcharts)</span></span><br><span class="line">http:<span class="comment">//echarts.baidu.com/(echarts)</span></span><br><span class="line">D3.js</span><br></pre></td></tr></table></figure></p>
+<p>5、新增加一些新的有助于开发的API:<br>本地存储localStorage/sessionStorge、<br>地理位置navigator.geolocation.getCurrentPosition、调取手机内部的GPS定位系统获取当前手机所在地的经纬度以及精准度<br>还提供了一些API，让我们可以通过浏览器调取手机内部的软件或者硬件（但是性能都不咋高，而且兼容性不是特别好）<br>websocket：socket.io、客户端和服务端新的传输方式（及时通讯IM系统基本上都是基于它完成的）<br>webworks…离线缓存</p>
+<h4 id="CSS3"><a href="#CSS3" class="headerlink" title="CSS3"></a>CSS3</h4><p>ID<br>target</p>
+<blockquote>
+<p>A  .B{}   后代<br>A.B{}    子代<br>A&gt;B{}   具备A也具备B<br>A+B{}   下一个弟弟<br>A~B{}   兄弟<br><code>:nth-chld</code>某个元素下任意类型的子元素<br><code>:nth-of-type</code>某个元素下的同一类型中的第几个子元素<br><code>否定选择器</code><br><code>:not()</code><br><code>属性选择器</code><br>E[attr=val]<br>E[attr|=val]只能等于var或只能以val-开头<br>E[attr*=val]包含val字符串<br>E[attr~=val]属性值有多个，其中有一个时val<br>E[attr^=val]以val开头<br>E[attr$=val]以val结尾<br><code>目标伪类选择器</code><br><code>:target</code>用来匹配url指向的目标元素<br>存在url指向该匹配元素时样式效果才会生效<br>伪元素<br>:first-line匹配第一行文本<br>;first-letter匹配第一首字符<br>:before和after DOM元素前后插入额外的内容<br><code>圆角</code><br><code>border-radius</code>:左上 右上 右下 左下；<br><code>渐变</code><br><code>linear-gradient</code>([&lt;起点&gt;||&lt;角度&gt;,]?&lt;点&gt;,&lt;点&gt;…)<br>只能用在背景上<br>颜色是沿着一条直线轴变化<br>参数<br>-起点：从什么方向开始渐变》left、top、left top<br>-角度：从什么角度开始渐变》xxx deg的形式<br>-点：渐变点的颜色和位置》red50%,位置可选<br>重复现行渐变</p>
+</blockquote>
+<p><code>径向渐变</code><br><code>radial-gradient</code>([[<shape>||<size>][at <position>]?,|at<position>,]?<color-stop>[,<color-stop>]+);<br>从“一个点”向多方向颜色渐变<br>shape形状：ellipse、circle或设置水平半径，垂直半径<br>size：渐变的大小，即渐变到哪里停止，有如关键词：<br>closest-side：最近边；farthest-side:最远边；<br>closest-corner:最近角；farthest-corner：最远角（默认值）<br>position;关键词|数值|变化<br>重复的径向渐变</color-stop></color-stop></position></position></size></shape></p>
+<hr>
+<p><code>背景</code><br>background -color/-image/-position/-repeat/-attachment<br><code>background-origin</code><br>padding-box从padding区域显示<br>border-box从border区域显示<br>contert-box从content区域显示<br><code>background-clip</code><br>padding-box从padding区域向外裁剪<br>border-box从border区域往外裁剪<br>content-box从content区域往外裁剪<br><code>text文本裁剪</code><br><code>background-size</code><br>100px 100px:宽高具体值<br>100% 100%宽高百分比<br>cover以合适的比例图片进行缩放不会变形，用来铺满整个容器<br>contain原始比例收缩，显示完整但不一定铺满（一边碰到容器的边缘，则停止覆盖，导致部分区域是没有背景图的）<br>cover按原始比例收缩，可能显示不完整但铺满整个容器<br><code>background-attachment</code><br>背景图片是滚动的还是固定的fixed(固定的)默认是滚动的<br><code>box-shadow</code>:h水平方向偏移，v垂直方向偏移，blur模糊半径，spread扩展半径，color颜色，inset奖赏这个表示内阴影默认是外阴影。<br><code>text-shadow</code>:x y blur color<br>x轴偏移 y轴偏移 模糊度 颜色<br>多层阴影制作的文字立体效果设置多种颜色中间以逗号隔开<br><code>text-stroke</code>：2px blue<br>通过设定1px的透明边框，可以让文字变得平滑<br>颜色设定透明能创建镂空字体<br>mask-image遮罩<br>mask-position<br>mask-repeat<br>transform2D变换<br>box-sizing:border-box/padding-box/content-box(默认值)改变的就是我们在css中设置的width、height到底代表啥，border-box让其代表整个盒子的宽高当我们去修改padding或者border盒子大小不变只会让内容缩放<br>columns:多列布局<br>flex：弹性盒子模型，布局<br>perspective：视距 实现3D必用属性<br>@media：媒体查询 实现响应式布局的一种方案<br>@font-face：导入字体图标<br>transition<br>animation</p>
+<hr>
+<h3 id="CSS样式表"><a href="#CSS样式表" class="headerlink" title="CSS样式表"></a>CSS样式表</h3><table>
+<thead>
+<tr>
+<th>元素</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>style</td>
+<td>写样式</td>
+</tr>
+<tr>
+<td>link</td>
+<td>引入标签</td>
+</tr>
+<tr>
+<td>list-style：none</td>
+<td>去除ul，ol，dl默认样式</td>
+</tr>
+<tr>
+<td>text-decoration: none;</td>
+<td>去除a的下划线</td>
+</tr>
+<tr>
+<td>font-weight: normal;</td>
+<td>去除字体加粗，斜体</td>
+</tr>
+<tr>
+<td>color: #ccc;</td>
+<td>字体颜色</td>
+</tr>
+<tr>
+<td>background-color:#faa770;</td>
+<td>背景颜色</td>
+</tr>
+<tr>
+<td>width: 100px;</td>
+<td>盒子宽度</td>
+</tr>
+<tr>
+<td>height :100px;</td>
+<td>盒子高度</td>
+</tr>
+<tr>
+<td>border-radius: 20px;</td>
+<td>盒子圆角</td>
+</tr>
+<tr>
+<td>line-height:100px;</td>
+<td>文本行高</td>
+</tr>
+<tr>
+<td>font-size : 16px ;</td>
+<td>字体大小</td>
+</tr>
+<tr>
+<td>font-weight: bold;</td>
+<td>字体加粗</td>
+</tr>
+<tr>
+<td>font-style: italic;</td>
+<td>字体倾斜</td>
+</tr>
+<tr>
+<td>letter-spacing: 10px;</td>
+<td>字体间距</td>
+</tr>
+<tr>
+<td>text-indent: 2em;</td>
+<td>段落首行缩进</td>
+</tr>
+<tr>
+<td>cursor:pointer</td>
+<td>鼠标经过加小手</td>
+</tr>
+<tr>
+<td>z-index:1;</td>
+<td>改变重叠盒子层级关系</td>
+</tr>
+<tr>
+<td>border-top:1px solid red;</td>
+<td>上边框</td>
+</tr>
+<tr>
+<td>border-right:1px solid red;</td>
+<td>右边框</td>
+</tr>
+<tr>
+<td>border-bottom:1px solid red;</td>
+<td>下边框</td>
+</tr>
+<tr>
+<td>border-left:1px solid red;</td>
+<td>左边框</td>
+</tr>
+<tr>
+<td>border-width:10px;</td>
+<td>边框的宽度</td>
+</tr>
+<tr>
+<td>border-color:red;</td>
+<td>边框的颜色</td>
+</tr>
+<tr>
+<td>border-style:solid(实线);dashed（虚线）；</td>
+<td>边框的样式</td>
+</tr>
+<tr>
+<td>border:10px solid #fff;</td>
+<td>边框宽度 样式 颜色缩写</td>
+</tr>
+<tr>
+<td>padding:1px 2px 3px 4px;</td>
+<td>盒子内边距 上 右  下 左</td>
+</tr>
+<tr>
+<td>margin:1px 2px 3px 4px;</td>
+<td>盒子外边距 上 右  下 左</td>
+</tr>
+<tr>
+<td>position: relative;</td>
+<td>相对定位</td>
+</tr>
+<tr>
+<td>position：absolute；</td>
+<td>绝对定位</td>
+</tr>
+<tr>
+<td>position: fixed;</td>
+<td>固定定位</td>
+</tr>
+<tr>
+<td>float：left</td>
+<td>左浮动</td>
+</tr>
+<tr>
+<td>float：right</td>
+<td>右浮动</td>
+</tr>
+<tr>
+<td>display：block</td>
+<td>转为块元素</td>
+</tr>
+<tr>
+<td>display：inline</td>
+<td>转为行内元素</td>
+</tr>
+<tr>
+<td>display:inline-block</td>
+<td>转为行内块元素</td>
+</tr>
+<tr>
+<td>display：none</td>
+<td>让元素隐藏</td>
+</tr>
+<tr>
+<td>overflow: hidden;</td>
+<td>溢出盒子高度隐藏</td>
+</tr>
+<tr>
+<td>overflow: scroll;</td>
+<td>不管内容是否超出，都会出现滚动条</td>
+</tr>
+<tr>
+<td>overflow: auto;</td>
+<td>系统判断超出则出现滚动条不超出则不出现</td>
+</tr>
+<tr>
+<td>white-space: nowrap;</td>
+<td>让文本强制换行</td>
+</tr>
+<tr>
+<td>text-overflow:ellipsis;</td>
+<td>让超出的文本以三个小点的方式出现</td>
+</tr>
+<tr>
+<td>hover</td>
+<td>鼠标经过时的状态</td>
+</tr>
+<tr>
+<td>active</td>
+<td>鼠标点击时的状态</td>
+</tr>
+<tr>
+<td>visited</td>
+<td>鼠标点击后的状态</td>
+</tr>
+<tr>
+<td>text-align:  right ; left ；</td>
+<td>文字水平居右，左</td>
+</tr>
+<tr>
+<td>text-align: center;</td>
+<td>文字水平居中</td>
+</tr>
+<tr>
+<td>line-height: 50px;</td>
+<td>文本垂直居中</td>
+</tr>
+<tr>
+<td>vertical-align：top</td>
+<td>平级元素顶部对齐</td>
+</tr>
+<tr>
+<td>vertical-align：middle；</td>
+<td>平级元素中部对齐</td>
+</tr>
+<tr>
+<td>vertical-align：bottom;</td>
+<td>平级元素底部对齐</td>
+</tr>
+<tr>
+<td>margin:0 auto;</td>
+<td>盒子，版心，位置居中</td>
+</tr>
+<tr>
+<td>box-shadow: .02rem .02rem .02rem .02rem rgba(178,178,178,.75),-.02rem .02rem .02rem .02rem rgba(178,178,178,.75);</td>
+<td>盒子阴影</td>
+</tr>
+<tr>
+<td>text-shadow： .02rem .02rem .02rem .02rem rgba(178,178,178,.75);</td>
+<td>文字阴影</td>
+</tr>
+<tr>
+<td>link rel=”icon” href=”img/favicon.ico” type=”image/x-icon</td>
+<td>引入图标(页面标题的前面–页卡)</td>
+</tr>
+<tr>
+<td>给body或者父级元素设置font-size:0;</td>
+<td>清除间隙问题</td>
+</tr>
+<tr>
+<td>opacity:0.5;</td>
+<td>设置透明度</td>
+</tr>
+<tr>
+<td>filter:alpha(opacity=50)</td>
+<td>设置透明度 兼容ie低版本8以下浏览器</td>
+</tr>
+<tr>
+<td>background: url(“图片路径”) no-repeat（不平铺）;</td>
+<td>背景图片</td>
+</tr>
+<tr>
+<td>background-position: center center；</td>
+<td>改变背景图片的位置、水平垂直居中</td>
+</tr>
+<tr>
+<td>background-size:100% 100%;</td>
+<td>改变背景图片的大小</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>background: red url(“pic_02.png”) no-repeat center center;—–这种写法格式是在项目中最常用</strong><br> <strong>background:背景颜色  背景图片的路径  背景图片是否平铺   改变背景图片的位置</strong>&gt;</p>
+</blockquote>
+<blockquote>
+<p><strong>实现隔行变色</strong>&lt;<br>-<strong>单独获取容器中的某一个子元素</strong> ——|||||||||||——  <strong>EVEN : 偶数 \ ODD : 奇数</strong>-<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">* nth-child(n):当前容器所有子元素中的第N个</span><br><span class="line">    *    .box li:nth-child(1)：BOX容器所有子元素中的第一个并且标签名是LI的</span><br><span class="line">* nth-of-type(n):先给当前容器按照某一个标签名进行分组,获取分组中的第N个</span><br><span class="line">    *    .box li:nth-of-type(1)：先获取BOX中所有的LI，在获取LI中的第一个</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<p><strong>实心小三角</strong><br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;style&gt;</span><br><span class="line">        div&#123;</span><br><span class="line">            border-color:  transparent（边框透明）  transparent   transparent   #0d0d0d ;</span><br><span class="line">            border-style: solid;</span><br><span class="line">            border-width: <span class="number">40</span>px;  &#125;</span><br><span class="line">    &lt;<span class="regexp">/style&gt;</span></span><br><span class="line"><span class="regexp">    &lt;div&gt;&lt;/</span>div&gt;</span><br></pre></td></tr></table></figure></p>
+<table>
+<thead>
+<tr>
+<th>色值</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>英文单词</td>
+<td>red,yellow,green,blue—工作中不用，在低版本浏览器下不兼容</td>
+</tr>
+<tr>
+<td>16进制</td>
+<td>#ff0000 #666767   简写：#f00  #fff(白色)/#000(黑色) —常用</td>
+</tr>
+<tr>
+<td>rgb</td>
+<td>red红,green绿,blue蓝</td>
+</tr>
+<tr>
+<td>rgba</td>
+<td>red红,green绿,blue蓝,a透明度(值：0-1)—常用</td>
+</tr>
+<tr>
+<td>颜色值在工作中最常用的是</td>
+<td>16进制、rgba，</td>
+</tr>
+<tr>
+<td>白色rgb(255,255,255)</td>
+</tr>
+<tr>
+<td>黑色rgb(0,0,0)</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<table>
+<thead>
+<tr>
+<th>标签</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>header</td>
+<td>头部</td>
+</tr>
+<tr>
+<td>footer</td>
+<td>尾部</td>
+</tr>
+<tr>
+<td>nav</td>
+<td>导航</td>
+</tr>
+<tr>
+<td>section</td>
+<td>区分大模块</td>
+</tr>
+<tr>
+<td>aside</td>
+<td>侧边栏</td>
+</tr>
+<tr>
+<td>article</td>
+<td>文章</td>
+</tr>
+<tr>
+<td>figure</td>
+<td>配图</td>
+</tr>
+<tr>
+<td>figcaption</td>
+<td>配图说明</td>
+</tr>
+<tr>
+<td>video</td>
+<td>视频</td>
+</tr>
+<tr>
+<td>audio</td>
+<td>音频</td>
+<td>&lt;</td>
+</tr>
+<tr>
+<td>main</td>
+<td>主体</td>
+</tr>
+<tr>
+<td>video 视频</td>
+<td>audio音频</td>
+</tr>
+<tr>
+<td>–</td>
+<td>–</td>
+</tr>
+<tr>
+<td>src=”” 视频路径</td>
+<td>autoplay 自动播放</td>
+</tr>
+<tr>
+<td>controls 是否显示控件</td>
+<td>loop 循环播放</td>
+<td>&lt;</td>
+</tr>
+<tr>
+<td>–</td>
+<td>–</td>
+</tr>
+<tr>
+<td>表单</td>
+<td>功能</td>
+</tr>
+<tr>
+<td>–</td>
+<td>–</td>
+</tr>
+<tr>
+<td>input type=”number”</td>
+<td>数字</td>
+</tr>
+<tr>
+<td>input type=”email”</td>
+<td>邮箱</td>
+</tr>
+<tr>
+<td>input type=”file”</td>
+<td>上传文件</td>
+</tr>
+<tr>
+<td>input type=”search”</td>
+<td>搜索框</td>
+<td>&lt;</td>
+</tr>
+</tbody>
+</table>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>REM布局</th>
+<th>最终版</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>参照iphone5/5s</td>
+<td>设计稿尺寸640 分辨率320*2  dpr:2.0</td>
+</tr>
+<tr>
+<td>参照iphone5/5s</td>
+<td>分辨率320*2 html{ font-size:50px;}</td>
+</tr>
+<tr>
+<td>参照iphone6/6s</td>
+<td>分辨375*2 html{font-size:58.59375px;}</td>
+</tr>
+<tr>
+<td>参照iphone6Plus</td>
+<td>分辨率：414*3 html{font-size:64.6875px;}</td>
+</tr>
+<tr>
+<td>分辨率：640</td>
+<td>html{font-size:100px;}</td>
+</tr>
+<tr>
+<td>–</td>
+<td>–</td>
+</tr>
+<tr>
+<td>照iphone6/6s</td>
+<td>设计稿尺寸750 分辨率375*2 dpr:2.0</td>
+</tr>
+<tr>
+<td>–</td>
+<td>–</td>
+</tr>
+<tr>
+<td>参照物iphone6/6s</td>
+<td>分辨率：375*2  html{font-size:50px;}</td>
+</tr>
+<tr>
+<td>iphone5/5s</td>
+<td>分辨率：320*2 dpr:2.0 html{font-size:42.66px;}</td>
+</tr>
+<tr>
+<td>iphone6Plus</td>
+<td>分辨率：414*3  dpr:3.0 html{font-size:55.2px;}</td>
+</tr>
+<tr>
+<td></td>
+<td>分辨率：640    html{font-size:85.33px;}</td>
+</tr>
+<tr>
+<td>–</td>
+<td>–</td>
+</tr>
+<tr>
+<td>–</td>
+<td>–</td>
+</tr>
+</tbody>
+</table>
+<p><strong>transform—2D转换</strong><br>| 属性值 | 描述 |<br>|–|–|<br>|translate() 平移 |元素从其当前位置移动，根据给定的 left（x 坐标） 和 top（y 坐标） 位置参数|<br>|rotate() 旋转 |    元素顺时针旋转给定的角度（角度单位：deg）。允许负值，元素将逆时针旋转|<br>|scale() 放大或缩小|    元素的尺寸会增加或减少，根据给定的宽度（X 轴）和高度（Y 轴）参数|<br>|skew() 倾斜、翻转|    元素翻转给定的角度，根据给定的水平线（X 轴）和垂直线（Y 轴）参数|</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/22/JQuery解读/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="tiandali">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="tiandali">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/05/22/JQuery解读/" itemprop="url">JQuery解读</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-05-22T01:09:00+08:00">
+                2018-05-22
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="jQuery"><a href="#jQuery" class="headerlink" title="jQuery"></a>jQuery</h2><blockquote>
+<ul>
+<li>“类库”：提供一些真实项目中的常用方法；任何项目都可以把类库导入进来调取里面的方法实现自己需要的业务逻辑。<br>zepto:移动端的类库</li>
+</ul>
+</blockquote>
+<blockquote>
+<ul>
+<li>插件;具备一定的业务功能，例如我们可以封装轮播图插件、选项卡插件、模态框插件等（插件规定了当前这个功能的样式结构把实现功能的js进行封装，以后想实现这个功能直接导入插件即可）swiper/iscroll/jquery-dialog/jquery-drag/jquery-datepicker/ECharts…</li>
+</ul>
+</blockquote>
+<blockquote>
+<ul>
+<li>UI组件:把结构css/js全都封装好了想要实现一个功能直接导入进来即可bootstrap…</li>
+</ul>
+</blockquote>
+<blockquote>
+<ul>
+<li>框架：具备一定的编程思想要求我们按照框架的思想开发，一般框架中提供了常用的类库方法提供了强大的功能插件有的也提供了强大的UI组件…React (React native)/VUE/Angular/Backbone/Sea.js/Require.js…</li>
+</ul>
+</blockquote>
+<p>jQuery是基于js封装的一个类库提供了很多方法而且这些方法是兼容所有浏览器的<br>jQ版本：v1（常用 1.8.3/1.9.3/1.11.3）v2（移动端,但不如zepto) v3()<br>jq选择器：基于各种选择器创建一个jq实例（jq对象）：$()<br>两个参数：<br><code>selector</code>：选择器的类型一般都是字符串但是支持函数或者元素对象。<br><code>context</code>：基于选择器获取元素时候指定的上下文默认是document。<br>jq对象：一个类数组结构（jq实例）这个类数组集合当中包含了获取到的元素。</p>
+<h3 id="JQ的核心原理解读（分析原代码）"><a href="#JQ的核心原理解读（分析原代码）" class="headerlink" title="JQ的核心原理解读（分析原代码）"></a>JQ的核心原理解读（分析原代码）</h3><blockquote>
+<p>JQ是一个常用方法类库（常用的DOM库），提供了很多真实项目开发中需要使用的属性和方法（这些方法JQ已经帮我们完善了浏览器兼容处理以及一些细节的优化）</p>
+</blockquote>
+<p><code>jQuery本身是一个类
+JQ是基于构造函数模式构建的类库</code></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> jQuery=<span class="function"><span class="keyword">function</span>(<span class="params">selector,context</span>)</span>&#123;</span><br><span class="line">	<span class="keyword">return</span> <span class="keyword">new</span> jQuery.fn.init(selector, context);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">jQuery.fn=jQuery.prototype=&#123;</span><br><span class="line">	jquery:version,</span><br><span class="line">	<span class="keyword">constructor</span>:jQuery,</span><br><span class="line">	...</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">...</span><br><span class="line"></span><br><span class="line">init=jQuery.fn.init=function(selector, context)&#123;</span><br><span class="line">	<span class="keyword">if</span>(<span class="keyword">typeof</span> selector==<span class="string">"string"</span>)&#123;</span><br><span class="line">		...</span><br><span class="line">	&#125;<span class="keyword">else</span> <span class="keyword">if</span>(selector.nodeType)&#123;</span><br><span class="line">		...</span><br><span class="line">	&#125;<span class="keyword">else</span> <span class="keyword">if</span>(jQuery.isFunction(selector))&#123;</span><br><span class="line">		...</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> jQuery.makeArray(selector,<span class="keyword">this</span> );<span class="comment">//=&gt;返回的是一个类数组</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">init.prototype=jQuery.fn;</span><br><span class="line"></span><br><span class="line">...</span><br><span class="line"></span><br><span class="line"><span class="built_in">window</span>.jQuery=<span class="built_in">window</span>.$=jQuery;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>当我们在JS中执行：<br>\$()<br>jQuery()</p>
+<p>都是在创建一个JQ类的实例（$===jQuery），这些实例都是一个类数组（我们把这个类数组称之为JQ对象），JQ的实例可以使用JQ原型上提供的公有的属性和方法</p>
+<p>项目中我们把\$()称之为JQ的选择器，因为执行这个方法可以传递一个selector参数进去，通过selector我们可以获取到需要操作的DOM元素集合（JQ类数组集合）；传递的第二个参数context它是当前获取元素的上下文（不传递默认是document，如果传递，我们传递一个JS元素对象即可）</p>
+<p>但是把它叫做JQ选择器有点笼统，因为传递的selector支持三种格式：<br>传递的是个字符串，就是我们所谓的选择器，能够通过选择器获取到元素<br>传递的是个元素对象，它的意思是把JS原生对象转换为JQ对象<br>传递的是个函数，它代表等DOM结构加载完成在执行对应的JS代码（类似于window.onload）</p>
+<p>…</p>
+</blockquote>
+<p><code>JQ的选择器</code><br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">$===jQuery  <span class="comment">//=&gt;true</span></span><br><span class="line">$()===jQuery() <span class="comment">//=&gt;false 不同实例</span></span><br><span class="line">$() <span class="keyword">instanceof</span> jQuery <span class="comment">//=&gt;true</span></span><br><span class="line"><span class="keyword">var</span> $example=$(); <span class="comment">//=&gt;我们用JQ选择器获取的值，一般都是用以$开头的变量名来存储（以后看见变量名是以$开头的，我们就知道是JQ获取的实例[JQ对象]）</span></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">$example</span></span><br><span class="line"><span class="comment">[xxx:xxx  私有的属性]</span></span><br><span class="line"><span class="comment">0:某一个元素对象</span></span><br><span class="line"><span class="comment">...</span></span><br><span class="line"><span class="comment">length:类数组的长度</span></span><br><span class="line"><span class="comment">context:document</span></span><br><span class="line"><span class="comment">selector:'传递的选择器内容'</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">__protot__：jQuery.prototype</span></span><br><span class="line"><span class="comment">   [xxx:xxx 公有的属性和方法]</span></span><br><span class="line"><span class="comment">   add</span></span><br><span class="line"><span class="comment">   addClass</span></span><br><span class="line"><span class="comment">   ...</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment"> __proto__:Object.prototype</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure></p>
+<blockquote>
+<p>第一个参数[selector]传递的是一个字符串，就是通过选择器获取需要的元素集合（获取的结果怎么着都是类数组集合：获取多个元素也就是索引多点，获取一个元素也就是只有索引0，一个都没获取到就是一个空的类数组集合[而不是null]）</p>
+<p>一般CSS或者CSS3中支持的选择器，JQ都支持<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//=&gt;基本选择器</span></span><br><span class="line">$(<span class="string">'#xxx'</span>)</span><br><span class="line">$(<span class="string">'.xxx'</span>)</span><br><span class="line">$(<span class="string">'xxx'</span>)</span><br><span class="line">$(<span class="string">'*'</span>)</span><br><span class="line">$(<span class="string">'.xxx,#xxx'</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">//=&gt;后代选择器</span></span><br><span class="line">$(<span class="string">'.box a'</span>)</span><br><span class="line">$(<span class="string">'.box&gt;a'</span>)</span><br><span class="line"><span class="comment">//$('.box~a')</span></span><br><span class="line"><span class="comment">//$('.box+a') 不常用</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//=&gt;伪类选择器</span></span><br><span class="line">$(<span class="string">'.box:contains(xxx)'</span>) 包含某某某内容的</span><br><span class="line">$(<span class="string">'a:first'</span>)</span><br><span class="line">$(<span class="string">'a:last'</span>)</span><br><span class="line">$(<span class="string">'a:eq(1)'</span>) 索引为<span class="number">1</span>的</span><br><span class="line">$(<span class="string">'a:gt(1)'</span>) 索引大于<span class="number">1</span>的</span><br><span class="line">$(<span class="string">'a:lt(10)'</span>) 索引小于<span class="number">10</span>的</span><br><span class="line">$(<span class="string">'a:not()'</span>) 不包含什么的</span><br><span class="line">$(<span class="string">'a:not(:gt(5))'</span>) 获取所有的a，但是不包含索引大于<span class="number">5</span>的（前六个）</span><br><span class="line">...</span><br><span class="line"></span><br><span class="line"><span class="comment">//=&gt;属性选择器</span></span><br><span class="line">...</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<h4 id="JQ对象和原生JS对象转换"><a href="#JQ对象和原生JS对象转换" class="headerlink" title="JQ对象和原生JS对象转换"></a><code>JQ对象和原生JS对象转换</code></h4><blockquote>
+<p>JQ对象：通过$()获取的JQ实例(类数组)<br>原生JS对象：通过ES中提供的属性或者方法获取的JS元素对象(nodeType===1)</p>
+<p>把JQ对象转换为原生JS对象<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> oBox=<span class="built_in">document</span>.getElementById(<span class="string">'box'</span>);<span class="comment">//=&gt;原生JS对象</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//oBox.addClass();//=&gt;报错：oBox不是JQ对象，不能使用JQ原型上的方法</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> $box=$(oBox); <span class="comment">//=&gt;把原生JS对象转换为JQ对象</span></span><br><span class="line">$box.addClass(<span class="string">'bg'</span>);</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<blockquote>
+<p>把JQ对象转换为原生JS对象<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> $body=$(<span class="string">'body'</span>);</span><br><span class="line"><span class="comment">//$body.className //=&gt;undefined，因为className是JS原生内置的属性，JQ对象不能直接的用</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//$body[索引]：在集合中获取指定索引的内容（获取的内容就是原生JS对象）</span></span><br><span class="line"><span class="comment">//$body.get(索引)：等价于 $body[索引]，获取指定索引位置的元素（原生JS对象）</span></span><br><span class="line"><span class="comment">//$body.eq(索引)：获取指定索引位置的元素对象（获取的结果还是一个新的JQ对象）</span></span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<h4 id="selector是一个方法"><a href="#selector是一个方法" class="headerlink" title="selector是一个方法"></a><code>selector是一个方法</code></h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">	<span class="comment">//=&gt;当页面中的DOM结构加载完成，就会执行回调函数中的JS代码</span></span><br><span class="line">	<span class="comment">//=&gt;类似于window.onload：等到页面中的DOM结构以及资源文件都加载完成才会执行对应的JS代码</span></span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">$(<span class="built_in">document</span>).ready(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">	<span class="comment">//=&gt;这种写法和上面的写法一模一样</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>和window.onload不太一样<br>1、$(function(){}) 可一在同一个页面中使用多次，多次都生效（所以在使用JQ完成代码的时候，我们一般都会把代码放在回调函数中：首先不仅是等到结构加载完在执行，而且还形成了一个闭包）<br>原理：利用了DOM二级事件绑定(可以执行多次)，监听的是DOMContentLoaded事件(DOM结构加载完成就会触发执行)</p>
+<p>2、window.onload本身就是资源都加载完成才会执行，使用的是DOM零级事件绑定，在同一个页面中只能使用一次<br>window.onload=function()…<br>window.onload=function()…<br>只能留最后一个，最后一次赋值替换了原有赋值</p>
+</blockquote>
+<h3 id="JQ即是一个类也是一个对象"><a href="#JQ即是一个类也是一个对象" class="headerlink" title="JQ即是一个类也是一个对象"></a>JQ即是一个类也是一个对象</h3><blockquote>
+<p>jQuery.prototype上设置了很多的属性和方法，这些是供JQ实例（DOM集合或者DOM元素）使用的属性和方法<br>addClass<br>css<br>removeClass<br>attr<br>…</p>
+<p>jQuery也是一个普通的对象，在对象上也有一些自己的属性和方法（和实例没有任何的关系）,这些都是工具类的方法<br>ajax<br>isFunction<br>unique<br>…</p>
+</blockquote>
+<h4 id="jQuery-prototype"><a href="#jQuery-prototype" class="headerlink" title="jQuery.prototype"></a><code>jQuery.prototype</code></h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="string">'#box'</span>).index()：获取当前元素的索引（是在自己兄弟元素中的索引，它有几个哥哥，索引就是几）</span><br><span class="line"></span><br><span class="line">$(<span class="string">'body'</span>).data(key,value)</span><br><span class="line">只传递key是获取</span><br><span class="line">如果传递了value是设置</span><br><span class="line">我们通过这个方法可以获取到在HTML结构上设置的data-xxx的自定义属性值</span><br><span class="line"><span class="comment">//&lt;body data-index='12'&gt;&lt;/body&gt;</span></span><br><span class="line"><span class="comment">//$('body').data('index') =&gt;12</span></span><br><span class="line"></span><br><span class="line">$(<span class="string">'#box'</span>).attr()：设置或者批量设置或者获取当前元素的自定义属性(内置属性也可以)  removeAttr</span><br><span class="line">$(<span class="string">'#box'</span>).prop()：和attr一样也是操作元素属性的，但是prop一般都操作表单元素的内置或者自定义属性 removeProp</span><br><span class="line"></span><br><span class="line">addClass：增加样式类</span><br><span class="line">removeClass：移除样式类</span><br><span class="line">toggleClass：当前样式类有就是移除，没有就是增加</span><br><span class="line">hasClass：验证是否存在某个样式类名</span><br><span class="line"></span><br><span class="line">$(<span class="string">'#box'</span>).html([val])：不传val就是获取内容，传递val就是设置内容，等价于原生的innerHTML</span><br><span class="line">$(<span class="string">'input'</span>).val([val])：表单元素value值的操作(设置或者获取)</span><br><span class="line"></span><br><span class="line">css：设置或者批量设置或者获取元素的样式（获取的结果没有去单位）</span><br><span class="line"></span><br><span class="line">offset()：获取距离BODY的偏移</span><br><span class="line">position()：获取距离父级参照物的偏移</span><br><span class="line">scrollTop/scrollLeft([val])：获取或者设置当前元素卷去的高度或者宽度</span><br><span class="line">height/width([val])</span><br><span class="line">innerWidth/innerHeight()：等价于clientWidth/clientHeight</span><br><span class="line">outerWidth/outerHeight()：等价于offsetWidth/offsetHeight</span><br><span class="line"></span><br><span class="line">$(<span class="string">'#box'</span>).on(<span class="string">'click'</span>,<span class="function"><span class="keyword">function</span>...)：<span class="title">JQ</span>中的事件绑定</span></span><br><span class="line"><span class="function">...</span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function"><span class="title">$</span>(<span class="params"><span class="string">'#box'</span></span>).<span class="title">remove</span>(<span class="params"></span>)：把当前盒子在容器中移除</span></span><br><span class="line"><span class="function"><span class="title">$</span>(<span class="params"><span class="string">'#box'</span></span>).<span class="title">clone</span>(<span class="params">true</span>)：把当前盒子深度克隆一份</span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function"><span class="title">filter</span></span></span><br><span class="line"><span class="function"><span class="title">children</span></span></span><br><span class="line"><span class="function"><span class="title">find</span></span></span><br><span class="line"><span class="function">...</span></span><br></pre></td></tr></table></figure>
+<p><code>写在对象上的方法</code><br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> j=$.noConflict()：如果当前项目中引入了两个类库，都是使用$操作的，为了防止$使用权的冲突，JQ做了一个处理，可以让我们转让$的使用权；此处返回的值j就是代表原始$的变量，以后可以使用j()执行（使用jQuery()执行也可以）</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> j=$.noConflict(<span class="literal">true</span>)：深度转让，把jQuery和$的使用权都转让了，此时只能使用j()执行了</span><br><span class="line"></span><br><span class="line">$.ajax()：帮助我们发送ajax请求</span><br><span class="line"></span><br><span class="line">...</span><br></pre></td></tr></table></figure></p>
+<h4 id="筛选方法"><a href="#筛选方法" class="headerlink" title="筛选方法"></a><code>筛选方法</code></h4><blockquote>
+<p>filter：同级过滤<br>children：子集过滤<br>find：后代过滤<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> $links=$(<span class="string">'a'</span>);</span><br><span class="line">$links.filter(<span class="string">'.bg'</span>); <span class="comment">//=&gt;首先获取所有的A，在所有的A中把具备样式类为bg的获取到（二次筛选）</span></span><br><span class="line"></span><br><span class="line">$(<span class="string">'#box'</span>).children(<span class="string">'a'</span>); <span class="comment">//=&gt;首先获取#box所有的子元素，在所有子元素中筛选出标签名为a的元素集合 &lt;=&gt; $('#box&gt;a')</span></span><br><span class="line"></span><br><span class="line">$(<span class="string">'#box'</span>).find(<span class="string">'.bg'</span>); <span class="comment">//=&gt;首先获取#box后代中所有的元素，在所有的元素中筛选出样式类名中具备bg的元素集合 &lt;=&gt; $('#box .bg')</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//prev：获取上一个哥哥  $('#box').prev('a')</span></span><br><span class="line"><span class="comment">//prevAll：所有的哥哥</span></span><br><span class="line"><span class="comment">//next：下一个弟弟</span></span><br><span class="line"><span class="comment">//nextAll：所有的弟弟</span></span><br><span class="line"><span class="comment">//siblings：所有的兄弟</span></span><br><span class="line"><span class="comment">//parent：父亲元素</span></span><br><span class="line"><span class="comment">//parents：所有的祖先元素（一直到html为止）</span></span><br><span class="line">...</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<h4 id="each"><a href="#each" class="headerlink" title="each"></a><code>each</code></h4><blockquote>
+<p>JQ中的each有三种<br>1、写在原型上的each：遍历JQ对象中的每一项<br>2、写在对象上的each：工具方法，可以用来遍历数组、类数组、对象等<br>3、内置的each其实也是调用原型上的each处理的，只不过JQ在处理的时候会内部自己调用<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//=&gt;内置EACH</span></span><br><span class="line">$(<span class="string">'a'</span>).addClass(<span class="string">'select'</span>); <span class="comment">//=&gt;我们获取的A可能有很多个，执行一次addClass，相当于给每个获取的A都增加了一个叫做select的样式类（JQ中大部分方法在执行的时候，都会把获取的JQ集合中的每一项调用each进行遍历，把需要操作的任务对每一个遍历的元素进行操作）</span></span><br><span class="line"></span><br><span class="line">$(<span class="string">'a'</span>).css(<span class="string">'width'</span>); <span class="comment">//=&gt;获取的时候只返回第一个元素的样式（设置走内置EACH批量处理，获取只处理第一个）</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//=&gt;原型上的EACH</span></span><br><span class="line">$(<span class="string">'a'</span>).each(<span class="function"><span class="keyword">function</span>(<span class="params">index,item</span>)</span>&#123;</span><br><span class="line">	<span class="comment">//=&gt;传递参数的顺序和数组内置的forEach顺序相反：ary.forEach(function(item,index)&#123;...&#125;);</span></span><br><span class="line">    <span class="comment">//=&gt;获取的A有多少个，回调函数被触发执行多少次：index当前遍历这一项的索引 item是当前遍历这一项的内容</span></span><br><span class="line">    <span class="comment">//=&gt;this -&gt; item (原生JS对象) 方法中的this是当前遍历的这一项</span></span><br><span class="line">    <span class="comment">//=&gt;$(this) 也是当前遍历这一项，但是属于JQ对象</span></span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">//=&gt;JQ对象上提供的工具方法：each</span></span><br><span class="line">$.each([数组/类数组], <span class="function"><span class="keyword">function</span>(<span class="params">index,item</span>) </span>&#123;</span><br><span class="line">	<span class="comment">//=&gt;this:item</span></span><br><span class="line">&#125;);</span><br><span class="line">$.each([对象],<span class="function"><span class="keyword">function</span>(<span class="params">key,value</span>)</span>&#123;</span><br><span class="line">	<span class="comment">//=&gt;this:value</span></span><br><span class="line">	<span class="comment">//=&gt;JQ也是采用for in循环用来遍历对象的，这样的话就存在可能把公有属性和方法遍历到的问题</span></span><br><span class="line">	<span class="keyword">if</span>([对象].hasOwnProperty(key))&#123;</span><br><span class="line"></span><br><span class="line">	&#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<h4 id="extend"><a href="#extend" class="headerlink" title="extend"></a><code>extend</code></h4><blockquote>
+<p>\$.extend()：把方法扩展到JQ对象上，这个操作一般是用来完善类库的<br>$.fn.extend()：把方法扩展到JQ的原型上，供JQ的实例（DOM集合）使用，这个操作一般是用来写JQ插件的<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//=&gt;扩展工具方法，用来完善类库</span></span><br><span class="line">$.extend(&#123;</span><br><span class="line">	aa:<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;&#125;</span><br><span class="line">&#125;);</span><br><span class="line">$.aa();</span><br><span class="line"></span><br><span class="line"><span class="comment">//=&gt;扩展到原型上供实例调用的</span></span><br><span class="line">$.fn.extend(&#123;</span><br><span class="line">	bb:<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">		<span class="comment">//=&gt;this:操作当前这个方法的JQ实例（JQ对像），此处不需要再$(this)转换为JQ对像</span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;);</span><br><span class="line">$(<span class="string">'xxx'</span>).bb();</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<h4 id="animate"><a href="#animate" class="headerlink" title="animate"></a><code>animate</code></h4><blockquote>
+<p>JQ中提供了元素运动的动画库<br>stop：结束当前元素正在运行的动画，继续执行下一个新动画（一般我们实现动画,stop方法基本上必然执行）<br>finish：和stop类似，finish需要让元素立即运动到上一个动画的目标位置，从目标位置执行下一个动画，而stop是从上一个动画停止的位置执行下一个动画</p>
+<p>animate([target],[duration],[effect],[callBack])：<br>[target] 对象<br>[duration] MS<br>[effect]  linear、ease、ease-in、ease-out、ease-in-out<br>[callBack] 回调函数，动画结束做的事情</p>
+<p>show(1000/‘fast’/‘slow’)<br>hide<br>toggle</p>
+<p>fadeIn<br>fadeOut<br>fadeToggle</p>
+<p>slideUp<br>slideDown<br>slideToggle<br>…</p>
+</blockquote>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/22/call、apply、bind/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="tiandali">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="tiandali">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/05/22/call、apply、bind/" itemprop="url">call、apply、bind</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-05-22T01:07:18+08:00">
+                2018-05-22
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="call-apply-bind"><a href="#call-apply-bind" class="headerlink" title="call  apply  bind"></a>call  apply  bind</h3><blockquote>
+<p>都是天生自带的方法(Function.prototype)，所有的函数都可以调取这三个方法<br><code>三个方法都是改变THIS指向的</code></p>
+</blockquote>
+<h4 id="call"><a href="#call" class="headerlink" title="call"></a>call</h4><p><code>call</code></p>
+<blockquote>
+<p>fn.call(context,para1,…)<br>把fn方法执行，并且让fn方法中的this变为context,而para1…都是给fn传递的实参<br>1.非严格模式下如果参数不传或者第一个传递的是null、undefined，this指向window<br>2.严格模式下第一个参数是谁，this就指向谁（包括null、undefined）不传this是undefined</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//=&gt;非严格模式</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fn</span>(<span class="params">num1,num2</span>)</span>&#123;</span><br><span class="line">	<span class="built_in">console</span>.log(<span class="keyword">this</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> obj=&#123;<span class="attr">fn</span>:fn&#125;;</span><br><span class="line">fn();<span class="comment">//=&gt;this:window</span></span><br><span class="line">obj.fn();<span class="comment">//=&gt;this:obj</span></span><br><span class="line"><span class="keyword">var</span> opp=&#123;&#125;;</span><br><span class="line"><span class="comment">//opp.fn();//=&gt;报错:opp中没有fn这个属性</span></span><br><span class="line">fn.call(opp);<span class="comment">//=&gt;this:opp num1&amp;&amp;num2都是undefined</span></span><br><span class="line">fn.call(<span class="number">1</span>,<span class="number">2</span>);<span class="comment">//=&gt;this:1 num1=2 num2=undefined</span></span><br><span class="line">fn.call(opp,<span class="number">1</span>,<span class="number">2</span>);<span class="comment">//=&gt;this:opp num1=1 num2=2</span></span><br><span class="line"><span class="comment">//-&gt;CALL方法的几个特殊性</span></span><br><span class="line">fn.call();<span class="comment">//=&gt;this:window   num1&amp;&amp;num2都是undefined</span></span><br><span class="line">fn.call(<span class="literal">null</span>);<span class="comment">//=&gt;this:window</span></span><br><span class="line">fn.call(<span class="literal">undefined</span>);<span class="comment">//=&gt;this:window</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//=&gt;JS严格模式下</span></span><br><span class="line"><span class="meta">"use strict"</span>;</span><br><span class="line">fn.call();<span class="comment">//=&gt;this:undefined</span></span><br><span class="line">fn.call(<span class="literal">undefined</span>);<span class="comment">//=&gt;this:undefined</span></span><br><span class="line">fn.call(<span class="literal">null</span>);<span class="comment">//=&gt;this:null</span></span><br></pre></td></tr></table></figure>
+<h4 id="apply"><a href="#apply" class="headerlink" title="apply"></a>apply</h4><blockquote>
+<p>apply的语法和call基本一致，作用原理也基本一致，唯一的区别：apply把传递给函数的实参以数组形式存放（但是也相当于在给函数一个个的传递实参值）<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">fn.call(<span class="literal">null</span>,<span class="number">10</span>,<span class="number">20</span>,<span class="number">30</span>);</span><br><span class="line">fn.apply(<span class="literal">null</span>,[<span class="number">10</span>,<span class="number">20</span>,<span class="number">30</span>]); <span class="comment">//=&gt;传递给fn的时候也是一个个的传递进去的</span></span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<h4 id="bind"><a href="#bind" class="headerlink" title="bind"></a>bind</h4><p><code>bind</code>预处理机制</p>
+<blockquote>
+<p>也是改变THIS的方法，它在IE6~8下不兼容；它和call(以及apply)改变this的原理不一样，区别于立即执行还是等待执行。<br>把所有参数传给点前面的方法，返回一个接受参数后的小函数，返回值是函数的定义<br>预处理机制：提前把所有的事情都弄好，最终函数执行需要手动运行</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">fn.call(opp,<span class="number">10</span>,<span class="number">20</span>); <span class="comment">//=&gt;把fn执行,让fn中的this变为opp,并且把10&amp;&amp;20分别传递给fn</span></span><br><span class="line"></span><br><span class="line">fn.bind(opp,<span class="number">10</span>,<span class="number">20</span>); <span class="comment">//=&gt;预先让fn中的this指向opp,并且把10和20预先传递给fn,此时的fn没有被执行(只有当执行的时候this和实参才会起到应有的作用)</span></span><br><span class="line"><span class="comment">//=&gt;需求：点击box这个盒子的时候，需要执行fn，并且让fn中的this指向opp</span></span><br><span class="line">oBox.onclick=fn; <span class="comment">//=&gt;点击的时候执行了fn,但此时fn中的this是oBox</span></span><br><span class="line"></span><br><span class="line">oBox.onclick=fn.call(opp); <span class="comment">//=&gt;绑定事件的时候就已经把fn立即执行了(call本身就是立即执行函数),然后把fn执行的返回值绑定给事件</span></span><br><span class="line"></span><br><span class="line">oBox.onclick=fn.bind(opp);</span><br><span class="line"><span class="comment">//=&gt;fn.bind(opp)：fn调取Function.prototype上的bind方法，执行这个方法返回了一个匿名函数</span></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> * function()&#123;</span></span><br><span class="line"><span class="comment"> *     fn.call(opp);</span></span><br><span class="line"><span class="comment"> * &#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line">oBox.onclick=<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">	<span class="comment">//=&gt;this:oBox</span></span><br><span class="line">	fn.call(opp);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>思考题<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fn1</span>(<span class="params"></span>)</span>&#123;<span class="built_in">console</span>.log(<span class="number">1</span>);&#125;</span><br><span class="line"> <span class="function"><span class="keyword">function</span> <span class="title">fn2</span>(<span class="params"></span>)</span>&#123;<span class="built_in">console</span>.log(<span class="number">2</span>);&#125;</span><br><span class="line"> fn1.call(fn2);<span class="comment">//=&gt;找到CALL-AA把它执行,CALL-AA中的THIS是FN1,第一个参数传递的是FN2  =&gt;在CALL-AA中执行的是FN1 =&gt;1</span></span><br><span class="line"></span><br><span class="line"> fn1.call.call(fn2);<span class="comment">//=&gt;找到CALL-AA让它执行,CALL-AA中的THIS是FN1.CALL,第一个参数是FN2  (把FN1.CALL中的THIS变为FN2，再让FN1.CALL执行  =&gt;先找到CALL-AA，把它执行，只不过此时它中的THIS是FN2 =&gt;让FN2中的THIS变为UNDEFINED，因为执行FN1.CALL的时候没有传递参数值，然后让FN2执行)  =&gt;2</span></span><br><span class="line"></span><br><span class="line"> <span class="built_in">Function</span>.prototype.call(fn1);<span class="comment">//=&gt;先找到CALL-AA把它执行，它中的THIS是Function.prototype =&gt;让F.P中的THIS变为FN1,然后让F.P执行,F.P是一个匿名函数也是一个空函数，执行没有任何的输出</span></span><br><span class="line"><span class="built_in">Function</span>.prototype.call.call(fn1);<span class="comment">//=&gt;先找到CALL-AA把它执行，它中的THIS是F.P.CALL =&gt;把F.P.CALL中的THIS修改为FN1,让F.P.CALL执行  =&gt;F.P.CALL(CALL-AA)第二次把它执行(此时它里面的THIS已经是FN1) =&gt;这一次其实在CALL-AA中是让FN1执行 =&gt;1</span></span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<blockquote>
+<p>查看函数原型上的方法：<br>call/apply/bind-&gt;改变调用主体的this关键字<br>call()第一个参数：用来改变<code>.</code>前面方法的this关键字，从第二个参数开始，以散列式的方式给<code>.</code>前面的方法传参.—散列式.<br>fn.apply()第一个参数：用来改变<code>.</code>前面方法的this关键字，第二个参数是用来给<code>.</code>前面的方法传参（把所有的参数放在数组里传给<code>.</code>前面的方法）—打包式.</p>
+</blockquote>
+<p>非严格模式下</p>
+<blockquote>
+<p>call/apply第一个参数不传，传null,传undefined-&gt;<code>.</code>前面方法里的this都是window<br>严格模式下-》规范<br>好处：<br>1.更加安全高效<br>2.提高编译器编译代码的速度<br>3.跟高版本浏览器接轨<br>第一个参数不传是undefined，其他传什么就是什么<br>fn1.call.call.call.call(fn2);<br>最后一个call作用<br>1.让点前面方法里的this关键字改成fn2-&gt;call方法里this-&gt;fn2<br>2.让点前面方法运行-&gt;function.prototype.call()-&gt;this()-&gt;fn2()</p>
+</blockquote>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/22/函数的三种角色/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="tiandali">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="tiandali">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/05/22/函数的三种角色/" itemprop="url">函数的三种角色</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-05-22T01:00:09+08:00">
+                2018-05-22
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="函数的三种角色"><a href="#函数的三种角色" class="headerlink" title="函数的三种角色"></a>函数的三种角色</h3><blockquote>
+<p><strong>第一种角色：普通函数</strong><br>堆栈内存释放、<br>作用域链、<br>…</p>
+<p><strong>第二种角色：类</strong><br>实例<br>prototype原型<br>__proto__原型链<br>…<br><strong>第三种角色：普通对象</strong><br>键值对的增删改查<br>…<br> <code>对象</code>：<br>普通对象、数组、正则、math、json、arguments…<br><code>实例</code>是对象类型的（除了基础数据类型的字面量创建的值）<br><code>prototype</code>的值也是对象类型<br><code>函数</code>也是对象类型的。<br>阿里超经典面试题（有难度）<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Foo</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    getName = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="number">1</span>);</span><br><span class="line">    &#125;;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>;</span><br><span class="line">&#125;</span><br><span class="line">Foo.getName = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="number">2</span>);</span><br><span class="line">&#125;;</span><br><span class="line">Foo.prototype.getName = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="number">3</span>);</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">var</span> getName = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="number">4</span>);</span><br><span class="line">&#125;;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getName</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="number">5</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Foo.getName();<span class="comment">//=&gt;2 把FOO作为对象,找其私有属性</span></span><br><span class="line">getName();<span class="comment">//=&gt;4 执行全局下的GET-NAME</span></span><br><span class="line">Foo().getName();<span class="comment">//=&gt;1 先把FOO作为普通函数执行,把执行的结果window调取GET-NAME在执行</span></span><br><span class="line"><span class="built_in">window</span>.getName();<span class="comment">//=&gt;1</span></span><br><span class="line"><span class="keyword">new</span> Foo.getName();<span class="comment">//=&gt;先获取Foo.getName的值(假设B),然后再new B()相当于创建B的实例 =&gt;2  (new Foo.getName;一样的)</span></span><br><span class="line"><span class="keyword">new</span> Foo().getName();<span class="comment">//=&gt;new Foo()当做一个整体获取实例，把得到的实例在调取GET-NAME  =&gt;3</span></span><br><span class="line"><span class="keyword">new</span> <span class="keyword">new</span> Foo().getName();</span><br><span class="line"><span class="comment">//=&gt;var f=new Foo()//=&gt;实例是this这是空的</span></span><br><span class="line"><span class="comment">//=&gt;new f.getName();  =&gt;new (f.getName)(); =&gt;3</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//obj.getX();//=&gt;先获取obj的getX的属性值，然后把获取的值执行</span></span><br></pre></td></tr></table></figure></p>
+</blockquote>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/22/类的封装：继承和多态/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1383,466 +2642,11 @@ var reg =/^0\.2$/;指以0开头，以2结尾，中间只能是</code>.`。就是
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/04/变量提升/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="tiandali">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="tiandali">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/05/04/变量提升/" itemprop="url">变量提升</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-05-04T17:57:05+08:00">
-                2018-05-04
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="变量提升"><a href="#变量提升" class="headerlink" title="变量提升"></a>变量提升</h3><blockquote>
-<p>在<code>当前作用域</code>中，JS代码自上而下执行<code>之前</code>，浏览器首先会把所有带<code>var/function</code>关键字的，进行提前的<code>声明(declare)/定义(defined)</code>，这种提前声明变量的机制，我们称之为<code>变量提升</code>。</p>
-<ul>
-<li>变量提升阶段：带var的只声明未定义。带function的声明和赋值都完成了。<ul>
-<li>变量提升只发生在当前作用域，</li>
-<li>在全局作用域下声明的函数或者变量是全局变量，同理在私有作用域声明的变量是私有变量，带var、function的才是声明</li>
-<li>浏览器很懒做过的事情不会重复执行第二遍，当代码执行遇到创建函数这部分代码后直接的跳过即可，因为在变量提升阶段就已经完成函数的执行了</li>
-<li>（函数执行）1.形成一个私有作用域。2.形参赋值。3.变量提升。<br>在es3和es5语法规法中只有全局作用域和函数执行的私有作用域（栈内存）其他的大括号不会形成栈内存。</li>
-</ul>
-</li>
-</ul>
-</blockquote>
-<h4 id="变量提升规律"><a href="#变量提升规律" class="headerlink" title="变量提升规律"></a>变量提升规律</h4><blockquote>
-<p>1.只会对等号左边的进行变量提升（function作为值时不会变量提升）<br> 2.return后面的也不能变量提升，对return下面的还是要变量提升<br> 3.重名变量，不会重复声明，但可以多次被定义赋值，后面的定义会把前面的值覆盖。<br> 4.自执行函数本身的function不进行变量提升，定义+执行一起完成<br> 5.不管条件是否成立，对待var关键字的进行变量提升，但是function关键字，标准浏览器下声明，ie9以上浏览器是声明+定义<br>  <code>带var不带var的区别？</code><br>在全局作用域下声明一个变量，也相当于给window全局对象设置了一个属性，变量的值就是属性值（私有作用域中声明的私有变量和window没啥关系 ）</p>
-<ul>
-<li>带var进行变量提升<ul>
-<li>不带var ：在全局作用域中，仅仅给全局对象设置了一个新的属性名把window省略了.</li>
-<li>项目当中，目的是创建变量，最好不要省略var，更严谨。</li>
-<li>全局变量和window中的属性存在映射机制。</li>
-</ul>
-</li>
-</ul>
-</blockquote>
-<blockquote>
-<p><code>私有作用域中带var和不带var也有区别：</code><br> 带var的在私有作用域变量提升阶段都声明为私有变量和外界没有任何关系<br> 不带var不是私有变量会向他的上级作用域查找，看是否为上级的变量，不是的话就向上级作用域找，一直找到window为止，我们把这种查找机制叫做作用域链.也就是我们在私有作用域中操作的这个私有变量是一直操作别人的</p>
-</blockquote>
-<ul>
-<li><code>不带var的查找顺序</code></li>
-<li><p>1.看是不是私有变量（形参和私有作用域里声明的）是的话就是它<br>-2.若不是，则往上级作用域查找,查找过程叫做作用域链</p>
-<p><code>什么是上级作用域？</code></p>
-<blockquote>
-<p>函数在哪里定义，则上级作用域就是谁<br><code>上级作用域只跟函数在哪定义有关，跟函数在哪里执行没有关系。</code></p>
-</blockquote>
-<h5 id="只对等号左边的进行赋值"><a href="#只对等号左边的进行赋值" class="headerlink" title="只对等号左边的进行赋值"></a>只对等号左边的进行赋值</h5><blockquote>
-<p>=:赋值，左边是变量，右边都应该是值。（如果是个函数表达式，把函数变成一个值（空间地址）赋值给变量）</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">console.log(fn);//undefined</span><br><span class="line">var fn=function()&#123;&#125;</span><br><span class="line">console.log(fn);//函数本身</span><br></pre></td></tr></table></figure>
-</blockquote>
-</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">//=&gt;全局变量提升：var x; var y; var z; fn=AAAFFF000;</span><br><span class="line">var x = 10,</span><br><span class="line">    y = 20,</span><br><span class="line">    z = 30;</span><br><span class="line">function fn(x, y) &#123;</span><br><span class="line">    //=&gt;[私有作用域]</span><br><span class="line">    //=&gt;形参赋值：x=10 y=20 (x/y都是私有变量)</span><br><span class="line">    //=&gt;变量提升：var x(忽略的,已经存在x这个名字了)</span><br><span class="line">    console.log(x, y, z);//=&gt;z不是私有变量是全局变量 10 20 30</span><br><span class="line">    var x = 100;//=&gt;私有的x=100</span><br><span class="line">    y = 200;//=&gt;私有的y=200</span><br><span class="line">    z = 300;//=&gt;全局的z=300</span><br><span class="line">    console.log(x, y, z);//=&gt;100 200 300</span><br><span class="line">&#125;</span><br><span class="line">fn(x, y, z);//=&gt;FN执行传递的是实参(实参都是值) fn(10,20,30)</span><br><span class="line">console.log(x, y, z);//=&gt;10 20 300</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>真实项目中创建函数一般都用函数表达式<br>1.因为只能对等号左边进行变量提升，所以变量提升完成后，当前函数只是声明了，没有定义，想要执行函数，只能放在赋值的代码之后执行，放在代码前会报错<br>2.这种方法代码逻辑更加严谨，以后想要知道一个执行的函数做了什么功能，只需要向上查找定义的部分即可（不会存在定义的代码在执行下面的情况）<br>var fn = function sum(){<br>console.log(sum);//函数本身<br>console.log(1);<br>};<br>sum();//uncaught referenceerror:sum is not defined.sum在函数外面不能用在里面可以用<br>fn();</p>
-</blockquote>
-<h5 id="不管条件是否成立都要进行变量提升"><a href="#不管条件是否成立都要进行变量提升" class="headerlink" title="不管条件是否成立都要进行变量提升"></a>不管条件是否成立都要进行变量提升</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">console.log(num);//undefined</span><br><span class="line">console.log(fn);//undefined</span><br><span class="line">if(1===1)&#123;</span><br><span class="line">console.log(num);//undefined</span><br><span class="line">console.log(fn);//函数体本身</span><br><span class="line">var num =12;</span><br><span class="line">function fn ()&#123;&#125;</span><br><span class="line">console.log(num);//12</span><br><span class="line">console.log(fn);//函数体本身</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>老版本浏览器不是这样处理的：不管条件是否成立，都要进行变量提升（和新版不一样的地方，新版本function只是声明，老版本function依然是声明+定义）<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//=&gt;变量提升：没有</span></span><br><span class="line">f = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;<span class="keyword">return</span> <span class="literal">true</span>;&#125;;</span><br><span class="line">g = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;<span class="keyword">return</span> <span class="literal">false</span>;&#125;;</span><br><span class="line">~<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="comment">//=&gt;[私有作用域]</span></span><br><span class="line">    <span class="comment">//变量提升：g=undefined (不管条件是否成立都要进行变量提升，但是新版本的浏览器只对函数进行声明)</span></span><br><span class="line">    <span class="keyword">if</span> (g() &amp;&amp; [] == ![]) &#123;<span class="comment">//=&gt;Uncaught TypeError: g is not a function</span></span><br><span class="line">        f = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;<span class="keyword">return</span> <span class="literal">false</span>;&#125;;</span><br><span class="line">        <span class="function"><span class="keyword">function</span> <span class="title">g</span>(<span class="params"></span>) </span>&#123;<span class="keyword">return</span> <span class="literal">true</span>;&#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;();</span><br><span class="line"><span class="built_in">console</span>.log(f());</span><br><span class="line"><span class="built_in">console</span>.log(g());</span><br></pre></td></tr></table></figure></p>
-</blockquote>
-<blockquote>
-<p>不管条件是否成立，判断体当中出现的var和function都会进行变量提升，但是新版本浏览器当中，function声明的变量只能提前声明不能定义了（函数是在判断体当中）<br>代码执行到判断地方<br>1）条件不成立;进入不到判断体当中赋值的代码执行不了，此事之前声明的变量或者函数依然是undefined。<br>2）条件成立：进入条件判断体中的第一件事情不是代码执行，而是把之前变量提升没有定义的函数首先定义了（进入到判断体中函数就定义了：迎合ES6中的块级作用域）<br>老版本浏览器不是这样处理的：不管条件是否成立，都要进行变量提升（和新版不一样的地方，新版本function只是声明，老版本function依然是声明+定义）</p>
-</blockquote>
-<h5 id="关于重名的处理"><a href="#关于重名的处理" class="headerlink" title="关于重名的处理"></a>关于重名的处理</h5><blockquote>
-<p>在变量提升阶段，如果名字重复了，不会重新的进行声明，但是会重新的进行定义（后面赋的值会把前面赋的值给替换掉）<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">function fn() &#123;</span><br><span class="line">    var i = 1;</span><br><span class="line">    return function (n) &#123;</span><br><span class="line">        console.log(n + i++);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">var f = fn();</span><br><span class="line">f(10);//-&gt;11</span><br><span class="line">fn()(10);//-&gt;11</span><br><span class="line">f(20);//-&gt;22</span><br><span class="line">fn()(20);//-&gt;21</span><br></pre></td></tr></table></figure></p>
-</blockquote>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/21/node-git基本应用/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="tiandali">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="tiandali">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/04/21/node-git基本应用/" itemprop="url">node&&git基本应用</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-04-21T04:24:40+08:00">
-                2018-04-21
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="node-amp-GIT基础知识"><a href="#node-amp-GIT基础知识" class="headerlink" title="node &amp; GIT基础知识"></a>node &amp; GIT基础知识</h3><h3 id="安装node"><a href="#安装node" class="headerlink" title="安装node"></a>安装node</h3><ul>
-<li>官网下载，一直下一步，最好下c盘。<br>或者：拷贝别人下载好的，</li>
-<li>到我的电脑-属性-高级设置-环境变量-path-添加node的安装目录。</li>
-<li>验证是否成功:win+R-&gt;cmd-&gt;node -version,npm -v能出现版本号代表安装成功，不能出现版本号，按照上一步配置环境变量即可。<h3 id="node基础概念"><a href="#node基础概念" class="headerlink" title="node基础概念"></a>node基础概念</h3>1.node并不是一门语言，他是一个工具或者一个运行环境基于v8引擎渲染和解析js的。</li>
-<li>单线程</li>
-<li>无阻赛i/o操作</li>
-<li>事件驱动<br>…<br>之所以把node称为服务器语言是因为node给予操作服务器的能力：我们在服务器端安装node使用js服务器端需要处理的一些事情，最后把写好的js代码交给node环境运行即可</li>
-</ul>
-<p>2.在node环境当中把js代码执行</p>
-<ul>
-<li>repl命令（read-evaluate-print-loop）输入-求值-输出-循环</li>
-<li><p>基于node xxx.js命令执行</p>
-<ul>
-<li>基于node执行我们需要先找到当前文件所在的文件夹，然后再这个目录下打开dos窗口，在窗口执行node xxx.js这样就相当于在node环境下把js文件中的代码执行了</li>
-<li>如何在当前目录中打开dos窗口</li>
-<li>1.基于dos命令中的cd一层层进入</li>
-<li>2.在当前目录地址栏中输入cmd快速在当前目录打开</li>
-<li>3.shift+鼠标右键，在此处打开命令窗口</li>
-</ul>
-</li>
-<li><p>基于wb这类编辑工具直接执行</p>
-</li>
-</ul>
-<p>3.常用DOS命令</p>
-<ul>
-<li><code>ping www.baidu.com -t</code></li>
-<li>测试网速，然后<code>Ctrl+c</code>结束当前运行的操作</li>
-<li><code>exit</code>：退出当前窗口</li>
-<li><code>ipconfig -all</code>   ：查看当前电脑的物理地址、IP地址、子网掩码、DNS等信息</li>
-<li><code>cls</code>；清屏</li>
-<li><code>cd</code>:进入指定的文件目录，（windows电脑需要先进入对应的磁盘）</li>
-<li><code>cd ../</code>:返回上级目录</li>
-<li><code>cd .</code>:当前目录</li>
-<li><code>cd /</code>:根目录</li>
-<li><code>dir</code>:查看当前目录下的文件</li>
-<li><code>mkdir</code>:创建文件夹</li>
-<li><code>copy con xxx.xx</code>:创建文件并且给文件中输入内容，输入完成后用<code>Ctrl+c</code>结束并保存</li>
-<li><code>del xxx.xx</code>:删除文件</li>
-<li><code>rmdir</code>:删除文件夹</li>
-</ul>
-<h3 id="npm模块管理"><a href="#npm模块管理" class="headerlink" title="npm模块管理"></a>npm模块管理</h3><p>安装完node后基本上自带npm模块管理器<br>我们需要一个第三方模块，或者模块插件，或者类库，或者框架，需要提前下载安装才可以使用，百度搜索找到下载地址，然后基于浏览器下载即可（资源比较混乱不好搜索）<br>也可以基于npm等第三方包管理器下载（yarn/bower这些都是第三方模块管理器）<br>1.npm下载的资源都是在<a href="http://www.npmjs.com/" target="_blank" rel="noopener">http://www.npmjs.com/</a>中下载的<br><code>npm install xxx</code>:把资源或者第三方模块下载到当前目录下<br><code>npm install xxx -g(--global)</code>:把资源或者第三方模块安装到全局环境下，可以基于命令来操作一些事情<br>卸载npm uninstall xxx/xxx -g:从本地或者全局卸载</p>
-<blockquote>
-<p>基于npm安装的一些细节点：</p>
-<ul>
-<li>需要联网</li>
-<li>下载成功后当前目录中多增加一个node_modules文件夹，在这个文件夹中找到我们安装的模块</li>
-<li>一般来说下载下来的内容包括源码和最后供开发者使用的压缩版本。</li>
-</ul>
-</blockquote>
-<blockquote>
-<p>2.解决下载慢的问题</p>
-<ul>
-<li>基于npm切换到国内下载源（一般是淘宝镜像）<ul>
-<li>首先安装nrm而且是把他安装到全局环境下，因为我们要使用命令。</li>
-<li><code>npm install nrm -g</code></li>
-<li>安装完我们就可以使用nrm命令</li>
-<li><code>nrm ls</code>查看当前可用源</li>
-<li><code>nrm use xxx</code>使用某个可用源</li>
-</ul>
-</li>
-<li>也可以基于yarn来安装管理<ul>
-<li>首先安装yarn，安装到全局，然后基于yarn安装我们需要的模块</li>
-<li><code>npm install yarn -g</code></li>
-<li><code>yarn add xxx</code></li>
-<li><code>yarn remove xxx</code></li>
-<li>基于yarn安装只能安装到本地不能安装到全局</li>
-</ul>
-</li>
-<li>基于cnpm淘宝镜像来处理</li>
-</ul>
-</blockquote>
-<blockquote>
-<p>3.解决安装版本的问题</p>
-<ul>
-<li>首先查看当前模块的历史版本信息<ul>
-<li><code>npm view jQuery&gt;jquery.version.json</code>:把当前模块的历史版本信息输出到具体的某个文件夹（文件名是自己取得）</li>
-<li>安装指定的版本模块</li>
-<li><code>yarn add jquery@1.11.3:npm</code> 和yarn都是这样来指定安装具体版本模块</li>
-</ul>
-</li>
-</ul>
-</blockquote>
-<p>1.bower是从github下载安装<br>2.安装less、babel-cli …</p>
-<h3 id="github"><a href="#github" class="headerlink" title="github"></a>github</h3><blockquote>
-<p>一个提供代码管理的公共平台我们以及众多开发者会把自己的生产的组件、类库、插件、框架等托管到这个平台供别人下载使用和研究<br>在github中我们可以创建仓库来管理自己的项目文件，而github支持开发者通过git操作，把本地的项目代码推送到指定的仓库，它还提供静态web页面的发布<br>在国内有一个和github类似的网站：coding,和github类似，也是提供代码管理的平台，但资源少。</p>
-</blockquote>
-<h3 id="git的基础知识"><a href="#git的基础知识" class="headerlink" title="git的基础知识"></a>git的基础知识</h3><ul>
-<li>git是一个分布式代码版本管理控制系统</li>
-<li>记录当前产品代码的所有版本信息（历史修改信息）而且方便快速回退到某一个具体版本，</li>
-<li>方便团队协作开发，能够检测代码冲突能够合并代码等<br>svn:集中式版本控制系统<br>git：分布式版本控制系统</li>
-</ul>
-<blockquote>
-<p>分布式和集中式区别：<br>[集中式]：想要做历史记录的查看或者备份必须链接到中央处理器才可以（需要联网）<br>处理速度没有Git快<br>[分布式]：每个开发者本地都是一个单独的仓库，在自己的仓库中就可以完成历史版本的记录和查看（不需要联网）<br>Git处理速度更快。</p>
-</blockquote>
-<h3 id="git操作步骤"><a href="#git操作步骤" class="headerlink" title="git操作步骤"></a>git操作步骤</h3><p>步骤：<br>1.先在GitHub上创建一个远程仓库<br>2.在本地创建一个文件夹初始化git仓库 <code>git init</code><br>3.本地仓库和远程仓库关联起来<code>git remote add origin</code>[可以自己起名字] 远程仓库的网络地址,移除关联是<code></code>git remote remove xxx<code>4.把本地仓库的内容提交到暂存区</code>git add .<code>5.把本地仓库的内容以及注释提交到历史区</code>git commit -m<code>&#39;注释内容&#39;
-6.把远程仓库的内容先拉到本地仓库，保持远程仓库和本地仓库同步</code> git pull origin master –allow-unrelated-histories<code>7.提交到远程仓库</code> git push origin master `</p>
-<h3 id="提交本地项目的另外一种方式："><a href="#提交本地项目的另外一种方式：" class="headerlink" title="提交本地项目的另外一种方式："></a>提交本地项目的另外一种方式：</h3><p>1.<code>git clone 远程仓库地址 本地仓库名（可以不写）</code>的方式把远程仓库克隆到本地<br>代替了:<br><code>git init</code>在本地创建了git仓库<br><code>git remote add origin [地址]</code>本地仓库和远程仓库关联了起来<br><code>git pull origin master</code>把远程仓库的内容拉取到了本地仓库<br>2.进入克隆的本地仓库 cd [本地仓库名]<br>3.<code>git add.</code><br>4.<code>git commit -m&#39;注释&#39;</code><br>5.<code>git push origin master</code>提交到远程仓库</p>
-<h3 id="提交项目"><a href="#提交项目" class="headerlink" title="提交项目"></a>提交项目</h3><p>登录GitHub<br><a href="https://github.com/zfpx/201801JS.git" target="_blank" rel="noopener">https://github.com/zfpx/201801JS.git</a>  黏贴到地址栏回车<br>点fork按钮，相当于把那个仓库克隆一份到我的仓库<br>git clone 刚刚克隆的仓库的地址 把从老师那fork过来的 远程仓库克隆到本地<br>cd 201801JS  到当前本地仓库地址<br>git add .添加到暂存区<br>git commit -m添加到历史区<br>git push origin master上传到自己的复制的远程仓库（根目录应该是本地仓库地址）</p>
-<p>New pull request发出新请求<br>Create pull request  申请并入</p>
-<p>主管做的事情merge pull request 或者close pull request</p>
-<blockquote>
-<p>webstrom关联<br>打开有关联通道文件夹，在子目录下创建文件，编辑后，点击菜单栏的VCS中的git-&gt;add，再次点击VCS中的git-&gt;commit,commit and push ,push.</p>
-</blockquote>
-<h3 id="Linux操作系统常用命令"><a href="#Linux操作系统常用命令" class="headerlink" title="Linux操作系统常用命令"></a>Linux操作系统常用命令</h3><blockquote>
-<ul>
-<li><code>ls</code>查看当前目录下的文件<ul>
-<li><code>-l</code>查看详细信息</li>
-<li><code>-a</code>查看隐藏文件</li>
-<li><code>-la</code>同时具备以上特定</li>
-</ul>
-</li>
-<li><code>clear</code>清屏</li>
-<li><code>cd</code>目录切换<ul>
-<li><code>cd../</code>返回上级目录</li>
-<li><code>cd./</code>返回当前目录</li>
-<li><code>cd</code>/返回根目录</li>
-<li><code>cd xxx</code>进入指定文件夹</li>
-<li><code>cd E:</code>进入到指定的磁盘</li>
-</ul>
-</li>
-<li><code>mkdir</code>创建文件夹</li>
-<li><code>touch</code> 创建一个空文件<ul>
-<li>可以创建无文件名的文件。例如touch .gitignore/touch .babelrc…</li>
-<li>在电脑旁隐藏文件后缀名的情况下。我们不至于创建出1.txt.txt这样重复后缀名的文件。</li>
-</ul>
-</li>
-<li><code>vi</code>向指定文件中插入内容例如：vi 1.txt<ul>
-<li>首先进入命令窗口模式</li>
-<li>我们先按<code>i</code>，进入到插入内容模式</li>
-<li>编辑要写的内容</li>
-<li>按<code>esc</code>键，再按<code>：</code>键，再按<code>wq</code>(保存并退出)</li>
-<li>如果按q!（强制退出，新输入的内容不保存）<br>-echo xxx&gt;1.txt  把xxx内容放到1.txt文件中，如果没有这个文件则创建这个文件（新存放的内容会替换原有的内容）<br>-echo xxx &gt;&gt;1.txt 新的内容会追加到原有内容的后面</li>
-</ul>
-</li>
-<li><code>cat</code>查看文件中的内容</li>
-<li><code>cp</code>拷贝文件</li>
-<li><code>rm</code>删除文件<ul>
-<li><code>-r</code>递归删除（把当前文件夹中的所有的后代元素也都遍历到删除）</li>
-<li><code>-f</code>强制删除</li>
-<li><code>-rf</code>一旦rf后，没有办法还原回来，所以删除要慎重</li>
-</ul>
-</li>
-</ul>
-</blockquote>
-<h3 id="git配置"><a href="#git配置" class="headerlink" title="git配置"></a>git配置</h3><blockquote>
-<p>安装完成Git后。我们最好先把一些基础信息配置一下<br><code>git config -l</code>查看当前本级Git的配置清单<br>相对比较重要的配置g：user.name/user.email,每一次提交的时候我们需要知道谁提交的。<br><code>$git config --global user.name xxx
-$git config --global user.email xxx</code></p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">切换账号:git config credential.helper &apos;&apos;</span><br><span class="line"></span><br><span class="line">保存账号git config credential.helper store</span><br></pre></td></tr></table></figure>
-<h3 id="Git工作原理和流程"><a href="#Git工作原理和流程" class="headerlink" title="Git工作原理和流程"></a>Git工作原理和流程</h3><p>“<code>git工作流程</code>”<br>一个Git仓库分为三个区域：<br>1.工作区：平时写代码的地方。<br>2.暂存区：把一些写好的代码暂时存储的地方。<br>3.历史区：生成一个个版本记录的地方。<br><code>&quot;创建Git仓库&quot;</code><br>在电脑的某一个文件夹中<br>1）右键-&gt;git bash here -&gt;在窗口执行<code>git init</code>.<br>2) 在windows dos窗口中执行，还是执行相同的命令执行完成后会在当前电脑指定文件夹中生成一个 .git 文件，证明当前文件夹就是一个本机独立的git版本控制仓库<br>一个项目目录下，我们一般会有以下这样的文件<br><code>.git</code>:在当前项目中创建git仓库生成的文件（很重要）<br><code>.idea</code>:使用WS开发，默认生成的文件，记录WS的一些信息（没用）<br><code>.gitignore</code>:我们一般会手动的在当前项目中创建一个后缀名是gitignore的文件，这个文件中记录了每一次git提交时候忽略不管的文件或者文件夹（ws中可以创建这个文件）<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"># dependencies</span><br><span class="line">node_modules</span><br><span class="line"></span><br><span class="line"># testing</span><br><span class="line">/coverage</span><br><span class="line"></span><br><span class="line"># production</span><br><span class="line">/build</span><br><span class="line"></span><br><span class="line"># misc</span><br><span class="line">.DS_Store</span><br><span class="line">.env.local</span><br><span class="line">.env.development.local</span><br><span class="line">.env.test.local</span><br><span class="line">.env.production.local</span><br><span class="line"></span><br><span class="line">npm-debug.log*</span><br><span class="line">yarn-debug.log*</span><br><span class="line">yarn-error.log*</span><br><span class="line"></span><br><span class="line"># webStorm</span><br><span class="line">.idea</span><br></pre></td></tr></table></figure></p>
-<p><code>README.md</code>:这个文件选择性增加，通过这个文件可以对当前的项目进行详细的描述（使用markdown编写）<br>在真正的项目中，一般都是需要团队协作开发的，也就是都会存在一个中央远程仓库，而我们操作的步骤如下：</p>
-<p>我们可以在本地继续开发，如果需要把开发的内容同步到远程仓库上，还是按照之前的老步骤操作即可<br><code>git add -A</code><br><code>git commit -m’备注信息’</code><br><code>git push origin master</code></p>
-<p><code>把工作区中的内容提交到暂存区</code><br><code>git add xxx</code>把指定的文件提交到暂存区<br><code>git add./git add -A</code>把所有修改的文件都提交到暂存区<br><code>git statu</code>查看当前工作区中文件的状态。<br>显示<code>红色</code>还没有提交到暂存区。<br>显示<code>绿色</code>还没有提交到历史区。<br><code>把暂存区的内容统一提交到历史区</code><br>提交到历史区的内容，会生成相关的版本和历史记录，以后如果想回滚到某一次的代码，可以使用git命令迁出对应的版本即可<code>git commit -m&#39;xxx&#39;</code>:把暂存区的内容提交到历史区（-m后面的内容都是对本次提交新版本的说明）</p>
-<h3 id="把本地的版本代码推送到中央仓库上"><a href="#把本地的版本代码推送到中央仓库上" class="headerlink" title="把本地的版本代码推送到中央仓库上"></a>把本地的版本代码推送到中央仓库上</h3><p>1）让本地仓库和远程仓库建立连接通道<br><code>git remote add [name:一般都叫做origin] [远程仓库地址]</code><br><code>git remote rm [name]</code><br><code>git remote update [name]</code><br><code>git remote -v</code>查看当前本地仓库所有的链接通道<br>2）把本机仓库代码和版本信息推送（拉取）到远程仓库上<br><code>git push origin master</code>推送<br><code>git pull origin master</code>拉取<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">本地仓库和远程仓库不一致时可以先拉后推</span><br><span class="line">`git pull origin master --allow-unrelated-histories</span><br></pre></td></tr></table></figure></p>
-<h3 id="无分支模式下的团队协作"><a href="#无分支模式下的团队协作" class="headerlink" title="无分支模式下的团队协作"></a>无分支模式下的团队协作</h3><p>作为开发者每天来的第一件事或提交代码之前都要先pull一下<br>[<code>如果远程仓库和本地仓库不是同一个文件或同一行代码从冲突</code>]<br>git会自动会依赖于fast-forward模式进行合并<br>自动合并后，我们需要重新提交即可git add/git commit/push…<br>[<code>同一个文件的同一行代码冲突</code>]<br>找到冲突的文件，留下自己想要的代码<br>不管之前是否commit过，都要重新commit，然后push即可。</p>
-<h3 id="单独分支管理"><a href="#单独分支管理" class="headerlink" title="单独分支管理"></a>单独分支管理</h3><ul>
-<li>1.每天第一件事就是创建一个dev分支，并且切换到这个分支上<ul>
-<li>2.正常的开发代码，把每天开发的任务都要先提交到自己的分支上</li>
-<li>3.提交到远程仓库上<br>把本地自己分支中的内容，合并到本地自己的master分支下<br>把本地创建的分支删除（可以不删除，但是有的公司不希望远程出现分支，或者避免开发人员的分支冲突，提交之前都要把自己创建的分支删除掉）</li>
-<li>4.和第一种只使用master分支一样了，把本地最新合并的master分支代码，提交到远程仓库的master分支下（冲突合并即可）。</li>
-</ul>
-</li>
-</ul>
-<p>操作分支的基础命令<br><code>$git branch</code> 查看现有的分支<br><code>$git branch xxx</code>创建一个新的分支<br><code>$git checkout xxx</code>切换到某个分支上<br><code>$git checkout -b xxx</code>创建一个新分支并且切换到这个分支上<br><code>$git branch -D xxx</code>删除某个分支（一定要切换到其他分支上才可以删除当前分支）<br><code>$git merge xxx</code>合并分支内容<br><code>$git log --graph /--oneline</code><br>在有分支的情况下，可以更清楚查看分支的提交和合并内容</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/2/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span>
+    <a class="extend prev" rel="prev" href="/page/2/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/4/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1888,7 +2692,7 @@ $git config --global user.email xxx</code></p>
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">27</span>
+                  <span class="site-state-item-count">32</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>

@@ -79,17 +79,13 @@
 
 
 
-<meta name="description" content="node &amp;amp; GIT基础知识安装node 官网下载，一直下一步，最好下c盘。或者：拷贝别人下载好的， 到我的电脑-属性-高级设置-环境变量-path-添加node的安装目录。 验证是否成功:win+R-&amp;gt;cmd-&amp;gt;node -version,npm -v能出现版本号代表安装成功，不能出现版本号，按照上一步配置环境变量即可。node基础概念1.node并不是一门语言，他是一个工具">
-<meta property="og:type" content="article">
-<meta property="og:title" content="node&amp;&amp;git基本应用">
-<meta property="og:url" content="http://yoursite.com/2018/04/21/node-git基本应用/index.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="tiandali">
+<meta property="og:url" content="http://yoursite.com/page/4/index.html">
 <meta property="og:site_name" content="tiandali">
-<meta property="og:description" content="node &amp;amp; GIT基础知识安装node 官网下载，一直下一步，最好下c盘。或者：拷贝别人下载好的， 到我的电脑-属性-高级设置-环境变量-path-添加node的安装目录。 验证是否成功:win+R-&amp;gt;cmd-&amp;gt;node -version,npm -v能出现版本号代表安装成功，不能出现版本号，按照上一步配置环境变量即可。node基础概念1.node并不是一门语言，他是一个工具">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-05-04T09:52:14.452Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="node&amp;&amp;git基本应用">
-<meta name="twitter:description" content="node &amp;amp; GIT基础知识安装node 官网下载，一直下一步，最好下c盘。或者：拷贝别人下载好的， 到我的电脑-属性-高级设置-环境变量-path-添加node的安装目录。 验证是否成功:win+R-&amp;gt;cmd-&amp;gt;node -version,npm -v能出现版本号代表安装成功，不能出现版本号，按照上一步配置环境变量即可。node基础概念1.node并不是一门语言，他是一个工具">
+<meta name="twitter:title" content="tiandali">
 
 
 
@@ -119,13 +115,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/04/21/node-git基本应用/"/>
+  <link rel="canonical" href="http://yoursite.com/page/4/"/>
 
 
 
 
 
-  <title>node&&git基本应用 | tiandali</title>
+  <title>tiandali</title>
   
 
 
@@ -144,7 +140,8 @@
     
   
 
-  <div class="container sidebar-position-left page-post-detail">
+  <div class="container sidebar-position-left 
+  page-home">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -217,9 +214,181 @@
         <div class="content-wrap">
           <div id="content" class="content">
             
-
-  <div id="posts" class="posts-expand">
+  <section id="posts" class="posts-expand">
     
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/04/变量提升/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="tiandali">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="tiandali">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/05/04/变量提升/" itemprop="url">变量提升</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-05-04T17:57:05+08:00">
+                2018-05-04
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="变量提升"><a href="#变量提升" class="headerlink" title="变量提升"></a>变量提升</h3><blockquote>
+<p>在<code>当前作用域</code>中，JS代码自上而下执行<code>之前</code>，浏览器首先会把所有带<code>var/function</code>关键字的，进行提前的<code>声明(declare)/定义(defined)</code>，这种提前声明变量的机制，我们称之为<code>变量提升</code>。</p>
+<ul>
+<li>变量提升阶段：带var的只声明未定义。带function的声明和赋值都完成了。<ul>
+<li>变量提升只发生在当前作用域，</li>
+<li>在全局作用域下声明的函数或者变量是全局变量，同理在私有作用域声明的变量是私有变量，带var、function的才是声明</li>
+<li>浏览器很懒做过的事情不会重复执行第二遍，当代码执行遇到创建函数这部分代码后直接的跳过即可，因为在变量提升阶段就已经完成函数的执行了</li>
+<li>（函数执行）1.形成一个私有作用域。2.形参赋值。3.变量提升。<br>在es3和es5语法规法中只有全局作用域和函数执行的私有作用域（栈内存）其他的大括号不会形成栈内存。</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<h4 id="变量提升规律"><a href="#变量提升规律" class="headerlink" title="变量提升规律"></a>变量提升规律</h4><blockquote>
+<p>1.只会对等号左边的进行变量提升（function作为值时不会变量提升）<br> 2.return后面的也不能变量提升，对return下面的还是要变量提升<br> 3.重名变量，不会重复声明，但可以多次被定义赋值，后面的定义会把前面的值覆盖。<br> 4.自执行函数本身的function不进行变量提升，定义+执行一起完成<br> 5.不管条件是否成立，对待var关键字的进行变量提升，但是function关键字，标准浏览器下声明，ie9以上浏览器是声明+定义<br>  <code>带var不带var的区别？</code><br>在全局作用域下声明一个变量，也相当于给window全局对象设置了一个属性，变量的值就是属性值（私有作用域中声明的私有变量和window没啥关系 ）</p>
+<ul>
+<li>带var进行变量提升<ul>
+<li>不带var ：在全局作用域中，仅仅给全局对象设置了一个新的属性名把window省略了.</li>
+<li>项目当中，目的是创建变量，最好不要省略var，更严谨。</li>
+<li>全局变量和window中的属性存在映射机制。</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<blockquote>
+<p><code>私有作用域中带var和不带var也有区别：</code><br> 带var的在私有作用域变量提升阶段都声明为私有变量和外界没有任何关系<br> 不带var不是私有变量会向他的上级作用域查找，看是否为上级的变量，不是的话就向上级作用域找，一直找到window为止，我们把这种查找机制叫做作用域链.也就是我们在私有作用域中操作的这个私有变量是一直操作别人的</p>
+</blockquote>
+<ul>
+<li><code>不带var的查找顺序</code></li>
+<li><p>1.看是不是私有变量（形参和私有作用域里声明的）是的话就是它<br>-2.若不是，则往上级作用域查找,查找过程叫做作用域链</p>
+<p><code>什么是上级作用域？</code></p>
+<blockquote>
+<p>函数在哪里定义，则上级作用域就是谁<br><code>上级作用域只跟函数在哪定义有关，跟函数在哪里执行没有关系。</code></p>
+</blockquote>
+<h5 id="只对等号左边的进行赋值"><a href="#只对等号左边的进行赋值" class="headerlink" title="只对等号左边的进行赋值"></a>只对等号左边的进行赋值</h5><blockquote>
+<p>=:赋值，左边是变量，右边都应该是值。（如果是个函数表达式，把函数变成一个值（空间地址）赋值给变量）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">console.log(fn);//undefined</span><br><span class="line">var fn=function()&#123;&#125;</span><br><span class="line">console.log(fn);//函数本身</span><br></pre></td></tr></table></figure>
+</blockquote>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">//=&gt;全局变量提升：var x; var y; var z; fn=AAAFFF000;</span><br><span class="line">var x = 10,</span><br><span class="line">    y = 20,</span><br><span class="line">    z = 30;</span><br><span class="line">function fn(x, y) &#123;</span><br><span class="line">    //=&gt;[私有作用域]</span><br><span class="line">    //=&gt;形参赋值：x=10 y=20 (x/y都是私有变量)</span><br><span class="line">    //=&gt;变量提升：var x(忽略的,已经存在x这个名字了)</span><br><span class="line">    console.log(x, y, z);//=&gt;z不是私有变量是全局变量 10 20 30</span><br><span class="line">    var x = 100;//=&gt;私有的x=100</span><br><span class="line">    y = 200;//=&gt;私有的y=200</span><br><span class="line">    z = 300;//=&gt;全局的z=300</span><br><span class="line">    console.log(x, y, z);//=&gt;100 200 300</span><br><span class="line">&#125;</span><br><span class="line">fn(x, y, z);//=&gt;FN执行传递的是实参(实参都是值) fn(10,20,30)</span><br><span class="line">console.log(x, y, z);//=&gt;10 20 300</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>真实项目中创建函数一般都用函数表达式<br>1.因为只能对等号左边进行变量提升，所以变量提升完成后，当前函数只是声明了，没有定义，想要执行函数，只能放在赋值的代码之后执行，放在代码前会报错<br>2.这种方法代码逻辑更加严谨，以后想要知道一个执行的函数做了什么功能，只需要向上查找定义的部分即可（不会存在定义的代码在执行下面的情况）<br>var fn = function sum(){<br>console.log(sum);//函数本身<br>console.log(1);<br>};<br>sum();//uncaught referenceerror:sum is not defined.sum在函数外面不能用在里面可以用<br>fn();</p>
+</blockquote>
+<h5 id="不管条件是否成立都要进行变量提升"><a href="#不管条件是否成立都要进行变量提升" class="headerlink" title="不管条件是否成立都要进行变量提升"></a>不管条件是否成立都要进行变量提升</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">console.log(num);//undefined</span><br><span class="line">console.log(fn);//undefined</span><br><span class="line">if(1===1)&#123;</span><br><span class="line">console.log(num);//undefined</span><br><span class="line">console.log(fn);//函数体本身</span><br><span class="line">var num =12;</span><br><span class="line">function fn ()&#123;&#125;</span><br><span class="line">console.log(num);//12</span><br><span class="line">console.log(fn);//函数体本身</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>老版本浏览器不是这样处理的：不管条件是否成立，都要进行变量提升（和新版不一样的地方，新版本function只是声明，老版本function依然是声明+定义）<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//=&gt;变量提升：没有</span></span><br><span class="line">f = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;<span class="keyword">return</span> <span class="literal">true</span>;&#125;;</span><br><span class="line">g = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;<span class="keyword">return</span> <span class="literal">false</span>;&#125;;</span><br><span class="line">~<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="comment">//=&gt;[私有作用域]</span></span><br><span class="line">    <span class="comment">//变量提升：g=undefined (不管条件是否成立都要进行变量提升，但是新版本的浏览器只对函数进行声明)</span></span><br><span class="line">    <span class="keyword">if</span> (g() &amp;&amp; [] == ![]) &#123;<span class="comment">//=&gt;Uncaught TypeError: g is not a function</span></span><br><span class="line">        f = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;<span class="keyword">return</span> <span class="literal">false</span>;&#125;;</span><br><span class="line">        <span class="function"><span class="keyword">function</span> <span class="title">g</span>(<span class="params"></span>) </span>&#123;<span class="keyword">return</span> <span class="literal">true</span>;&#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;();</span><br><span class="line"><span class="built_in">console</span>.log(f());</span><br><span class="line"><span class="built_in">console</span>.log(g());</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<blockquote>
+<p>不管条件是否成立，判断体当中出现的var和function都会进行变量提升，但是新版本浏览器当中，function声明的变量只能提前声明不能定义了（函数是在判断体当中）<br>代码执行到判断地方<br>1）条件不成立;进入不到判断体当中赋值的代码执行不了，此事之前声明的变量或者函数依然是undefined。<br>2）条件成立：进入条件判断体中的第一件事情不是代码执行，而是把之前变量提升没有定义的函数首先定义了（进入到判断体中函数就定义了：迎合ES6中的块级作用域）<br>老版本浏览器不是这样处理的：不管条件是否成立，都要进行变量提升（和新版不一样的地方，新版本function只是声明，老版本function依然是声明+定义）</p>
+</blockquote>
+<h5 id="关于重名的处理"><a href="#关于重名的处理" class="headerlink" title="关于重名的处理"></a>关于重名的处理</h5><blockquote>
+<p>在变量提升阶段，如果名字重复了，不会重新的进行声明，但是会重新的进行定义（后面赋的值会把前面赋的值给替换掉）<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">function fn() &#123;</span><br><span class="line">    var i = 1;</span><br><span class="line">    return function (n) &#123;</span><br><span class="line">        console.log(n + i++);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">var f = fn();</span><br><span class="line">f(10);//-&gt;11</span><br><span class="line">fn()(10);//-&gt;11</span><br><span class="line">f(20);//-&gt;22</span><br><span class="line">fn()(20);//-&gt;21</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
 
   
 
@@ -249,7 +418,9 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">node&&git基本应用</h1>
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/04/21/node-git基本应用/" itemprop="url">node&&git基本应用</a></h1>
         
 
         <div class="post-meta">
@@ -299,7 +470,9 @@
       
 
       
-        <h3 id="node-amp-GIT基础知识"><a href="#node-amp-GIT基础知识" class="headerlink" title="node &amp; GIT基础知识"></a>node &amp; GIT基础知识</h3><h3 id="安装node"><a href="#安装node" class="headerlink" title="安装node"></a>安装node</h3><ul>
+        
+          
+            <h3 id="node-amp-GIT基础知识"><a href="#node-amp-GIT基础知识" class="headerlink" title="node &amp; GIT基础知识"></a>node &amp; GIT基础知识</h3><h3 id="安装node"><a href="#安装node" class="headerlink" title="安装node"></a>安装node</h3><ul>
 <li>官网下载，一直下一步，最好下c盘。<br>或者：拷贝别人下载好的，</li>
 <li>到我的电脑-属性-高级设置-环境变量-path-添加node的安装目录。</li>
 <li>验证是否成功:win+R-&gt;cmd-&gt;node -version,npm -v能出现版本号代表安装成功，不能出现版本号，按照上一步配置环境变量即可。<h3 id="node基础概念"><a href="#node基础概念" class="headerlink" title="node基础概念"></a>node基础概念</h3>1.node并不是一门语言，他是一个工具或者一个运行环境基于v8引擎渲染和解析js的。</li>
@@ -464,6 +637,8 @@ $git config --global user.email xxx</code></p>
 </ul>
 <p>操作分支的基础命令<br><code>$git branch</code> 查看现有的分支<br><code>$git branch xxx</code>创建一个新的分支<br><code>$git checkout xxx</code>切换到某个分支上<br><code>$git checkout -b xxx</code>创建一个新分支并且切换到这个分支上<br><code>$git branch -D xxx</code>删除某个分支（一定要切换到其他分支上才可以删除当前分支）<br><code>$git merge xxx</code>合并分支内容<br><code>$git log --graph /--oneline</code><br>在有分支的情况下，可以更清楚查看分支的提交和合并内容</p>
 
+          
+        
       
     </div>
     
@@ -480,28 +655,12 @@ $git config --global user.email xxx</code></p>
       
 
       
-      
+
       
 
       
-        <div class="post-nav">
-          <div class="post-nav-next post-nav-item">
-            
-          </div>
-
-          <span class="post-nav-divider"></span>
-
-          <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/05/04/变量提升/" rel="prev" title="变量提升">
-                变量提升 <i class="fa fa-chevron-right"></i>
-              </a>
-            
-          </div>
-        </div>
       
-
-      
+        <div class="post-eof"></div>
       
     </footer>
   </div>
@@ -511,11 +670,14 @@ $git config --global user.email xxx</code></p>
   </article>
 
 
+    
+  </section>
 
-    <div class="post-spread">
-      
-    </div>
-  </div>
+  
+  <nav class="pagination">
+    <a class="extend prev" rel="prev" href="/page/3/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span>
+  </nav>
+
 
 
           </div>
@@ -523,10 +685,6 @@ $git config --global user.email xxx</code></p>
 
 
           
-
-  
-
-
 
         </div>
         
@@ -547,17 +705,8 @@ $git config --global user.email xxx</code></p>
       
 
       
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            Table of Contents
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            Overview
-          </li>
-        </ul>
-      
 
-      <section class="site-overview-wrap sidebar-panel">
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -599,22 +748,6 @@ $git config --global user.email xxx</code></p>
         </div>
       </section>
 
-      
-      <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#node-amp-GIT基础知识"><span class="nav-number">1.</span> <span class="nav-text">node &amp; GIT基础知识</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安装node"><span class="nav-number">2.</span> <span class="nav-text">安装node</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#node基础概念"><span class="nav-number">3.</span> <span class="nav-text">node基础概念</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#npm模块管理"><span class="nav-number">4.</span> <span class="nav-text">npm模块管理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#github"><span class="nav-number">5.</span> <span class="nav-text">github</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#git的基础知识"><span class="nav-number">6.</span> <span class="nav-text">git的基础知识</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#git操作步骤"><span class="nav-number">7.</span> <span class="nav-text">git操作步骤</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#提交本地项目的另外一种方式："><span class="nav-number">8.</span> <span class="nav-text">提交本地项目的另外一种方式：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#提交项目"><span class="nav-number">9.</span> <span class="nav-text">提交项目</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Linux操作系统常用命令"><span class="nav-number">10.</span> <span class="nav-text">Linux操作系统常用命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#git配置"><span class="nav-number">11.</span> <span class="nav-text">git配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Git工作原理和流程"><span class="nav-number">12.</span> <span class="nav-text">Git工作原理和流程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#把本地的版本代码推送到中央仓库上"><span class="nav-number">13.</span> <span class="nav-text">把本地的版本代码推送到中央仓库上</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#无分支模式下的团队协作"><span class="nav-number">14.</span> <span class="nav-text">无分支模式下的团队协作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#单独分支管理"><span class="nav-number">15.</span> <span class="nav-text">单独分支管理</span></a></li></ol></div>
-            
-
-          </div>
-        </section>
-      <!--/noindex-->
       
 
       
@@ -748,10 +881,6 @@ $git config --global user.email xxx</code></p>
   
 
   
-  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
-<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
-
-
 
   
 

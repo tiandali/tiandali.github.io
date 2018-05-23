@@ -1,0 +1,694 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="前端性能优化 一：主要是减少HTTP请求次数和请求大小，二：代码优化，有利于seo,扩展维护，减少性能消耗,[JS代码优化的108条建议]三：DNS及HTTP通信方式的优化。  1.在JS中尽量减少闭包的使用，原因：闭包会产生不释放的栈内存。A：循环给元素做事件绑定的时候尽可能的把后期需要的信息，例如索引存储到元素的自定义上，而不是创建闭包存储。B：可以在最外层形成一个闭包，把一些后续需要的公共信">
+<meta property="og:type" content="article">
+<meta property="og:title" content="前端性能优化">
+<meta property="og:url" content="http://yoursite.com/2018/05/24/前端性能优化/index.html">
+<meta property="og:site_name" content="tiandali">
+<meta property="og:description" content="前端性能优化 一：主要是减少HTTP请求次数和请求大小，二：代码优化，有利于seo,扩展维护，减少性能消耗,[JS代码优化的108条建议]三：DNS及HTTP通信方式的优化。  1.在JS中尽量减少闭包的使用，原因：闭包会产生不释放的栈内存。A：循环给元素做事件绑定的时候尽可能的把后期需要的信息，例如索引存储到元素的自定义上，而不是创建闭包存储。B：可以在最外层形成一个闭包，把一些后续需要的公共信">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2018-05-23T16:51:38.960Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="前端性能优化">
+<meta name="twitter:description" content="前端性能优化 一：主要是减少HTTP请求次数和请求大小，二：代码优化，有利于seo,扩展维护，减少性能消耗,[JS代码优化的108条建议]三：DNS及HTTP通信方式的优化。  1.在JS中尽量减少闭包的使用，原因：闭包会产生不释放的栈内存。A：循环给元素做事件绑定的时候尽可能的把后期需要的信息，例如索引存储到元素的自定义上，而不是创建闭包存储。B：可以在最外层形成一个闭包，把一些后续需要的公共信">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/05/24/前端性能优化/"/>
+
+
+
+
+
+  <title>前端性能优化 | tiandali</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">tiandali</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/24/前端性能优化/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="tiandali">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="tiandali">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">前端性能优化</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-05-24T00:50:10+08:00">
+                2018-05-24
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="前端性能优化"><a href="#前端性能优化" class="headerlink" title="前端性能优化"></a>前端性能优化</h3><blockquote>
+<p>一：主要是减少HTTP请求次数和请求大小，<br>二：代码优化，有利于seo,扩展维护，减少性能消耗,[JS代码优化的108条建议]<br>三：DNS及HTTP通信方式的优化。</p>
+<ul>
+<li>1.在JS中尽量减少闭包的使用，原因：闭包会产生不释放的栈内存。<br>A：循环给元素做事件绑定的时候尽可能的把后期需要的信息，例如索引存储到元素的自定义上，而不是创建闭包存储。<br>B：可以在最外层形成一个闭包，把一些后续需要的公共信息进行存储，而不是每一个方法都创建闭包（例如单例模式）<br>C：尽可能的手动释放不被占用的内存]</li>
+<li>2.尽量合并css和js文件，原理是减少HTTP请求次数，尽可能的把合并后的代码进行压缩，减少HTTP请求资源的大小。<br>A：webpack这种自动化构建工具，可以帮我们实现代码的合并和压缩，（工程化开发）<br>B：在移动端开发中，或者追求高性能的pc端开发，例如百度首页，如果css或者js不是需要很多，我们可以选择把css和js编程内嵌式（也就是直接写在HTML里）。</li>
+<li>3.尽量使用字体图标或者SVG图标来代替传统的PNG等格式的图片，（因为字体图片等是矢量图（基于代码编写出来的）放大不会变形，而且渲染速度快，相对比位图要小一点）</li>
+<li>4.减少对DOM的操作，主要是减少DOM重绘和回流。<br>A：关于重排的分离读写<br>B：使用文档碎片或者字符串拼接做数据绑定（DOM的动态创建）</li>
+<li>5在JS避免”嵌套循环”（这种会和外增加很多循环次数，）和死循环（一旦晕倒死循环浏览器就卡壳了）</li>
+<li>6.采用图片的懒加载，延迟加载。<br>A 目的是为了减少页面第一次加载过程中HTTP的请求次数<br>B 步骤：开始加载页面的时候所有的真实图片都不去发送HTTP请求加载，而是给一张占位的背景图，当页面加载完，而且图片在可视区域内我们再去做图片加载</li>
+<li>7.利用浏览器和服务器的缓存技术，304缓存，把一些不经常更新的静态资源文件，例如JS，css，静态图片等都可以做缓存</li>
+<li>8.尽可能使用事件委托（事件处理）来处理事件绑定的操作，减少DOM频繁操作，其中包括每一个DOM元素做事件绑定</li>
+<li>9.尽量减少CSS表达式的使用、<br>A：expression;<br>例如：left:expression(documen.body.offsetWideth-100+”px”);</li>
+<li>10.css选择器解析规则从右向左解析<code>.container .link a{...}</code>先找到所有A在筛选..link样式类的，再次筛选是在.container样式类中的…先找到所有的A，操作起来的消耗性能的，我们使用css是选择器的时候尽可能减少对标签选择器的使用</li>
+<li>11.css雪碧图css sprite,把所有相对较小的资源图片汇总到一张大图上，后期我么只需要把大图加载下来，用背景定位的方式展示对应的小图即可</li>
+<li>12减少本地cookie的使用，最主要的是减少本地cookie存储内容的大小，因为客户端操作cookie的时候，这些信息总在客户端和服务器端传来传去</li>
+<li>13.页面中的数据获取采用异步编程和延迟分批加载<br>A：使用异步获取数据是为了降低HTTP通道的堵塞不会因为数据没有请求回来耽误下面信息的渲染，提高页面的打开速度（我们可以这样处理，需要动态绑定数据的区域先隐藏等数据返回并且绑定完成后在让其显示。）<br>延迟分批加载类似于图片懒加载，是为了减少第一次页面加载时候的HTTP请求次数。<br>-14.页面中音视频标签，我们为了不让页面加载的时候就去加载这些资源，要不然加载会很慢，方案只需要设置preload=“none”等待页面加载完成，音视频播放的时候我们在去加载音视频资源</li>
+<li>15在客户端和服务器端进行信息交互的时候，对于多项数据我们尽可能基于json格式来进行传送（json格式的数据处理方便，资源小），相对于XML格式的传输才会有这个优势</li>
+<li>16.尽可能实现js的封装，低耦合高内聚，减少页面中的冗余代码</li>
+<li>17 css设置定位后，最好使用zindex改变盒子的层级，让所有的盒子不在相同的平面上，这样后续处理的时候，性能有那么一丢丢的提高。</li>
+<li>18.基于Ajax的get请求进行数据交互的时候，根据需求可以让其产生缓存（这个缓存不是304缓存）这样下一次从相同地址获取的数据是上一次缓存的数据，但是很少用项目中一般刻意清除这个缓存的时候偏多</li>
+<li>19.减少对于filter滤镜的使用</li>
+<li>20.css导入减少@import导入式，因为@import是同步操作，只有把这个对应的css导入，才会向下加载，而link是异步操作</li>
+<li>21.配置Etag</li>
+<li>22  使用window.requestAnimationFram(js中的桢动画)代替传统的定时器动画</li>
+<li>23 .减少递归的使用，避免死递归，避免由于递归导致的栈内存嵌套（建议使用伪递归）</li>
+<li>24 .避免使用iframe(不仅不好管控样式，而且相当于在a页面中加载了其他页面，消耗较大)</li>
+<li>25.利用h5中提供的localstorage本地存储或者mainfest离线缓存，做些信息的本地存储，下一次加载页面的时候直接从本地获取，减少http请求次数。</li>
+<li>26..基于script调取js的时候，可以使用 defer 或者 async 来异步加载</li>
+</ul>
+</blockquote>
+<blockquote>
+<p>重量级优化：CDN加速（烧钱机器）<br>地域式服务器分布，在热门地域附近设置服务器机组，附近的用户访问的都是离其最近的机组（提高访问速度）</p>
+</blockquote>
+<blockquote>
+<p>额外：<br>1.一般把css放在body上，JS放在body下，原因是让其先加载CSS后加载JS。为了保证页面渲染过程中元素是带着样式渲染的，而js一般都是用来操作DOM元素的，需要等到元素加载完在操作。<br>2.能用css搞定的绝对不用JS，能用原生JS搞定的绝对不用插件，绝对不是用FLASH除了音频的低版本浏览器播放<br>=》css处理动画等功能性能优于JS，而且css中的transfrom变形还开启了硬件加速。<br>3.js中尽量减少对eval的使用，因为js合并压缩的时候，可能出现由于符号不完善，导致的代码执行优先级优先于错误代码<br>4.使用keep-alive实现客户端和服务器端的长连接<br>5.尽量使用设计模式来管理我们的代码（单例、构造、Promise、发布订阅），方便后期的升级和维护<br>6.开启服务器端的gzip压缩（这个压缩可以有效减少请求资源文件的大小），其实客户端的图片等资源也是可以进行压缩的（但是对于24位的位图，压缩后可能会变模糊）<br>7.页面中不要出现无效的连接，利于seo优化，还有其他<br>8.避免使用with语句（非常耗性能）</p>
+</blockquote>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/05/22/面试题/" rel="next" title="面试题">
+                <i class="fa fa-chevron-left"></i> 面试题
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/05/24/打开浏览器输入网址按下enter键，到网页呈现经历了什么？/" rel="prev" title="打开浏览器输入网址按下enter键，到网页呈现经历了什么？">
+                打开浏览器输入网址按下enter键，到网页呈现经历了什么？ <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">tiandali</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">32</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#前端性能优化"><span class="nav-number">1.</span> <span class="nav-text">前端性能优化</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">tiandali</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

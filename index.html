@@ -229,6 +229,759 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/24/ajax/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="tiandali">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="tiandali">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/05/24/ajax/" itemprop="url">ajax</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-05-24T01:25:15+08:00">
+                2018-05-24
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="ajax"><a href="#ajax" class="headerlink" title="ajax"></a>ajax</h3><blockquote>
+<p> async javascript and xml<br>在ajax的异步不是我们理解的同步异步编程，而是泛指局部刷新，但是我们在以后的Ajax请求中尽可能使用异步获取数据（因为异步数据获取不会阻塞下面代码的执行）<br>客户端从服务器端获取数据<br>XML:可扩展标记语言，利用扩展有规则标记，来存储相关数据和内容。<br>好处是：清晰的展示出数据的结构<br>json:也很清晰的展示出数据的结构，并且访问数据的时候操作起来比XML更方便<br>现实项目中服务器返回给客户端数据不单纯的是数据，而是数据和需要展示的结构拼接好的结果，类似于我们自己做的字符串拼接，是服务端把数据和结构拼接好返回给我们，此时返回的数据格式一般是XML格式的字符串</p>
+</blockquote>
+<p>ajax:客户端js中的方法，用来向服务器端发送请求，然后把服务器端返回的内容获取到，一般运行在客户端的浏览器中</p>
+<p><strong>ajax的诞生是为了实现局部刷新</strong></p>
+<blockquote>
+<p><strong>服务器端渲染的好处</strong><br> 1.有利于seo优化，有利于引擎收录，但是客户端做字符串拼接，呈现出来的内容在页面源代码是没有 的不利于seo<br>2.只要服务器端并发给力，页面加载速度与会比客户端渲染更快<br>很多大网站比如淘宝京东，首屏内容都是基于服务器端渲染的客户端获取XML数据后直接呈现，增加页面第一次打开速度而剩下屏中的内容都是基于Ajax获取数据，在客户端进行数据拼接渲染的</p>
+</blockquote>
+<blockquote>
+<ul>
+<li>基于Ajax向服务器发送请求获取数据，不管是json还是服务器渲染好的XML文档都是<strong>前后端分离</strong>的项目<br>A:不利于SEO优化（源代码中看不到动态添加的数据）<br>B：都可以实现“局部刷新”<br>例如京东，首屏数据是基于Ajax从服务器端获取的XML字符串（服务器端渲染）其他屏数据是从服务器获取json，客户端拼接字符串掺入到指定的区域中（客户端渲染）</li>
+</ul>
+</blockquote>
+<blockquote>
+<ul>
+<li>不基于Ajax，直接通过浏览器向服务器发送请求，服务器把需要呈现的内容返回，这种模式是<strong>非前后端分离项目</strong><br>A:不利于SEO优化<br>B:只能实现全局刷新<br>C:请求页面的后缀名一般都不是HTML，而是.php/.jsp/.aspx/.asp…也有HTML，但是是基于node做后台实现服务器渲染的，注意原始地址可能被重新修改URL重写</li>
+</ul>
+</blockquote>
+<blockquote>
+<ul>
+<li>还有一些项目，首屏是不分离的，浏览器向服务器发送请求，服务器端直接把首屏内容返回，客户端h直接显示，但是其他屏都是基于AJAX获取的，这种叫做<strong>前后端半分离</strong>，例如淘宝</li>
+</ul>
+</blockquote>
+<hr>
+<blockquote>
+<p>一：let xhr=new XMLHttpRequest;</p>
+<ul>
+<li>创建一个Ajax对象，ie6中不兼容的，使用的是new ActiveXobject来实现</li>
+</ul>
+</blockquote>
+<hr>
+<blockquote>
+<p>二：xhr.open(“get”,”json/data.json”,false，[username],[userpass]);</p>
+<ul>
+<li>发送前的基本信息配置：<br>1.get:从服务器获取数据，最常用，一般使用问号传参的方式，传递给服务器的内容存在<code>大小限制</code>，因为浏览器对于url有长度限制，还会出现<code>缓存</code>问题。可以在末尾加一个随机数解决。一般来说get不安全，而post相对安全一些<br>2.打开一个URL地址:向服务器端发送请求的API接口地址，<br>3.同步还是异步，true是异步；项目中都使用异步编程，防止阻塞后续代码执行。</li>
+</ul>
+</blockquote>
+<hr>
+<blockquote>
+<p>三：xhr.onreadystatechange=function(){<br>if（xhr.readyState=====4&amp;&amp;xhr.status=====200）{<br>let val=xhr.responseText;l}}</p>
+</blockquote>
+<blockquote>
+<ul>
+<li>事件监听：一般监听的都是ready-state-change事件，基于这个时间可以获取服务器返回的响应头响应主体内容<br>给onreadystatechange绑定一个方法，监听状态改变，一改变就触发</li>
+</ul>
+</blockquote>
+<blockquote>
+<p><strong>xhr.readyState:</strong><br>0 unsent 当前概念的请求还没有发送<br>1 opened url 地址已经打开<br>2 headers ——received响应头已经接受<br>3 loading 主要返回的内容正在服务器端进行准备处理<br>4 done 响应主题的内容已经成功返回到客户端</p>
+</blockquote>
+<hr>
+<blockquote>
+<p><strong>xhr.status状态码</strong><br>根据状态吗能够清楚的反映出当前交互的结果以及原因<br>200 ok 成功，只能证明服务器成功返回信息了，但是信息不一定是你业务需要的<br>301 永久转移/永久重定向 =》域名更改重新定向到新的域名<br>302 临时转移<br> 网站现在是基于https协议运作的，如果访问的是HTTP协议会基于307重定向到HTTPS协议上，一般用做服务器负载均衡。<br> 当一台服务器达到最大并发数的时候会把后续访问的用户临时转移到其他的服务器机组上处理。<br> 偶尔真实项目中会把所有的图片放到单独的服务器上、图片处理服务器这样减少主服务器的压力当用户向主服务器访问图片的时候，主服务器都把他转移到图片服务器上处理<br>307 临时重定向<br>304 not modified 设置缓存<br>对于不经常更新的资源文件例如../js/html/img等，服务器会结合客户端设置304缓存，第一次加载过这些资源就缓存到客户端了，下次再获取的时候是从缓存中获取；如果资源更新了，服务器端会通过最后修改时间来强制让客户端从服务器重新拉取；基于CTRL+F5强制刷新页面，304做的缓存就没有用了</p>
+</blockquote>
+<blockquote>
+<p>400   请求参数出现错误<br>401  无访问权限<br>404 客户端访问的地址不存在<br>413 和服务器交互的内容资源超过服务器最大限制</p>
+</blockquote>
+<blockquote>
+<p>500 未知的服务器错误<br>503 服务器超负载。</p>
+</blockquote>
+<hr>
+<blockquote>
+<p>关于XHR的属性和方法、</p>
+</blockquote>
+<blockquote>
+<p>xhr.response 响应主体<br>xhr.responseText 响应主体的内容是字符串（XML或者JSON字符串都可以）<br>xhr.responseXML 响应主体内容是XML</p>
+</blockquote>
+<blockquote>
+<p>xhr.status:返回的HTTP状态码<br>xhr.statusText：状态码的描述</p>
+</blockquote>
+<blockquote>
+<p>xhr.timeout：设置请求超时的时间<br>xhr.withCredentials 是否跨域false</p>
+</blockquote>
+<blockquote>
+<p>xhr.abort ()：强制中断<br>xhr.getALLResponseHeaders()获取响应头信息<br>xhr.getResponseHeader([key])获取key对应的响应头信息，例如xhr.getResponseHeader(‘data’)获取响应头中的时间<br>xhr.open()打开url请求<br>xhr.overrideMimeType()重写MIME类型<br>xhr.send()发送AJAX请求<br>xhr.setRequestHeader()设置请求头。</p>
+</blockquote>
+<hr>
+<blockquote>
+<p>四：xhr.send([请求主体内容])；</p>
+<ul>
+<li>发送请求，参数是请求主体中传递服务器的内容；<br>从这步开始当前Ajax任务开始，如果Ajax是同步的后续代码不会执行，要等到Ajax状态成功后再执行，反之异步不会</li>
+</ul>
+</blockquote>
+<hr>
+<blockquote>
+<p>关于HTTP请求方式的一点学习<br>所有的请求都可以给服务器端传递内容，也都可以从服务器端获取内容<br>get:从服务器获取数据，最常用，一般使用问号传参的方式，传递给服务器的内容存在<code>大小限制</code>，因为浏览器对于url有长度限制，还会出现<code>缓存</code>问题。可以在末尾加一个随机数解决。一般来说get不安全，而post相对安全一些<br>post:一般用于向服务器推送数据，一般使用请求主体的方式<br>put:一般用于，给服务器增加资源文件（上传图片）<br>delete:一般用于从服务器删除资源文件<br>head：一般用于获取服务器的响应头信息。<br>options:一般使用它向服务器发送一个探测性请求，如果服务器端返回的信息了，说明当前客户端和服务器建立了连接，我们可以继续执行其他请求了（trace是干这件事的，但是axios这个Ajax类库再给予cross domain进行跨域请求的时候，就是先发送options请求进行探测尝试，如果能连通服务器，才会继续发送其他请求的）<br>trace:回显服务器收到的请求，主要用于测试或诊断<br>connect:HTTP/1.1协议中预留给能够连接改为管道方式的</p>
+</blockquote>
+<hr>
+<blockquote>
+<p>get  vs  post<br>传递给服务器信息的方式不一样<br>get是基于URL地址问号传参的方式把信息传递给服务器，post是基于请求主体把信息传递给服务器.<br>get不安全，post相对安全<br>post是基于请求主体传递，相对来说不好被劫持，所以登陆注册等涉及安全性的交互操作，我们都应该用post请求<br>get 会产生不可控制的缓存，post不会<br>不可控：不是想要就要的，这是浏览器自主记忆的缓存，我们无法基于JS控制，真实项目中我们都会把这个缓存干掉<br>get请求产生缓存的原因;连续多次向相同的地址并且传递的参数信息也是相同的发送请求浏览器会把之前或获取的数据从还从中拿到返回，导致无法获取服务器最新的数据（post不会）<br>解决方案：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">xhr.open(&apos;get&apos;,`https://www.easy-mock.com/mock/5b0412beda8a195fb0978627/temp/list ?id=1000&amp;lx=2000&amp;_=$&#123;Math.random()&#125;`);//保证每次请求的地址不完全一致，在每一次请求的末尾追加一个随机数即可，(使用_作为属性名就是不想和其他的属性名冲突)</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/24/HTTP报文/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="tiandali">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="tiandali">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/05/24/HTTP报文/" itemprop="url">HTTP报文</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-05-24T01:23:49+08:00">
+                2018-05-24
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="HTTP报文"><a href="#HTTP报文" class="headerlink" title="HTTP报文"></a>HTTP报文</h3><blockquote>
+<p>首部（头）：请求头、响应头、通用头<br>起始行：请求起始行、响应起始行<br>主体：请求主体、响应主体</p>
+</blockquote>
+<p><code>General 通用头</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Request URL: http://www.zhufengpeixun.cn //请求地址</span><br><span class="line">Request Method: GET   //请求方式（GET / POST / DELEFT / PUT / HEAD OPTION）</span><br><span class="line">Status Code: 304 Not Modified   //响应的http状态码</span><br><span class="line">Remote Address: 162.159.211.54:80  // 主机地址（服务器外网IP地址）</span><br><span class="line">Referrer Policy: unsafe-url</span><br></pre></td></tr></table></figure>
+<p><code>Request Header 请求头 【客户端设置，服务器接收】</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">GET / HTTP/1.1  //=&gt; 起始行（描述当前请求的一些基本信息：用的是1.1版本传输协议进行内容传输的）</span><br><span class="line">Host: www.zhufengpeixun.cn</span><br><span class="line">Connection: keep-alive</span><br><span class="line">Cache-Control: max-age=0</span><br><span class="line">Upgrade-Insecure-Requests: 1</span><br><span class="line">User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64) </span><br><span class="line">...</span><br><span class="line">Accept-Encoding: gzip, deflate</span><br><span class="line">Accept-Language: zh-CN,zh;q=0.9</span><br><span class="line">Cookie: ... =&gt; cookie信息一般都是放到头文件中实现和服务器端的数据通信的</span><br><span class="line">If-Modified-Since: Sun, 06 May 2018 10:02:42 GMT</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+<p><code>Response Headers 响应头 【服务器端设置，客户端获取】</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">HTTP/1.1 304 Not Modified   //=&gt; 响应起始行（HTTP状态码）</span><br><span class="line">Date: Tue, 22 May 2018 09:20:59 GMT  //=&gt; 服务器响应内容时候的‘服务器端时间’（客户端获取这个时间的时候已经和真实的时间产生误差了，因为服务器返回内容到客户端接收到，也是需要时间的），并且这个时间是格林尼治时间（比北京时间慢8小时， 北京时间是 GMT+0800）</span><br><span class="line">Connection: keep-alive </span><br><span class="line">ETag: &quot;700a6f-17f43-56b86a77513d3&quot;</span><br><span class="line">Vary: Accept-Encoding,User-Agent</span><br><span class="line">Server: yunjiasu-nginx  //=&gt;管理web服务的工具 </span><br><span class="line">CF-RAY: 41ee35bd772192c4-SJC</span><br></pre></td></tr></table></figure>
+<p><code>Response [响应主体]</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">服务器返回的是啥就是啥</span><br></pre></td></tr></table></figure></p>
+<p><code>Request Payload / Form Data [请求主体]</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">客户端传递给服务器的内容</span><br></pre></td></tr></table></figure></p>
+<blockquote>
+<p>2.大家了解HTTP报文以及如何查看对未来工作开发和bug调试至关重要，以后设计到交互功能（前端《=》后台）出现问题，都按照如下方式查找问题原因<br>A：打开控制台，在network中找到当前交互的请求地址，点击进去看详情<br>B：如果是传递给服务器的参数或者方式错误（前端问题）<br>C：如果服务器返回的信息有错误或者API接口文档规定的内容不一样[后台问题]<br>D：如果返回数据是对的，但是展示有问题（前端问题）<br>确定是自己前端的问题后，基于断点或者（代码中的debugger）控制台输出等方式，开始逐步调试即可。<br>3.客户端和服务器端信息交互的方式<br>客户端传递给服务器<br>A:问号传参 ，请求的URL地址末尾通过问号传参方式，把以写信息传递给服务器、/stu/info?id=12&amp;lx=man<br>B:设置请求头<br>客户端把需要传递给服务器的内容设置到请求头信息中（自定义请求头），服务器可以通过接受请求头信息把内容得到<br>C：设置请求头主体<br>xhr.send([ajax send中传递的内容就是客户端设置的请求主体内容，服务器端可以接收到这些信息的])<br>[服务器返回给客户端]<br>A设置响应头信息<br>例如把服务时间通过响应头返回给客户端，客户端通过获取响应头信息得到这个时间（响应头返回的速度是优先于响应主体的）<br>B设置响应主体<br>主要的返回信息都在相应主体中</p>
+</blockquote>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/24/打开浏览器输入网址按下enter键，到网页呈现经历了什么？/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="tiandali">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="tiandali">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/05/24/打开浏览器输入网址按下enter键，到网页呈现经历了什么？/" itemprop="url">打开浏览器输入网址按下enter键，到网页呈现经历了什么？</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-05-24T01:21:39+08:00">
+                2018-05-24
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="打开浏览器，输入网址，按下enter键，到看到整个页面，中间都经历了哪些事情？"><a href="#打开浏览器，输入网址，按下enter键，到看到整个页面，中间都经历了哪些事情？" class="headerlink" title="打开浏览器，输入网址，按下enter键，到看到整个页面，中间都经历了哪些事情？"></a>打开浏览器，输入网址，按下enter键，到看到整个页面，中间都经历了哪些事情？</h3><p>1.浏览器首先向DNS域名解析服务器发请求<br>2.DNS反解析：根据浏览器请求地址中的域名，到DNS服务器中找到对应的服务器外网IP地址<br>3.通过找到外网IP向对应的服务器发送请求（首先访问的是服务器的web站点管理工具：准确来说我们是先基于工具在服务器上创建很多服务，当客户端访问的时候服务器会匹配出具体是请求那个服务）<br>4.通过URL地址携带的端口号，找到服务器上对应的服务，以及服务所管理的项目源文件<br>5.服务器端根据请求的地址中的路径名称，问号传参或者哈希值，把客户端所需要的内容进行准备和处理<br>6.把准备的内容响应给客户端（如果请求的是HTML或者css等这样的资源文件，服务器返回的是资源文件中的源代码（不是文件本身，音视频除外））<br>7.客户端浏览器接收到服务器返回的源代码，基于自己内部的渲染引擎（内核）开始进行页面的绘制和渲染<br>-&gt;首先计算DOM结构，生产DOMtree<br>-&gt;自上而下运行代码，加载css等资源文件<br>-&gt;根据获取的css生成样式，开始渲染（绘制）页面Render tree<br>-&gt;开始渲染和绘制A<br>HTTP请求阶段：1-4；<br>HTTP：响应阶段5-6；服务器把客户端需要的内容准备好并且返回客户端<br>浏览器渲染阶段：7；</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/24/前端性能优化/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="tiandali">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="tiandali">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/05/24/前端性能优化/" itemprop="url">前端性能优化</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-05-24T00:50:10+08:00">
+                2018-05-24
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="前端性能优化"><a href="#前端性能优化" class="headerlink" title="前端性能优化"></a>前端性能优化</h3><blockquote>
+<p>一：主要是减少HTTP请求次数和请求大小，<br>二：代码优化，有利于seo,扩展维护，减少性能消耗,[JS代码优化的108条建议]<br>三：DNS及HTTP通信方式的优化。</p>
+<ul>
+<li>1.在JS中尽量减少闭包的使用，原因：闭包会产生不释放的栈内存。<br>A：循环给元素做事件绑定的时候尽可能的把后期需要的信息，例如索引存储到元素的自定义上，而不是创建闭包存储。<br>B：可以在最外层形成一个闭包，把一些后续需要的公共信息进行存储，而不是每一个方法都创建闭包（例如单例模式）<br>C：尽可能的手动释放不被占用的内存]</li>
+<li>2.尽量合并css和js文件，原理是减少HTTP请求次数，尽可能的把合并后的代码进行压缩，减少HTTP请求资源的大小。<br>A：webpack这种自动化构建工具，可以帮我们实现代码的合并和压缩，（工程化开发）<br>B：在移动端开发中，或者追求高性能的pc端开发，例如百度首页，如果css或者js不是需要很多，我们可以选择把css和js编程内嵌式（也就是直接写在HTML里）。</li>
+<li>3.尽量使用字体图标或者SVG图标来代替传统的PNG等格式的图片，（因为字体图片等是矢量图（基于代码编写出来的）放大不会变形，而且渲染速度快，相对比位图要小一点）</li>
+<li>4.减少对DOM的操作，主要是减少DOM重绘和回流。<br>A：关于重排的分离读写<br>B：使用文档碎片或者字符串拼接做数据绑定（DOM的动态创建）</li>
+<li>5在JS避免”嵌套循环”（这种会和外增加很多循环次数，）和死循环（一旦晕倒死循环浏览器就卡壳了）</li>
+<li>6.采用图片的懒加载，延迟加载。<br>A 目的是为了减少页面第一次加载过程中HTTP的请求次数<br>B 步骤：开始加载页面的时候所有的真实图片都不去发送HTTP请求加载，而是给一张占位的背景图，当页面加载完，而且图片在可视区域内我们再去做图片加载</li>
+<li>7.利用浏览器和服务器的缓存技术，304缓存，把一些不经常更新的静态资源文件，例如JS，css，静态图片等都可以做缓存</li>
+<li>8.尽可能使用事件委托（事件处理）来处理事件绑定的操作，减少DOM频繁操作，其中包括每一个DOM元素做事件绑定</li>
+<li>9.尽量减少CSS表达式的使用、<br>A：expression;<br>例如：left:expression(documen.body.offsetWideth-100+”px”);</li>
+<li>10.css选择器解析规则从右向左解析<code>.container .link a{...}</code>先找到所有A在筛选..link样式类的，再次筛选是在.container样式类中的…先找到所有的A，操作起来的消耗性能的，我们使用css是选择器的时候尽可能减少对标签选择器的使用</li>
+<li>11.css雪碧图css sprite,把所有相对较小的资源图片汇总到一张大图上，后期我么只需要把大图加载下来，用背景定位的方式展示对应的小图即可</li>
+<li>12减少本地cookie的使用，最主要的是减少本地cookie存储内容的大小，因为客户端操作cookie的时候，这些信息总在客户端和服务器端传来传去</li>
+<li>13.页面中的数据获取采用异步编程和延迟分批加载<br>A：使用异步获取数据是为了降低HTTP通道的堵塞不会因为数据没有请求回来耽误下面信息的渲染，提高页面的打开速度（我们可以这样处理，需要动态绑定数据的区域先隐藏等数据返回并且绑定完成后在让其显示。）<br>延迟分批加载类似于图片懒加载，是为了减少第一次页面加载时候的HTTP请求次数。<br>-14.页面中音视频标签，我们为了不让页面加载的时候就去加载这些资源，要不然加载会很慢，方案只需要设置preload=“none”等待页面加载完成，音视频播放的时候我们在去加载音视频资源</li>
+<li>15在客户端和服务器端进行信息交互的时候，对于多项数据我们尽可能基于json格式来进行传送（json格式的数据处理方便，资源小），相对于XML格式的传输才会有这个优势</li>
+<li>16.尽可能实现js的封装，低耦合高内聚，减少页面中的冗余代码</li>
+<li>17 css设置定位后，最好使用zindex改变盒子的层级，让所有的盒子不在相同的平面上，这样后续处理的时候，性能有那么一丢丢的提高。</li>
+<li>18.基于Ajax的get请求进行数据交互的时候，根据需求可以让其产生缓存（这个缓存不是304缓存）这样下一次从相同地址获取的数据是上一次缓存的数据，但是很少用项目中一般刻意清除这个缓存的时候偏多</li>
+<li>19.减少对于filter滤镜的使用</li>
+<li>20.css导入减少@import导入式，因为@import是同步操作，只有把这个对应的css导入，才会向下加载，而link是异步操作</li>
+<li>21.配置Etag</li>
+<li>22  使用window.requestAnimationFram(js中的桢动画)代替传统的定时器动画</li>
+<li>23 .减少递归的使用，避免死递归，避免由于递归导致的栈内存嵌套（建议使用伪递归）</li>
+<li>24 .避免使用iframe(不仅不好管控样式，而且相当于在a页面中加载了其他页面，消耗较大)</li>
+<li>25.利用h5中提供的localstorage本地存储或者mainfest离线缓存，做些信息的本地存储，下一次加载页面的时候直接从本地获取，减少http请求次数。</li>
+<li>26..基于script调取js的时候，可以使用 defer 或者 async 来异步加载</li>
+</ul>
+</blockquote>
+<blockquote>
+<p>重量级优化：CDN加速（烧钱机器）<br>地域式服务器分布，在热门地域附近设置服务器机组，附近的用户访问的都是离其最近的机组（提高访问速度）</p>
+</blockquote>
+<blockquote>
+<p>额外：<br>1.一般把css放在body上，JS放在body下，原因是让其先加载CSS后加载JS。为了保证页面渲染过程中元素是带着样式渲染的，而js一般都是用来操作DOM元素的，需要等到元素加载完在操作。<br>2.能用css搞定的绝对不用JS，能用原生JS搞定的绝对不用插件，绝对不是用FLASH除了音频的低版本浏览器播放<br>=》css处理动画等功能性能优于JS，而且css中的transfrom变形还开启了硬件加速。<br>3.js中尽量减少对eval的使用，因为js合并压缩的时候，可能出现由于符号不完善，导致的代码执行优先级优先于错误代码<br>4.使用keep-alive实现客户端和服务器端的长连接<br>5.尽量使用设计模式来管理我们的代码（单例、构造、Promise、发布订阅），方便后期的升级和维护<br>6.开启服务器端的gzip压缩（这个压缩可以有效减少请求资源文件的大小），其实客户端的图片等资源也是可以进行压缩的（但是对于24位的位图，压缩后可能会变模糊）<br>7.页面中不要出现无效的连接，利于seo优化，还有其他<br>8.避免使用with语句（非常耗性能）</p>
+</blockquote>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/22/面试题/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="tiandali">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="tiandali">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/05/22/面试题/" itemprop="url">面试题</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-05-22T14:44:25+08:00">
+                2018-05-22
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="打开浏览器，输入网址，按下enter键，到看到整个页面，中间都经历了哪些事情？"><a href="#打开浏览器，输入网址，按下enter键，到看到整个页面，中间都经历了哪些事情？" class="headerlink" title="打开浏览器，输入网址，按下enter键，到看到整个页面，中间都经历了哪些事情？"></a>打开浏览器，输入网址，按下enter键，到看到整个页面，中间都经历了哪些事情？</h3><p>1.浏览器首先向DNS域名解析服务器发请求<br>2.DNS反解析：根据浏览器请求地址中的域名，到DNS服务器中找到对应的服务器外网IP地址<br>3.通过找到外网IP向对应的服务器发送请求（首先访问的是服务器的web站点管理工具：准确来说我们是先基于工具在服务器上创建很多服务，当客户端访问的时候服务器会匹配出具体是请求那个服务）<br>4.通过URL地址携带的端口号，找到服务器上对应的服务，以及服务所管理的项目源文件<br>5.服务器端根据请求的地址中的路径名称，问号传参或者哈希值，把客户端所需要的内容进行准备和处理<br>6.把准备的内容响应给客户端（如果请求的是HTML或者css等这样的资源文件，服务器返回的是资源文件中的源代码（不是文件本身，音视频除外））<br>7.客户端浏览器接收到服务器返回的源代码，基于自己内部的渲染引擎（内核）开始进行页面的绘制和渲染<br>-&gt;首先计算DOM结构，生产DOMtree<br>-&gt;自上而下运行代码，加载css等资源文件<br>-&gt;根据获取的css生成样式，开始渲染（绘制）页面Render tree<br>-&gt;开始渲染和绘制<br>HTTP请求阶段：1-4；<br>HTTP：响应阶段5-6；服务器把客户端需要的内容准备好并且返回客户端<br>浏览器渲染阶段：7；<br>2.我们把一次完整的 响应＋请求=HTTP事务，事务就是完整的一次操作，请求响应缺一不可<br>3.一个页面完全加载完成，需要向服务器发起很多次HTTP事务操作<br>一般来说：首先把HTML源代吗拿过来，加载HTML的时候遇到link,script,img[src],iframe,video/video(没有设置preload=‘none’)都会重新和服务器端建立HTTP事务交互<br>特殊情况；如果我们做了资源缓存处理304，而且即将加载的资源在之前已经加载过了，这样的操作和传统的HTTP事务有所不一样，他们是从服务器和浏览器的缓存中读取数据，比传统的读取快很多。<br>4.在客户端向服务器发送请求，以及服务器把内容响应给客户端的时候，中间相互传递了很多内容（客户端把一些内容传递给服务器，服务器把一些内容响应给客户端），我们把传递的内容统称为“HTTP报文”</p>
+<h3 id="前端性能优化"><a href="#前端性能优化" class="headerlink" title="前端性能优化"></a>前端性能优化</h3><p>1.减少HTTP请求的次数以及请求内容的大小<br>2.</p>
+<h4 id="url的组成"><a href="#url的组成" class="headerlink" title="url的组成"></a>url的组成</h4><p>url：统一资源定位符<br>urn:统一资源名称<br>uri:统一资源标识符<br>URI=URL+URN<br><a href="http://www.baidu.com/" target="_blank" rel="noopener">http://www.baidu.com/</a><br>[传输协议]<br>用来传输客户端和服务端交互的信息，类似于快递小哥<br>HTTP：超文本传输协议（除了传递普通文本，还可以传递文件流或者进制编码等信息），是目前最常用的web传输协议<br>https：经过ssl(secure sockets layer安全套接层)加密的HTTP传输协议，比HTTP更加安全（涉及支付的网站一般都是基于https完成的）<br>FTP；文件的传输协议，一般用来实现资源文件在服务器上的上传下载（文件较大）<br>[域名]Domain name<br>一级域名(顶级域名)<br>二级域名<br>三级域名<br>看有几个点<br>.com供商用的国际域名<br>.cn供商用的中文域名<br>.net用于网络供应服务商<br>.gov用于政府机构<br>.edu教育机构<br>[端口号]<br>用来区分统一服务器上不同服务的标识，基于web服务管理创建服务的时候可以制定，不同服务器之间一般是不能使用相同的端口号<br>HTTP：默认端口号80<br>HTTPS：默认端口号：403<br>FTP:默认端口号21<br>如果当前网站服务，采用的是协议对应的默认端口管理，那么用户输入网址的时候可以不指定端口号，浏览器会默认帮用户把默认的端口传递给服务器。<br>一台服务器上的端口号范围；0-65535；<br>webstrom预览页面：把自己当电脑当作服务器，在服务器上创建一个服务端口号是63342，自己电脑上的浏览器预览自己电脑上的服务，属于本机服务请求，用localhost(127.0.0.1)本地域名即可</p>
+<p>服务器上安装一款应用都可能会作为一个服务，占用一个端口号<br>[请求路径名称]<br>path<br>pathname<br>例如：/stu/index.html一般都是请求当前服务对应的项目目录下，stu文件中的index.html页面但是也有特殊情况，就是当前的URL是被伪URL重写的，我们看到的url其实不是真实的请求，<br><a href="https://item.js.com/567897.html" target="_blank" rel="noopener">https://item.js.com/567897.html</a> 这个地址就是被重写的，它的真实url地址很可能是 <a href="https://item.jd.com/detail.jsp?id=567897，其实就是跳转到详情页，通过问号传递不同的产品编号，展示不同的产品详情信息，但是.jsp这种服务器渲染的动态页面不能被搜索引擎收录，不利于页面的seo,所以我们会把动态页面静态化，这也就用到了URl重写技术" target="_blank" rel="noopener">https://item.jd.com/detail.jsp?id=567897，其实就是跳转到详情页，通过问号传递不同的产品编号，展示不同的产品详情信息，但是.jsp这种服务器渲染的动态页面不能被搜索引擎收录，不利于页面的seo,所以我们会把动态页面静态化，这也就用到了URl重写技术</a><br>例如/stu/info这种没有任何后缀信息，一般都不是用来请求资源文件的，而是用于Ajax数据请求的接口地址（如果后缀是.json类的，也是同理）<br>有一种除外/stu/info/这种很可能不是接口地址，而是没有指定请求的资源名称，服务器会请求默认的资源文件，一般都是index.html/defult.html…</p>
+<p>动态页面DHTML：泛指当前页面中的内容不是写死的，而是动态绑定的，例如：.jsp/.php/.aspx…这些页面中的数据都是基于ajax或者是后台编程语言处理，有服务器端渲染，最后把渲染后的结果返回给客户端呈现的<br>[问号传参及哈希值]<br>？xxx=xxx&amp;…#xxx<br>在HTTP事务中，问好传参是客户端把信息传递给服务器的一种方式，（也有可能是跳转到某一个页面，把参数值传递给页面用来标识的）<br>哈希值一般都跟客户端服务器交互没啥关系，主要是用于页面中的锚点定位和hash路由交换</p>
+<h3 id="HTTP报文"><a href="#HTTP报文" class="headerlink" title="HTTP报文"></a>HTTP报文</h3><blockquote>
+<p>起始行：请求起始行、响应起始行<br>首部（头）：请求头、响应头、通用头<br>主体：请求主体、响应主体</p>
+</blockquote>
+<p><code>General 通用头</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Request URL: http://www.zhufengpeixun.cn //请求地址</span><br><span class="line">Request Method: GET   //请求方式（GET / POST / DELEFT / PUT / HEAD OPTION）</span><br><span class="line">Status Code: 304 Not Modified   //响应的http状态码</span><br><span class="line">Remote Address: 162.159.211.54:80  // 主机地址（服务器外网IP地址）</span><br><span class="line">Referrer Policy: unsafe-url</span><br></pre></td></tr></table></figure>
+<p><code>Request Header 请求头 【客户端设置，服务器接收】</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">GET / HTTP/1.1  //=&gt; 起始行（描述当前请求的一些基本信息：用的是1.1版本传输协议进行内容传输的）</span><br><span class="line">Host: www.zhufengpeixun.cn</span><br><span class="line">Connection: keep-alive</span><br><span class="line">Cache-Control: max-age=0</span><br><span class="line">Upgrade-Insecure-Requests: 1</span><br><span class="line">User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64) </span><br><span class="line">...</span><br><span class="line">Accept-Encoding: gzip, deflate</span><br><span class="line">Accept-Language: zh-CN,zh;q=0.9</span><br><span class="line">Cookie: ... =&gt; cookie信息一般都是放到头文件中实现和服务器端的数据通信的</span><br><span class="line">If-Modified-Since: Sun, 06 May 2018 10:02:42 GMT</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+<p><code>Response Headers 响应头 【服务器端设置，客户端获取】</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">HTTP/1.1 304 Not Modified   //=&gt; 响应起始行（HTTP状态码）</span><br><span class="line">Date: Tue, 22 May 2018 09:20:59 GMT  //=&gt; 服务器响应内容时候的‘服务器端时间’（客户端获取这个时间的时候已经和真实的时间产生误差了，因为服务器返回内容到客户端接收到，也是需要时间的），并且这个时间是格林尼治时间（比北京时间慢8小时， 北京时间是 GMT+0800）</span><br><span class="line">Connection: keep-alive </span><br><span class="line">ETag: &quot;700a6f-17f43-56b86a77513d3&quot;</span><br><span class="line">Vary: Accept-Encoding,User-Agent</span><br><span class="line">Server: yunjiasu-nginx  //=&gt;管理web服务的工具 </span><br><span class="line">CF-RAY: 41ee35bd772192c4-SJC</span><br></pre></td></tr></table></figure>
+<p><code>Response [响应主体]</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">服务器返回的是啥就是啥</span><br></pre></td></tr></table></figure></p>
+<p><code>Request Payload / Form Data [请求主体]</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">客户端传递给服务器的内容</span><br></pre></td></tr></table></figure></p>
+<p>2.大家了解HTTP报文以及如何查看对未来工作开发和bug调试至关重要，以后设计到交互功能（前端《=》后台）出现问题，都按照如下方式查找问题原因<br>A：打开控制台，在network中找到当前交互的请求地址，点击进去看详情<br>B：如果是传递给服务器的参数或者方式错误（前端问题）<br>C：如果服务器返回的信息有错误或者API接口文档规定的内容不一样[后台问题]<br>D：如果返回数据是对的，但是展示有问题（前端问题）<br>确定是自己前端的问题后，基于断点或者（代码中的debugger）控制台输出等方式，开始逐步调试即可。<br>3.客户端和服务器端信息交互的方式<br>客户端传递给服务器<br>A:问号传参 ，请求的URL地址末尾通过问号传参方式，把以写信息传递给服务器、/stu/info?id=12&amp;lx=man<br>B:设置请求头<br>客户端把需要传递给服务器的内容设置到请求头信息中（自定义请求头），服务器可以通过接受请求头信息把内容得到<br>C：设置请求头主题<br>xhr.send([ajax send中传递的内容就是客户端设置的请求主体内容，服务器端可以接收到这些信息的])<br>[服务器返回给客户端]<br>A设置响应头信息<br>例如把服务时间通过响应头返回给客户端，客户端通过获取响应头信息得到这个时间（响应头返回的速度是优先于响应主体的）<br>B设置响应主体<br>主要的返回信息都在相应主体中</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/22/9-9乘法表/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -300,7 +1053,7 @@
       
         
           
-            <h4 id="9-9乘法表"><a href="#9-9乘法表" class="headerlink" title="9*9乘法表"></a>9*9乘法表</h4><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">style</span>&gt;</span><span class="undefined"></span></span><br><span class="line"><span class="undefined">ul li&#123;</span></span><br><span class="line"><span class="undefined">    list-style: none;</span></span><br><span class="line"><span class="undefined">&#125;</span></span><br><span class="line"><span class="undefined">ul li span&#123;</span></span><br><span class="line"><span class="undefined">    display: inline-block;</span></span><br><span class="line"><span class="undefined">    width: 100px;</span></span><br><span class="line"><span class="undefined">    height: 40px;</span></span><br><span class="line"><span class="undefined">    line-height: 40px;</span></span><br><span class="line"><span class="undefined">    border:1px solid #333;</span></span><br><span class="line"><span class="undefined">    text-align: center;&#125;</span></span><br><span class="line"><span class="undefined">    </span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">ul</span> <span class="attr">id</span>=<span class="string">"list"</span>&gt;</span><span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span>&gt;</span><span class="undefined"></span></span><br><span class="line"><span class="undefined">var oUl=document.getElementById("list");</span></span><br><span class="line"><span class="undefined">var str="";</span></span><br><span class="line"><span class="undefined">for (var i = 1; i&lt;=9; i++) &#123;</span></span><br><span class="line"><span class="xml">str +="<span class="tag">&lt;<span class="name">li</span>&gt;</span>";</span></span><br><span class="line"><span class="undefined">    for (var j = 1; j &lt;=i; j++) &#123;</span></span><br><span class="line"><span class="undefined">str+=j+"*"+i+"="+j*i+"&amp;nbsp;";</span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="undefined">    &#125;</span></span><br><span class="line"><span class="xml">    str+="<span class="tag">&lt;/<span class="name">li</span>&gt;</span>"</span></span><br><span class="line"><span class="undefined">&#125;</span></span><br><span class="line"><span class="undefined">oUl.innerHTML=str;</span></span><br><span class="line"><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+            <h4 id="9-9乘法表"><a href="#9-9乘法表" class="headerlink" title="9*9乘法表"></a>9*9乘法表</h4><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">style</span>&gt;</span><span class="undefined"></span></span><br><span class="line"><span class="undefined">ul li&#123;</span></span><br><span class="line"><span class="undefined">    list-style: none;</span></span><br><span class="line"><span class="undefined">&#125;</span></span><br><span class="line"><span class="undefined">ul li span&#123;</span></span><br><span class="line"><span class="undefined">    display: inline-block;</span></span><br><span class="line"><span class="undefined">    width: 100px;</span></span><br><span class="line"><span class="undefined">    height: 40px;</span></span><br><span class="line"><span class="undefined">    line-height: 40px;</span></span><br><span class="line"><span class="undefined">    border:1px solid #333;</span></span><br><span class="line"><span class="undefined">    text-align: center;&#125;</span></span><br><span class="line"><span class="undefined">    </span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">ul</span> <span class="attr">id</span>=<span class="string">"list"</span>&gt;</span><span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span>&gt;</span><span class="undefined"></span></span><br><span class="line"><span class="javascript"><span class="keyword">var</span> oUl=<span class="built_in">document</span>.getElementById(<span class="string">"list"</span>);</span></span><br><span class="line"><span class="javascript"><span class="keyword">var</span> str=<span class="string">""</span>;</span></span><br><span class="line"><span class="javascript"><span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">1</span>; i&lt;=<span class="number">9</span>; i++) &#123;</span></span><br><span class="line"><span class="javascript">str +=<span class="string">"&lt;li&gt;"</span>;</span></span><br><span class="line"><span class="javascript">    <span class="keyword">for</span> (<span class="keyword">var</span> j = <span class="number">1</span>; j &lt;=i; j++) &#123;</span></span><br><span class="line"><span class="javascript">str+=j+<span class="string">"*"</span>+i+<span class="string">"="</span>+j*i+<span class="string">"&amp;nbsp;"</span>;</span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="undefined">    &#125;</span></span><br><span class="line"><span class="javascript">    str+=<span class="string">"&lt;/li&gt;"</span></span></span><br><span class="line"><span class="undefined">&#125;</span></span><br><span class="line"><span class="undefined">oUl.innerHTML=str;</span></span><br><span class="line"><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
           
         
       
@@ -821,730 +1574,11 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/22/放大镜案例/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="tiandali">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="tiandali">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/05/22/放大镜案例/" itemprop="url">放大镜案例</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-05-22T14:16:43+08:00">
-                2018-05-22
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h4 id="放大镜案例"><a href="#放大镜案例" class="headerlink" title="放大镜案例"></a>放大镜案例</h4><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">"en"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>Title<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">style</span> <span class="attr">type</span>=<span class="string">"text/css"</span>&gt;</span><span class="undefined"></span></span><br><span class="line"><span class="undefined">        .container&#123;</span></span><br><span class="line"><span class="undefined">            margin: 20px auto;</span></span><br><span class="line"><span class="undefined">            width: 650px;</span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="undefined">        &#125;</span></span><br><span class="line"><span class="undefined">        .smallBox&#123;</span></span><br><span class="line"><span class="undefined">            float: left;</span></span><br><span class="line"><span class="undefined">            position: relative;</span></span><br><span class="line"><span class="undefined">            width: 300px;</span></span><br><span class="line"><span class="undefined">            height: 300px;</span></span><br><span class="line"><span class="undefined">            overflow: hidden;</span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="undefined">        &#125;</span></span><br><span class="line"><span class="undefined">        .smallBox img&#123;</span></span><br><span class="line"><span class="undefined">            display: block;</span></span><br><span class="line"><span class="undefined">            width: 100%;</span></span><br><span class="line"><span class="undefined">            height: 100%;</span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="undefined">        &#125;</span></span><br><span class="line"><span class="undefined">        .smallBox .mark&#123;</span></span><br><span class="line"><span class="undefined">            position: absolute;</span></span><br><span class="line"><span class="undefined">            top: 0;</span></span><br><span class="line"><span class="undefined">            left: 0;</span></span><br><span class="line"><span class="undefined">            width: 100px;</span></span><br><span class="line"><span class="undefined">            height: 100px;</span></span><br><span class="line"><span class="undefined">            z-index:10;</span></span><br><span class="line"><span class="undefined">            background: rgba(255,0,0,.3);</span></span><br><span class="line"><span class="undefined">            cursor: move;</span></span><br><span class="line"><span class="undefined">        &#125;</span></span><br><span class="line"><span class="undefined">        .bigBox&#123;</span></span><br><span class="line"><span class="undefined">            position: relative;</span></span><br><span class="line"><span class="undefined">            float: left;</span></span><br><span class="line"><span class="undefined">            display: none;</span></span><br><span class="line"><span class="undefined">            width: 350px;</span></span><br><span class="line"><span class="undefined">            height: 350px;</span></span><br><span class="line"><span class="undefined">            overflow: hidden;</span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="undefined">        &#125;</span></span><br><span class="line"><span class="undefined">        .bigBox img&#123;</span></span><br><span class="line"><span class="undefined">            position: absolute;</span></span><br><span class="line"><span class="undefined">            top: 0;</span></span><br><span class="line"><span class="undefined">            left: 0;</span></span><br><span class="line"><span class="undefined">            display: block;</span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="undefined">            /*width: 1050px;*/</span></span><br><span class="line"><span class="undefined">            height: 1050px;</span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="undefined">        &#125;</span></span><br><span class="line"><span class="undefined">    </span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"container clearfix"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"smallBox"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">"img/1.jpg"</span> <span class="attr">alt</span>=<span class="string">""</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!--&lt;div class="mark"&gt;&lt;/div&gt;--&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"bigBox"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">"img/2.jpg"</span> <span class="attr">alt</span>=<span class="string">""</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="undefined"></span></span><br><span class="line"><span class="javascript">    <span class="keyword">let</span> container=<span class="built_in">document</span>.querySelector(<span class="string">'.container'</span>),</span></span><br><span class="line"><span class="javascript">        smallBox=container.querySelector(<span class="string">'.smallBox'</span>),</span></span><br><span class="line"><span class="javascript">        bigBox=container.querySelector(<span class="string">'.bigBox'</span>),</span></span><br><span class="line"><span class="javascript">        bigImg=bigBox.querySelector(<span class="string">'img'</span>);</span></span><br><span class="line"><span class="javascript">    <span class="keyword">let</span> mark=<span class="literal">null</span>;</span></span><br><span class="line"><span class="javascript">    smallBox.onmouseenter=<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">        <span class="keyword">if</span>(!mark)&#123;</span></span><br><span class="line"><span class="javascript">     mark=<span class="built_in">document</span>.createElement(<span class="string">'div'</span>);</span></span><br><span class="line"><span class="javascript">        mark.className=<span class="string">'mark'</span>;</span></span><br><span class="line"><span class="undefined">        smallBox.appendChild(mark);</span></span><br><span class="line"><span class="javascript">        bigBox.style.display=<span class="string">'block'</span>;</span></span><br><span class="line"><span class="undefined">        &#125;</span></span><br><span class="line"><span class="undefined">    &#125;;</span></span><br><span class="line"><span class="javascript">    smallBox.onmousemove=<span class="function"><span class="keyword">function</span> (<span class="params">ev</span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">        <span class="keyword">if</span>(!mark)<span class="keyword">return</span>;</span></span><br><span class="line"><span class="javascript">        <span class="comment">//鼠标在盒子中间计算的left和top值</span></span></span><br><span class="line"><span class="javascript">        <span class="keyword">let</span> curL=ev.pageX-smallBox.offsetLeft-mark.offsetWidth/<span class="number">2</span>;</span></span><br><span class="line"><span class="javascript">        <span class="keyword">let</span> curT=ev.pageY-smallBox.offsetTop-mark.offsetHeight/<span class="number">2</span>;</span></span><br><span class="line"><span class="javascript">        <span class="comment">//计算出来的值不能超过边界；</span></span></span><br><span class="line"><span class="javascript">        <span class="keyword">let</span> minL=<span class="number">0</span>,</span></span><br><span class="line"><span class="undefined">            minT=0,</span></span><br><span class="line"><span class="undefined">            maxL=smallBox.offsetWidth-mark.offsetWidth,</span></span><br><span class="line"><span class="undefined">            maxT=smallBox.offsetHeight-mark.offsetHeight;</span></span><br><span class="line"><span class="xml">        curL=curL<span class="tag">&lt;<span class="name">minL?minL:(curL</span>&gt;</span>maxL?maxL:curL);</span></span><br><span class="line"><span class="xml">        curT=curT<span class="tag">&lt;<span class="name">minT?minT:(curT</span>&gt;</span>maxT?maxT:curT);</span></span><br><span class="line"><span class="javascript">        mark.style.left=curL+<span class="string">'px'</span>;</span></span><br><span class="line"><span class="javascript">        mark.style.top=curT+<span class="string">'px'</span>;</span></span><br><span class="line"><span class="javascript">        bigImg.style.left=-curL*<span class="number">3.5</span>+<span class="string">'px'</span>;</span></span><br><span class="line"><span class="javascript">        bigImg.style.top=-curT*<span class="number">3.5</span>+<span class="string">'px'</span>;</span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="undefined">    &#125;;</span></span><br><span class="line"><span class="javascript">    smallBox.onmouseleave=<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">        <span class="keyword">if</span>(mark)&#123;</span></span><br><span class="line"><span class="javascript">            <span class="keyword">this</span>.removeChild(mark);</span></span><br><span class="line"><span class="javascript">            mark=<span class="literal">null</span>;</span></span><br><span class="line"><span class="javascript">            bigBox.style.display=<span class="string">'none'</span>;</span></span><br><span class="line"><span class="undefined">        &#125;</span></span><br><span class="line"><span class="undefined">    &#125;</span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/22/拖拽案例/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="tiandali">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="tiandali">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/05/22/拖拽案例/" itemprop="url">弹性盒子案例拖拽</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-05-22T14:16:02+08:00">
-                2018-05-22
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="拖拽（模态框）"><a href="#拖拽（模态框）" class="headerlink" title="拖拽（模态框）"></a>拖拽（模态框）</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html lang=&quot;en&quot;&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">    &lt;meta charset=&quot;UTF-8&quot;&gt;</span><br><span class="line">    &lt;title&gt;Title&lt;/title&gt;</span><br><span class="line">    &lt;link rel=&quot;stylesheet&quot; href=&quot;../../reset.min.css&quot;&gt;</span><br><span class="line">    &lt;style type=&quot;text/css&quot;&gt;</span><br><span class="line">        html, body &#123;</span><br><span class="line">            height: 500%;</span><br><span class="line">            -webkit-user-select :none;</span><br><span class="line">        &#125;</span><br><span class="line">        .dialogMark &#123;</span><br><span class="line">            position: fixed;</span><br><span class="line">            top: 0;</span><br><span class="line">            left: 0;</span><br><span class="line">            z-index: 100;</span><br><span class="line">            width: 100%;</span><br><span class="line">            height: 100%;</span><br><span class="line">            background: rgba(0, 0, 0, .3);</span><br><span class="line">        &#125;</span><br><span class="line">        .diaLogBox &#123;</span><br><span class="line">            /*控制盒子在中间我们最好在js中实现，经过精密的计算，计算出具体的top和left而不是模糊的百分比这样我们在js中通过*/</span><br><span class="line">            width: 200px;</span><br><span class="line">            position: fixed;</span><br><span class="line">            height: 300px;</span><br><span class="line">            background: #FFF;</span><br><span class="line">            z-index: 101;</span><br><span class="line">            overflow: hidden;</span><br><span class="line">        &#125;</span><br><span class="line">        .diaLogBox h3 &#123;</span><br><span class="line">            position: relative;</span><br><span class="line">            padding: 0 10px;</span><br><span class="line">            height: 50px;</span><br><span class="line">            line-height: 50px;</span><br><span class="line">            background: #DDD;</span><br><span class="line">            border-bottom: 1px solid #aaaaaa;</span><br><span class="line">            cursor: move;</span><br><span class="line">        &#125;</span><br><span class="line">        .diaLogBox h3 i &#123;</span><br><span class="line">            position: absolute;</span><br><span class="line">            right: 10px;</span><br><span class="line">            top: 50%;</span><br><span class="line">            margin-top: -10px;</span><br><span class="line">            width: 20px;</span><br><span class="line">            height: 20px;</span><br><span class="line">            line-height: 20px;</span><br><span class="line">            text-align: center;</span><br><span class="line">            font-size: 16px;</span><br><span class="line">            color: #E01D20;</span><br><span class="line">            font-style: normal;</span><br><span class="line">            font-family: &quot;Microsoft JhengHei&quot;;</span><br><span class="line">            background: lightgoldenrodyellow;</span><br><span class="line">        &#125;</span><br><span class="line">    &lt;/style&gt;</span><br><span class="line"></span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">&lt;!--dialog：模态框--&gt;</span><br><span class="line"></span><br><span class="line">&lt;div class=&quot;dialogMark&quot;&gt;&lt;/div&gt;</span><br><span class="line">&lt;div class=&quot;diaLogBox&quot; id=&quot;diaLogBox&quot;&gt;</span><br><span class="line">    &lt;h3 class=&quot;title&quot;&gt;大力出奇迹</span><br><span class="line">         &lt;i class=&quot;closeBtn&quot;&gt;X&lt;/i&gt;</span><br><span class="line">    &lt;/h3&gt;</span><br><span class="line">    &lt;div class=&quot;con&quot;&gt;</span><br><span class="line"></span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">&lt;/div&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line">    let dialogRender = (function () &#123;</span><br><span class="line">        let diaLogBox = document.getElementById(&apos;diaLogBox&apos;);</span><br><span class="line">        let title = diaLogBox.getElementsByTagName(&apos;h3&apos;)[0];</span><br><span class="line">         let closeBtn=diaLogBox.getElementsByTagName(&apos;i&apos;)[0];</span><br><span class="line">        let winW = document.documentElement.clientWidth || document.body.clientWidth;</span><br><span class="line">        let winH = document.documentElement.clientHeight || document.body.clientHeight;</span><br><span class="line"></span><br><span class="line">        let maxL = winW - diaLogBox.offsetWidth;</span><br><span class="line">        let maxT = winH - diaLogBox.offsetHeight;</span><br><span class="line">        let Down = function (ev) &#123;</span><br><span class="line">            console.log(1);</span><br><span class="line">            ev = ev || window.event;</span><br><span class="line">            //记录鼠标起始位置&amp;&amp;盒子的起始位置</span><br><span class="line">            this.strX = ev.clientX;</span><br><span class="line">            this.strY = ev.clientY;</span><br><span class="line">            this.strL = diaLogBox.offsetLeft;</span><br><span class="line">            this.strT = diaLogBox.offsetTop;</span><br><span class="line">            //谷歌下不兼容，用setCapture，releaseCapture解决鼠标焦点丢失问题</span><br><span class="line">            if(this.setCapture)&#123;</span><br><span class="line">                this.onmousemove=Move;</span><br><span class="line">                this.onmouseup=Up;</span><br><span class="line">                this.setCapture();</span><br><span class="line">                return;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">            //按下代表拖拽开始，会有鼠标丢失的问题，</span><br><span class="line">//            this.onmousemove=Move;</span><br><span class="line">//            this.onmouseup=Up;</span><br><span class="line">            //解决方法：</span><br><span class="line">            //用document解决鼠标焦点丢失问题</span><br><span class="line">            //let _this = this;</span><br><span class="line">            document.onmousemove = (ev) =&gt; &#123;</span><br><span class="line">                Move.call(this,ev);</span><br><span class="line">            &#125;;</span><br><span class="line">            document.onmouseup = (ev) =&gt; &#123;</span><br><span class="line">                Up.call(this,ev);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;;</span><br><span class="line">        let Move = function (ev) &#123;</span><br><span class="line">//            console.log(this);</span><br><span class="line">            ev = ev || window.event;</span><br><span class="line">            let curL = ev.clientX - this.strX + this.strL;</span><br><span class="line">            let curT = ev.clientY - this.strY + this.strT;</span><br><span class="line"></span><br><span class="line">            console.log(curT, ev.clientY, this.strY, this.strT);</span><br><span class="line">            //边界处理</span><br><span class="line">            curL = curL &lt; 0 ? 0 : (curL &gt; maxL ? maxL : curL);</span><br><span class="line">            curT = curT &lt; 0 ? 0 : (curT &gt; maxT ? maxT : curT);</span><br><span class="line">            console.log(curT);</span><br><span class="line">            diaLogBox.style.left = curL + &apos;px&apos;;</span><br><span class="line">            diaLogBox.style.top = curT + &apos;px&apos;;</span><br><span class="line"></span><br><span class="line">            console.log(diaLogBox.style.top);</span><br><span class="line">        &#125;;</span><br><span class="line">        let Up = function (ev) &#123;</span><br><span class="line">           //谷歌下不兼容，用setCapture，releaseCapture解决鼠标焦点丢失问题</span><br><span class="line">            if(this.setCapture)&#123;</span><br><span class="line">                this.onmousemove=null;</span><br><span class="line">                this.onmouseup=null;</span><br><span class="line">                this.releaseCapture();</span><br><span class="line">                return;</span><br><span class="line">            &#125;</span><br><span class="line">            //用document解决鼠标焦点丢失问题</span><br><span class="line">            document.onmousemove = null;</span><br><span class="line">            document.onmouseup = null;</span><br><span class="line">        &#125;;</span><br><span class="line">        </span><br><span class="line">  closeBtn.onclick=function () &#123;</span><br><span class="line">            diaLogBox.style.display=&apos;none&apos;;</span><br><span class="line">        &#125;;</span><br><span class="line"></span><br><span class="line">        return &#123;</span><br><span class="line">            init: function () &#123;</span><br><span class="line">                //让盒子处于页面中间</span><br><span class="line">                diaLogBox.style.left = maxL / 2 + &apos;px&apos;;</span><br><span class="line">                diaLogBox.style.top = maxT / 2 + &apos;px&apos;;</span><br><span class="line">                title.onmousedown = Down;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;)();</span><br><span class="line">    dialogRender.init();</span><br><span class="line"></span><br><span class="line">&lt;/script&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/22/弹性盒子案例/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="tiandali">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="tiandali">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/05/22/弹性盒子案例/" itemprop="url">弹性盒子案例</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-05-22T14:15:51+08:00">
-                2018-05-22
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="好玩的弹性动画"><a href="#好玩的弹性动画" class="headerlink" title="好玩的弹性动画"></a>好玩的弹性动画</h3><h4 id="弹性盒子"><a href="#弹性盒子" class="headerlink" title="弹性盒子"></a>弹性盒子</h4><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">"en"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>Title<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">"stylesheet"</span> <span class="attr">href</span>=<span class="string">"../../reset.min.css"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">style</span> <span class="attr">type</span>=<span class="string">"text/css"</span>&gt;</span><span class="undefined"></span></span><br><span class="line"><span class="undefined">        html, body &#123;</span></span><br><span class="line"><span class="undefined">            width: 100%;</span></span><br><span class="line"><span class="undefined">            height: 100%;</span></span><br><span class="line"><span class="undefined">            overflow: hidden;</span></span><br><span class="line"><span class="undefined">        &#125;</span></span><br><span class="line"><span class="undefined">        #box &#123;</span></span><br><span class="line"><span class="undefined">            position: absolute;</span></span><br><span class="line"><span class="undefined">            width: 200px;</span></span><br><span class="line"><span class="undefined">            height: 200px;</span></span><br><span class="line"><span class="undefined">            top: 100px;</span></span><br><span class="line"><span class="undefined">            left: 100px;</span></span><br><span class="line"><span class="undefined">            background: red;</span></span><br><span class="line"><span class="undefined">            cursor: move;</span></span><br><span class="line"><span class="undefined">        &#125;</span></span><br><span class="line"><span class="undefined">    </span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"box"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"发布订阅subscribe.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="undefined"></span></span><br><span class="line"><span class="javascript">    <span class="keyword">let</span> box = <span class="built_in">document</span>.querySelector(<span class="string">'#box'</span>);</span></span><br><span class="line"><span class="javascript">    <span class="keyword">let</span> subscribeDown = <span class="keyword">new</span> Subscribe();</span></span><br><span class="line"><span class="javascript">    <span class="keyword">let</span> subscribeMove = <span class="keyword">new</span> Subscribe();</span></span><br><span class="line"><span class="javascript">    <span class="keyword">let</span> subscribeUp = <span class="keyword">new</span> Subscribe();</span></span><br><span class="line"><span class="javascript">    <span class="keyword">let</span> down = <span class="function"><span class="keyword">function</span> (<span class="params">ev</span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">        <span class="keyword">this</span>.strX = ev.clientX;</span></span><br><span class="line"><span class="javascript">        <span class="keyword">this</span>.strY = ev.clientY;</span></span><br><span class="line"><span class="javascript">        <span class="keyword">this</span>.strT = <span class="keyword">this</span>.offsetTop;</span></span><br><span class="line"><span class="javascript">        <span class="keyword">this</span>.strL = <span class="keyword">this</span>.offsetLeft;</span></span><br><span class="line"><span class="javascript">        <span class="comment">//解决鼠标焦点丢失</span></span></span><br><span class="line"><span class="javascript">        <span class="keyword">this</span>.MOVE = move.bind(<span class="keyword">this</span>);</span></span><br><span class="line"><span class="javascript">        <span class="keyword">this</span>.UP = up.bind(<span class="keyword">this</span>);</span></span><br><span class="line"><span class="javascript">        <span class="built_in">document</span>.addEventListener(<span class="string">'mousemove'</span>, <span class="keyword">this</span>.MOVE);</span></span><br><span class="line"><span class="javascript">        <span class="built_in">document</span>.addEventListener(<span class="string">'mouseup'</span>, <span class="keyword">this</span>.UP);</span></span><br><span class="line"><span class="javascript">        subscribeDown.fire(<span class="keyword">this</span>, ev);</span></span><br><span class="line"><span class="undefined">    &#125;;</span></span><br><span class="line"><span class="javascript">    <span class="keyword">let</span> move = <span class="function"><span class="keyword">function</span> (<span class="params">ev</span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">        <span class="keyword">this</span>.curL = ev.clientX - <span class="keyword">this</span>.strX + <span class="keyword">this</span>.strL;</span></span><br><span class="line"><span class="javascript">        <span class="keyword">this</span>.curT = ev.clientY - <span class="keyword">this</span>.strY + <span class="keyword">this</span>.strT;</span></span><br><span class="line"><span class="javascript">        <span class="keyword">this</span>.style.left = <span class="keyword">this</span>.curL + <span class="string">'px'</span>;</span></span><br><span class="line"><span class="javascript">        <span class="keyword">this</span>.style.top = <span class="keyword">this</span>.curT + <span class="string">'px'</span>;</span></span><br><span class="line"><span class="javascript">        subscribeMove.fire(<span class="keyword">this</span>, ev)</span></span><br><span class="line"><span class="undefined">    &#125;;</span></span><br><span class="line"><span class="javascript">    <span class="keyword">let</span> up = <span class="function"><span class="keyword">function</span> (<span class="params">ev</span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">        <span class="comment">//抬起清除事件</span></span></span><br><span class="line"><span class="javascript">        <span class="built_in">document</span>.removeEventListener(<span class="string">'mousemove'</span>, <span class="keyword">this</span>.MOVE);</span></span><br><span class="line"><span class="javascript">        <span class="built_in">document</span>.removeEventListener(<span class="string">'mouseup'</span>, <span class="keyword">this</span>.UP);</span></span><br><span class="line"><span class="javascript">        subscribeUp.fire(<span class="keyword">this</span>, ev);</span></span><br><span class="line"><span class="undefined">    &#125;;</span></span><br><span class="line"><span class="undefined">    box.onmousedown = down;</span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="javascript">    subscribeMove.add(<span class="function">(<span class="params">curEle, ev</span>) =&gt;</span> &#123;</span></span><br><span class="line"><span class="javascript">        <span class="keyword">if</span> (!curEle.lastFly) &#123;</span></span><br><span class="line"><span class="undefined">            curEle.lastFly = curEle.offsetLeft;</span></span><br><span class="line"><span class="undefined">            curEle.speedFly = 0;</span></span><br><span class="line"><span class="javascript">            <span class="keyword">return</span>;</span></span><br><span class="line"><span class="undefined">        &#125;</span></span><br><span class="line"><span class="undefined">        curEle.speedFly = curEle.offsetLeft - curEle.lastFly;</span></span><br><span class="line"><span class="undefined">        curEle.lastFly = curEle.offsetLeft;</span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="undefined">    &#125;);</span></span><br><span class="line"><span class="javascript">    subscribeUp.add(<span class="function">(<span class="params">curEle, ev</span>) =&gt;</span> &#123;</span></span><br><span class="line"><span class="javascript">        <span class="keyword">let</span> minL = <span class="number">0</span>;</span></span><br><span class="line"><span class="javascript">        <span class="keyword">let</span> maxL = <span class="built_in">document</span>.documentElement.clientWidth - curEle.offsetWidth;</span></span><br><span class="line"><span class="javascript">        <span class="keyword">let</span> speed = curEle.speedFly;</span></span><br><span class="line"><span class="javascript">        <span class="keyword">let</span> dir = <span class="string">'right'</span>;</span></span><br><span class="line"><span class="javascript">        speed &lt; <span class="number">0</span> ? dir = <span class="string">'left'</span> : <span class="literal">null</span>;</span></span><br><span class="line"><span class="javascript">        speed = <span class="built_in">Math</span>.abs(speed);</span></span><br><span class="line"><span class="javascript">        curEle.flyTimer = setInterval(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="javascript">            <span class="keyword">if</span> (speed &lt; <span class="number">0.5</span>) &#123;</span></span><br><span class="line"><span class="undefined">                clearInterval(curEle.flyTimer);</span></span><br><span class="line"><span class="javascript">                <span class="keyword">return</span>;</span></span><br><span class="line"><span class="undefined">            &#125;</span></span><br><span class="line"><span class="undefined">            speed *= 0.98;</span></span><br><span class="line"><span class="javascript">            <span class="keyword">let</span> curL = curEle.offsetLeft;</span></span><br><span class="line"><span class="javascript">            <span class="keyword">if</span> (dir === <span class="string">'right'</span>) &#123;</span></span><br><span class="line"><span class="javascript">                <span class="keyword">if</span> (curL &gt;= maxL) &#123;</span></span><br><span class="line"><span class="javascript">                    curEle.style.left = maxL + <span class="string">'px'</span>;</span></span><br><span class="line"><span class="javascript">                    dir = <span class="string">'left'</span>;</span></span><br><span class="line"><span class="javascript">                    <span class="keyword">return</span>;</span></span><br><span class="line"><span class="undefined">                &#125;</span></span><br><span class="line"><span class="undefined">                curL += speed;</span></span><br><span class="line"><span class="javascript">            &#125; <span class="keyword">else</span> &#123;</span></span><br><span class="line"><span class="javascript">                <span class="keyword">if</span> (curL &lt;= minL) &#123;</span></span><br><span class="line"><span class="javascript">                    curEle.style.left = minL + <span class="string">'px'</span>;</span></span><br><span class="line"><span class="javascript">                    dir = <span class="string">'right'</span>;</span></span><br><span class="line"><span class="javascript">                    <span class="keyword">return</span>;</span></span><br><span class="line"><span class="undefined">                &#125;</span></span><br><span class="line"><span class="undefined">                curL -= speed;</span></span><br><span class="line"><span class="undefined">            &#125;</span></span><br><span class="line"><span class="javascript">            curEle.style.left = curL + <span class="string">'px'</span>;</span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="undefined">        &#125;, 17);</span></span><br><span class="line"><span class="undefined">    &#125;);</span></span><br><span class="line"><span class="javascript">    subscribeDown.add(<span class="function">(<span class="params">curEle, ev</span>) =&gt;</span> &#123;</span></span><br><span class="line"><span class="undefined">        clearInterval(curEle.flyTimer);</span></span><br><span class="line"><span class="undefined">        curEle.speedFly = 0;</span></span><br><span class="line"><span class="undefined">        clearInterval(curEle.dropTimer);</span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="undefined">    &#125;);</span></span><br><span class="line"><span class="javascript">    subscribeUp.add(<span class="function">(<span class="params">curEle, ev</span>) =&gt;</span> &#123;</span></span><br><span class="line"><span class="javascript">        <span class="keyword">let</span> speed = <span class="number">9.8</span>;</span></span><br><span class="line"><span class="javascript">        <span class="keyword">let</span> minT = <span class="number">0</span>;</span></span><br><span class="line"><span class="javascript">        <span class="keyword">let</span> maxT = <span class="built_in">document</span>.documentElement.clientHeight - curEle.offsetHeight;</span></span><br><span class="line"><span class="undefined">        flag = 0;</span></span><br><span class="line"><span class="javascript">        curEle.dropTimer = setInterval(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span></span><br><span class="line"><span class="javascript">            <span class="keyword">if</span> (flag &gt; <span class="number">1</span>) &#123;</span></span><br><span class="line"><span class="undefined">                clearInterval(curEle.dropTimer);</span></span><br><span class="line"><span class="javascript">                <span class="keyword">return</span>;</span></span><br><span class="line"><span class="undefined">            &#125;</span></span><br><span class="line"><span class="undefined">            speed += 9.8;</span></span><br><span class="line"><span class="undefined">            speed *= 0.98;</span></span><br><span class="line"><span class="javascript">            <span class="keyword">let</span> curT = curEle.offsetTop;</span></span><br><span class="line"><span class="undefined">            curT += speed;</span></span><br><span class="line"><span class="javascript">            <span class="keyword">if</span> (curT &gt;= maxT) &#123;</span></span><br><span class="line"><span class="javascript">                curEle.style.top = maxT + <span class="string">'px'</span>;</span></span><br><span class="line"><span class="undefined">                speed *= -1;</span></span><br><span class="line"><span class="javascript">                flag++;<span class="keyword">return</span>;</span></span><br><span class="line"><span class="undefined">            &#125;</span></span><br><span class="line"><span class="javascript">            <span class="keyword">if</span> (curT &lt;= minT) &#123;</span></span><br><span class="line"><span class="javascript">                curEle.style.top = minT + <span class="string">'px'</span>;</span></span><br><span class="line"><span class="undefined">                speed *= -1;</span></span><br><span class="line"><span class="javascript">                <span class="keyword">return</span>;</span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="undefined">            &#125;</span></span><br><span class="line"><span class="javascript">            curEle.style.top = curT + <span class="string">'px'</span>;</span></span><br><span class="line"><span class="undefined">            flag = 0;</span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="undefined">        &#125;, 17);</span></span><br><span class="line"><span class="undefined">    &#125;);</span></span><br><span class="line"><span class="undefined">    </span></span><br><span class="line"><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/22/移动端/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="tiandali">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="tiandali">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/05/22/移动端/" itemprop="url">移动端</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-05-22T01:12:50+08:00">
-                2018-05-22
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="视口"><a href="#视口" class="headerlink" title="视口"></a>视口</h3><p><strong>在写移动端(响应式)项目时，页面必须加上这句话(viewport) ，这句话一般加在head元素内(meta标签-文档编码后面)</strong><br>      <strong>meta : v p + tab 键</strong><br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;meta name=<span class="string">"viewport"</span></span><br><span class="line">          content=<span class="string">"width=device-width,（让HTML页面宽度等于设备宽度） user-scalable=no,（禁止用户手动缩放） initial-scale=1.0,（初始缩放比例） maximum-scale=1.0, （最大放大比例）minimum-scale=1.0 （最小缩放比）"</span>&gt;</span><br><span class="line">不放大也不缩小,部分安卓机中设置user-scalable是不起作用的需要同这两个一起使用</span><br></pre></td></tr></table></figure></p>
-<blockquote>
-<p>layout viewport：布局视口（开发css等相关）<br>visual viewport：手机视口<br>ideal viewport：理想视口</p>
-</blockquote>
-<hr>
-<blockquote>
-<ul>
-<li>HTML的宽度&gt;手机宽度=&gt;把页面整体缩放</li>
-<li>页面内容宽度&gt;HTML页面的宽度=&gt;出现横向滚动条<br>真实项目中是不会出现横向滚动条的，想让他不出现横向滚动条就要保证的内容的宽度不会超过HTML页面的宽度</li>
-<li>移动端开发手机设备宽度不一定，HTML页面的宽度也不一定，所以内容的宽度一般也是不固定的（也就是所谓的百分比宽度）</li>
-<li>移动端开发：外层盒子的宽度一般都是百分比设定的，很少有些固定值的（里面具体的小元素宽度可以固定）=》流式响应式布局方案<br>在PC端我们开发的HTML页面运行在浏览器中，浏览器有多宽（一般浏览器代表设备的宽度）HTML就有多宽，也就是在浏览器宽度的视口中渲染和呈现我们的页面。</li>
-</ul>
-</blockquote>
-<hr>
-<p><strong>移动端和pc端有区别</strong>：<br>不管移动端设备（代指打开的浏览器）的宽度是多少，HTML页面的宽度就是980（或者1024）=&gt;导致的问题：如果在设备窗口中想把整个页面完全呈现出来，小窗口中展示大页面，我们只能把大页面进行缩放，HTML页面缩放了那么页面中所有内容都缩放了.<br><strong>解决方案</strong><br>只要让HTML5页面宽度和手机设备宽度保持一致即可，就不会出现首先渲染页面的时候把页面缩放的事情了。<br><strong>平时处理的移动端项目</strong><br>1.pc端和移动端公用一套项目的（结构相对简单：一般都是展示类的企业网站）<br>A：先做PC端，设计师给的设计稿一般都是给PC端的，一般宽度都不是写死的，宽度是自适应的（具体情况具体分析）<br>B：切换到手机上，使用@media（媒体查询）把不同设备上不合适的样式进行修改<br><strong>设计师一般只给一套设计稿</strong><br>2.pc端和移动端是分开的两套不同的项目<br>=》pc端单独做（做的时候不需要考虑移动端响应式）固定布局<br>=》移动端单独做，只需考虑移动端的响应式适配即可响应式布局</p>
-<ul>
-<li>A：依然给予@media来处理</li>
-<li>B:固定布局（viewport=》width=320px）:：按照设计稿把320尺寸的写好即可，所有的尺寸都可以固定，而且都是设计稿的一半，因为设计稿是大一倍的，在其他的设备上，让320的页面居中展示即可</li>
-<li>C：scale等比缩放布局（严格按照设计稿的尺寸来写样式，没有自适应宽度，都是固定写死的，在其他设备上，首先获取设备的宽度，让其除以设计稿的宽度，然后让原始写好的页面按照这个比例整体缩小即可）=》导致一些问题：如：字体变模糊</li>
-<li>D：rem 等比缩放，他是参考scale，只是用的是rem单位实现的缩放。但是一般宽度都让他自适应。其余的值可以写成固定值，在编写css样式的时候我们把所有的px单位都换算成rem单位，当加载完成的时候，根据当前设备的尺寸初一设计稿，根据比例动态调整rem和px的换算比例，弊端高度容易出现误差，一般缩放的是宽度，但是高度一般不是等比的。可以用@media修改，也可以把垂直方向的间距等用百分比设置</li>
-<li>E：css3中提供了flex-box伸缩盒模型，基于这个属性，可以让某些效果处理起来更方便</li>
-<li>A&amp;D&amp;E较多使用</li>
-</ul>
-<p><strong>一般会给两套设计稿，移动端+pc</strong><br>一般都是640<em>1136,或者（980不设高度），750</em>1334…<br>为什么给的设计稿都比参照手机大一倍？<br>目的是保证我们切下来的素材资源图片是大图<br>为什么要保证是大图？<br>因为很多手机都是二倍及三倍屏幕像素密度比DPR的<br>即使给的是二倍设计稿，但是部分手机的设备尺寸要大于设计稿的一半，有的手机是3倍DPR的，这样就导致一个问题，部分图片还是会变的模糊一些，此时我们找设计师单独的把模糊图片要一张大图即可<br>通俗的讲就是高分辨率手机要配合高分辨率图片，非高清的图片用高分辨率手机看着看更模糊</p>
-<h3 id="媒体查询"><a href="#媒体查询" class="headerlink" title="媒体查询"></a>媒体查询</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">media screen and (min-width:375px)&#123;</span><br><span class="line">    min-width:375px 大于等于375px</span><br><span class="line">    max-width:375px 小于等于375px</span><br><span class="line">&#125;</span><br><span class="line">  @media screen and (orientation: portrait)&#123;</span><br><span class="line">          //竖屏  </span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line">        @media screen and (orientation: landscape)&#123;</span><br><span class="line">//横屏</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure>
-<p>@media  [媒体设备]<br>all-&gt;所有设备<br>screen-&gt;所有屏幕设备（pc+电脑）<br>print-&gt;打印机设备<br>@media all and (max-width:480px){}<br><strong>当前页面的宽度小于等于480px</strong></p>
-<p>手机常用设备尺寸<br>苹果：320，375，414<br>安卓：320，360，480，540，640，（760…）<br>pad:768<em>1024,1024</em>1366</p>
-<h4 id="响应式布局"><a href="#响应式布局" class="headerlink" title="响应式布局"></a>响应式布局</h4><p>能够在不同尺寸的设备上都能良好的展示，这就是响应式布局设计（responsive layout）<br>公司中的产品形态：<br>pc端（全屏页面需要宽度自适应，但是一般都是固定宽度）<br>pc端+移动端用一套项目（简单的页面，产品介绍，公司展示类的官网）<br>移动端（移动端设备差异较大，需要做响应式布局开发）<br>嵌入到APP中的H5<br>微信分享出来的H5<br>微信公众号<br>小程序<br>靠浏览器访问的H5<br>react native、ionic/cordova…js开发APP框架，使用JS代码开发APP最后框架会把代码转换为安卓和IOS需要的代码</p>
-<blockquote>
-<p>如何实现响应式布局开发<br>最常用的方案：rem等比缩放响应式布局<br>做移动端H5开发，首先加meta标签。meta:vp<br>rem和px都是样式单位，px是固定单位，rem是相对单位，相当于当前页面根元素html的字体设置的单位<br>我们开始给HTML的字体大小设置为100px（1rem=100px），接下来我们写样式的时候把所有的尺寸都有rem设定，测量出来的px值/100就是应该设置的rem的值，如果HTML的fontsize不变，用rem和px一样，但是如果字体大小改变，也就是改变了rem和px之间的换算比例，那么之前所有rem做单位的样式都会自动按照最新的比例进行缩放。实现了改动HTMLfontsize整个页面中的元素都跟着缩放了，牵一发动全身。<br>真实项目中设计师给我们一套设计稿，常用的尺寸（640<em>1136,750</em>1334,640<em>960.。。。）拿到设计稿后，我们严格按照设计稿中的尺寸编写样式<br>HTML{<br>Ffont-size：100px;}<br>接下来鞋样室把测量出来的px都除以100变为rem,所有的单位都是基于rem来搞<br>假定设计稿是750，也就是相当于750的设备，1rem=100px;<br>我们的页面在320的设备上，我们需要修改HTML的字体大小，此时实现页面跟着整体缩放，：320/750</em>100，当前设备上HTML的字体大小。</p>
-</blockquote>
-<h4 id="gitHub发布自己项目"><a href="#gitHub发布自己项目" class="headerlink" title="gitHub发布自己项目"></a>gitHub发布自己项目</h4><ol>
-<li>登录gitHub</li>
-<li>创建空仓库</li>
-<li>settings -&gt; GitHub Pages  -&gt;choose a theme -&gt;随便选择一个模板即可（反正也没啥用，和我们的页面样式不一样） select theme -&gt; commit changes  （此时仓库就不是空的了）<br><a href="https://zhufengpeixun.github.io/H5RESUME/" target="_blank" rel="noopener">https://zhufengpeixun.github.io/H5RESUME/</a>  输入这个网址可以看到刚才发布的页面<br><a href="https://zhufengpeixun[gitHub用户名].github.io/H5RESUME[仓库名]/index.html[项目中的文件名]" target="_blank" rel="noopener">https://zhufengpeixun[gitHub用户名].github.io/H5RESUME[仓库名]/index.html[项目中的文件名]</a></li>
-<li>把创建好的远程仓库克隆到本地，并且把自己的项目原代码放到本地仓库中</li>
-<li>把本地仓库中的内容推送到远程仓库上<br>git add -A<br>git commit -m’备注信息’<br>git push origin master   （可能让你输入远程仓库的用户名和密码）</li>
-</ol>
-<p>易企秀<br>兔展</p>
-<h4 id="制作简易App"><a href="#制作简易App" class="headerlink" title="制作简易App"></a>制作简易App</h4><p>HBuilder:文件》打开目录》选择你要打包的项目》右键点击项目》发行》云打包原生APP》（不能有种中文）</p>
-<h3 id="Hybrid混合App开发"><a href="#Hybrid混合App开发" class="headerlink" title="Hybrid混合App开发"></a>Hybrid混合App开发</h3><p> 前端做的都是H5页面<br>运行在浏览器中<br>移动端不仅可以运行在浏览器中，还可以运行在App中（例如：微信、自己公司的App中）</p>
-<blockquote>
-<p>【优点】</p>
-<ul>
-<li>及时更新（不需要用户选择，我们只需要把服务器上的源文件更新，用户访问的用域是最新的）</li>
-<li>跨平台，成本低</li>
-</ul>
-<p>【弊端】</p>
-<ul>
-<li>不是直接运行在操作系统中的，是运行在浏览器或者App中的，所以不能直接的操作手机上的软硬件（运作模式：H5通知浏览器或者App我们想做什么 -&gt; 浏览器调取手机的软硬件 -&gt; 浏览器把信息返回给H5）</li>
-<li>性能没有App好</li>
-</ul>
-</blockquote>
-<h4 id="App不是H5，是原生的应用-NativeApp"><a href="#App不是H5，是原生的应用-NativeApp" class="headerlink" title="App不是H5，是原生的应用 NativeApp"></a>App不是H5，是原生的应用 NativeApp</h4><p>IOS : object-c / swift (需要C的功底)<br> 安卓: java-native （需要JAVA功底）</p>
-<blockquote>
-<p>【优点】<br>用户把安装包下载到手机上进行安装，后期程序是直接运行在手机操作系统中的</p>
-<ul>
-<li>性能高</li>
-<li>可以调取手机内置的软件或者硬件（例如：调取摄像头、重力感应器、通讯录等）【前提用户需要同意才可以】</li>
-</ul>
-<p>【弊端】<br>不能跨平台，一款产品需要两个团队开发两套不同的安装包</p>
-<ul>
-<li>成本大</li>
-<li>版本不统一</li>
-<li>不能及时更新</li>
-</ul>
-</blockquote>
-<h4 id="Hybrid混合App开发诞生"><a href="#Hybrid混合App开发诞生" class="headerlink" title="Hybrid混合App开发诞生"></a>Hybrid混合App开发诞生</h4><p>把传统的IOS / 安卓开发 与 H5开发结合在一起来做 （微信公众号开发：把我们做的H5运行在微信App中）</p>
-<h4 id="React-Native-ionic-微信小程序…"><a href="#React-Native-ionic-微信小程序…" class="headerlink" title="React Native ionic 微信小程序…"></a>React Native ionic 微信小程序…</h4><h4 id="SEO-网络运营推广（搜索引擎优化推广）"><a href="#SEO-网络运营推广（搜索引擎优化推广）" class="headerlink" title="SEO 网络运营推广（搜索引擎优化推广）"></a>SEO 网络运营推广（搜索引擎优化推广）</h4><p>目标：尽可能在搜索引擎中提升产品的权重（ALEX排名）<br>百度是一个搜索引擎，他养了一个宠物 “爬虫 / 蜘蛛” ，他会让爬虫有规律的去你网站中进行内容的收录（收录到自己的词库中），当用户在引擎中输入关键词进行查询，引擎会到自己的词库中进行匹配，把匹配的站点推荐展示</p>
-<p>如果我们向做SEO优化，应该尽可能的让引擎多收录一些关键词和内容</p>
-<blockquote>
-<p>给当前页面设置meta标签/title<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;title&gt;网站标题&lt;/title&gt;</span><br><span class="line">   &lt;meta name=&quot;keywords&quot; content=&quot;页面关键词&quot;&gt;</span><br><span class="line">   &lt;meta name=&quot;description&quot; content=&quot;页面描述&quot;&gt;</span><br></pre></td></tr></table></figure></p>
-</blockquote>
-<p>对于一个页面中h1-h6这些标签的权重较高，尤其是H1，我们尽可能把重要的关键词放到H1中（语义化标签合理使用）<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"> &lt;h1&gt;</span><br><span class="line"> &lt;img src=&quot;&quot; alt=&quot;&quot;/&gt;</span><br><span class="line"> 新浪网</span><br><span class="line"> &lt;/h1&gt;</span><br><span class="line">H1中的文字不需要展示给用户但是我们还会写一些文字主要是给爬虫看的，样式中fontsize等于零即可，img是不被收录的，但是ALT中编写的问题可以被收录所以img标签的alt属性一定要加，最好写一些关键词</span><br></pre></td></tr></table></figure></p>
-<blockquote>
-<p>前后端分离项目，（数据由客户端js获取和渲染）是不利于SEO优化的<br>使用JS数据绑定，页面的源代码中没有动态绑定的数据的，但是用户在页面中可以看见内容，而搜索引擎的爬虫就是从源代码进行抓取收录的，vue和react都是JS做数据绑定的。<br>目前市场上大部分都是前后端分离项目，也就是JS数据绑定，由客户端渲染，但是还有一部分项目依然是传统的服务端数据处理（非完全前后端分离项目）</p>
-</blockquote>
-<p>2.SEM百度竞价推广（千万不能信）</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/22/常用设计模式/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="tiandali">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="tiandali">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/05/22/常用设计模式/" itemprop="url">常用设计模式</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-05-22T01:12:39+08:00">
-                2018-05-22
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="JAVASCRIPT中常用的设计模式"><a href="#JAVASCRIPT中常用的设计模式" class="headerlink" title="JAVASCRIPT中常用的设计模式"></a>JAVASCRIPT中常用的设计模式</h3><p>学习各种设计模式有什么作用？</p>
-<blockquote>
-<p>[ 开发 ]<br>开发效率高<br>利于团队协作</p>
-<p>[ 维护 ]<br>有利于代码的升级改版<br>逻辑清晰，代码严谨，利于后期的维护</p>
-<p>[ 通用 ]<br>我们依托设计模式可以实现组件化、模块化、插件化、框架化以及一些常用类库方法的编写</p>
-<p><code>技术语言发展路线</code><br>语言语法更新迭代之路（路漫漫而其修远兮）<br>语法初步稳定阶段 -&gt; 研究核心语法和使用的早一批人 -&gt;封装各种类库和插件 -&gt;大量研究核心的开发人员…  -&gt;出现各种设计模式 -&gt;框架(VUE、REACT)</p>
-</blockquote>
-<h4 id="插件、组件、类库、框架的区别"><a href="#插件、组件、类库、框架的区别" class="headerlink" title="插件、组件、类库、框架的区别"></a>插件、组件、类库、框架的区别</h4><blockquote>
-<p>类库：提供一些真实项目开发中常用的方法（方法做了完善处理：兼容处理、细节优化），方便我们开发和维护 [ jQuery、Zepto… ]</p>
-<p>插件：把项目中某一部分进行插件封装（是具备具体的业务逻辑的，更加有针对性），以后再有类似的需求，直接导入插件即可，相关业务逻辑代码不需要自己在编写了 [ jquery.drag.js 、jquery.dialog.js、jquery.validate.min.js 、datepicker日历插件、echarts统计图插件、iscroll插件…]</p>
-<p>组件：类似于插件，但是插件一般只是把JS部分封装，组件不仅封装了JS部分，而且把CSS部分也封装了，以后再使用的时候，我们直接的按照文档使用说明引入CSS/JS，搭建对应的结构，什么都不用做功能自然就有了 [ swiper组件、bootstrap组件… ]</p>
-<p>框架：比上面的三个都要庞大，它不仅仅提供了很多常用的方法、而且也可以支持一些插件的扩展（可以把一些插件集成到框架中运行）、更重要的是提供了非常优秀的代码管理设计思想…  [ REACT、VUE、ANGULAR、REACT NATIVE… ]</p>
-</blockquote>
-<h3 id="JS中常用的设计模式"><a href="#JS中常用的设计模式" class="headerlink" title="JS中常用的设计模式"></a>JS中常用的设计模式</h3><blockquote>
-<p>单例设计模式、构造原型设计模式、发布订阅设计模式、promise设计模式…</p>
-</blockquote>
-<h4 id="单例设计模式"><a href="#单例设计模式" class="headerlink" title="单例设计模式"></a><code>单例设计模式</code></h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//=&gt;单例模式：把实现当前这个模块所有的属性和方法汇总到同一个命名空间下（分组作用，避免了全局变量的污染）</span></span><br><span class="line"><span class="keyword">let</span> exampleRender=(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">	<span class="comment">//=&gt;实现当前模块具体业务逻辑的方法全部存放在闭包中</span></span><br><span class="line">	<span class="keyword">let</span> fn=<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">		<span class="comment">//...</span></span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> &#123;</span><br><span class="line">		init:<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">			<span class="comment">//=&gt;入口方法：控制当前模块具体的业务逻辑顺序</span></span><br><span class="line">			fn();</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;)();</span><br><span class="line">exampleRender.init();</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>真实项目中，我们如果想要实现具体的业务逻辑需求，都可以依托于单例模式构建；我们把项目划分成各大板块或者模块，把实现同一个板块的方法放在一个独立的命名空间下，方便团队协作开发；</p>
-</blockquote>
-<h4 id="构造原型模式"><a href="#构造原型模式" class="headerlink" title="构造原型模式"></a><code>构造原型模式</code></h4><p>：最贴近OOP面向对象编程思想的</p>
-<blockquote>
-<p>以后真实项目中，不管是封装类库还是插件或者UI组件，基本上都是基于构造原型模式来开发的<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Tool</span></span>&#123;</span><br><span class="line">	<span class="keyword">constructor</span>()&#123;</span><br><span class="line">		<span class="keyword">this</span>.isCompatible=<span class="string">'addEventListener'</span> <span class="keyword">in</span> <span class="built_in">document</span>;<span class="comment">//=&gt;如果不兼容返回FALSE(IE6~8)</span></span><br><span class="line">		</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">//=&gt;挂载到原型上的方法</span></span><br><span class="line">	css()&#123;</span><br><span class="line">		<span class="comment">//...</span></span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">//=&gt;挂载到普通对象上的方法</span></span><br><span class="line">	<span class="keyword">static</span> distinct()&#123;</span><br><span class="line">		<span class="comment">//...</span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Banner</span> <span class="keyword">extends</span> <span class="title">Tool</span></span>&#123;</span><br><span class="line">	<span class="keyword">constructor</span>(...arg)&#123;</span><br><span class="line">		<span class="keyword">super</span>();</span><br><span class="line">		<span class="keyword">this</span>.xxx=xxx;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">//=&gt;挂载到子类原型上的方法</span></span><br><span class="line">	bindData()&#123;</span><br><span class="line">		<span class="keyword">this</span>.css();<span class="comment">//=&gt;把父类原型上的方法执行（子类继承了父类，那么子类的实例就可以调取父类原型上的方法了）</span></span><br><span class="line">		<span class="keyword">this</span>.distinct===<span class="literal">undefined</span>;<span class="comment">//=&gt;子类的实例只能调取父类原型上的方法，以及父类给实例提供的私有属性方法，但是父类做为普通对象加入的静态方法，子类的实例是无法调取的 (只有这样才可以调取使用：Tool.distinct())</span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-</blockquote>
-<blockquote>
-<p>我有三个类 A/B/C ，我想让C继承A和B<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span></span>&#123;</span><br><span class="line">	...</span><br><span class="line">&#125;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">B</span> <span class="keyword">extends</span> <span class="title">A</span></span>&#123;</span><br><span class="line">	...</span><br><span class="line">&#125;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">C</span> <span class="keyword">extends</span> <span class="title">B</span></span>&#123;</span><br><span class="line">	...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-</blockquote>
-<p><code>发布订阅设计模式：观察者模式</code></p>
-<blockquote>
-<p>不同于单例和构造，发布订阅是小型设计模式，应用到某一个具体的需求中：凡是当到达某个条件之后要执行N多方法，我们都可以依托于发布订阅设计模式管理和规划我们的JS代码</p>
-<p>我们经常把发布订阅设计模式嵌套到其它的设计模式中</p>
-</blockquote>
-<h4 id="promise设计模式"><a href="#promise设计模式" class="headerlink" title="promise设计模式"></a><code>promise设计模式</code></h4><blockquote>
-<p>解决AJAX异步请求层级嵌套的问题</p>
-<p>它也是小型设计模式，目的是为了解决层级嵌套问题的，我们也会经常把它嵌套在其它的设计模式中运行<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">$.ajax(&#123;</span><br><span class="line">	url:<span class="string">'/A'</span>,</span><br><span class="line">	<span class="keyword">async</span>:<span class="literal">true</span>,<span class="comment">//=&gt;异步</span></span><br><span class="line">	success:<span class="function"><span class="keyword">function</span>(<span class="params">result</span>)</span>&#123;</span><br><span class="line">		$.ajax(&#123;</span><br><span class="line">			url:<span class="string">'/B'</span>,</span><br><span class="line">			<span class="keyword">async</span>:<span class="literal">true</span>,</span><br><span class="line">			success:<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">				<span class="comment">//=&gt;还会有后续嵌套</span></span><br><span class="line">			&#125;</span><br><span class="line">		&#125;);		</span><br><span class="line">	&#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
-</blockquote>
-<h4 id="发布订阅设计模式"><a href="#发布订阅设计模式" class="headerlink" title="发布订阅设计模式"></a>发布订阅设计模式</h4><blockquote>
-<p>俗称叫做“观察者模式”</p>
-<p>实现思路和原理：<br>1、我们先创建一个计划表（容器）<br>2、后期需要做什么事情，我们都依次把需要处理的事情增加到计划表中<br>3、当符合某个条件的时候，我们只需要通知计划表中的方法按照顺序依次执行即可</p>
-</blockquote>
-<p><code>JQ中的发布订阅</code></p>
-<blockquote>
-<p>JQ中提供了实现发布订阅设计模式的方法<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> $plan = $.Callbacks();<span class="comment">//=&gt;创建一个计划表</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> fn = <span class="function"><span class="keyword">function</span>(<span class="params">n,m</span>)</span>&#123;</span><br><span class="line">	<span class="comment">//=&gt;n=100 m=200</span></span><br><span class="line">&#125;</span><br><span class="line">$plan.add(fn);<span class="comment">//=&gt;向计划表中增加方法</span></span><br><span class="line">$plan.remove(fn);<span class="comment">//=&gt;从计划表中移除方法</span></span><br><span class="line"></span><br><span class="line">$plan.fire(<span class="number">100</span>，<span class="number">200</span>);<span class="comment">//=&gt;通知计划表中所有的方法按照顺序执行；100 200会分别作为实参传递给每一个需要执行的方法；</span></span><br></pre></td></tr></table></figure></p>
-</blockquote>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1590,7 +1624,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">27</span>
+                  <span class="site-state-item-count">32</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
