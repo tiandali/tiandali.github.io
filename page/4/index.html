@@ -79,13 +79,16 @@
 
 
 
+<meta name="description" content="成为一个有趣、有料的人">
 <meta property="og:type" content="website">
 <meta property="og:title" content="tiandali">
 <meta property="og:url" content="http://yoursite.com/page/4/index.html">
 <meta property="og:site_name" content="tiandali">
+<meta property="og:description" content="成为一个有趣、有料的人">
 <meta property="og:locale" content="zh-Hans">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="tiandali">
+<meta name="twitter:description" content="成为一个有趣、有料的人">
 
 
 
@@ -234,7 +237,7 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="tiandali">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.JPG">
+      <meta itemprop="image" content="https://avatars0.githubusercontent.com/u/24270379?s=400&u=28a97e2ed046ba7f3ab063443145ba5e4064efd1&v=4">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -300,61 +303,19 @@
       
         
           
-            <h3 id="变量提升"><a href="#变量提升" class="headerlink" title="变量提升"></a>变量提升</h3><blockquote>
-<p>在<code>当前作用域</code>中，JS代码自上而下执行<code>之前</code>，浏览器首先会把所有带<code>var/function</code>关键字的，进行提前的<code>声明(declare)/定义(defined)</code>，这种提前声明变量的机制，我们称之为<code>变量提升</code>。</p>
-<ul>
-<li>变量提升阶段：带var的只声明未定义。带function的声明和赋值都完成了。<ul>
-<li>变量提升只发生在当前作用域，</li>
-<li>在全局作用域下声明的函数或者变量是全局变量，同理在私有作用域声明的变量是私有变量，带var、function的才是声明</li>
-<li>浏览器很懒做过的事情不会重复执行第二遍，当代码执行遇到创建函数这部分代码后直接的跳过即可，因为在变量提升阶段就已经完成函数的执行了</li>
-<li>（函数执行）1.形成一个私有作用域。2.形参赋值。3.变量提升。<br>在es3和es5语法规法中只有全局作用域和函数执行的私有作用域（栈内存）其他的大括号不会形成栈内存。</li>
-</ul>
-</li>
-</ul>
-</blockquote>
-<h4 id="变量提升规律"><a href="#变量提升规律" class="headerlink" title="变量提升规律"></a>变量提升规律</h4><blockquote>
-<p>1.只会对等号左边的进行变量提升（function作为值时不会变量提升）<br> 2.return后面的也不能变量提升，对return下面的还是要变量提升<br> 3.重名变量，不会重复声明，但可以多次被定义赋值，后面的定义会把前面的值覆盖。<br> 4.自执行函数本身的function不进行变量提升，定义+执行一起完成<br> 5.不管条件是否成立，对待var关键字的进行变量提升，但是function关键字，标准浏览器下声明，ie9以上浏览器是声明+定义<br>  <code>带var不带var的区别？</code><br>在全局作用域下声明一个变量，也相当于给window全局对象设置了一个属性，变量的值就是属性值（私有作用域中声明的私有变量和window没啥关系 ）</p>
-<ul>
-<li>带var进行变量提升<ul>
-<li>不带var ：在全局作用域中，仅仅给全局对象设置了一个新的属性名把window省略了.</li>
-<li>项目当中，目的是创建变量，最好不要省略var，更严谨。</li>
-<li>全局变量和window中的属性存在映射机制。</li>
-</ul>
-</li>
-</ul>
-</blockquote>
-<blockquote>
-<p><code>私有作用域中带var和不带var也有区别：</code><br> 带var的在私有作用域变量提升阶段都声明为私有变量和外界没有任何关系<br> 不带var不是私有变量会向他的上级作用域查找，看是否为上级的变量，不是的话就向上级作用域找，一直找到window为止，我们把这种查找机制叫做作用域链.也就是我们在私有作用域中操作的这个私有变量是一直操作别人的</p>
-</blockquote>
-<ul>
-<li><code>不带var的查找顺序</code></li>
-<li><p>1.看是不是私有变量（形参和私有作用域里声明的）是的话就是它<br>-2.若不是，则往上级作用域查找,查找过程叫做作用域链</p>
-<p><code>什么是上级作用域？</code></p>
-<blockquote>
-<p>函数在哪里定义，则上级作用域就是谁<br><code>上级作用域只跟函数在哪定义有关，跟函数在哪里执行没有关系。</code></p>
-</blockquote>
-<h5 id="只对等号左边的进行赋值"><a href="#只对等号左边的进行赋值" class="headerlink" title="只对等号左边的进行赋值"></a>只对等号左边的进行赋值</h5><blockquote>
-<p>=:赋值，左边是变量，右边都应该是值。（如果是个函数表达式，把函数变成一个值（空间地址）赋值给变量）</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">console.log(fn);//undefined</span><br><span class="line">var fn=function()&#123;&#125;</span><br><span class="line">console.log(fn);//函数本身</span><br></pre></td></tr></table></figure>
-</blockquote>
-</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">//=&gt;全局变量提升：var x; var y; var z; fn=AAAFFF000;</span><br><span class="line">var x = 10,</span><br><span class="line">    y = 20,</span><br><span class="line">    z = 30;</span><br><span class="line">function fn(x, y) &#123;</span><br><span class="line">    //=&gt;[私有作用域]</span><br><span class="line">    //=&gt;形参赋值：x=10 y=20 (x/y都是私有变量)</span><br><span class="line">    //=&gt;变量提升：var x(忽略的,已经存在x这个名字了)</span><br><span class="line">    console.log(x, y, z);//=&gt;z不是私有变量是全局变量 10 20 30</span><br><span class="line">    var x = 100;//=&gt;私有的x=100</span><br><span class="line">    y = 200;//=&gt;私有的y=200</span><br><span class="line">    z = 300;//=&gt;全局的z=300</span><br><span class="line">    console.log(x, y, z);//=&gt;100 200 300</span><br><span class="line">&#125;</span><br><span class="line">fn(x, y, z);//=&gt;FN执行传递的是实参(实参都是值) fn(10,20,30)</span><br><span class="line">console.log(x, y, z);//=&gt;10 20 300</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>真实项目中创建函数一般都用函数表达式<br>1.因为只能对等号左边进行变量提升，所以变量提升完成后，当前函数只是声明了，没有定义，想要执行函数，只能放在赋值的代码之后执行，放在代码前会报错<br>2.这种方法代码逻辑更加严谨，以后想要知道一个执行的函数做了什么功能，只需要向上查找定义的部分即可（不会存在定义的代码在执行下面的情况）<br>var fn = function sum(){<br>console.log(sum);//函数本身<br>console.log(1);<br>};<br>sum();//uncaught referenceerror:sum is not defined.sum在函数外面不能用在里面可以用<br>fn();</p>
-</blockquote>
-<h5 id="不管条件是否成立都要进行变量提升"><a href="#不管条件是否成立都要进行变量提升" class="headerlink" title="不管条件是否成立都要进行变量提升"></a>不管条件是否成立都要进行变量提升</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">console.log(num);//undefined</span><br><span class="line">console.log(fn);//undefined</span><br><span class="line">if(1===1)&#123;</span><br><span class="line">console.log(num);//undefined</span><br><span class="line">console.log(fn);//函数体本身</span><br><span class="line">var num =12;</span><br><span class="line">function fn ()&#123;&#125;</span><br><span class="line">console.log(num);//12</span><br><span class="line">console.log(fn);//函数体本身</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>老版本浏览器不是这样处理的：不管条件是否成立，都要进行变量提升（和新版不一样的地方，新版本function只是声明，老版本function依然是声明+定义）<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//=&gt;变量提升：没有</span></span><br><span class="line">f = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;<span class="keyword">return</span> <span class="literal">true</span>;&#125;;</span><br><span class="line">g = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;<span class="keyword">return</span> <span class="literal">false</span>;&#125;;</span><br><span class="line">~<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="comment">//=&gt;[私有作用域]</span></span><br><span class="line">    <span class="comment">//变量提升：g=undefined (不管条件是否成立都要进行变量提升，但是新版本的浏览器只对函数进行声明)</span></span><br><span class="line">    <span class="keyword">if</span> (g() &amp;&amp; [] == ![]) &#123;<span class="comment">//=&gt;Uncaught TypeError: g is not a function</span></span><br><span class="line">        f = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;<span class="keyword">return</span> <span class="literal">false</span>;&#125;;</span><br><span class="line">        <span class="function"><span class="keyword">function</span> <span class="title">g</span>(<span class="params"></span>) </span>&#123;<span class="keyword">return</span> <span class="literal">true</span>;&#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;();</span><br><span class="line"><span class="built_in">console</span>.log(f());</span><br><span class="line"><span class="built_in">console</span>.log(g());</span><br></pre></td></tr></table></figure></p>
-</blockquote>
-<blockquote>
-<p>不管条件是否成立，判断体当中出现的var和function都会进行变量提升，但是新版本浏览器当中，function声明的变量只能提前声明不能定义了（函数是在判断体当中）<br>代码执行到判断地方<br>1）条件不成立;进入不到判断体当中赋值的代码执行不了，此事之前声明的变量或者函数依然是undefined。<br>2）条件成立：进入条件判断体中的第一件事情不是代码执行，而是把之前变量提升没有定义的函数首先定义了（进入到判断体中函数就定义了：迎合ES6中的块级作用域）<br>老版本浏览器不是这样处理的：不管条件是否成立，都要进行变量提升（和新版不一样的地方，新版本function只是声明，老版本function依然是声明+定义）</p>
-</blockquote>
-<h5 id="关于重名的处理"><a href="#关于重名的处理" class="headerlink" title="关于重名的处理"></a>关于重名的处理</h5><blockquote>
-<p>在变量提升阶段，如果名字重复了，不会重新的进行声明，但是会重新的进行定义（后面赋的值会把前面赋的值给替换掉）<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">function fn() &#123;</span><br><span class="line">    var i = 1;</span><br><span class="line">    return function (n) &#123;</span><br><span class="line">        console.log(n + i++);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">var f = fn();</span><br><span class="line">f(10);//-&gt;11</span><br><span class="line">fn()(10);//-&gt;11</span><br><span class="line">f(20);//-&gt;22</span><br><span class="line">fn()(20);//-&gt;21</span><br></pre></td></tr></table></figure></p>
-</blockquote>
+          变量提升
+在当前作用域中，JS代码自上而下执行之前，浏览器首先会把所有带var/function关键字的，进行提前的声明(declare)/定义(defined)，这种提前声明变量的机制，我们称之为变量提升。
 
-          
+变量提升阶段：带var的只声明未定义。带function的声明和赋值都完成了。
+变量提升
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/05/04/变量提升/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -406,7 +367,7 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="tiandali">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.JPG">
+      <meta itemprop="image" content="https://avatars0.githubusercontent.com/u/24270379?s=400&u=28a97e2ed046ba7f3ab063443145ba5e4064efd1&v=4">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -472,172 +433,18 @@
       
         
           
-            <h3 id="node-amp-GIT基础知识"><a href="#node-amp-GIT基础知识" class="headerlink" title="node &amp; GIT基础知识"></a>node &amp; GIT基础知识</h3><h3 id="安装node"><a href="#安装node" class="headerlink" title="安装node"></a>安装node</h3><ul>
-<li>官网下载，一直下一步，最好下c盘。<br>或者：拷贝别人下载好的，</li>
-<li>到我的电脑-属性-高级设置-环境变量-path-添加node的安装目录。</li>
-<li>验证是否成功:win+R-&gt;cmd-&gt;node -version,npm -v能出现版本号代表安装成功，不能出现版本号，按照上一步配置环境变量即可。<h3 id="node基础概念"><a href="#node基础概念" class="headerlink" title="node基础概念"></a>node基础概念</h3>1.node并不是一门语言，他是一个工具或者一个运行环境基于v8引擎渲染和解析js的。</li>
-<li>单线程</li>
-<li>无阻赛i/o操作</li>
-<li>事件驱动<br>…<br>之所以把node称为服务器语言是因为node给予操作服务器的能力：我们在服务器端安装node使用js服务器端需要处理的一些事情，最后把写好的js代码交给node环境运行即可</li>
-</ul>
-<p>2.在node环境当中把js代码执行</p>
-<ul>
-<li>repl命令（read-evaluate-print-loop）输入-求值-输出-循环</li>
-<li><p>基于node xxx.js命令执行</p>
-<ul>
-<li>基于node执行我们需要先找到当前文件所在的文件夹，然后再这个目录下打开dos窗口，在窗口执行node xxx.js这样就相当于在node环境下把js文件中的代码执行了</li>
-<li>如何在当前目录中打开dos窗口</li>
-<li>1.基于dos命令中的cd一层层进入</li>
-<li>2.在当前目录地址栏中输入cmd快速在当前目录打开</li>
-<li>3.shift+鼠标右键，在此处打开命令窗口</li>
-</ul>
-</li>
-<li><p>基于wb这类编辑工具直接执行</p>
-</li>
-</ul>
-<p>3.常用DOS命令</p>
-<ul>
-<li><code>ping www.baidu.com -t</code></li>
-<li>测试网速，然后<code>Ctrl+c</code>结束当前运行的操作</li>
-<li><code>exit</code>：退出当前窗口</li>
-<li><code>ipconfig -all</code>   ：查看当前电脑的物理地址、IP地址、子网掩码、DNS等信息</li>
-<li><code>cls</code>；清屏</li>
-<li><code>cd</code>:进入指定的文件目录，（windows电脑需要先进入对应的磁盘）</li>
-<li><code>cd ../</code>:返回上级目录</li>
-<li><code>cd .</code>:当前目录</li>
-<li><code>cd /</code>:根目录</li>
-<li><code>dir</code>:查看当前目录下的文件</li>
-<li><code>mkdir</code>:创建文件夹</li>
-<li><code>copy con xxx.xx</code>:创建文件并且给文件中输入内容，输入完成后用<code>Ctrl+c</code>结束并保存</li>
-<li><code>del xxx.xx</code>:删除文件</li>
-<li><code>rmdir</code>:删除文件夹</li>
-</ul>
-<h3 id="npm模块管理"><a href="#npm模块管理" class="headerlink" title="npm模块管理"></a>npm模块管理</h3><p>安装完node后基本上自带npm模块管理器<br>我们需要一个第三方模块，或者模块插件，或者类库，或者框架，需要提前下载安装才可以使用，百度搜索找到下载地址，然后基于浏览器下载即可（资源比较混乱不好搜索）<br>也可以基于npm等第三方包管理器下载（yarn/bower这些都是第三方模块管理器）<br>1.npm下载的资源都是在<a href="http://www.npmjs.com/" target="_blank" rel="noopener">http://www.npmjs.com/</a>中下载的<br><code>npm install xxx</code>:把资源或者第三方模块下载到当前目录下<br><code>npm install xxx -g(--global)</code>:把资源或者第三方模块安装到全局环境下，可以基于命令来操作一些事情<br>卸载npm uninstall xxx/xxx -g:从本地或者全局卸载</p>
-<blockquote>
-<p>基于npm安装的一些细节点：</p>
-<ul>
-<li>需要联网</li>
-<li>下载成功后当前目录中多增加一个node_modules文件夹，在这个文件夹中找到我们安装的模块</li>
-<li>一般来说下载下来的内容包括源码和最后供开发者使用的压缩版本。</li>
-</ul>
-</blockquote>
-<blockquote>
-<p>2.解决下载慢的问题</p>
-<ul>
-<li>基于npm切换到国内下载源（一般是淘宝镜像）<ul>
-<li>首先安装nrm而且是把他安装到全局环境下，因为我们要使用命令。</li>
-<li><code>npm install nrm -g</code></li>
-<li>安装完我们就可以使用nrm命令</li>
-<li><code>nrm ls</code>查看当前可用源</li>
-<li><code>nrm use xxx</code>使用某个可用源</li>
-</ul>
-</li>
-<li>也可以基于yarn来安装管理<ul>
-<li>首先安装yarn，安装到全局，然后基于yarn安装我们需要的模块</li>
-<li><code>npm install yarn -g</code></li>
-<li><code>yarn add xxx</code></li>
-<li><code>yarn remove xxx</code></li>
-<li>基于yarn安装只能安装到本地不能安装到全局</li>
-</ul>
-</li>
-<li>基于cnpm淘宝镜像来处理</li>
-</ul>
-</blockquote>
-<blockquote>
-<p>3.解决安装版本的问题</p>
-<ul>
-<li>首先查看当前模块的历史版本信息<ul>
-<li><code>npm view jQuery&gt;jquery.version.json</code>:把当前模块的历史版本信息输出到具体的某个文件夹（文件名是自己取得）</li>
-<li>安装指定的版本模块</li>
-<li><code>yarn add jquery@1.11.3:npm</code> 和yarn都是这样来指定安装具体版本模块</li>
-</ul>
-</li>
-</ul>
-</blockquote>
-<p>1.bower是从github下载安装<br>2.安装less、babel-cli …</p>
-<h3 id="github"><a href="#github" class="headerlink" title="github"></a>github</h3><blockquote>
-<p>一个提供代码管理的公共平台我们以及众多开发者会把自己的生产的组件、类库、插件、框架等托管到这个平台供别人下载使用和研究<br>在github中我们可以创建仓库来管理自己的项目文件，而github支持开发者通过git操作，把本地的项目代码推送到指定的仓库，它还提供静态web页面的发布<br>在国内有一个和github类似的网站：coding,和github类似，也是提供代码管理的平台，但资源少。</p>
-</blockquote>
-<h3 id="git的基础知识"><a href="#git的基础知识" class="headerlink" title="git的基础知识"></a>git的基础知识</h3><ul>
-<li>git是一个分布式代码版本管理控制系统</li>
-<li>记录当前产品代码的所有版本信息（历史修改信息）而且方便快速回退到某一个具体版本，</li>
-<li>方便团队协作开发，能够检测代码冲突能够合并代码等<br>svn:集中式版本控制系统<br>git：分布式版本控制系统</li>
-</ul>
-<blockquote>
-<p>分布式和集中式区别：<br>[集中式]：想要做历史记录的查看或者备份必须链接到中央处理器才可以（需要联网）<br>处理速度没有Git快<br>[分布式]：每个开发者本地都是一个单独的仓库，在自己的仓库中就可以完成历史版本的记录和查看（不需要联网）<br>Git处理速度更快。</p>
-</blockquote>
-<h3 id="git操作步骤"><a href="#git操作步骤" class="headerlink" title="git操作步骤"></a>git操作步骤</h3><p>步骤：<br>1.先在GitHub上创建一个远程仓库<br>2.在本地创建一个文件夹初始化git仓库 <code>git init</code><br>3.本地仓库和远程仓库关联起来<code>git remote add origin</code>[可以自己起名字] 远程仓库的网络地址,移除关联是<code></code>git remote remove xxx<code>4.把本地仓库的内容提交到暂存区</code>git add .<code>5.把本地仓库的内容以及注释提交到历史区</code>git commit -m<code>&#39;注释内容&#39;
-6.把远程仓库的内容先拉到本地仓库，保持远程仓库和本地仓库同步</code> git pull origin master –allow-unrelated-histories<code>7.提交到远程仓库</code> git push origin master `</p>
-<h3 id="提交本地项目的另外一种方式："><a href="#提交本地项目的另外一种方式：" class="headerlink" title="提交本地项目的另外一种方式："></a>提交本地项目的另外一种方式：</h3><p>1.<code>git clone 远程仓库地址 本地仓库名（可以不写）</code>的方式把远程仓库克隆到本地<br>代替了:<br><code>git init</code>在本地创建了git仓库<br><code>git remote add origin [地址]</code>本地仓库和远程仓库关联了起来<br><code>git pull origin master</code>把远程仓库的内容拉取到了本地仓库<br>2.进入克隆的本地仓库 cd [本地仓库名]<br>3.<code>git add.</code><br>4.<code>git commit -m&#39;注释&#39;</code><br>5.<code>git push origin master</code>提交到远程仓库</p>
-<h3 id="提交项目"><a href="#提交项目" class="headerlink" title="提交项目"></a>提交项目</h3><p>登录GitHub<br><a href="https://github.com/zfpx/201801JS.git" target="_blank" rel="noopener">https://github.com/zfpx/201801JS.git</a>  黏贴到地址栏回车<br>点fork按钮，相当于把那个仓库克隆一份到我的仓库<br>git clone 刚刚克隆的仓库的地址 把从老师那fork过来的 远程仓库克隆到本地<br>cd 201801JS  到当前本地仓库地址<br>git add .添加到暂存区<br>git commit -m添加到历史区<br>git push origin master上传到自己的复制的远程仓库（根目录应该是本地仓库地址）</p>
-<p>New pull request发出新请求<br>Create pull request  申请并入</p>
-<p>主管做的事情merge pull request 或者close pull request</p>
-<blockquote>
-<p>webstrom关联<br>打开有关联通道文件夹，在子目录下创建文件，编辑后，点击菜单栏的VCS中的git-&gt;add，再次点击VCS中的git-&gt;commit,commit and push ,push.</p>
-</blockquote>
-<h3 id="Linux操作系统常用命令"><a href="#Linux操作系统常用命令" class="headerlink" title="Linux操作系统常用命令"></a>Linux操作系统常用命令</h3><blockquote>
-<ul>
-<li><code>ls</code>查看当前目录下的文件<ul>
-<li><code>-l</code>查看详细信息</li>
-<li><code>-a</code>查看隐藏文件</li>
-<li><code>-la</code>同时具备以上特定</li>
-</ul>
-</li>
-<li><code>clear</code>清屏</li>
-<li><code>cd</code>目录切换<ul>
-<li><code>cd../</code>返回上级目录</li>
-<li><code>cd./</code>返回当前目录</li>
-<li><code>cd</code>/返回根目录</li>
-<li><code>cd xxx</code>进入指定文件夹</li>
-<li><code>cd E:</code>进入到指定的磁盘</li>
-</ul>
-</li>
-<li><code>mkdir</code>创建文件夹</li>
-<li><code>touch</code> 创建一个空文件<ul>
-<li>可以创建无文件名的文件。例如touch .gitignore/touch .babelrc…</li>
-<li>在电脑旁隐藏文件后缀名的情况下。我们不至于创建出1.txt.txt这样重复后缀名的文件。</li>
-</ul>
-</li>
-<li><code>vi</code>向指定文件中插入内容例如：vi 1.txt<ul>
-<li>首先进入命令窗口模式</li>
-<li>我们先按<code>i</code>，进入到插入内容模式</li>
-<li>编辑要写的内容</li>
-<li>按<code>esc</code>键，再按<code>：</code>键，再按<code>wq</code>(保存并退出)</li>
-<li>如果按q!（强制退出，新输入的内容不保存）<br>-echo xxx&gt;1.txt  把xxx内容放到1.txt文件中，如果没有这个文件则创建这个文件（新存放的内容会替换原有的内容）<br>-echo xxx &gt;&gt;1.txt 新的内容会追加到原有内容的后面</li>
-</ul>
-</li>
-<li><code>cat</code>查看文件中的内容</li>
-<li><code>cp</code>拷贝文件</li>
-<li><code>rm</code>删除文件<ul>
-<li><code>-r</code>递归删除（把当前文件夹中的所有的后代元素也都遍历到删除）</li>
-<li><code>-f</code>强制删除</li>
-<li><code>-rf</code>一旦rf后，没有办法还原回来，所以删除要慎重</li>
-</ul>
-</li>
-</ul>
-</blockquote>
-<h3 id="git配置"><a href="#git配置" class="headerlink" title="git配置"></a>git配置</h3><blockquote>
-<p>安装完成Git后。我们最好先把一些基础信息配置一下<br><code>git config -l</code>查看当前本级Git的配置清单<br>相对比较重要的配置g：user.name/user.email,每一次提交的时候我们需要知道谁提交的。<br><code>$git config --global user.name xxx
-$git config --global user.email xxx</code></p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">切换账号:git config credential.helper &apos;&apos;</span><br><span class="line"></span><br><span class="line">保存账号git config credential.helper store</span><br></pre></td></tr></table></figure>
-<h3 id="Git工作原理和流程"><a href="#Git工作原理和流程" class="headerlink" title="Git工作原理和流程"></a>Git工作原理和流程</h3><p>“<code>git工作流程</code>”<br>一个Git仓库分为三个区域：<br>1.工作区：平时写代码的地方。<br>2.暂存区：把一些写好的代码暂时存储的地方。<br>3.历史区：生成一个个版本记录的地方。<br><code>&quot;创建Git仓库&quot;</code><br>在电脑的某一个文件夹中<br>1）右键-&gt;git bash here -&gt;在窗口执行<code>git init</code>.<br>2) 在windows dos窗口中执行，还是执行相同的命令执行完成后会在当前电脑指定文件夹中生成一个 .git 文件，证明当前文件夹就是一个本机独立的git版本控制仓库<br>一个项目目录下，我们一般会有以下这样的文件<br><code>.git</code>:在当前项目中创建git仓库生成的文件（很重要）<br><code>.idea</code>:使用WS开发，默认生成的文件，记录WS的一些信息（没用）<br><code>.gitignore</code>:我们一般会手动的在当前项目中创建一个后缀名是gitignore的文件，这个文件中记录了每一次git提交时候忽略不管的文件或者文件夹（ws中可以创建这个文件）<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"># dependencies</span><br><span class="line">node_modules</span><br><span class="line"></span><br><span class="line"># testing</span><br><span class="line">/coverage</span><br><span class="line"></span><br><span class="line"># production</span><br><span class="line">/build</span><br><span class="line"></span><br><span class="line"># misc</span><br><span class="line">.DS_Store</span><br><span class="line">.env.local</span><br><span class="line">.env.development.local</span><br><span class="line">.env.test.local</span><br><span class="line">.env.production.local</span><br><span class="line"></span><br><span class="line">npm-debug.log*</span><br><span class="line">yarn-debug.log*</span><br><span class="line">yarn-error.log*</span><br><span class="line"></span><br><span class="line"># webStorm</span><br><span class="line">.idea</span><br></pre></td></tr></table></figure></p>
-<p><code>README.md</code>:这个文件选择性增加，通过这个文件可以对当前的项目进行详细的描述（使用markdown编写）<br>在真正的项目中，一般都是需要团队协作开发的，也就是都会存在一个中央远程仓库，而我们操作的步骤如下：</p>
-<p>我们可以在本地继续开发，如果需要把开发的内容同步到远程仓库上，还是按照之前的老步骤操作即可<br><code>git add -A</code><br><code>git commit -m’备注信息’</code><br><code>git push origin master</code></p>
-<p><code>把工作区中的内容提交到暂存区</code><br><code>git add xxx</code>把指定的文件提交到暂存区<br><code>git add./git add -A</code>把所有修改的文件都提交到暂存区<br><code>git statu</code>查看当前工作区中文件的状态。<br>显示<code>红色</code>还没有提交到暂存区。<br>显示<code>绿色</code>还没有提交到历史区。<br><code>把暂存区的内容统一提交到历史区</code><br>提交到历史区的内容，会生成相关的版本和历史记录，以后如果想回滚到某一次的代码，可以使用git命令迁出对应的版本即可<code>git commit -m&#39;xxx&#39;</code>:把暂存区的内容提交到历史区（-m后面的内容都是对本次提交新版本的说明）</p>
-<h3 id="把本地的版本代码推送到中央仓库上"><a href="#把本地的版本代码推送到中央仓库上" class="headerlink" title="把本地的版本代码推送到中央仓库上"></a>把本地的版本代码推送到中央仓库上</h3><p>1）让本地仓库和远程仓库建立连接通道<br><code>git remote add [name:一般都叫做origin] [远程仓库地址]</code><br><code>git remote rm [name]</code><br><code>git remote update [name]</code><br><code>git remote -v</code>查看当前本地仓库所有的链接通道<br>2）把本机仓库代码和版本信息推送（拉取）到远程仓库上<br><code>git push origin master</code>推送<br><code>git pull origin master</code>拉取<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">本地仓库和远程仓库不一致时可以先拉后推</span><br><span class="line">`git pull origin master --allow-unrelated-histories</span><br></pre></td></tr></table></figure></p>
-<h3 id="无分支模式下的团队协作"><a href="#无分支模式下的团队协作" class="headerlink" title="无分支模式下的团队协作"></a>无分支模式下的团队协作</h3><p>作为开发者每天来的第一件事或提交代码之前都要先pull一下<br>[<code>如果远程仓库和本地仓库不是同一个文件或同一行代码从冲突</code>]<br>git会自动会依赖于fast-forward模式进行合并<br>自动合并后，我们需要重新提交即可git add/git commit/push…<br>[<code>同一个文件的同一行代码冲突</code>]<br>找到冲突的文件，留下自己想要的代码<br>不管之前是否commit过，都要重新commit，然后push即可。</p>
-<h3 id="单独分支管理"><a href="#单独分支管理" class="headerlink" title="单独分支管理"></a>单独分支管理</h3><ul>
-<li>1.每天第一件事就是创建一个dev分支，并且切换到这个分支上<ul>
-<li>2.正常的开发代码，把每天开发的任务都要先提交到自己的分支上</li>
-<li>3.提交到远程仓库上<br>把本地自己分支中的内容，合并到本地自己的master分支下<br>把本地创建的分支删除（可以不删除，但是有的公司不希望远程出现分支，或者避免开发人员的分支冲突，提交之前都要把自己创建的分支删除掉）</li>
-<li>4.和第一种只使用master分支一样了，把本地最新合并的master分支代码，提交到远程仓库的master分支下（冲突合并即可）。</li>
-</ul>
-</li>
-</ul>
-<p>操作分支的基础命令<br><code>$git branch</code> 查看现有的分支<br><code>$git branch xxx</code>创建一个新的分支<br><code>$git checkout xxx</code>切换到某个分支上<br><code>$git checkout -b xxx</code>创建一个新分支并且切换到这个分支上<br><code>$git branch -D xxx</code>删除某个分支（一定要切换到其他分支上才可以删除当前分支）<br><code>$git merge xxx</code>合并分支内容<br><code>$git log --graph /--oneline</code><br>在有分支的情况下，可以更清楚查看分支的提交和合并内容</p>
-
-          
+          node &amp; GIT基础知识安装node
+官网下载，一直下一步，最好下c盘。或者：拷贝别人下载好的，
+到我的电脑-属性-高级设置-环境变量-path-添加node的安装目录。
+验证是否成功:win+R-&gt;cmd-&gt;node -version,npm -v能出现版本号代表安装成功，
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/04/21/node-git基本应用/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -711,11 +518,11 @@ $git config --global user.email xxx</code></p>
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
               <img class="site-author-image" itemprop="image"
-                src="/images/avatar.JPG"
+                src="https://avatars0.githubusercontent.com/u/24270379?s=400&u=28a97e2ed046ba7f3ab063443145ba5e4064efd1&v=4"
                 alt="tiandali" />
             
               <p class="site-author-name" itemprop="name">tiandali</p>
-              <p class="site-description motion-element" itemprop="description"></p>
+              <p class="site-description motion-element" itemprop="description">成为一个有趣、有料的人</p>
           </div>
 
           <nav class="site-state motion-element">
@@ -948,6 +755,13 @@ $git config --global user.email xxx</code></p>
   
 
   
+
+
+
+  <!-- 页面点击小红心 -->
+  <script type="text/javascript" src="/js/src/love.js"></script>
+  <!-- 背景动画 -->
+  <script type="text/javascript" src="/js/src/particle.js"></script>
 
 </body>
 </html>
